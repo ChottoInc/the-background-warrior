@@ -5,6 +5,9 @@ public class GenericBar : MonoBehaviour
 {
     [SerializeField] protected Slider slider;
 
+    public float Value => slider.value;
+    public float MaxValue => slider.maxValue;
+
     public void Setup(float maxValue, float currentValue)
     {
         slider.maxValue = maxValue;

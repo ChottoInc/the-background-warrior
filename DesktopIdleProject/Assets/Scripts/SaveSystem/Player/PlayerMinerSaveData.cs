@@ -4,7 +4,7 @@ public class PlayerMinerSaveData
 
     public int levelStatPower;
     public int levelStatSmashSpeed;
-    public int levelStatPrecision;
+    public int levelStatShockwave;
     public int levelStatLuck;
 
     // ---- POINTS
@@ -29,7 +29,7 @@ public class PlayerMinerSaveData
     {
         levelStatPower = data.LevelStatPower;
         levelStatSmashSpeed = data.LevelStatSmashSpeed;
-        levelStatPrecision = data.LevelStatPrecision;
+        levelStatShockwave = data.LevelStatShockwave;
         levelStatLuck = data.LevelStatLuck;
 
 

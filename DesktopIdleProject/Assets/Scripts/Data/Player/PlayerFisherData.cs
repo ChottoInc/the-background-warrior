@@ -18,6 +18,11 @@ public class PlayerFisherData
     private int levelstatKnowledge = 1;
     private int levelStatLuck = 1;
 
+    private int startLevelCalmness = 1;
+    private int startLevelReflex = 1;
+    private int startLevelKnowledge = 1;
+    private int startLevelLuck = 1;
+
 
     public int LevelStatCalmness => levelStatCalmness;
     public int LevelStatReflex => levelstatReflex;
@@ -96,12 +101,33 @@ public class PlayerFisherData
         levelstatReflex = saveData.levelReflex;
         levelstatKnowledge = saveData.levelKnowledge;
         levelStatLuck = saveData.levelStatLuck;
-        
-        
+
+
+        levelStatCalmness = Math.Min(levelStatCalmness, UtilsFisher.PER_LEVEL_FISHER_MAX_CALMNESS);
+        levelstatReflex = Math.Min(levelstatReflex, UtilsFisher.PER_LEVEL_FISHER_MAX_REFLEX);
+        levelstatKnowledge = Math.Min(levelstatKnowledge, UtilsFisher.PER_LEVEL_FISHER_MAX_KNOWLEDGE);
+        levelStatLuck = Math.Min(levelStatLuck, UtilsFisher.PER_LEVEL_FISHER_MAX_LUCK);
+
+
         availableStatPoints = saveData.availableStatPoints;
         
         currentLevel = saveData.currentLevel;
         currentExp = saveData.currentExp;
+
+        int sumLevels =
+            levelStatCalmness + levelstatReflex + levelstatKnowledge + levelStatLuck -
+            startLevelCalmness - startLevelReflex - startLevelKnowledge - startLevelLuck +
+            availableStatPoints +
+            1;
+
+        currentLevel = Math.Min(currentLevel, sumLevels);
+
+        // reset available points to 0 if previous bugs occured, and set exp to 0
+        if (currentLevel > UtilsFisher.MAX_LEVEL_FISHER)
+        {
+            availableStatPoints = 0;
+            currentExp = 0;
+        }
 
         FillFishGroupsSeriesCompletion();
     }
@@ -110,6 +136,11 @@ public class PlayerFisherData
     {
         currentLevel = 1;
         currentExp = 0;
+
+        levelStatCalmness = startLevelCalmness;
+        levelstatReflex = startLevelReflex;
+        levelstatKnowledge = startLevelKnowledge;
+        levelStatLuck = startLevelLuck;
 
         // multiplier
         baseCalmness = 0f; // reduced max time for spawn fish, up to 0.5f - 50%

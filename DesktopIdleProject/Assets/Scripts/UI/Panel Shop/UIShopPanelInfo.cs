@@ -40,8 +40,6 @@ public class UIShopPanelInfo : MonoBehaviour
 
         if (PlayerManager.Instance.Inventory.CurrentBits < itemSO.Price) return;
 
-        AudioManager.Instance.PlayClickUI();
-
         string question = $"Do you want to buy {itemSO.ItemName} for {itemSO.Price} bits?";
 
         TooltipManagerData tooltipData = new TooltipManagerData();

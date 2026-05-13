@@ -6,11 +6,13 @@ public class PlayerJobBlacksmithSO : AbstractPlayerJobData
     [field: SerializeField] public float PerLevelGainCraftSpeed { get; private set; }
     [field: SerializeField] public float PerLevelGainEfficiency { get; private set; }
     [field: SerializeField] public float PerLevelGainLuck { get; private set; }
+    [field: SerializeField] public float PerLevelGainMetallurgy { get; private set; }
 
     [field: Space(10)]
     [field: SerializeField] public int MaxLevelCraftSpeed { get; private set; }
     [field: SerializeField] public int MaxLevelEfficiency { get; private set; }
     [field: SerializeField] public int MaxLevelLuck { get; private set; }
+    [field: SerializeField] public int MaxLevelMetallurgy { get; private set; }
 
     [field: Space(10)]
     [field: SerializeField] public float BaseExpGrowth { get; private set; }
@@ -56,6 +58,11 @@ public class PlayerJobBlacksmithSO : AbstractPlayerJobData
         PerLevelGainLuck = value;
     }
 
+    public void SetPerLevelGainMetallurgy(float value)
+    {
+        PerLevelGainMetallurgy = value;
+    }
+
 
     public void SetMaxLevelCraftSpeed(int value)
     {
@@ -70,6 +77,11 @@ public class PlayerJobBlacksmithSO : AbstractPlayerJobData
     public void SetMaxLevelLuck(int value)
     {
         MaxLevelLuck = value;
+    }
+
+    public void SetMaxLevelMetallurgy(int value)
+    {
+        MaxLevelMetallurgy = value;
     }
 
 

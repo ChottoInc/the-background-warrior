@@ -18,7 +18,7 @@ MonoBehaviour:
   shopItemType: 0
   itemName: Bronze Pack
   itemDesc: A fine card pack containing 8 cards. An Uncommon card is guaranteed.
-  price: 150
+  price: 100
   sprite: {fileID: 21300000, guid: 4d0922284587dd74191a0289f6f6438a, type: 3}
   size: 8
   rarityChances:

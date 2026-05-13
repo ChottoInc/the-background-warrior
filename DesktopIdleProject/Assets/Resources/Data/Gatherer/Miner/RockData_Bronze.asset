@@ -17,11 +17,11 @@ MonoBehaviour:
   rockType: 2
   baseLootChance: 12
   possibleItems:
-  - value: {fileID: 11400000, guid: ce93a1275fc975a4e92ed12bb191d6ec, type: 2}
-    chanches: 40
-  - value: {fileID: 11400000, guid: 7354c829b5dbc9b4d89da810bdf8c20e, type: 2}
-    chanches: 40
   - value: {fileID: 11400000, guid: 3031592e0fe6e974bb28c661969da799, type: 2}
-    chanches: 15
+    chanches: 75
+  - value: {fileID: 11400000, guid: 7354c829b5dbc9b4d89da810bdf8c20e, type: 2}
+    chanches: 12
+  - value: {fileID: 11400000, guid: ce93a1275fc975a4e92ed12bb191d6ec, type: 2}
+    chanches: 8
   - value: {fileID: 11400000, guid: 90e1c1f666c4d9f4f8c48ff380317a8a, type: 2}
     chanches: 5

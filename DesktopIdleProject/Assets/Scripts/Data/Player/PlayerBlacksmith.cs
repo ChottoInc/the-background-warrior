@@ -98,12 +98,25 @@ public class PlayerBlacksmith : Player
 
             int needAmount = metal.RequiredOres;
 
-            if(PlayerManager.Instance.Inventory.HasEnough(ore.Id, needAmount))
+            // check has enough material
+            if( PlayerManager.Instance.Inventory.HasEnough(ore.Id, needAmount))
             {
                 imageOutOfOrder.gameObject.SetActive(false);
 
-                currentOreId = id;
-                return true;
+                // if infinite keep forging, else check for quantity
+                if (playerData.IsInfiniteForging)
+                {
+                    currentOreId = id;
+                    return true;
+                }
+                else
+                {
+                    if(playerData.CurrentForgingQuantity > 0)
+                    {
+                        currentOreId = id;
+                        return true;
+                    }
+                }
             }
             else
             {
@@ -160,26 +173,23 @@ public class PlayerBlacksmith : Player
             // Get refined metal
             MetalSO metal = ore.RefinedMetal;
 
-            // Calculate how much ore to remove
-            int needAmount = metal.RequiredOres;
-
-            if(UnityEngine.Random.value <= playerData.CurrentEfficiency)
-            {
-                // TODO: calculate how much to spare
-                // deafult 20% spare materials?
-
-                needAmount -= Mathf.RoundToInt((float)needAmount * 0.2f);
-            }
+            // Calculate if sparing materials
+            bool successSpared = UtilsGeneral.GetRandomSuccessFromValue(playerData.CurrentEfficiency);
 
             int amountMetalToAdd = 1;
             if(UnityEngine.Random.value <= playerData.CurrentLuck)
             {
-                // if luck procs, dobule material
-                amountMetalToAdd *= 2;
+                // if luck procs, check Metallurgy stats for amount
+                int amountMultiplier = 1 + (Mathf.FloorToInt(playerData.CurrentMetallurgy) + 1);
+                amountMetalToAdd *= amountMultiplier; // up to * 5
             }
 
+            // remove quantity from blacksmith
+            playerData.SetCurrentForgingQuantity(playerData.CurrentForgingQuantity - 1);
+
             // Update inventory
-            PlayerManager.Instance.Inventory.RemoveItem(id, needAmount);
+            if(!successSpared)
+                PlayerManager.Instance.Inventory.RemoveItem(id, metal.RequiredOres);
 
             PlayerManager.Instance.Inventory.AddItem(metal.Id, amountMetalToAdd);
 
@@ -189,6 +199,7 @@ public class PlayerBlacksmith : Player
             long rewardedExp = UtilsItem.GetMetalExp(metal);
             playerData.AddExp(rewardedExp);
 
+            PlayerManager.Instance.UpdateBlacksmithData(playerData);
             SaveBlacksmithData();
 
             // Recheck for next batch, or idle
@@ -243,10 +254,10 @@ public class PlayerBlacksmith : Player
     {
         switch (idGear)
         {
-            case UtilsGather.ID_BLACKSMITH_HELMET: playerData.AddBlacksmithHelmetLevel(1); break;
-            case UtilsGather.ID_BLACKSMITH_ARMOR: playerData.AddBlacksmithArmorLevel(1); break;
-            case UtilsGather.ID_BLACKSMITH_GLOVES: playerData.AddBlacksmithGlovesLevel(1); break;
-            case UtilsGather.ID_BLACKSMITH_BOOTS: playerData.AddBlacksmithBootsLevel(1); break;
+            case UtilsBlacksmith.ID_BLACKSMITH_HELMET: playerData.AddBlacksmithHelmetLevel(1); break;
+            case UtilsBlacksmith.ID_BLACKSMITH_ARMOR: playerData.AddBlacksmithArmorLevel(1); break;
+            case UtilsBlacksmith.ID_BLACKSMITH_GLOVES: playerData.AddBlacksmithGlovesLevel(1); break;
+            case UtilsBlacksmith.ID_BLACKSMITH_BOOTS: playerData.AddBlacksmithBootsLevel(1); break;
         }
     }
 

@@ -8,13 +8,13 @@ public class UIButtonTabQuests : MonoBehaviour
 
     private void OnDestroy()
     {
-        QuestManager.Instance.OnNeedNotication -= EnableNotification;
+        QuestManager.Instance.OnNeedNotification -= EnableNotification;
         tabButton.OnDeselected -= DisableNotification;
     }
 
     private void Awake()
     {
-        QuestManager.Instance.OnNeedNotication += EnableNotification;
+        QuestManager.Instance.OnNeedNotification += EnableNotification;
         tabButton.OnDeselected += DisableNotification;
     }
 

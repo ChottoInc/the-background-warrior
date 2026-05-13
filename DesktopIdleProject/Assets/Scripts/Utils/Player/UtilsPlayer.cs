@@ -19,24 +19,25 @@ public static class UtilsPlayer
     public const int ID_WARRIOR_CRITDMG = 5;
     public const int ID_WARRIOR_LUCK = 6;
 
-    public const int ID_MINER_POWER = 20;           // damage to rocks
-    public const int ID_MINER_SMASHSPEED = 21;      // atk spd for rocks
-    public const int ID_MINER_PRECISION = 22;       // increase damage on rocks, at max level rocks get full damage
-    public const int ID_MINER_LUCK = 23;            // increase loot chance from rocks
+    public const int ID_MINER_POWER = 20;               // damage to rocks
+    public const int ID_MINER_SMASHSPEED = 21;          // atk spd for rocks
+    public const int ID_MINER_SHOCKWAVE = 22;           // increase damage on nearby rocks
+    public const int ID_MINER_LUCK = 23;                // increase loot chance from rocks
         
-    public const int ID_BLACKSMITH_CRAFTSPEED = 30; // craft material spd
-    public const int ID_BLACKSMITH_EFFICIENCY = 31; // spare material
-    public const int ID_BLACKSMITH_LUCK = 32;       // double metals if procs
+    public const int ID_BLACKSMITH_CRAFTSPEED = 30;     // craft material spd
+    public const int ID_BLACKSMITH_EFFICIENCY = 31;     // spare material
+    public const int ID_BLACKSMITH_LUCK = 32;           // extra metals if procs
+    public const int ID_BLACKSMITH_METALLURGY = 33;     // amount extra metals if procs
 
-    public const int ID_FISHER_CALMNESS = 33;       // reduce max time to wait for hook
-    public const int ID_FISHER_REFLEX = 34;         // increase success on catch
-    public const int ID_FISHER_KNOWLEDGE = 35;      // increase chance fishes in the pool are different from the ones already caught
-    public const int ID_FISHER_LUCK = 36;           // increase the fish rarity any time it procs
+    public const int ID_FISHER_CALMNESS = 40;           // reduce max time to wait for hook
+    public const int ID_FISHER_REFLEX = 41;             // increase success on catch
+    public const int ID_FISHER_KNOWLEDGE = 42;          // increase chance fishes in the pool are different from the ones already caught
+    public const int ID_FISHER_LUCK = 43;               // increase the fish rarity any time it procs
 
-    public const int ID_FARMER_GREENTHUMB = 50;     // increase crop growth
-    public const int ID_FARMER_AGRONOMY = 51;       // increase available seeds every N levels
-    public const int ID_FARMER_KINDNESS = 52;       // increase probability to encounter a companion
-    public const int ID_FARMER_LUCK = 53;           // increase the probability the companion is befriended
+    public const int ID_FARMER_GREENTHUMB = 50;         // increase crop growth
+    public const int ID_FARMER_AGRONOMY = 51;           // increase available seeds every N levels
+    public const int ID_FARMER_KINDNESS = 52;           // increase probability to encounter a companion
+    public const int ID_FARMER_LUCK = 53;               // increase the probability the companion is befriended
 
 
     public static void Initialize()
@@ -109,12 +110,14 @@ public static class UtilsPlayer
             // MINER DATA
             case ID_MINER_POWER: return UtilsMiner.PER_LEVEL_MINER_MAX_POWER;
             case ID_MINER_SMASHSPEED: return UtilsMiner.PER_LEVEL_MINER_MAX_SMASHSPEED;
-            case ID_MINER_PRECISION: return UtilsMiner.PER_LEVEL_MINER_MAX_PRECISION;
+            case ID_MINER_SHOCKWAVE: return UtilsMiner.PER_LEVEL_MINER_MAX_SHOCKWAVE;
             case ID_MINER_LUCK: return UtilsMiner.PER_LEVEL_MINER_MAX_LUCK;
 
+            // BLACKSMITH DATA
             case ID_BLACKSMITH_CRAFTSPEED: return UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_CRAFTSPEED;
             case ID_BLACKSMITH_EFFICIENCY: return UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_EFFICIENCY;
             case ID_BLACKSMITH_LUCK: return UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_LUCK;
+            case ID_BLACKSMITH_METALLURGY: return UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_METALLURGY;
 
             // FISHER DATA
             case ID_FISHER_CALMNESS: return UtilsFisher.PER_LEVEL_FISHER_MAX_CALMNESS;
@@ -148,13 +151,14 @@ public static class UtilsPlayer
             // MINER DATA
             case ID_MINER_POWER: return PlayerManager.Instance.PlayerMinerData.LevelStatPower;
             case ID_MINER_SMASHSPEED: return PlayerManager.Instance.PlayerMinerData.LevelStatSmashSpeed;
-            case ID_MINER_PRECISION: return PlayerManager.Instance.PlayerMinerData.LevelStatPrecision;
+            case ID_MINER_SHOCKWAVE: return PlayerManager.Instance.PlayerMinerData.LevelStatShockwave;
             case ID_MINER_LUCK: return PlayerManager.Instance.PlayerMinerData.LevelStatLuck;
 
             // BLACKSMITH DATA
             case ID_BLACKSMITH_CRAFTSPEED: return PlayerManager.Instance.PlayerBlacksmithData.LevelStatCraftSpeed;
             case ID_BLACKSMITH_EFFICIENCY: return PlayerManager.Instance.PlayerBlacksmithData.LevelEfficiency;
             case ID_BLACKSMITH_LUCK: return PlayerManager.Instance.PlayerBlacksmithData.LevelStatLuck;
+            case ID_BLACKSMITH_METALLURGY: return PlayerManager.Instance.PlayerBlacksmithData.LevelStatMetallurgy;
 
             // FISHER DATA
             case ID_FISHER_CALMNESS: return PlayerManager.Instance.PlayerFisherData.LevelStatCalmness;
@@ -188,13 +192,14 @@ public static class UtilsPlayer
             // MINER DATA
             case ID_MINER_POWER: return UtilsText.text_tooltip_stat_miner_power;
             case ID_MINER_SMASHSPEED: return UtilsText.text_tooltip_stat_miner_smashspeed;
-            case ID_MINER_PRECISION: return UtilsText.text_tooltip_stat_miner_precision;
+            case ID_MINER_SHOCKWAVE: return UtilsText.text_tooltip_stat_miner_shockwave;
             case ID_MINER_LUCK: return UtilsText.text_tooltip_stat_miner_luck;
 
             // BLACKSMITH DATA
             case ID_BLACKSMITH_CRAFTSPEED: return UtilsText.text_tooltip_stat_blacksmith_craftspeed;
             case ID_BLACKSMITH_EFFICIENCY: return UtilsText.text_tooltip_stat_blacksmith_efficiency;
             case ID_BLACKSMITH_LUCK: return UtilsText.text_tooltip_stat_blacksmith_luck;
+            case ID_BLACKSMITH_METALLURGY: return UtilsText.text_tooltip_stat_blacksmith_metallurgy;
 
             // FISHER DATA
             case ID_FISHER_CALMNESS: return UtilsText.text_tooltip_stat_fisher_calmness;
@@ -239,12 +244,13 @@ public static class UtilsPlayer
 
             case ID_MINER_POWER: return "Power (Miner)";
             case ID_MINER_SMASHSPEED: return "Smash Spd (Miner)";
-            case ID_MINER_PRECISION: return "Precision (Miner)";
+            case ID_MINER_SHOCKWAVE: return "Shockwave (Miner)";
             case ID_MINER_LUCK: return "Luck (Miner)";
 
             case ID_BLACKSMITH_CRAFTSPEED: return "Craft Speed (Blacksmith)";
             case ID_BLACKSMITH_EFFICIENCY: return "Efficiency (Blacksmith)";
             case ID_BLACKSMITH_LUCK: return "Luck (Blacksmith)";
+            case ID_BLACKSMITH_METALLURGY: return "Metallurgy (Blacksmith)";
 
             case ID_FISHER_CALMNESS: return "Calmness (Fisher)";
             case ID_FISHER_REFLEX: return "Reflex (Fisher)";

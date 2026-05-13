@@ -29,7 +29,7 @@ public class InitializerManager : MonoBehaviour
 
     private bool hasCheckFiles;
 
-    private bool hasSaveFile;
+    private bool hasSaveFile = true;
 
 
 

@@ -16,7 +16,7 @@ MonoBehaviour:
   mapName: Ruined City
   mapSceneName: RuinedCityScene
   mapDifficulty: 3
-  baseEnemyLevel: 210
-  enemiesPerStage: 70
+  baseEnemyLevel: 175
+  enemiesPerStage: 60
   stages: 30
   nextMap: {fileID: 0}

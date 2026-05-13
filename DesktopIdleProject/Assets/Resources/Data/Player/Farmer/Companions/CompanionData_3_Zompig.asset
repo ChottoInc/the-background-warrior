@@ -16,5 +16,5 @@ MonoBehaviour:
   companionName: Zompig
   iconCompanion: {fileID: 21300000, guid: 46e8b4c8a5bfd3848a197ca0491ad1d6, type: 3}
   prefab: {fileID: 7505034789650973762, guid: 6648efceef695bf4386b8147d7e24f0e, type: 3}
-  baseAtkPerc: 0.025
+  baseAtkPerc: 0.05
   baseAtkSpd: 0.5

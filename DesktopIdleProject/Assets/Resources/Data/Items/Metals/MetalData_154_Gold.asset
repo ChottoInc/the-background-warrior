@@ -16,5 +16,5 @@ MonoBehaviour:
   itemType: 2
   sprite: {fileID: 21300000, guid: 635facf4735ee454da066ce9aef6f5d5, type: 3}
   itemName: Gold
-  requiredOres: 2
+  requiredOres: 1
   rockType: 4

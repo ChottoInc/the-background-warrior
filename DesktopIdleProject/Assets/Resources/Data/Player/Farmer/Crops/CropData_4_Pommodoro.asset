@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CropData_4_Pommodoro
   m_EditorClassIdentifier: 
   id: 4
-  baseGrowthTime: 3600
+  baseGrowthTime: 1550
   cropName: Pommodoro
   spriteSeed: {fileID: 21300000, guid: ac501ab2be075e040bd08ed7e92fcf5a, type: 3}
   spriteCrop:
@@ -24,3 +24,4 @@ MonoBehaviour:
   - {fileID: 962023750, guid: df9485a1ba04a5a41a595e675a69c549, type: 3}
   attractedCompanions:
   - {fileID: 11400000, guid: cf89924db83db6f408962acb3fec4727, type: 2}
+  rewardedExp: 0

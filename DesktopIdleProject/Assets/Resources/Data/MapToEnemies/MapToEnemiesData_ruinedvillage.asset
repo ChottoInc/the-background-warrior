@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a45d4151484b4d80f7e9aa8d4413d, type: 3}
+  m_Name: MapToEnemiesData_ruinedvillage
+  m_EditorClassIdentifier: 
+  mapSO: {fileID: 11400000, guid: bd6df523d62d2ac43b901f30078be895, type: 2}
+  possibleEnemies:
+  - value: {fileID: 11400000, guid: 59ec0a087b13b15448bba862945d225b, type: 2}
+    chanches: 30
+  - value: {fileID: 11400000, guid: 5fe2723f8454e4f449b1a25ff9ee391f, type: 2}
+    chanches: 30
+  - value: {fileID: 11400000, guid: 3cd65fc48baa46c42a111cd7b266599b, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 9682a58bcf341454783d590adc6f5a1a, type: 2}
+    chanches: 10
+  - value: {fileID: 11400000, guid: ee57206f82bac7d4bb57a71f370d8dae, type: 2}
+    chanches: 5
+  - value: {fileID: 11400000, guid: 0e1d27100bbca454ebea2f3a5a1cd9bb, type: 2}
+    chanches: 5

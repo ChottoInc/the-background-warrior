@@ -287,7 +287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1130, y: 0}
+  m_AnchoredPosition: {x: -1313, y: 90}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4370797100127408377
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipPosition: {fileID: 5198272174290154000}
-  cooldownTooltip: 1.5
+  cooldownTooltip: 0.35
   toggleAutoBattle: {fileID: 5712124057286634137}
 --- !u!1 &6976669217186840932
 GameObject:

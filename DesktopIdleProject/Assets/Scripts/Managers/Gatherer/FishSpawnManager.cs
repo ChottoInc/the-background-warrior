@@ -3,13 +3,19 @@ using UnityEngine;
 
 public class FishSpawnManager : MonoBehaviour
 {
-    private const int MAX_FISHES_IN_POOL = 10;
+    private const int MAX_FISHES_IN_POOL = 25;
 
     [SerializeField] float minHookTime = 30f;
 
     // default max spawn time
     [SerializeField] float maxHookTime = 60f;
 
+    [Space(10)]
+    [SerializeField] GenericBar fishBar;
+
+    private float timer20seconds;
+
+    private float passedTimeHook;
     private float timerHook;
 
     private float CurrentMaxHookTime => Mathf.Max(maxHookTime - (maxHookTime * player.PlayerData.CurrentCalmness), minHookTime);
@@ -57,11 +63,17 @@ public class FishSpawnManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        fishBar.gameObject.SetActive(!SettingsManager.Instance.IsHiddenFishingBar);
+
+        SettingsManager.Instance.OnIsHiddenFishingBarChange += OnFishBarHiddenChange;
     }
 
     private void OnDestroy()
     {
         player.OnFishCaught -= AddFishToCaughtList;
+
+        SettingsManager.Instance.OnIsHiddenFishingBarChange -= OnFishBarHiddenChange;
     }
 
 
@@ -75,7 +87,12 @@ public class FishSpawnManager : MonoBehaviour
 
         FillPool();
 
+        timer20seconds = UtilsGeneral.TIMER_20SECONDS;
+
         timerHook = GetRandomHookTime();
+        passedTimeHook = 0;
+
+        fishBar.Setup(timerHook, passedTimeHook);
 
         isInitialized = true;
     }
@@ -84,20 +101,37 @@ public class FishSpawnManager : MonoBehaviour
     {
         if (!isInitialized) return;
 
-        if(timerHook <= 0)
+        if(timer20seconds <= 0)
+        {
+            UpdateFishBarUI();
+            timer20seconds = UtilsGeneral.TIMER_20SECONDS;
+        }
+        else
+        {
+            timer20seconds -= Time.deltaTime;
+        }
+
+        if (passedTimeHook >= timerHook)
         {
             //Debug.Log("Attempt catch fish");
 
             player.HandleHook();
 
             timerHook = GetRandomHookTime();
+            passedTimeHook = 0;
+
+            fishBar.Setup(timerHook, passedTimeHook);
         }
         else
         {
-            timerHook -= Time.deltaTime;
+            passedTimeHook += Time.deltaTime;
         }
     }
 
+    private void OnFishBarHiddenChange(bool isOn)
+    {
+        fishBar.gameObject.SetActive(!isOn);
+    }
     
 
     public void FillPool()
@@ -115,6 +149,13 @@ public class FishSpawnManager : MonoBehaviour
             while (UtilsGeneral.GetRandomSuccessFromValue(baseLuckPlayer))
             {
                 randRarity = UpgradeRarity(randRarity);
+
+                // interrupt check luck if max rarity reached
+                if((int)randRarity == System.Enum.GetValues(typeof(UtilsItem.FishRarity)).Length - 1)
+                {
+                    break;
+                }
+
                 baseLuckPlayer *= 0.5f;
             }
 
@@ -187,5 +228,10 @@ public class FishSpawnManager : MonoBehaviour
     private void AddFishToCaughtList(FishSO fishSO)
     {
         caughtFishesSession.Add(fishSO);
+    }
+
+    private void UpdateFishBarUI()
+    {
+        fishBar.SetCurrentValue(passedTimeHook);
     }
 }

@@ -18,7 +18,7 @@ MonoBehaviour:
   shopItemType: 0
   itemName: Silver Pack
   itemDesc: A fine card pack containing 12 cards. An Uncommon card is guaranteed.
-  price: 200
+  price: 150
   sprite: {fileID: 21300000, guid: f25e3dc3be20c564fa666f6456210384, type: 3}
   size: 12
   rarityChances:

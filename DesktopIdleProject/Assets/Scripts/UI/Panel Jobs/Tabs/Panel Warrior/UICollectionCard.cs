@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UICollectionCard : MonoBehaviour
@@ -20,10 +21,13 @@ public class UICollectionCard : MonoBehaviour
     private CardSO cardSO;
     private bool hasCard;
 
-    public void Setup(UITabJobWarrior panelWarrior, CardSO cardSO)
+    private ScrollRect scroll;
+
+    public void Setup(UITabJobWarrior panelWarrior, CardSO cardSO, ScrollRect scroll)
     {
         this.panelWarrior = panelWarrior;
         this.cardSO = cardSO;
+        this.scroll = scroll;
 
         UpdateCardUI();
 
@@ -72,5 +76,32 @@ public class UICollectionCard : MonoBehaviour
         if (!hasCard) return;
 
         UITooltipManager.Instance.Hide(UITooltipManager.ID_SHOW_CARD, true);
+    }
+
+    public void OnBeginDrag(BaseEventData data)
+    {
+        if (scroll != null)
+        {
+            PointerEventData pointerData = (PointerEventData)data;
+            scroll.OnBeginDrag(pointerData);
+        }
+    }
+
+    public void OnDrag(BaseEventData data)
+    {
+        if (scroll != null)
+        {
+            PointerEventData pointerData = (PointerEventData)data;
+            scroll.OnDrag(pointerData);
+        }
+    }
+
+    public void OnEndDrag(BaseEventData data)
+    {
+        if (scroll != null)
+        {
+            PointerEventData pointerData = (PointerEventData)data;
+            scroll.OnEndDrag(pointerData);
+        }
     }
 }

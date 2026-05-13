@@ -67,10 +67,12 @@ public class SettingsManager : MonoBehaviour
 
     // -- Fisher
     private bool isInvertedFishingSpot;
+    private bool isHiddenFishingBar;
 
 
     public event Action<bool> OnInvertedHUDChange;
     public event Action<bool> OnInvertedFishingSpotChange;
+    public event Action<bool> OnIsHiddenFishingBarChange;
 
 
     public bool IsAutoBattleOn => isAutoBattleOn;
@@ -85,6 +87,7 @@ public class SettingsManager : MonoBehaviour
 
 
     public bool IsInvertedFishingSpot => isInvertedFishingSpot;
+    public bool IsHiddenFishingBar => isHiddenFishingBar;
 
 
     // --------- VIDEO
@@ -199,6 +202,7 @@ public class SettingsManager : MonoBehaviour
         SetAreLevelUpEquipmentAnimationOn(saveData.areLevelUpEquipmentOn, false);
 
         SetIsInvertedFishingSpotOn(saveData.isInvertedFishingSpot, false);
+        SetIsHiddenFishingSpot(saveData.isHiddenFishingBar, false);
 
         // --- video
         SetIsAlwaysOnTop(saveData.isAlwaysOnTop, false);
@@ -240,6 +244,7 @@ public class SettingsManager : MonoBehaviour
         SetAreLevelUpEquipmentAnimationOn(true, false);
 
         SetIsInvertedFishingSpotOn(false, false);
+        SetIsHiddenFishingSpot(false, false);
 
         // --- video
         SetIsAlwaysOnTop(false, false);
@@ -387,6 +392,15 @@ public class SettingsManager : MonoBehaviour
     {
         isInvertedFishingSpot = isOn;
         OnInvertedFishingSpotChange?.Invoke(isOn);
+
+        if (save)
+            Save();
+    }
+
+    public void SetIsHiddenFishingSpot(bool isOn, bool save = true)
+    {
+        isHiddenFishingBar = isOn;
+        OnIsHiddenFishingBarChange?.Invoke(isOn);
 
         if (save)
             Save();

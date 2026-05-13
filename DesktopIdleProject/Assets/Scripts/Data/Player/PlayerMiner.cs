@@ -1,13 +1,18 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMiner : Player
 {
     [Header("Movement")]
     [SerializeField] Animator animator;
+    [SerializeField] AnimationClip attackClip;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] bool faceRight;
     [SerializeField] float speed = 5f;
+
+
+    private float startingAttackSpeedAnimationDuration;
 
 
     [Header("Combat")]
@@ -19,11 +24,12 @@ public class PlayerMiner : Player
 
     // ------ MOVEMENT VARS
 
+    private bool canInitialMove;
+
     private Vector3 startScale;
 
     private float currentTarget;
-
-    private bool isIdling;
+    private Vector2 currentDirection;
 
     private bool dirLeft;
 
@@ -35,7 +41,6 @@ public class PlayerMiner : Player
 
     private bool isSmashing;
     private float CooldownSmash => 1f / playerData.CurrentSmashSpeed;
-    private float timerSmash;
 
 
 
@@ -63,21 +68,15 @@ public class PlayerMiner : Player
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        startingAttackSpeedAnimationDuration = attackClip.length;
     }
 
     private void Start()
     {
         startScale = spriteRenderer.transform.localScale;
 
-        GenerateNewTarget();
-    }
-
-    private void Update()
-    {
-        if (isSmashing)
-        {
-            CheckSmash();
-        }
+        StartCoroutine(CoSpawned());
     }
 
     private void FixedUpdate()
@@ -90,18 +89,25 @@ public class PlayerMiner : Player
         }
     }
 
-    private void CheckSmash()
+    private IEnumerator CoSpawned()
     {
-        if (timerSmash <= 0)
-        {
-            OnPerformSmash?.Invoke();
-            timerSmash = CooldownSmash;
-        }
-        else
-        {
-            timerSmash -= Time.deltaTime;
-        }
+        yield return new WaitForSeconds(2f);
+
+        // change rb type
+        rb.bodyType = RigidbodyType2D.Kinematic;
+
+        // enable movement
+        canInitialMove = true;
+
+        GenerateNewTarget();
     }
+
+
+    public void PerformSmash()
+    {
+        OnPerformSmash?.Invoke();
+    }
+
 
     private void CheckForRock()
     {
@@ -122,15 +128,17 @@ public class PlayerMiner : Player
 
     private void HandleMovement()
     {
+        if (!canInitialMove) return;
+
         float distance = Mathf.Abs(transform.position.x - currentTarget);
 
-        if (distance > 0.1f && !isIdling)
+        if (distance > 0.1f)
         {
             // get target dir
-            Vector2 dir = new Vector2(currentTarget - transform.position.x, 0).normalized;
+            currentDirection = new Vector2(currentTarget - transform.position.x, 0).normalized;
 
-            // move with rb
-            rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
+            // move
+            transform.position += speed * Time.fixedDeltaTime * (Vector3)currentDirection;
 
             CheckFlip();
         }
@@ -144,7 +152,7 @@ public class PlayerMiner : Player
     private void CheckFlip()
     {
         // check sprite flip
-        float vx = rb.velocity.x;
+        float vx = currentDirection.x;
         if (vx > 0.01f && faceRight)
         {
             spriteRenderer.transform.localScale = startScale;
@@ -201,14 +209,19 @@ public class PlayerMiner : Player
 
     public void SetSmashing(bool isSmashing)
     {
-        rb.velocity = new Vector2(0, rb.velocity.y);
-
         this.isSmashing = isSmashing;
 
         //reset detection rocks for update
         if (!isSmashing)
         {
             isRockDetected = false;
+        }
+        else
+        {
+            float attackSpeedMultiplier = startingAttackSpeedAnimationDuration / CooldownSmash;
+
+            // Set the animator speed accordingly to Atk Spd
+            animator.SetFloat("AttackSpeedMultiplier", attackSpeedMultiplier);
         }
 
         animator.SetBool("isSmashing", isSmashing);

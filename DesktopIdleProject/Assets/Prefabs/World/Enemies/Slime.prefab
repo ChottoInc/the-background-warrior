@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 778152376538590542}
   - component: {fileID: 3945790777843108747}
   - component: {fileID: 6840952482080030444}
-  - component: {fileID: 7685290172827756569}
+  - component: {fileID: 3426557835359642973}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
@@ -166,6 +166,9 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 64
+  excludeLayersRb:
+    serializedVersion: 2
+    m_Bits: 2240
   deathVFX: {fileID: 4391727986682639424}
   panelDamage: {fileID: 5627431890879618889}
 --- !u!61 &6840952482080030444
@@ -213,7 +216,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0749187, y: 0.48120832}
   m_EdgeRadius: 0
---- !u!50 &7685290172827756569
+--- !u!50 &3426557835359642973
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -322,6 +325,10 @@ PrefabInstance:
     - target: {fileID: 1180699542007843452, guid: fc80308f3a3a459438c7efda32c234e1, type: 3}
       propertyPath: m_Name
       value: Canvas Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180699542007843452, guid: fc80308f3a3a459438c7efda32c234e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3161367447173072814, guid: fc80308f3a3a459438c7efda32c234e1, type: 3}
       propertyPath: enemy

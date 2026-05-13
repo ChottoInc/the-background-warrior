@@ -30,7 +30,7 @@ MonoBehaviour:
     mapId: 1
     questBefriendSpecific: 1
     companionSO: {fileID: 11400000, guid: c1ab5d4718de58845bd50e406c671b8c, type: 2}
-    amountBefriend: 20
-    rewardAmount: 10
+    amountBefriend: 10
+    rewardAmount: 30
   nexts:
   - {fileID: 11400000, guid: b755ae564b868c046849b194fa25c5bb, type: 2}

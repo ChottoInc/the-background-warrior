@@ -16,14 +16,14 @@ MonoBehaviour:
   dataPath: Files/Player/PlayerDatas - Miner
   <PerLevelGainPower>k__BackingField: 2
   <PerLevelGainSmashSpeed>k__BackingField: 0.02
-  <PerLevelGainPrecision>k__BackingField: 0.01
+  <PerLevelGainShockwave>k__BackingField: 0.01
   <PerLevelGainLuck>k__BackingField: 0.01
   <MaxLevelPower>k__BackingField: 50
   <MaxLevelSmashSpeed>k__BackingField: 40
-  <MaxLevelPrecision>k__BackingField: 30
+  <MaxLevelShockwave>k__BackingField: 30
   <MaxLevelLuck>k__BackingField: 40
   <BaseExpGrowth>k__BackingField: 50
-  <ExpoExpGrowth>k__BackingField: 1.08
-  <FlatExpGrowth>k__BackingField: 10
-  <WeaponLinearGrowth>k__BackingField: 0.25
-  <WeaponQuadraticGrowth>k__BackingField: 0.03
+  <ExpoExpGrowth>k__BackingField: 1.1
+  <FlatExpGrowth>k__BackingField: 20
+  <WeaponLinearGrowth>k__BackingField: 0.3
+  <WeaponQuadraticGrowth>k__BackingField: 0.04

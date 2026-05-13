@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UITabJobWarrior : UITabWindow
 {
@@ -8,6 +9,7 @@ public class UITabJobWarrior : UITabWindow
     [Header("Maps")]
     [SerializeField] GameObject mapPrefab;
     [SerializeField] Transform containerMaps;
+    [SerializeField] ScrollRect scrollMaps;
 
     private CombatMapSO[] maps;
     private List<GameObject> mapObjs;
@@ -15,6 +17,7 @@ public class UITabJobWarrior : UITabWindow
     [Header("Cards")]
     [SerializeField] GameObject cardPrefab;
     [SerializeField] Transform containerCards;
+    [SerializeField] ScrollRect scrollCards;
 
     private ItemSO[] cards;
     private List<GameObject> cardObjs;
@@ -72,7 +75,7 @@ public class UITabJobWarrior : UITabWindow
             
             if (prefab.TryGetComponent(out UITabWarriorMap obj))
             {
-                obj.Setup(this, maps[i]);
+                obj.Setup(this, maps[i], scrollMaps);
             }
             mapObjs.Add(prefab);
         }
@@ -92,7 +95,7 @@ public class UITabJobWarrior : UITabWindow
             if (prefab.TryGetComponent(out UICollectionCard obj))
             {
                 CardSO cardSO = cards[i] as CardSO;
-                obj.Setup(this, cardSO);
+                obj.Setup(this, cardSO, scrollCards);
             }
             cardObjs.Add(prefab);
         }

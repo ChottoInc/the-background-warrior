@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UIFisherGroupPrefab : MonoBehaviour
 {
@@ -14,14 +16,17 @@ public class UIFisherGroupPrefab : MonoBehaviour
     [SerializeField] TMP_Text textDescription;
 
 
+    private ScrollRect scroll;
+
     private FishGroupSO fishGroupSO;
 
 
     private bool isInitialized;
 
 
-    public void Setup(FishGroupSO fishGroupSO)
+    public void Setup(ScrollRect scroll, FishGroupSO fishGroupSO)
     {
+        this.scroll = scroll;
         this.fishGroupSO = fishGroupSO;
 
         InitializeIfNeeded();
@@ -74,7 +79,7 @@ public class UIFisherGroupPrefab : MonoBehaviour
 
             if (prefab.TryGetComponent(out UIFisherPanelFishPrefab obj))
             {
-                obj.Setup(fishGroupSO.Fishes[i]);
+                obj.Setup(scroll, fishGroupSO.Fishes[i]);
             }
             panelFishesObjs.Add(prefab);
         }

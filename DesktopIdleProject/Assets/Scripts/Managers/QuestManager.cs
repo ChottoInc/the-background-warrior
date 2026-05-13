@@ -130,7 +130,7 @@ public class QuestManager : MonoBehaviour
 
 
 
-    public event Action OnNeedNotication;
+    public event Action OnNeedNotification;
 
 
 
@@ -396,6 +396,10 @@ public class QuestManager : MonoBehaviour
                                 valid = false;
                         }
                     }
+                    
+                    // check if enemy is currently available in your maps
+                    if(!IsMonsterAvailable(daily.QuestData, PlayerManager.Instance.PlayerFightData.AvailableMaps))
+                        valid = false;
                 }
 
                 tries++;
@@ -486,15 +490,21 @@ public class QuestManager : MonoBehaviour
                 dictQuestsStoryProgress[datas[i].questId] = dataProgress;
 
                 // if save is inactive but active by default, remove from list
-                if(!dataProgress.isActive && activeStoryQuests.Contains(datas[i].questId))
+                if (!dataProgress.isActive && activeStoryQuests.Contains(datas[i].questId))
                 {
                     activeStoryQuests.Remove(datas[i].questId);
                 }
 
-                // instead add to active if acrive from save and not active by default
+                // instead add to active if active from save and not active by default
                 if (dataProgress.isActive && !activeStoryQuests.Contains(datas[i].questId))
                 {
                     activeStoryQuests.Add(datas[i].questId);
+
+                    // check on load if unlock map quest is completed
+                    if (IsReachedMapQuest(datas[i].questId))
+                    {
+                        UpdateQuestAlreadyReachedMap(datas[i].questId);
+                    }
                 }
             }
         }
@@ -520,11 +530,26 @@ public class QuestManager : MonoBehaviour
             {
                 exceptionIndex = i;
 
-                // save in dictionary
-                QuestDataProgress dataProgress = new QuestDataProgress(datas[i]);
-                dictQuestsBountyProgress.Add(datas[i].questId, dataProgress);
+                bool valid = true;
+                QuestBountySO so = GetBountyQuestById(datas[i].questId);
 
-                activeBountyQuests.Add(datas[i].slotTab, datas[i].questId);
+                // check if player can do it
+                if (!so.AvailableFor.SharesAnyValueWith(PlayerManager.Instance.PlayerJobsData.AvailableJobs))
+                    valid = false;
+
+                // check if enemy is currently available in your maps
+                if (!IsMonsterAvailable(so.QuestData, PlayerManager.Instance.PlayerFightData.AvailableMaps))
+                    valid = false;
+
+                // only if the bounty clears the check is added to actives from save
+                if (valid)
+                {
+                    // save in dictionary
+                    QuestDataProgress dataProgress = new QuestDataProgress(datas[i]);
+                    dictQuestsBountyProgress.Add(datas[i].questId, dataProgress);
+
+                    activeBountyQuests.Add(datas[i].slotTab, datas[i].questId);
+                }
             }
         }
         catch
@@ -623,6 +648,9 @@ public class QuestManager : MonoBehaviour
         // copy of dictionary with new progress info
         Dictionary<string, QuestDataProgress> copyDict = new Dictionary<string, QuestDataProgress>();
 
+        // list of unlock quests that need to be updated after the new quests are added
+        List<string> unlockMapUpdates = new List<string>();
+
         foreach (var pair in dictQuestsStoryProgress)
         {
             if (pair.Value.isCleared && pair.Value.isActive)
@@ -645,6 +673,11 @@ public class QuestManager : MonoBehaviour
                     foreach(var next in nexts)
                     {
                         activeStoryQuests.Add(next.UniqueId);
+
+                        if (IsReachedMapQuest(next.UniqueId))
+                        {
+                            unlockMapUpdates.Add(next.UniqueId);
+                        }
                     }
                 }
 
@@ -667,7 +700,32 @@ public class QuestManager : MonoBehaviour
             dictQuestsStoryProgress[active] = copyProgress;
         }
 
+        // add to dict updated unlock maps
+        foreach (var map in unlockMapUpdates)
+        {
+            UpdateQuestAlreadyReachedMap(map);
+        }
+
         SaveQuestsData();
+    }
+
+    private bool IsReachedMapQuest(string questId)
+    {
+        QuestStorySO nextSO = GetStoryQuestById(questId);
+        if (nextSO.QuestData.questObjectiveType == QuestObjectiveType.UnlockMap)
+        {
+            if (PlayerManager.Instance.PlayerFightData.AvailableMaps.Contains(nextSO.QuestData.mapId))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void UpdateQuestAlreadyReachedMap(string questId)
+    {
+        QuestStorySO so = GetStoryQuestById(questId);
+        OnAddMap(so.QuestData.mapId);
     }
 
     #endregion
@@ -824,14 +882,14 @@ public class QuestManager : MonoBehaviour
             }
         }
 
-        if(!needNotification && counterNotificationDailies == activeDailyQuests.Count)
+        if(!needNotification && counterNotificationDailies == activeDailyQuests.Count && activeDailyQuests.Count > 0)
         {
             needNotification = true;
         }
 
         if(needNotification)
         {
-            OnNeedNotication?.Invoke();
+            OnNeedNotification?.Invoke();
         }
 
         if (needSave)
@@ -971,7 +1029,7 @@ public class QuestManager : MonoBehaviour
 
         if (needNotification)
         {
-            OnNeedNotication?.Invoke();
+            OnNeedNotification?.Invoke();
         }
 
         if (needSave)
@@ -1111,7 +1169,7 @@ public class QuestManager : MonoBehaviour
 
         if (needNotification)
         {
-            OnNeedNotication?.Invoke();
+            OnNeedNotification?.Invoke();
         }
 
         if (needSave)
@@ -1246,7 +1304,7 @@ public class QuestManager : MonoBehaviour
 
         if (needNotification)
         {
-            OnNeedNotication?.Invoke();
+            OnNeedNotification?.Invoke();
         }
 
         if (needSave)
@@ -1371,7 +1429,7 @@ public class QuestManager : MonoBehaviour
 
         if (needNotification)
         {
-            OnNeedNotication?.Invoke();
+            OnNeedNotification?.Invoke();
         }
 
         if (needSave)

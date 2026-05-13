@@ -28,7 +28,6 @@ public class HomeWorldManager : MonoBehaviour
 
     public int CurrentEnemyIndex => currentEnemyIndex;
 
-
     public static HomeWorldManager Instance { get; private set; }
 
     private void Awake()
@@ -40,6 +39,14 @@ public class HomeWorldManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneLoaderManager.Instance.LoadHome();
         }
     }
 
@@ -91,6 +98,8 @@ public class HomeWorldManager : MonoBehaviour
     private void SpawnEnemy(EnemyData data, Vector2 spawnPos)
     {
         GameObject enemyObj = PoolManager.Instance.Pull(data.EnemySO.EnemyPoolName);
+        //GameObject enemyObj = Instantiate(enemyPrefab, transform);
+
         Enemy enemy = enemyObj.GetComponent<Enemy>();
         currentEnemies.Add(enemy);
 

@@ -18,10 +18,14 @@ public class PlayerFarmer : Player
     [SerializeField] AnimationClip sowClip;
 
 
+    private float timer5Mins;
+
     private PlayerFarmerData playerData;
 
 
     // --------- MOVEMENT VARS
+
+    private bool canInitialMove;
 
     private bool isWalking;
 
@@ -32,6 +36,7 @@ public class PlayerFarmer : Player
     private Vector3 startScale;
 
     private float currentTarget;
+    private Vector2 currentDirection;
 
     private bool isIdling;
     private float timerIdle;
@@ -68,6 +73,23 @@ public class PlayerFarmer : Player
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        // every 5 mins give some exp to the player
+        if (timer5Mins <= 0)
+        {
+            playerData.AddExp(UtilsFarmer.PASSIVE_EXP);
+            timer5Mins = UtilsGeneral.TIMER_5MIN_IN_SECONDS;
+
+            PlayerManager.Instance.UpdateFarmerData(playerData);
+            PlayerManager.Instance.SaveFarmerData();
+        }
+        else
+        {
+            timer5Mins -= Time.deltaTime;
+        }
+    }
+
     public void Setup(PlayerFarmerData playerData)
     {
         this.playerData = playerData;
@@ -84,10 +106,9 @@ public class PlayerFarmer : Player
     {
         startScale = spriteRenderer.transform.localScale;
 
-        GenerateNewTarget();
+        StartCoroutine(CoSpawned());
 
-        isWalking = true;
-        animator.SetBool("isWalking", isWalking);
+        timer5Mins = UtilsGeneral.TIMER_5MIN_IN_SECONDS;
     }
 
 
@@ -104,8 +125,26 @@ public class PlayerFarmer : Player
         }
     }
 
+    private IEnumerator CoSpawned()
+    {
+        yield return new WaitForSeconds(2f);
+
+        // change rb type
+        rb.bodyType = RigidbodyType2D.Kinematic;
+
+        // enable movement
+        canInitialMove = true;
+
+        GenerateNewTarget();
+
+        isWalking = true;
+        animator.SetBool("isWalking", isWalking);
+    }
+
     private void HandleMovement()
     {
+        if (!canInitialMove) return;
+
         float distance = Mathf.Abs(transform.position.x - currentTarget);
 
         if (distance > 0.1f && !isIdling)
@@ -117,10 +156,10 @@ public class PlayerFarmer : Player
             }
 
             // get target dir
-            Vector2 dir = new Vector2(currentTarget - transform.position.x, 0).normalized;
+            currentDirection = new Vector2(currentTarget - transform.position.x, 0).normalized;
 
-            // move with rb
-            rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
+            // move
+            transform.position += speed * Time.fixedDeltaTime * (Vector3)currentDirection;
 
             CheckFlip();
         }
@@ -129,9 +168,6 @@ public class PlayerFarmer : Player
             // handles idling timer before move again
             if (!isIdling)
             {
-                // stop the player
-                rb.velocity = new Vector2(0f, rb.velocity.y);
-
                 isWalking = false;
                 animator.SetBool("isWalking", isWalking);
 
@@ -160,18 +196,15 @@ public class PlayerFarmer : Player
         if (distance > 1f && !isIdling)
         {
             // get target dir
-            Vector2 dir = new Vector2(currentTarget - transform.position.x, 0).normalized;
+            currentDirection = new Vector2(currentTarget - transform.position.x, 0).normalized;
 
-            // move with rb
-            rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
+            // move
+            transform.position += speed * Time.fixedDeltaTime * (Vector3)currentDirection;
 
             CheckFlip();
         }
         else
         {
-            // stop the player
-            rb.velocity = new Vector2(0f, rb.velocity.y);
-
             // reset to stop the movement
             canSow = false;
 
@@ -186,7 +219,7 @@ public class PlayerFarmer : Player
     private void CheckFlip()
     {
         // check sprite flip
-        float vx = rb.velocity.x;
+        float vx = currentDirection.x;
         if (vx > 0.01f && faceRight)
         {
             spriteRenderer.transform.localScale = startScale;

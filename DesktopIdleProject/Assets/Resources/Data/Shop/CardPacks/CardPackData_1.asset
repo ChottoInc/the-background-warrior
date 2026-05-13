@@ -18,7 +18,7 @@ MonoBehaviour:
   shopItemType: 0
   itemName: Iron Pack
   itemDesc: A humble card pack containing 5 cards. An Uncommon card is guaranteed.
-  price: 100
+  price: 60
   sprite: {fileID: 21300000, guid: 51829f2cb9e577445b63ea12b1176db6, type: 3}
   size: 5
   rarityChances:

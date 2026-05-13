@@ -121,8 +121,6 @@ public class UIPanelDismantle : MonoBehaviour
 
     public void OnButtonDismantle()
     {
-        AudioManager.Instance.PlayClickUI();
-
         // Update selected amount with input
         OnInputChange(inputAmount.text);
 

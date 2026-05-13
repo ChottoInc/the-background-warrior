@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a45d4151484b4d80f7e9aa8d4413d, type: 3}
+  m_Name: MapToEnemiesData_cave
+  m_EditorClassIdentifier: 
+  mapSO: {fileID: 11400000, guid: 8f60ad0b7dd5a86409db8acf98b10ff2, type: 2}
+  possibleEnemies:
+  - value: {fileID: 11400000, guid: 033cd7da7ca61a24cb16fc140f386c12, type: 2}
+    chanches: 30
+  - value: {fileID: 11400000, guid: ef634d3e44431d444b6bf986430d05e5, type: 2}
+    chanches: 30
+  - value: {fileID: 11400000, guid: 0bd9c3a8a4f0c6c4db4a37c6015fa316, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 5edbc13e6c23a87439e16a50da5b6afd, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 76e060a489f56f24f99195bcdd4d03e2, type: 2}
+    chanches: 10

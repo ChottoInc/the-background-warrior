@@ -16,5 +16,5 @@ MonoBehaviour:
   companionName: Ragghost
   iconCompanion: {fileID: 21300000, guid: 6fb2d0752c844d54e90a184335a1f94a, type: 3}
   prefab: {fileID: 1161013162096733355, guid: 8f2597df6a930df4aa4151561d93f19c, type: 3}
-  baseAtkPerc: 0.1
+  baseAtkPerc: 0.15
   baseAtkSpd: 0.5

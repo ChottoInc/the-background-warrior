@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class RockSpawnManager : MonoBehaviour
 {
-    //public const int MAX_ENEMY_INDEX = 100;
     public const int MAX_ROCK_INDEX = 50;
 
     [SerializeField] int startingRocks = 20;
@@ -17,7 +16,7 @@ public class RockSpawnManager : MonoBehaviour
     private int currentRockIndex;
 
 
-    private int currentStageSmashed;
+    //private int currentStageSmashed;
 
 
 
@@ -94,7 +93,7 @@ public class RockSpawnManager : MonoBehaviour
             RockData data = GenerateRock();
             SpawnRock(data, spawnPos);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -111,6 +110,9 @@ public class RockSpawnManager : MonoBehaviour
 
     public void SpawnNextRock()
     {
+        if (currentRocks.Count >= MAX_ROCK_INDEX)
+            return;
+
         float randX = Random.Range(minXSpawn, maxXSpawn);
         Vector2 spawnPos = new Vector2(randX, ySpawn);
 
@@ -125,14 +127,22 @@ public class RockSpawnManager : MonoBehaviour
 
     #endregion
 
+    /*
     public void AddSmash(int amount)
     {
         currentStageSmashed += amount;
-    }
+    }*/
 
     public void KillAllRocks()
     {
         foreach (var rock in currentRocks)
+        {
+            rock.PlayDeath(true);
+        }
+
+        // clear remaining rocks
+        Rock[] remains = FindObjectsByType<Rock>(FindObjectsSortMode.None);
+        foreach (var rock in remains)
         {
             rock.PlayDeath(true);
         }
@@ -146,7 +156,6 @@ public class RockSpawnManager : MonoBehaviour
     private void Resets()
     {
         currentRockIndex = 1;
-        currentStageSmashed = 0;
     }
 
     #region UI

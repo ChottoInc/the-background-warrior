@@ -83,8 +83,6 @@ public class UITabSettingsVideo : UITabWindow
         // check if more than 1 display is available
         if (possibleIndexes <= 1) return;
 
-        AudioManager.Instance.PlayClickUI();
-
         currentMonitorIndex++;
 
         // if next display is not available go back to start

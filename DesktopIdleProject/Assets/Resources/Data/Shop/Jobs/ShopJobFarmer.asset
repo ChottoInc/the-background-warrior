@@ -18,6 +18,6 @@ MonoBehaviour:
   shopItemType: 1
   itemName: 'Class: Farmer'
   itemDesc: Unlock the Farmer Class
-  price: 500
+  price: 750
   sprite: {fileID: 21300000, guid: 5b9ec5880385d9c4aa59eb9d2a4a6959, type: 3}
   shoppingJob: 5

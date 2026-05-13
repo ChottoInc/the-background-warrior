@@ -120,8 +120,6 @@ public class UIQuestPrefab : MonoBehaviour
 
     public void OnButtonClaim()
     {
-        AudioManager.Instance.PlayClickUI();
-
         // add reward to player
         PlayerManager.Instance.Inventory.AddBits(rewardAmount);
 

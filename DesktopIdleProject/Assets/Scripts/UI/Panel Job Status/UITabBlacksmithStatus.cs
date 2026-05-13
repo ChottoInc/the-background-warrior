@@ -8,6 +8,7 @@ public class UITabBlacksmithStatus : UITabPlayerStatus
     private int distributedPointsOnCraftSpeed;
     private int distributedPointsOnEfficiency;
     private int distributedPointsOnLuck;
+    private int distributedPointsOnMetallurgy;
 
     private void OnDestroy()
     {
@@ -26,6 +27,7 @@ public class UITabBlacksmithStatus : UITabPlayerStatus
         distributedPointsOnCraftSpeed = 0;
         distributedPointsOnEfficiency = 0;
         distributedPointsOnLuck = 0;
+        distributedPointsOnMetallurgy = 0;
     }
 
     protected override void AssignAvailablePoints()
@@ -57,6 +59,11 @@ public class UITabBlacksmithStatus : UITabPlayerStatus
             player.PlayerData.IncreaseLevelStat(UtilsPlayer.ID_BLACKSMITH_LUCK, distributedPointsOnLuck);
         }
 
+        if (distributedPointsOnMetallurgy > 0)
+        {
+            player.PlayerData.IncreaseLevelStat(UtilsPlayer.ID_BLACKSMITH_METALLURGY, distributedPointsOnMetallurgy);
+        }
+
 
 
         player.PlayerData.RemoveStatPoints(totalDistributedPoints);
@@ -80,6 +87,7 @@ public class UITabBlacksmithStatus : UITabPlayerStatus
             case UtilsPlayer.ID_BLACKSMITH_CRAFTSPEED: distributedPointsOnCraftSpeed++; break;
             case UtilsPlayer.ID_BLACKSMITH_EFFICIENCY: distributedPointsOnEfficiency++; break;
             case UtilsPlayer.ID_BLACKSMITH_LUCK: distributedPointsOnLuck++; break;
+            case UtilsPlayer.ID_BLACKSMITH_METALLURGY: distributedPointsOnMetallurgy++; break;
         }
     }
 
@@ -91,6 +99,7 @@ public class UITabBlacksmithStatus : UITabPlayerStatus
             case UtilsPlayer.ID_BLACKSMITH_CRAFTSPEED: distributedPointsOnCraftSpeed--; break;
             case UtilsPlayer.ID_BLACKSMITH_EFFICIENCY: distributedPointsOnEfficiency--; break;
             case UtilsPlayer.ID_BLACKSMITH_LUCK: distributedPointsOnLuck--; break;
+            case UtilsPlayer.ID_BLACKSMITH_METALLURGY: distributedPointsOnMetallurgy--; break;
         }
     }
 
@@ -102,6 +111,7 @@ public class UITabBlacksmithStatus : UITabPlayerStatus
             case UtilsPlayer.ID_BLACKSMITH_CRAFTSPEED: return player.PlayerData.LevelStatCraftSpeed;
             case UtilsPlayer.ID_BLACKSMITH_EFFICIENCY: return player.PlayerData.LevelEfficiency;
             case UtilsPlayer.ID_BLACKSMITH_LUCK: return player.PlayerData.LevelStatLuck;
+            case UtilsPlayer.ID_BLACKSMITH_METALLURGY: return player.PlayerData.LevelStatMetallurgy;
         }
     }
 }

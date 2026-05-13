@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
+    private const int MAX_ENEMIES = 10;
+
     [Header("Enemies")]
-    [SerializeField] UtilsGeneral.GeneralChances<EnemySO>[] possibleEnemies;
-    [SerializeField] private int startingEnemies = 20;
+    [SerializeField] MapToEnemiesSO mapEnemies;
+
+    private bool finishedStartingEnemies;
+
+    public bool FinishedStartingEnemies => finishedStartingEnemies;
 
     [Header("Drops")]
     [SerializeField] UtilsGeneral.GeneralChances<CardSO>[] possibleCards;
@@ -116,7 +121,8 @@ public class StageManager : MonoBehaviour
     /// </summary>
     private EnemyData GenerateEnemy()
     {
-        EnemySO randEnemySO = UtilsGeneral.GetRandomValueFromGeneralChanches(possibleEnemies);
+        //EnemySO randEnemySO = UtilsGeneral.GetRandomValueFromGeneralChanches(possibleEnemies);
+        EnemySO randEnemySO = UtilsGeneral.GetRandomValueFromGeneralChanches(mapEnemies.PossibleEnemies);
 
         // generate data
         EnemyData result = new EnemyData(randEnemySO, CombatManager.Instance.MapSO);
@@ -129,9 +135,11 @@ public class StageManager : MonoBehaviour
 
     private IEnumerator CoSpawnStartingEnemies(float timer = 0f)
     {
+        finishedStartingEnemies = false;
+
         yield return new WaitForSeconds(timer);
 
-        for (int i = 0; i < startingEnemies; i++)
+        for (int i = 0; i < MAX_ENEMIES; i++)
         {
             float randX = Random.Range(minXSpawn, maxXSpawn);
             Vector2 spawnPos = new Vector2(randX, ySpawn);
@@ -139,8 +147,10 @@ public class StageManager : MonoBehaviour
             EnemyData data = GenerateEnemy();
             SpawnEnemy(data, spawnPos);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.35f);
         }
+
+        finishedStartingEnemies = true;
     }
 
     private void SpawnEnemy(EnemyData data, Vector2 spawnPos)
@@ -155,6 +165,8 @@ public class StageManager : MonoBehaviour
             enemyObj.transform.position = spawnPos;
 
             enemy.Setup(data, currentEnemyIndex - 1, SceneLoaderManager.SceneType.CombatMap);
+
+            //Debug.Log("spawned enemy with id: " + (currentEnemyIndex - 1));
         }
         else
         {
@@ -174,6 +186,7 @@ public class StageManager : MonoBehaviour
     public void RemoveFromCurrentEnemiesList(Enemy enemy)
     {
         currentEnemies.Remove(enemy);
+        //Debug.Log("removed enemy with id: " + enemy.EnemyIndex);
     }
 
     #endregion
@@ -268,6 +281,7 @@ public class StageManager : MonoBehaviour
     public void AddKill(int amount)
     {
         currentStageKilled += amount;
+        //Debug.Log("current killed count: " + currentStageKilled);
     }
 
     
@@ -277,12 +291,12 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public bool NextStage()
     {
-        /*
-         * stop player
-         * */
         if (currentStageKilled != currentEnemyIndex - 1) return false;
 
-        if(currentStage < CombatManager.Instance.MapSO.Stages && SettingsManager.Instance.IsAutoBattleOn)
+        //Debug.Log("------ NEXT STAGE -------------");
+        //Debug.Log("current killed count: " + currentStageKilled);
+
+        if (currentStage < CombatManager.Instance.MapSO.Stages && SettingsManager.Instance.IsAutoBattleOn)
         {
             // update stage
             currentStage++;
@@ -357,6 +371,13 @@ public class StageManager : MonoBehaviour
     public void KillAllEnemies()
     {
         foreach (var enemy in currentEnemies)
+        {
+            enemy.PlayDeath(true);
+        }
+
+        // clear remaining rocks
+        Enemy[] remains = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
+        foreach (var enemy in remains)
         {
             enemy.PlayDeath(true);
         }

@@ -39,6 +39,7 @@ public class SettingsSaveData
 
     // -- Fisher
     public bool isInvertedFishingSpot;
+    public bool isHiddenFishingBar;
 
     // ------------ VIDEO
 
@@ -86,6 +87,7 @@ public class SettingsSaveData
         areLevelUpEquipmentOn = manager.AreLevelUpEquipmentOn;
 
         isInvertedFishingSpot = manager.IsInvertedFishingSpot;
+        isHiddenFishingBar = manager.IsHiddenFishingBar;
 
 
 

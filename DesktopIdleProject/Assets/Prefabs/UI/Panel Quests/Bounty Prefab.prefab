@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 8711257576265195757}
   - component: {fileID: 1788010765575944782}
   - component: {fileID: 4172710880180222078}
-  - component: {fileID: 1453175399786013316}
+  - component: {fileID: 7372483859871079809}
   m_Layer: 5
   m_Name: Button Accept
   m_TagString: Untagged
@@ -191,8 +191,8 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.8
---- !u!114 &1453175399786013316
+  m_PixelsPerUnitMultiplier: 0.9
+--- !u!114 &7372483859871079809
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1486395720308587105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -248,6 +248,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  multiplier: 0.9
+  timerShrink: 0.1
 --- !u!1 &2389018896665337017
 GameObject:
   m_ObjectHideFlags: 0

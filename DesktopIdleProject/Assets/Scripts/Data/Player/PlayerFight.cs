@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerFight : Player
+public class PlayerFight : Player, IDamageable
 {
     [Header("Movement")]
     [SerializeField] Animator animator;
@@ -11,10 +11,6 @@ public class PlayerFight : Player
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] bool faceRight;
     [SerializeField] float speed = 5f;
-
-
-    private const int ATTACK_ANIMATION_FRAMES = 7;
-    private const int ATTACK_FRAME_INDEX = 3;
 
     private float startingAttackSpeedAnimationDuration;
 
@@ -29,6 +25,7 @@ public class PlayerFight : Player
 
     [Space(10)]
     [SerializeField] GenericBar hpBar;
+    [SerializeField] UIPanelPlayerDamage panelDamage;
 
     [Header("Death")]
     [SerializeField] float timerResetAfterDeath = 2f;
@@ -38,9 +35,12 @@ public class PlayerFight : Player
 
     // ------ MOVEMENT VARS
 
+    private bool canInitialMove;
+
     private Vector3 startScale;
 
     private float currentTarget;
+    private Vector2 currentDirection;
 
     private bool isIdling;
 
@@ -53,15 +53,16 @@ public class PlayerFight : Player
 
     // ------ ATTACK VARS
 
+
     private bool isEnemyDetected;
 
     private bool isAttacking;
     private float CooldownAttack => 1f / playerData.CurrentAtkSpd;
-    private float timerAttack;
 
 
 
     public event Action OnPerformAttack;
+    public event Action<int> OnTakeDamage;
 
 
     public event Action<int, int> OnStatChange;
@@ -69,9 +70,6 @@ public class PlayerFight : Player
 
 
     public event Action OnResetAfterDeath;
-
-
-
 
     public PlayerFightData PlayerData => playerData;
 
@@ -86,13 +84,12 @@ public class PlayerFight : Player
         if(playerData != null)
         {
             playerData.OnHpChange -= UpdateHpBarUI;
+            playerData.OnTakeDamage -= OnActionTakeDamage;
             playerData.OnLevelUp -= LevelUp;
 
             playerData.OnStatChange -= OnStatChangeFight;
             playerData.OnAddMap -= OnAddMapFight;
         }
-
-        OnPerformAttack -= PlaySwordHit;
     }
 
 
@@ -102,29 +99,37 @@ public class PlayerFight : Player
 
         // Get default speed for animator walk
         startingAttackSpeedAnimationDuration = attackClip.length;
-
-        OnPerformAttack += PlaySwordHit;
     }
 
     private void Start()
     {
         startScale = spriteRenderer.transform.localScale;
 
-        GenerateNewTarget();
+        StartCoroutine(CoSpawned());
     }
 
     private void Update()
     {
-        if (isAttacking)
-        {
-            CheckAttack();
-        }
-
         CheckSpeedMult();
+    }
+
+    private IEnumerator CoSpawned()
+    {
+        yield return new WaitForSeconds(2f);
+
+        // change rb type
+        rb.bodyType = RigidbodyType2D.Kinematic;
+
+        // enable movement
+        canInitialMove = true;
+
+        GenerateNewTarget();
     }
 
     private void CheckSpeedMult()
     {
+        if (!SettingsManager.Instance.AreCheatsEnabled) return;
+
         if (Input.GetKeyDown(KeyCode.X))
         {
             if (Time.timeScale == 1f)
@@ -152,23 +157,22 @@ public class PlayerFight : Player
         }
     }
 
-    private void CheckAttack()
+    public void PerformAttack()
     {
-        if (timerAttack <= 0)
-        {
-            //Debug.Log("Weapon mult: " + PlayerManager.Instance.WeaponMinerMultiplier);
-            //Debug.Log("Weapon level: " + PlayerManager.Instance.PlayerMinerData.WeaponLevel);
-            OnPerformAttack?.Invoke();
-            timerAttack = CooldownAttack;
-        }
-        else
-        {
-            timerAttack -= Time.deltaTime;
-        }
+        OnPerformAttack?.Invoke();
+    }
+
+    private void OnActionTakeDamage(int damage)
+    {
+        OnTakeDamage?.Invoke(damage);
     }
 
     private void CheckForEnemy()
     {
+        if (!canInitialMove) return;
+
+        if (!StageManager.Instance.FinishedStartingEnemies) return;
+
         if (isEnemyDetected) return;
 
         if (CheckEnemyAtPoint(checkEnemyPoint.position, 0.5f, enemyLayer, out Collider2D hit))
@@ -185,15 +189,17 @@ public class PlayerFight : Player
 
     private void HandleMovement()
     {
+        if (!canInitialMove) return;
+
         float distance = Mathf.Abs(transform.position.x - currentTarget);
 
         if (distance > 0.1f && !isIdling)
         {
             // get target dir
-            Vector2 dir = new Vector2(currentTarget - transform.position.x, 0).normalized;
+            currentDirection = new Vector2(currentTarget - transform.position.x, 0).normalized;
 
-            // move with rb
-            rb.velocity = new Vector2(dir.x * CurrentSpeed, rb.velocity.y);
+            // move
+            transform.position += CurrentSpeed * Time.fixedDeltaTime * (Vector3)currentDirection;
 
             CheckFlip();
         }
@@ -207,7 +213,7 @@ public class PlayerFight : Player
     private void CheckFlip()
     {
         // check sprite flip
-        float vx = rb.velocity.x;
+        float vx = currentDirection.x;
         if (vx > 0.01f && faceRight)
         {
             spriteRenderer.transform.localScale = startScale;
@@ -220,7 +226,7 @@ public class PlayerFight : Player
         {
             spriteRenderer.transform.localScale = new Vector3(-startScale.x, startScale.y, startScale.z);
         }
-        else if(vx < -0.01f && !faceRight)
+        else if (vx < -0.01f && !faceRight)
         {
             spriteRenderer.transform.localScale = startScale;
         }
@@ -251,6 +257,7 @@ public class PlayerFight : Player
         if (playerData != null)
         {
             playerData.OnHpChange += UpdateHpBarUI;
+            playerData.OnTakeDamage += OnActionTakeDamage;
             playerData.OnLevelUp += LevelUp;
 
             playerData.OnStatChange += OnStatChangeFight;
@@ -283,9 +290,6 @@ public class PlayerFight : Player
         if (!isAttacking)
         {
             isEnemyDetected = false;
-
-            // Stop sword hit VFX
-            StopAllCoroutines();
         }
         else
         {
@@ -293,35 +297,15 @@ public class PlayerFight : Player
 
             // Set the animator speed accordingly to Atk Spd
             animator.SetFloat("AttackSpeedMultiplier", attackSpeedMultiplier);
-
-            timerAttack = 0;
         }
 
         animator.SetBool("isAttacking", isAttacking);
     }
 
-    private void PlaySwordHit()
+    public void PlaySwordHit(Vector2 enemyPos)
     {
-        // Time the sowrd VFX with the animation
-        float hitNormalizedTime = (float)ATTACK_FRAME_INDEX / (float)ATTACK_ANIMATION_FRAMES; // Tweak that to make the hit appear sooner or later
-        float timer = CooldownAttack * hitNormalizedTime;
-
-        StartCoroutine(CoPlaySwordHit(timer));
-    }
-
-    private IEnumerator CoPlaySwordHit(float timer)
-    {
-        yield return new WaitForSeconds(timer);
-
-        Enemy currentEnemy = CombatManager.Instance.CurrentEnemy;
-
-        if (currentEnemy != null)
-        {
-            GameObject hitVFX = Instantiate(swordHitVFXPrefab, CombatManager.Instance.CurrentEnemy.transform.position, Quaternion.identity);
-            hitVFX.transform.parent = null;
-
-            currentEnemy.UpdateDamageUI();
-        }
+        GameObject hitVFX = Instantiate(swordHitVFXPrefab, enemyPos, Quaternion.identity);
+        hitVFX.transform.parent = null;
     }
 
     public bool CheckEnemyAtPoint(Vector2 point, float radius, LayerMask enemyMask, out Collider2D hitEnemy)
@@ -349,6 +333,7 @@ public class PlayerFight : Player
 
     private IEnumerator CoResetAfterDeath()
     {
+       // Debug.Log("start routine death");
         yield return new WaitForSeconds(timerResetAfterDeath);
 
         OnResetAfterDeath?.Invoke();

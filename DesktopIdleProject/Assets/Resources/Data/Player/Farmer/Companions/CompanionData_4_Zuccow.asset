@@ -16,5 +16,5 @@ MonoBehaviour:
   companionName: Zuccow
   iconCompanion: {fileID: 21300000, guid: 471e20835be620442b3f7de075f9c5db, type: 3}
   prefab: {fileID: 75811487269909513, guid: 36bde5dcc5ed3744190db418c3b049f7, type: 3}
-  baseAtkPerc: 0.2
+  baseAtkPerc: 0.25
   baseAtkSpd: 0.5

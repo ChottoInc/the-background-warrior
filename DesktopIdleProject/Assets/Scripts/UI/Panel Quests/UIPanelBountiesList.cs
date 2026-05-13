@@ -78,6 +78,10 @@ public class UIPanelBountiesList : MonoBehaviour
                     if (QuestManager.Instance.IsBountyActiveById(randBountySO.UniqueId))
                         valid = false;
 
+                    // check if enemy is currently available in your maps
+                    if (!UtilsQuest.IsMonsterAvailable(randBountySO.QuestData, PlayerManager.Instance.PlayerFightData.AvailableMaps))
+                        valid = false;
+
                     tries++;
                 } while (!valid && tries < maxTries);
 

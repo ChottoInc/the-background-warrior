@@ -25,6 +25,9 @@ public static class UtilsFarmer
     private static float FLAT_FARMER_EXP_GROWTH = 10f;
 
 
+    public const long PASSIVE_EXP = 650;
+
+
     private static PlayerJobFarmerSO jobDataSO;
 
 

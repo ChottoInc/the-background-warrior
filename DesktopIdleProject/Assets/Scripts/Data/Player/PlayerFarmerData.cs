@@ -14,9 +14,14 @@ public class PlayerFarmerData
     // ---- LEVEL STAT POINTS
 
     private int levelStatGreenthumb = 1;
-    private int levelstatAgronomy = 1;
+    private int levelstatAgronomy = 0;
     private int levelstatKindness = 1;
     private int levelStatLuck = 1;
+
+    private int startLevelGreenthumb = 1;
+    private int startLevelAgronomy = 0;
+    private int startLevelKindness = 1;
+    private int startLevelLuck = 1;
 
 
     public int LevelStatGreenthumb => levelStatGreenthumb;
@@ -45,7 +50,7 @@ public class PlayerFarmerData
 
 
     public float CurrentGreenthumb => baseGreenthumb + UtilsFarmer.PER_LEVEL_FARMER_GAIN_GREENTHUMB * (levelStatGreenthumb - 1);
-    public float CurrentAgronomy => baseAgronomy + UtilsFarmer.PER_LEVEL_FARMER_GAIN_AGRONOMY * (levelstatAgronomy - 1);
+    public float CurrentAgronomy => baseAgronomy + UtilsFarmer.PER_LEVEL_FARMER_GAIN_AGRONOMY * (levelstatAgronomy);
     public float CurrentKindness => baseKindness + UtilsFarmer.PER_LEVEL_FARMER_GAIN_KINDNESS * (levelstatKindness - 1);
     public float CurrentLuck => baseLuck + UtilsFarmer.PER_LEVEL_FARMER_GAIN_LUCK * (levelStatLuck - 1);
 
@@ -93,14 +98,33 @@ public class PlayerFarmerData
         levelstatKindness = saveData.levelKindness;
         levelStatLuck = saveData.levelStatLuck;
 
+        levelStatGreenthumb = Math.Min(levelStatGreenthumb, UtilsFarmer.PER_LEVEL_FARMER_MAX_GREENTHUMB);
+        levelstatAgronomy = Math.Min(levelstatAgronomy, UtilsFarmer.PER_LEVEL_FARMER_MAX_AGRONOMY);
+        levelstatKindness = Math.Min(levelstatKindness, UtilsFarmer.PER_LEVEL_FARMER_MAX_KINDNESS);
+        levelStatLuck = Math.Min(levelStatLuck, UtilsFarmer.PER_LEVEL_FARMER_MAX_LUCK);
 
         availableStatPoints = saveData.availableStatPoints;
 
         currentLevel = saveData.currentLevel;
         currentExp = saveData.currentExp;
 
+        int sumLevels =
+            levelStatGreenthumb + levelstatAgronomy + levelstatKindness + levelStatLuck -
+            startLevelGreenthumb - startLevelAgronomy - startLevelKindness - startLevelLuck +
+            availableStatPoints +
+            1;
 
-        if(saveData.slot1CropSaveData != null)
+        currentLevel = Math.Min(currentLevel, sumLevels);
+
+        // reset available points to 0 if previous bugs occured, and set exp to 0
+        if (currentLevel > UtilsFarmer.MAX_LEVEL_FARMER)
+        {
+            availableStatPoints = 0;
+            currentExp = 0;
+        }
+
+
+        if (saveData.slot1CropSaveData != null)
             slot1CropData = new CropData(saveData.slot1CropSaveData);
 
         if (saveData.slot2CropSaveData != null)
@@ -124,6 +148,13 @@ public class PlayerFarmerData
     {
         currentLevel = 1;
         currentExp = 0;
+
+
+        levelStatGreenthumb = startLevelGreenthumb;
+        levelstatAgronomy = startLevelAgronomy;
+        levelstatKindness = startLevelKindness;
+        levelStatLuck = startLevelLuck;
+
 
         // multiplier
         baseGreenthumb = 0f; // reduced growth time crops, up to 25%

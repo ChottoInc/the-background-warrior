@@ -25,6 +25,13 @@ public static class UtilsFisher
     private static PlayerJobFisherSO jobDataSO;
 
 
+
+
+    public const long PASSIVE_EXP = 50;
+    public const long UNCAUGHT_EXP = 300;
+
+
+
     public static void Initialize()
     {
         jobDataSO = UtilsPlayer.GetJobFromDatabase(UtilsPlayer.PlayerJob.Fisher) as PlayerJobFisherSO;

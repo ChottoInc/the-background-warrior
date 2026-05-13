@@ -10,6 +10,22 @@ public class UIPanelShrink : MonoBehaviour
 
     private bool isExpanded;
 
+    [Header("Notification")]
+    [SerializeField] UITab tabButton;
+    [SerializeField] GameObject notificationObj;
+
+    private void OnDestroy()
+    {
+        QuestManager.Instance.OnNeedNotification -= EnableNotification;
+        tabButton.OnDeselected -= DisableNotification;
+    }
+
+    private void Awake()
+    {
+        QuestManager.Instance.OnNeedNotification += EnableNotification;
+        tabButton.OnDeselected += DisableNotification;
+    }
+
     private void Start()
     {
         isExpanded = true;
@@ -23,6 +39,11 @@ public class UIPanelShrink : MonoBehaviour
 
         isExpanded = !isExpanded;
 
+        if (isExpanded)
+        {
+            DisableNotification();
+        }
+
         foreach (var item in objectsToHide)
         {
             item.SetActive(isExpanded);
@@ -34,5 +55,19 @@ public class UIPanelShrink : MonoBehaviour
     private void UpdateButtonUI()
     {
         imageButton.sprite = isExpanded ? spriteShrink : spriteExpand;
+    }
+
+
+
+
+    public void EnableNotification()
+    {
+        if (isExpanded) return;
+        notificationObj.SetActive(true);
+    }
+
+    public void DisableNotification()
+    {
+        notificationObj.SetActive(false);
     }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   mapName: Mountains
   mapSceneName: MountainsScene
   mapDifficulty: 1
-  baseEnemyLevel: 90
-  enemiesPerStage: 50
+  baseEnemyLevel: 80
+  enemiesPerStage: 40
   stages: 30
   nextMap: {fileID: 11400000, guid: db68f68b3a2772d47886de7afcbab375, type: 2}

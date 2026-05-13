@@ -5,4 +5,5 @@ Knowledge,0.01,30
 Luck,0.01,40
 ,,
 Base Exp Growth,50,
-Expo Growth,1.15,
+Expo Growth,1.05,
+Flat Growth,10,

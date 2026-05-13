@@ -18,7 +18,7 @@ MonoBehaviour:
   shopItemType: 0
   itemName: Gold Pack
   itemDesc: An elite card pack containing 15 cards. A Rare card is guaranteed.
-  price: 275
+  price: 220
   sprite: {fileID: 21300000, guid: 25f6e5017c110b04e9e9fcc33a32ccd5, type: 3}
   size: 15
   rarityChances:

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIFisherPanelFishPrefab : MonoBehaviour
@@ -8,10 +9,13 @@ public class UIFisherPanelFishPrefab : MonoBehaviour
     [SerializeField] Color unlockedColor;
     [SerializeField] Transform tooltipPosition;
 
+    private ScrollRect scroll;
+
     private FishSO fishSO;
 
-    public void Setup(FishSO fishSO)
+    public void Setup(ScrollRect scroll, FishSO fishSO)
     {
+        this.scroll = scroll;
         this.fishSO = fishSO;
 
         imageFish.sprite = fishSO.Sprite;
@@ -51,5 +55,32 @@ public class UIFisherPanelFishPrefab : MonoBehaviour
     public void OnPointerExit()
     {
         UITooltipManager.Instance.Hide(UITooltipManager.ID_SHOW_TEXT, true);
+    }
+
+    public void OnBeginDrag(BaseEventData data)
+    {
+        if (scroll != null)
+        {
+            PointerEventData pointerData = (PointerEventData)data;
+            scroll.OnBeginDrag(pointerData);
+        }
+    }
+
+    public void OnDrag(BaseEventData data)
+    {
+        if (scroll != null)
+        {
+            PointerEventData pointerData = (PointerEventData)data;
+            scroll.OnDrag(pointerData);
+        }
+    }
+
+    public void OnEndDrag(BaseEventData data)
+    {
+        if (scroll != null)
+        {
+            PointerEventData pointerData = (PointerEventData)data;
+            scroll.OnEndDrag(pointerData);
+        }
     }
 }

@@ -5,13 +5,13 @@ public class PlayerJobMinerSO : AbstractPlayerJobData
 {
     [field: SerializeField] public float PerLevelGainPower { get; private set; }
     [field: SerializeField] public float PerLevelGainSmashSpeed { get; private set; }
-    [field: SerializeField] public float PerLevelGainPrecision { get; private set; }
+    [field: SerializeField] public float PerLevelGainShockwave { get; private set; }
     [field: SerializeField] public float PerLevelGainLuck { get; private set; }
 
     [field: Space(10)]
     [field: SerializeField] public int MaxLevelPower { get; private set; }
     [field: SerializeField] public int MaxLevelSmashSpeed { get; private set; }
-    [field: SerializeField] public int MaxLevelPrecision { get; private set; }
+    [field: SerializeField] public int MaxLevelShockwave { get; private set; }
     [field: SerializeField] public int MaxLevelLuck { get; private set; }
 
     [field: Space(10)]
@@ -34,9 +34,9 @@ public class PlayerJobMinerSO : AbstractPlayerJobData
         PerLevelGainSmashSpeed = value;
     }
 
-    public void SetPerLevelGainPrecision(float value)
+    public void SetPerLevelGainShockwave(float value)
     {
-        PerLevelGainPrecision = value;
+        PerLevelGainShockwave = value;
     }
 
     public void SetPerLevelGainLuck(float value)
@@ -55,9 +55,9 @@ public class PlayerJobMinerSO : AbstractPlayerJobData
         MaxLevelSmashSpeed = value;
     }
 
-    public void SetMaxLevelPrecision(int value)
+    public void SetMaxLevelShockwave(int value)
     {
-        MaxLevelPrecision = value;
+        MaxLevelShockwave = value;
     }
 
     public void SetMaxLevelLuck(int value)

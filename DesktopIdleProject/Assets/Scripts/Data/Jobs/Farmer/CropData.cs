@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CropData
@@ -42,6 +43,8 @@ public class CropData
         baseGrowthTime = cropSO.BaseGrowthTime;
         currentGrowth = saveData.currentGrowth;
 
+        currentGrowth = Math.Min(GrowthTime, currentGrowth);
+
         plantedSlot = saveData.plantedSlot;
     }
 
@@ -68,6 +71,9 @@ public class CropData
     public void AddGrowth(float t)
     {
         currentGrowth += t;
+
+        // set max as growth time
+        currentGrowth = Math.Min(GrowthTime, currentGrowth);
 
         // reward exp if growth reaches max
         if(IsFullyGrown)

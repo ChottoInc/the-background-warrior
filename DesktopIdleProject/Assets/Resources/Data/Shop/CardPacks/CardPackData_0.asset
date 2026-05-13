@@ -18,7 +18,7 @@ MonoBehaviour:
   shopItemType: 0
   itemName: Copper Pack
   itemDesc: A humble card pack containing 3 cards.
-  price: 50
+  price: 30
   sprite: {fileID: 21300000, guid: c4ee973c4ea34eb499e0c389c47502a4, type: 3}
   size: 3
   rarityChances:

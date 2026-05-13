@@ -45,4 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  rockMask:
+    serializedVersion: 2
+    m_Bits: 256
+  radiusShockwave: 2
   alwaysFindLootCheat: 0

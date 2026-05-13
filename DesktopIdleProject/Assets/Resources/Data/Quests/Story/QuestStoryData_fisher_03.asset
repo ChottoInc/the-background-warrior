@@ -23,11 +23,14 @@ MonoBehaviour:
     itemType: 3
     questObtainSpecific: 0
     itemId: 0
-    amountObtain: 250
+    amountObtain: 200
     questLevelUpSpecific: 0
     statId: 0
     amountStat: 0
     mapId: 1
-    rewardAmount: 15
+    questBefriendSpecific: 0
+    companionSO: {fileID: 0}
+    amountBefriend: 0
+    rewardAmount: 50
   nexts:
   - {fileID: 11400000, guid: c4e60ee731fce77458d24cb046efc330, type: 2}

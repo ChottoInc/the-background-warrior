@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class UtilsQuest
@@ -134,7 +135,7 @@ public static class UtilsQuest
                 break;
 
             case QuestObjectiveType.Befriend:
-                result += string.Format("\n{0}/{1}", progress.progressCounter, data.amountObtain);
+                result += string.Format("\n{0}/{1}", progress.progressCounter, data.amountBefriend);
                 break;
         }
 
@@ -214,11 +215,11 @@ public static class UtilsQuest
             case QuestObjectiveType.Befriend:
                 if (data.questBefriendSpecific)
                 {
-                    result = string.Format("Obtain {0} {1}", data.amountObtain, data.companionSO.CompanionName);
+                    result = string.Format("Obtain {0} {1}", data.amountBefriend, data.companionSO.CompanionName);
                 }
                 else
                 {
-                    result = string.Format("Obtain {0} companions", data.amountObtain);
+                    result = string.Format("Obtain {0} companions", data.amountBefriend);
                 }
                 break;
         }
@@ -239,6 +240,9 @@ public static class UtilsQuest
             case QuestObjectiveType.Obtain:
                 return HandleCounterQuestCheck(data.amountObtain, progress.progressCounter);
 
+            case QuestObjectiveType.Befriend:
+                return HandleCounterQuestCheck(data.amountBefriend, progress.progressCounter);
+
             case QuestObjectiveType.LevelUp:
                 return HandleCounterQuestCheck(data.amountStat, progress.progressCounter);
 
@@ -257,6 +261,38 @@ public static class UtilsQuest
     {
         if (completed) return true;
         return false;
+    }
+
+
+
+
+
+    public static bool IsMonsterAvailable(QuestData data, List<int> availableMaps)
+    {
+        if (data.questKillSpecific)
+        {
+            // get map monsters
+            List<MapToEnemiesSO> maps = new List<MapToEnemiesSO>();
+            foreach (var idMap in availableMaps)
+            {
+                maps.Add(UtilsCombatMap.GetEnemiesByMap(idMap));
+            }
+
+            foreach (var map in maps)
+            {
+                bool found = UtilsCombatMap.IsEnemyInMap(data.monsterId, map);
+
+                if (found) 
+                    return true;
+            }
+
+            return false;
+        }
+        else
+        {
+            // if not specific every monster counts, so true
+            return true;
+        }
     }
 
 

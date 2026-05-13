@@ -5,4 +5,5 @@ Kindness,0.01,25
 Luck,0.01,15
 ,,
 Base Exp Growth,50,
-Expo Growth,1.15,
+Expo Growth,1.08,
+Flat Growth,10,

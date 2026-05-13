@@ -64,6 +64,15 @@ public class CombatManager : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Debug.Log($"EnemyKill subscribers: {OnEnemyKill?.GetInvocationList().Length ?? 0}");
+        }
+    }
+
+
     public void Setup(CombatMapSO mapSO)
     {
         this.mapSO = mapSO;
@@ -127,6 +136,8 @@ public class CombatManager : MonoBehaviour
 
     private void OnPlayerAttack()
     {
+        if (currentEnemy == null) return;
+
         if (playerHighDamageCheat && SettingsManager.Instance.AreCheatsEnabled)
         {
             currentEnemy.EnemyData.TakeDamageCheat(1000f);
@@ -135,9 +146,11 @@ public class CombatManager : MonoBehaviour
         {
             currentEnemy.EnemyData.TakeDamage(player.PlayerData);
         }
+
+        player.PlaySwordHit(currentEnemy.transform.position);
             
 
-        if (currentEnemy.IsDead)
+        if (currentEnemy.IsDead && currentEnemy != null)
         {
             HandleEnemyDeath();
 
@@ -243,7 +256,7 @@ public class CombatManager : MonoBehaviour
 
     private void HandleNextEnemy()
     {
-        if (StageManager.Instance.CurrentEnemyIndex < mapSO.EnemiesPerStage)
+        if (StageManager.Instance.CurrentEnemyIndex - 1 < mapSO.EnemiesPerStage)
         {
             StageManager.Instance.SpawnNextEnemy();
         }
@@ -298,11 +311,14 @@ public class CombatManager : MonoBehaviour
 
         EnableFight(false);
 
+       // Debug.Log("player deatd from manager");
+
         player.SetDeath(true);
     }
 
     private void ResetAfterDeath()
     {
+       // Debug.Log("reset after death");
         StageManager.Instance.RestartCurrentStage();
 
         player.PlayerData.ResetAfterStage();

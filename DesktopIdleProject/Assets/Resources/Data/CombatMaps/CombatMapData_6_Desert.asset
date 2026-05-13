@@ -16,7 +16,7 @@ MonoBehaviour:
   mapName: Desert
   mapSceneName: DesertScene
   mapDifficulty: 2
-  baseEnemyLevel: 130
-  enemiesPerStage: 60
+  baseEnemyLevel: 110
+  enemiesPerStage: 50
   stages: 30
   nextMap: {fileID: 11400000, guid: 726058c0cf233fa45900427a9b5721cc, type: 2}

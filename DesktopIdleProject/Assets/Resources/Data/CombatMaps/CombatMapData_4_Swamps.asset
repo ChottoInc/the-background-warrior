@@ -17,6 +17,6 @@ MonoBehaviour:
   mapSceneName: SwampsScene
   mapDifficulty: 1
   baseEnemyLevel: 60
-  enemiesPerStage: 50
+  enemiesPerStage: 40
   stages: 30
   nextMap: {fileID: 11400000, guid: d2923e66192671d4b820e4d0df46e476, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CropData_0_Bamboo
   m_EditorClassIdentifier: 
   id: 0
-  baseGrowthTime: 1200
+  baseGrowthTime: 350
   cropName: Bamboo
   spriteSeed: {fileID: 21300000, guid: 11781d63e6407034fab187d6c0531b97, type: 3}
   spriteCrop:
@@ -24,3 +24,4 @@ MonoBehaviour:
   - {fileID: 2044097158, guid: cf03922ec99f3bc40ac4ebb30742f00c, type: 3}
   attractedCompanions:
   - {fileID: 11400000, guid: c1ab5d4718de58845bd50e406c671b8c, type: 2}
+  rewardedExp: 0

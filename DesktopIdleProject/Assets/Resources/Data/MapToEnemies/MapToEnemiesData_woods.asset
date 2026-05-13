@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a45d4151484b4d80f7e9aa8d4413d, type: 3}
+  m_Name: MapToEnemiesData_woods
+  m_EditorClassIdentifier: 
+  mapSO: {fileID: 11400000, guid: c8be4cab8c0113446843cf71d67de75f, type: 2}
+  possibleEnemies:
+  - value: {fileID: 11400000, guid: 1f37b91e07a27624c957eec6a7641031, type: 2}
+    chanches: 35
+  - value: {fileID: 11400000, guid: a704b324e7b029b48ab834b887ae8529, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: ebc36f31340c3884e94ac9d358b2cc31, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 990a64d256de09d43b914e3bb1f62426, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 0aa4e41ad3cc6af459ce9f0b00b3487b, type: 2}
+    chanches: 15

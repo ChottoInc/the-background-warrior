@@ -2459,7 +2459,7 @@ GameObject:
   - component: {fileID: 8485562406283230899}
   - component: {fileID: 2387910728491235184}
   - component: {fileID: 324610158033573693}
-  - component: {fileID: 3858490524352857734}
+  - component: {fileID: 6722563842039050923}
   m_Layer: 5
   m_Name: Button Dismantle
   m_TagString: Untagged
@@ -2485,7 +2485,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 168, y: -128.505}
-  m_SizeDelta: {x: 185, y: 55}
+  m_SizeDelta: {x: 260, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2387910728491235184
 CanvasRenderer:
@@ -2525,7 +2525,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3858490524352857734
+--- !u!114 &6722563842039050923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2534,7 +2534,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1809642920505392741}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -2581,6 +2581,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  multiplier: 0.9
+  timerShrink: 0.1
 --- !u!1 &1828679278851141212
 GameObject:
   m_ObjectHideFlags: 0
@@ -3363,7 +3365,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.85
+  m_fontSize: 50
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3864,7 +3866,7 @@ GameObject:
   - component: {fileID: 2012299074780804765}
   - component: {fileID: 5732060332465841343}
   - component: {fileID: 6367871413202481159}
-  - component: {fileID: 8834175913348547008}
+  - component: {fileID: 5644003883221148267}
   m_Layer: 5
   m_Name: Button Convert
   m_TagString: Untagged
@@ -3930,7 +3932,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8834175913348547008
+--- !u!114 &5644003883221148267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3939,7 +3941,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3172139480284004414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -3986,6 +3988,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  multiplier: 0.9
+  timerShrink: 0.1
 --- !u!1 &3226705963736996852
 GameObject:
   m_ObjectHideFlags: 0
@@ -5927,7 +5931,7 @@ GameObject:
   - component: {fileID: 3446805925248824148}
   - component: {fileID: 1347816159930614003}
   - component: {fileID: 646717881005799524}
-  - component: {fileID: 5658448630976642487}
+  - component: {fileID: 3862315284496141754}
   - component: {fileID: 1280771705718411280}
   m_Layer: 5
   m_Name: Scroll Items
@@ -5995,7 +5999,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5658448630976642487
+--- !u!114 &3862315284496141754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6004,7 +6008,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5084164057641800295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 59de2e49b58d18941a159d3931156a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 2787080927311910264}
@@ -6014,13 +6018,13 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 7.5
   m_Viewport: {fileID: 6020344205771711065}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 4414835272414301410}
-  m_HorizontalScrollbarVisibility: 2
+  m_HorizontalScrollbarVisibility: 0
   m_VerticalScrollbarVisibility: 2
-  m_HorizontalScrollbarSpacing: -3
+  m_HorizontalScrollbarSpacing: 0
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6190,7 +6194,7 @@ GameObject:
   - component: {fileID: 5081004786539522768}
   - component: {fileID: 6880485570345339132}
   - component: {fileID: 2498066145339506307}
-  - component: {fileID: 4506562647269117084}
+  - component: {fileID: 4583114404836714455}
   m_Layer: 5
   m_Name: Button Quick Select
   m_TagString: Untagged
@@ -6216,7 +6220,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 178.84789, y: -45.96701}
-  m_SizeDelta: {x: 190.4, y: 50}
+  m_SizeDelta: {x: 270, y: 58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6880485570345339132
 CanvasRenderer:
@@ -6256,7 +6260,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1.5
---- !u!114 &4506562647269117084
+--- !u!114 &4583114404836714455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6265,7 +6269,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5267430214357651873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -6312,6 +6316,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  multiplier: 0.9
+  timerShrink: 0.1
 --- !u!1 &5486902184084777486
 GameObject:
   m_ObjectHideFlags: 0
@@ -6732,7 +6738,7 @@ GameObject:
   - component: {fileID: 9209341664382198211}
   - component: {fileID: 7718532150544871939}
   - component: {fileID: 2509610391929416314}
-  - component: {fileID: 6444493751522883944}
+  - component: {fileID: 7673659988621121170}
   m_Layer: 5
   m_Name: Button Dismantle
   m_TagString: Untagged
@@ -6798,7 +6804,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6444493751522883944
+--- !u!114 &7673659988621121170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6807,7 +6813,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5997674033791773081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -6854,6 +6860,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  multiplier: 0.9
+  timerShrink: 0.1
 --- !u!1 &6236934617588404191
 GameObject:
   m_ObjectHideFlags: 0
@@ -8417,7 +8425,7 @@ GameObject:
   - component: {fileID: 3725756985628317430}
   - component: {fileID: 8156005403760865663}
   - component: {fileID: 6491826215107890654}
-  - component: {fileID: 3003849155443802727}
+  - component: {fileID: 4620949728922296304}
   m_Layer: 5
   m_Name: Button Convert
   m_TagString: Untagged
@@ -8483,7 +8491,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1.5
---- !u!114 &3003849155443802727
+--- !u!114 &4620949728922296304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8492,7 +8500,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7386751693050942179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -8539,6 +8547,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  multiplier: 0.9
+  timerShrink: 0.1
 --- !u!1 &7453015202504254659
 GameObject:
   m_ObjectHideFlags: 0
@@ -9448,7 +9458,7 @@ GameObject:
   - component: {fileID: 144156288072914385}
   - component: {fileID: 5578950410499049397}
   - component: {fileID: 9113278295741680464}
-  - component: {fileID: 5366387233591863124}
+  - component: {fileID: 4396924737464119107}
   - component: {fileID: 711002957628835916}
   m_Layer: 5
   m_Name: Scroll Items
@@ -9516,7 +9526,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5366387233591863124
+--- !u!114 &4396924737464119107
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9525,7 +9535,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8398642007967732597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 59de2e49b58d18941a159d3931156a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 8726568865268709553}
@@ -9535,13 +9545,13 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 7.5
   m_Viewport: {fileID: 7992143311660925958}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 7956419436057001115}
-  m_HorizontalScrollbarVisibility: 2
+  m_HorizontalScrollbarVisibility: 0
   m_VerticalScrollbarVisibility: 2
-  m_HorizontalScrollbarSpacing: -3
+  m_HorizontalScrollbarSpacing: 0
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
     m_PersistentCalls:

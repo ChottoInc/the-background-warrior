@@ -105,8 +105,6 @@ public class UITooltipYesNo : MonoBehaviour
 
     private void Close(bool result)
     {
-        AudioManager.Instance.PlayClickUI();
-
         IsShowing = false;
 
         tcs?.TrySetResult(result);

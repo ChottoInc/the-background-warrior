@@ -1,12 +1,12 @@
 ,Per level gain,Max level
-Max Hp,20,50
+Max Hp,45,50
 Atk,0.75,50
 Def,0.2,50
 Atk Spd,0.01,30
 Crit Rate,0.001,20
-Crit Dmg,0.02,30
+Crit Dmg,0.005,30
 Luck,0.0005,30
 ,,
-Base Exp Growth,20,
-Expo Growth,1.85,
+Base Exp Growth,50,
+Expo Growth,1.08,
 Flat Growth,80,

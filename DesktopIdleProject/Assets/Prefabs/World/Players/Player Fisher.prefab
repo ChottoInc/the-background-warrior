@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: -7, y: 7, z: 7}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7319969148832793512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -237,6 +237,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7319969148832793512}
     m_Modifications:
+    - target: {fileID: 750450706856139887, guid: 3959b16b42d57ee45b11fe1571a0041c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 877106541623579354, guid: 3959b16b42d57ee45b11fe1571a0041c, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -248,6 +252,18 @@ PrefabInstance:
     - target: {fileID: 2251514908916543166, guid: 3959b16b42d57ee45b11fe1571a0041c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463776652276273944, guid: 3959b16b42d57ee45b11fe1571a0041c, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463776652276273944, guid: 3959b16b42d57ee45b11fe1571a0041c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.57032484
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463776652276273944, guid: 3959b16b42d57ee45b11fe1571a0041c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.19215685
       objectReference: {fileID: 0}
     - target: {fileID: 2481455561923615440, guid: 3959b16b42d57ee45b11fe1571a0041c, type: 3}
       propertyPath: m_Name
@@ -271,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5241107313144283767, guid: 3959b16b42d57ee45b11fe1571a0041c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8393632110225679489, guid: 3959b16b42d57ee45b11fe1571a0041c, type: 3}
       propertyPath: m_IsActive

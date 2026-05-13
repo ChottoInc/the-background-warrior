@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,14 @@ public class UITabQuestsDaily : UITabWindow
     private List<GameObject> questObjs;
 
     [Space(10)]
+    [SerializeField] TMP_Text textReward;
     [SerializeField] Button buttonClaim;
 
     public override void Open()
     {
         base.Open();
+
+        textReward.text = UtilsQuest.DAILY_BITS_REWARD.ToString();
 
         FillQuests();
     }
@@ -74,8 +78,6 @@ public class UITabQuestsDaily : UITabWindow
 
     public void OnButtonClaim()
     {
-        AudioManager.Instance.PlayClickUI();
-
         PlayerManager.Instance.Inventory.AddBits(UtilsQuest.DAILY_BITS_REWARD);
         PlayerManager.Instance.SaveInventoryData();
 

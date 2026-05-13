@@ -8,10 +8,18 @@ public class Rock : MonoBehaviour, IPoolObject
     [Header("Death")]
     [SerializeField] ParticleSystem smashVFX;
 
+    [Header("UI")]
+    [SerializeField] GenericBar durabilityBar;
+
+    private bool isDurabilityBarActive;
+
+
+
     private float smashVFXDuration;
     private float timerSmashVFX;
 
     private RockData rockData;
+
 
     private int rockIndex;
 
@@ -29,6 +37,16 @@ public class Rock : MonoBehaviour, IPoolObject
 
 
     public int RockIndex => rockIndex;
+
+
+
+    private void OnDestroy()
+    {
+        if(rockData != null)
+            rockData.OnTakeDamage -= OnTakeDamage;
+    }
+
+
 
     private void Start()
     {
@@ -64,6 +82,10 @@ public class Rock : MonoBehaviour, IPoolObject
 
         spriteRenderer.sprite = rockData.RockSO.Sprite;
         spriteRenderer.sortingOrder = rockIndex;
+
+        durabilityBar.Setup(rockData.MaxDurability, rockData.CurrentDurability);
+
+        rockData.OnTakeDamage += OnTakeDamage;
     }
 
     private void HideSprite(bool hide)
@@ -79,10 +101,15 @@ public class Rock : MonoBehaviour, IPoolObject
 
     public void PlayDeath(bool setSmashed)
     {
-        if (setSmashed)
+        if (setSmashed && rockData != null)
             rockData.SetSmashed();
 
         HideSprite(true);
+
+        durabilityBar.gameObject.SetActive(false);
+        isDurabilityBarActive = false;
+
+        //rockData = null;
 
         // play vfx
         smashVFX.Play();
@@ -92,7 +119,7 @@ public class Rock : MonoBehaviour, IPoolObject
 
     private void HideAfterSmash()
     {
-        smashVFX.Stop();
+        smashVFX.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         Die();
     }
 
@@ -103,13 +130,36 @@ public class Rock : MonoBehaviour, IPoolObject
 
     public void OnDespawn()
     {
-
+        if (rockData != null)
+        {
+            rockData = null;
+        }
     }
 
     public void Die()
     {
-        RockSpawnManager.Instance.RemoveFromCurrentRocksList(this);
+        if(RockSpawnManager.Instance != null)
+            RockSpawnManager.Instance.RemoveFromCurrentRocksList(this);
+
         PoolManager.Instance.Return(gameObject, "rock");
+    }
+
+
+    private void OnTakeDamage()
+    {
+        // active durability ui when damaged
+        if (!isDurabilityBarActive)
+        {
+            isDurabilityBarActive = true;
+            durabilityBar.gameObject.SetActive(true);
+        }
+
+        UpdateDurabilityUI();
+    }
+
+    private void UpdateDurabilityUI()
+    {
+        durabilityBar.SetCurrentValue(rockData.CurrentDurability);
     }
 
 

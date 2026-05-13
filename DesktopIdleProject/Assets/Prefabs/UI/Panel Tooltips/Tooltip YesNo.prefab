@@ -277,8 +277,8 @@ MonoBehaviour:
   canvasGroup: {fileID: 5653769028336510876}
   timeToFade: 0.25
   textQuestion: {fileID: 3236256904679981688}
-  yesButton: {fileID: 5668553437422620688}
-  noButton: {fileID: 805159942062888955}
+  yesButton: {fileID: 7509230874018290278}
+  noButton: {fileID: 5221458881850709980}
 --- !u!225 &5653769028336510876
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 309392460707907234}
   - component: {fileID: 5850637308806040664}
   - component: {fileID: 4100663190593610267}
-  - component: {fileID: 5668553437422620688}
+  - component: {fileID: 7509230874018290278}
   m_Layer: 5
   m_Name: Button Confirm
   m_TagString: Untagged
@@ -502,7 +502,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5668553437422620688
+--- !u!114 &7509230874018290278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4785915051406661860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -546,6 +546,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  multiplier: 0.9
+  timerShrink: 0.1
 --- !u!1 &5385646423202121285
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +974,7 @@ GameObject:
   - component: {fileID: 9005038620966059643}
   - component: {fileID: 5912910780841310154}
   - component: {fileID: 5102232242882564789}
-  - component: {fileID: 805159942062888955}
+  - component: {fileID: 5221458881850709980}
   m_Layer: 5
   m_Name: Button Cancel
   m_TagString: Untagged
@@ -1038,7 +1040,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &805159942062888955
+--- !u!114 &5221458881850709980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1047,7 +1049,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7885830672269453178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1082,3 +1084,5 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  multiplier: 0.9
+  timerShrink: 0.1

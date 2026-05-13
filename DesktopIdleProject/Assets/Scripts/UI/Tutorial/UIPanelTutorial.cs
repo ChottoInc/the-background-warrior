@@ -256,4 +256,38 @@ public class UIPanelTutorial : MonoBehaviour
 
         panelShrink.SetActive(false);
     }
+
+
+    public void OnClickSkipTutorial()
+    {
+        // dehighlight ui elements
+        foreach (var uiElement in uiElementsToHighlight)
+        {
+            if(uiElement.TryGetComponent(out Canvas canvasComp))
+            {
+                Destroy(canvasComp);
+            }
+        }
+
+        // active all ui elements
+        buttonLevel.SetActive(true);
+        buttonJob.SetActive(true);
+        buttonInventory.SetActive(true);
+
+        buttonShop.SetActive(true);
+        buttonQuests.SetActive(true);
+
+        buttonSetting.SetActive(true);
+        panelStage.SetActive(true);
+        panelAutoBattle.SetActive(true);
+        panelShrink.SetActive(true);
+
+        // hide panel
+        content.SetActive(false);
+
+        SettingsManager.Instance.SetSeenTutorial(lastShownTutorial, true);
+
+        // trigger last tutorial has been finished
+        OnTutorialEnded?.Invoke(lastShownTutorial);
+    }
 }

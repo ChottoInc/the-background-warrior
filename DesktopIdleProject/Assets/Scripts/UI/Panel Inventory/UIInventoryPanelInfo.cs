@@ -41,15 +41,11 @@ public class UIInventoryPanelInfo : MonoBehaviour
 
     public void OnButtonConvert()
     {
-        AudioManager.Instance.PlayClickUI();
-
         tabInventory.OpenPanelConvert();
     }
 
     public void OnButtonDismantle()
     {
-        AudioManager.Instance.PlayClickUI();
-
         panelDismantle.Setup(group);
         panelDismantle.Show(true);
         Show(false);

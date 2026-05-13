@@ -17,6 +17,6 @@ MonoBehaviour:
   mapSceneName: RuinedVillageScene
   mapDifficulty: 1
   baseEnemyLevel: 45
-  enemiesPerStage: 50
+  enemiesPerStage: 40
   stages: 30
   nextMap: {fileID: 11400000, guid: 1f2ef696592cbbd4987d8020f2bd8f8b, type: 2}

@@ -9,14 +9,28 @@ public class PlayerBlacksmithData
     private float baseCraftSpeed;
     private float baseEfficiency;
     private float baseLuck;
+    private float baseMetallurgy;
+
 
     // ---- LEVEL STAT POINTS
 
-    private int levelStatCraftSpeed = 1;
-    private int levelEfficiency = 1;
-    private int levelStatLuck = 1;
+    private int levelStatCraftSpeed;
+    private int levelEfficiency;
+    private int levelStatLuck;
+    private int levelStatMetallurgy;
 
-    // ---- WEAPON MINER
+    private readonly int startLevelCraftSpeed = 1;
+    private readonly int startLevelEfficiency = 1;
+    private readonly int startLevelStatLuck = 1;
+    private readonly int startLevelMetallurgy = 0;
+
+    public int LevelStatCraftSpeed => levelStatCraftSpeed;
+    public int LevelEfficiency => levelEfficiency;
+    public int LevelStatLuck => levelStatLuck;
+    public int LevelStatMetallurgy => levelStatMetallurgy;
+
+
+    // ---- GEARS BLACKSMITH
 
     private int levelHelmetBlacksmith;
 
@@ -27,10 +41,12 @@ public class PlayerBlacksmithData
     private int levelBootsBlacksmith;
 
 
+    public int HelmetLevel => levelHelmetBlacksmith;
+    public int ArmorLevel => levelArmorBlacksmith;
+    public int GlovesLevel => levelGlovesBlacksmith;
+    public int BootsLevel => levelBootsBlacksmith;
 
-    public int LevelStatCraftSpeed => levelStatCraftSpeed;
-    public int LevelEfficiency => levelEfficiency;
-    public int LevelStatLuck => levelStatLuck;
+
 
 
     // ---- POINTS
@@ -49,6 +65,13 @@ public class PlayerBlacksmithData
     // ---- FORGING VARIABLES
 
     private int currentForgingOre;
+    private bool isInfiniteForging;
+    private int currentForgingQuantity;
+
+
+    public int CurrentForgingOre => currentForgingOre;
+    public bool IsInfiniteForging => isInfiniteForging;
+    public int CurrentForgingQuantity => currentForgingQuantity;
 
 
 
@@ -62,19 +85,17 @@ public class PlayerBlacksmithData
     public float CurrentCraftSpeed => baseCraftSpeed + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_CRAFTSPEED * (levelStatCraftSpeed - 1);
     public float CurrentEfficiency => baseEfficiency + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_EFFICIENCY * (levelEfficiency - 1);
     public float CurrentLuck => baseLuck + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_LUCK * (levelStatLuck - 1);
+    public float CurrentMetallurgy => baseMetallurgy + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_METALLURGY * (levelStatMetallurgy);
 
     public float CurrentCraftTime => 60f / CurrentCraftSpeed;
 
 
 
-    public int HelmetLevel => levelHelmetBlacksmith;
-    public int ArmorLevel => levelArmorBlacksmith;
-    public int GlovesLevel => levelGlovesBlacksmith;
-    public int BootsLevel => levelBootsBlacksmith;
+    
 
 
 
-    public int CurrentForgingOre => currentForgingOre;
+    
 
 
 
@@ -94,12 +115,33 @@ public class PlayerBlacksmithData
         levelStatCraftSpeed = saveData.levelStatCraftSpeed;
         levelEfficiency = saveData.levelStatEfficiency;
         levelStatLuck = saveData.levelStatLuck;
+        levelStatMetallurgy = saveData.levelStatMetallurgy;
+
+        levelStatCraftSpeed = Math.Min(levelStatCraftSpeed, UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_CRAFTSPEED);
+        levelEfficiency = Math.Min(levelEfficiency, UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_EFFICIENCY);
+        levelStatLuck = Math.Min(levelStatLuck, UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_LUCK);
+        levelStatMetallurgy = Math.Min(levelStatMetallurgy, UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_METALLURGY);
 
 
         availableStatPoints = saveData.availableStatPoints;
 
         currentLevel = saveData.currentLevel;
         currentExp = saveData.currentExp;
+
+        int sumLevels = 
+            levelStatCraftSpeed + levelEfficiency + levelStatLuck + levelStatMetallurgy -
+            startLevelCraftSpeed - startLevelEfficiency - startLevelStatLuck - startLevelMetallurgy +
+            availableStatPoints +
+            1;
+
+        currentLevel = Math.Min(currentLevel, sumLevels);
+
+        // reset available points to 0 if previous bugs occured, and set exp to 0
+        if(currentLevel > UtilsBlacksmith.MAX_LEVEL_BLACKSMITH)
+        {
+            availableStatPoints = 0;
+            currentExp = 0;
+        }
 
         // ---- WEAPON
 
@@ -110,6 +152,8 @@ public class PlayerBlacksmithData
 
 
         currentForgingOre = saveData.currentForgingOre;
+        isInfiniteForging = saveData.isInfiniteForging;
+        currentForgingQuantity = saveData.currentForgingQuantity;
     }
 
     private void GenerateBaseStats()
@@ -117,11 +161,16 @@ public class PlayerBlacksmithData
         currentLevel = 1;
         currentExp = 0;
 
+        levelStatCraftSpeed = startLevelCraftSpeed;
+        levelEfficiency = startLevelEfficiency;
+        levelStatLuck = startLevelStatLuck;
+        levelStatMetallurgy = startLevelMetallurgy;
+
+
         baseCraftSpeed = 1f;
-
         baseEfficiency = 0f;
-
         baseLuck = 0f;
+        baseMetallurgy = 0f; // multiplier extra materials, check on whole values
 
         // ---- EQUIPMENT
 
@@ -133,6 +182,8 @@ public class PlayerBlacksmithData
         // ---- FORGING
 
         currentForgingOre = -1;
+        isInfiniteForging = false;
+        currentForgingQuantity = 0;
     }
 
     public void AddStatPoints(int amount)
@@ -181,6 +232,7 @@ public class PlayerBlacksmithData
             case ID_BLACKSMITH_CRAFTSPEED: levelStatCraftSpeed += amount; break;
             case ID_BLACKSMITH_EFFICIENCY: levelEfficiency += amount; break;
             case ID_BLACKSMITH_LUCK: levelStatLuck += amount; break;
+            case ID_BLACKSMITH_METALLURGY: levelStatMetallurgy += amount; break;
         }
 
         OnStatChange?.Invoke(id, amount);
@@ -209,5 +261,15 @@ public class PlayerBlacksmithData
     public void SetForgingOre(int id)
     {
         currentForgingOre = id;
+    }
+
+    public void SetInfiniteForging(bool infinite)
+    {
+        isInfiniteForging = infinite;
+    }
+
+    public void SetCurrentForgingQuantity(int max)
+    {
+        currentForgingQuantity = max;
     }
 }

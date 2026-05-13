@@ -5,6 +5,10 @@ public class SmashManager : MonoBehaviour
 {
     [SerializeField] PlayerMiner player;
 
+    [Header("Miner stats")]
+    [SerializeField] LayerMask rockMask;
+    [SerializeField] float radiusShockwave = 3f;
+
     [Header("Cheats")]
     [SerializeField] bool alwaysFindLootCheat;
 
@@ -103,9 +107,12 @@ public class SmashManager : MonoBehaviour
         // get exp before starting death for safety
         long rewardedExp = UtilsGather.GetRockExp(currentRock.RockData.RockSO.RockType);
 
-        // kill enemy
+        // kill rock
         currentRock.PlayDeath(false);
-        RockSpawnManager.Instance.AddSmash(1);
+        //RockSpawnManager.Instance.AddSmash(1);
+
+        // check nearby shockwave rocks
+        HandleShockwave();
 
         // stop fight after setting death
         EnableSmash(false);
@@ -114,16 +121,64 @@ public class SmashManager : MonoBehaviour
         player.PlayerData.AddExp(rewardedExp);
         PlayerManager.Instance.UpdateMinerData(player.PlayerData);
 
-        GiveLoot();
+        GiveLoot(currentRock);
 
-        // always spawn next rock, todo: handle index rock, every now and then reset index
+        // always spawn next rock
         RockSpawnManager.Instance.SpawnNextRock();
     }
 
-    private void GiveLoot()
+    private void HandleShockwave()
+    {
+        if (player.PlayerData.CurrentShockwave > 0)
+        {
+            // get center current rock
+            Vector2 currentCenter = currentRock.transform.position;
+
+            // check hits
+            var hits = Physics2D.OverlapCircleAll(currentCenter, radiusShockwave, rockMask);
+            if (hits.Length > 0)
+            {
+                float shockwaveDamage = player.PlayerData.CurrentPower * player.PlayerData.CurrentShockwave;
+
+                //int hitcounter = 0;
+                // deal damage to every rock
+                foreach (var hit in hits)
+                {
+                    Rock rock = hit.GetComponent<Rock>();
+                    rock.RockData.TakeDamage(shockwaveDamage);
+
+                    if (rock.IsSmashed)
+                    {
+                        // exp for each rock
+                        long rewardedExp = UtilsGather.GetRockExp(rock.RockData.RockSO.RockType);
+
+                        // destroy them
+                        rock.PlayDeath(false);
+
+                        // add exp
+                        player.PlayerData.AddExp(rewardedExp);
+
+                        // reward
+                        GiveLoot(rock);
+
+                        // spawn next rock
+                        //Debug.Log("smashed with shockwave: " + hitcounter);
+                        RockSpawnManager.Instance.SpawnNextRock();
+                    }
+
+                    //hitcounter++;
+                }
+
+                // save
+                PlayerManager.Instance.UpdateMinerData(player.PlayerData);
+            }
+        }
+    }
+
+    private void GiveLoot(Rock rock)
     {
         float randPercLoot = Random.value;
-        float thresholdLoot = (currentRock.RockData.RockSO.BaseLootChance / 100f) + player.PlayerData.CurrentLuck;
+        float thresholdLoot = (rock.RockData.RockSO.BaseLootChance / 100f) + player.PlayerData.CurrentLuck;
 
         if (alwaysFindLootCheat && SettingsManager.Instance.AreCheatsEnabled)
         {
@@ -135,7 +190,7 @@ public class SmashManager : MonoBehaviour
         if (randPercLoot <= thresholdLoot)
         {
             //Debug.Log("Looted!");
-            ItemSO randLoot = UtilsGeneral.GetRandomValueFromGeneralChanches(currentRock.RockData.RockSO.PossibleItems);
+            ItemSO randLoot = UtilsGeneral.GetRandomValueFromGeneralChanches(rock.RockData.RockSO.PossibleItems);
 
             if(randLoot != null)
             {

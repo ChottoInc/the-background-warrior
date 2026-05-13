@@ -5,6 +5,9 @@ using UnityEngine;
 
 public static class UtilsGeneral
 {
+    public const float TIMER_5MIN_IN_SECONDS = 300f;
+    public const float TIMER_20SECONDS = 20f;
+
     public enum DayMoment { Morning, Afternoon, Evening, Night }
 
     public static DayMoment GetDayMoment()
@@ -164,13 +167,14 @@ public static class UtilsGeneral
     private const string TUTORIAL_INTRO_6 = "Click on the STATS icon to increase stats level.";
 
     private const string TUTORIAL_INTRO_7 = "If you want to select a different job, click on the JOB icon.";
+    private const string TUTORIAL_INTRO_8 = "You can find more informations about jobs in the HELP section of the SETTINGS menu.";
 
 
-    private const string TUTORIAL_INTRO_8 = "Check your items using the INVENTORY icon.";
+    private const string TUTORIAL_INTRO_9 = "Check your items using the INVENTORY icon.";
 
-    private const string TUTORIAL_INTRO_9 = "Click on the QUESTS icon to check your progress and claim your rewards.";
+    private const string TUTORIAL_INTRO_10 = "Click on the QUESTS icon to check your progress and claim your rewards.";
 
-    private const string TUTORIAL_INTRO_10 = "Spend Bits in the shop to purchase cards and jobs.";
+    private const string TUTORIAL_INTRO_11 = "Spend Bits in the shop to purchase cards and jobs.";
 
     /// <summary>
     /// Struct containing the dialogue and if the text panel need to move to next position
@@ -202,13 +206,14 @@ public static class UtilsGeneral
             new TutorialDialogueNeedPos(TUTORIAL_INTRO_5, true),
             new TutorialDialogueNeedPos(TUTORIAL_INTRO_6, false),
 
-            new TutorialDialogueNeedPos(TUTORIAL_INTRO_7, true),
-
+            new TutorialDialogueNeedPos(TUTORIAL_INTRO_7, false),
             new TutorialDialogueNeedPos(TUTORIAL_INTRO_8, true),
 
             new TutorialDialogueNeedPos(TUTORIAL_INTRO_9, true),
 
             new TutorialDialogueNeedPos(TUTORIAL_INTRO_10, true),
+
+            new TutorialDialogueNeedPos(TUTORIAL_INTRO_11, true),
         });
     
 

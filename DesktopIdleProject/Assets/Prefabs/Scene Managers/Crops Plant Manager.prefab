@@ -48,3 +48,9 @@ MonoBehaviour:
   slot2: {fileID: 0}
   slot3: {fileID: 0}
   slot4: {fileID: 0}
+  player: {fileID: 0}
+  ySpawn: -4
+  minLureCooldown: 120
+  maxLureCooldown: 300
+  reducedLureCooldownCheat: 0
+  reducedGrowthTimeCheat: 0

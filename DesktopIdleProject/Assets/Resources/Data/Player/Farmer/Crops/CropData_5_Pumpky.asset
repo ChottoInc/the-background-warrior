@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CropData_5_Pumpky
   m_EditorClassIdentifier: 
   id: 5
-  baseGrowthTime: 4200
+  baseGrowthTime: 2000
   cropName: Pumpky
   spriteSeed: {fileID: 21300000, guid: eccd6ac9df95fcb48a0ea52da8c76da2, type: 3}
   spriteCrop:
@@ -23,3 +23,4 @@ MonoBehaviour:
   - {fileID: 1978560910, guid: 369084ec5c2bee740bf4e0cb3fa53c24, type: 3}
   - {fileID: -1240168511, guid: 369084ec5c2bee740bf4e0cb3fa53c24, type: 3}
   attractedCompanions: []
+  rewardedExp: 0

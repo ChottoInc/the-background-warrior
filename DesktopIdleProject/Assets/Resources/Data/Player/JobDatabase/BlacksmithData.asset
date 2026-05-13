@@ -17,21 +17,23 @@ MonoBehaviour:
   <PerLevelGainCraftSpeed>k__BackingField: 0.02
   <PerLevelGainEfficiency>k__BackingField: 0.01
   <PerLevelGainLuck>k__BackingField: 0.01
+  <PerLevelGainMetallurgy>k__BackingField: 0.1
   <MaxLevelCraftSpeed>k__BackingField: 50
   <MaxLevelEfficiency>k__BackingField: 30
   <MaxLevelLuck>k__BackingField: 70
+  <MaxLevelMetallurgy>k__BackingField: 30
   <BaseExpGrowth>k__BackingField: 50
-  <ExpoExpGrowth>k__BackingField: 1.08
+  <ExpoExpGrowth>k__BackingField: 1.55
   <FlatExpGrowth>k__BackingField: 10
-  <HelmetMaxHpLinearGrowth>k__BackingField: 0.075
-  <HelmetMaxHpQuadraticGrowth>k__BackingField: 0.01
-  <ArmorDefLinearGrowth>k__BackingField: 0.075
-  <ArmorDefQuadraticGrowth>k__BackingField: 0.02
+  <HelmetMaxHpLinearGrowth>k__BackingField: 0.15
+  <HelmetMaxHpQuadraticGrowth>k__BackingField: 0.03
+  <ArmorDefLinearGrowth>k__BackingField: 0.04
+  <ArmorDefQuadraticGrowth>k__BackingField: 0.008
   <GlovesAtkSpdLinearGrowth>k__BackingField: 0.2
   <GlovesAtkSpdQuadraticGrowth>k__BackingField: 0.04
-  <GlovesCritDmgLinearGrowth>k__BackingField: 0.2
-  <GlovesCritDmgQuadraticGrowth>k__BackingField: 0.3
-  <BootsDefLinearGrowth>k__BackingField: 0.08
-  <BootsDefQuadraticGrowth>k__BackingField: 0.03
-  <BootsCritRateLinearGrowth>k__BackingField: 0.2
-  <BootsCritRateQuadraticGrowth>k__BackingField: 0.03
+  <GlovesCritDmgLinearGrowth>k__BackingField: 0.03
+  <GlovesCritDmgQuadraticGrowth>k__BackingField: 0.02
+  <BootsDefLinearGrowth>k__BackingField: 0.05
+  <BootsDefQuadraticGrowth>k__BackingField: 0.01
+  <BootsCritRateLinearGrowth>k__BackingField: 0.03
+  <BootsCritRateQuadraticGrowth>k__BackingField: 0.0075

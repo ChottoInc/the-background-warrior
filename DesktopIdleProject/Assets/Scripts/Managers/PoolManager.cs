@@ -37,11 +37,13 @@ public class PoolManager : MonoBehaviour
 
     public GameObject Pull(string poolName)
     {
+        //Debug.Log(transform.childCount + 1);
         return poolLookup[poolName].Pull();
     }
 
     public void Return(GameObject obj, string poolName)
     {
         poolLookup[poolName].Return(obj);
+        //Debug.Log(transform.childCount);
     }
 }

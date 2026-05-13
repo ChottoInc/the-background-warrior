@@ -7,7 +7,7 @@ public class UITabMinerStatus : UITabPlayerStatus
 
     private int distributedPointsOnPower;
     private int distributedPointsOnSmashSpeed;
-    private int distributedPointsOnPrecision;
+    private int distributedPointsOnShockwave;
     private int distributedPointsOnLuck;
 
     private void OnDestroy()
@@ -26,7 +26,7 @@ public class UITabMinerStatus : UITabPlayerStatus
 
         distributedPointsOnPower = 0;
         distributedPointsOnSmashSpeed = 0;
-        distributedPointsOnPrecision = 0;
+        distributedPointsOnShockwave = 0;
         distributedPointsOnLuck = 0;
     }
 
@@ -54,9 +54,9 @@ public class UITabMinerStatus : UITabPlayerStatus
             player.PlayerData.IncreaseLevelStat(UtilsPlayer.ID_MINER_SMASHSPEED, distributedPointsOnSmashSpeed);
         }
 
-        if (distributedPointsOnPrecision > 0)
+        if (distributedPointsOnShockwave > 0)
         {
-            player.PlayerData.IncreaseLevelStat(UtilsPlayer.ID_MINER_PRECISION, distributedPointsOnPrecision);
+            player.PlayerData.IncreaseLevelStat(UtilsPlayer.ID_MINER_SHOCKWAVE, distributedPointsOnShockwave);
         }
 
         if (distributedPointsOnLuck > 0)
@@ -86,7 +86,7 @@ public class UITabMinerStatus : UITabPlayerStatus
             default: Debug.Log("Increased stat id not correct. " + id); break;
             case UtilsPlayer.ID_MINER_POWER: distributedPointsOnPower++; break;
             case UtilsPlayer.ID_MINER_SMASHSPEED: distributedPointsOnSmashSpeed++; break;
-            case UtilsPlayer.ID_MINER_PRECISION: distributedPointsOnPrecision++; break;
+            case UtilsPlayer.ID_MINER_SHOCKWAVE: distributedPointsOnShockwave++; break;
             case UtilsPlayer.ID_MINER_LUCK: distributedPointsOnLuck++; break;
         }
     }
@@ -98,7 +98,7 @@ public class UITabMinerStatus : UITabPlayerStatus
             default: Debug.Log("Increased stat id not correct. " + id); break;
             case UtilsPlayer.ID_MINER_POWER: distributedPointsOnPower--; break;
             case UtilsPlayer.ID_MINER_SMASHSPEED: distributedPointsOnSmashSpeed--; break;
-            case UtilsPlayer.ID_MINER_PRECISION: distributedPointsOnPrecision--; break;
+            case UtilsPlayer.ID_MINER_SHOCKWAVE: distributedPointsOnShockwave--; break;
             case UtilsPlayer.ID_MINER_LUCK: distributedPointsOnLuck--; break;
         }
     }
@@ -110,7 +110,7 @@ public class UITabMinerStatus : UITabPlayerStatus
             default: Debug.Log("Increased stat id not correct. " + id); return -1;
             case UtilsPlayer.ID_MINER_POWER: return player.PlayerData.LevelStatPower;
             case UtilsPlayer.ID_MINER_SMASHSPEED: return player.PlayerData.LevelStatSmashSpeed;
-            case UtilsPlayer.ID_MINER_PRECISION: return player.PlayerData.LevelStatPrecision;
+            case UtilsPlayer.ID_MINER_SHOCKWAVE: return player.PlayerData.LevelStatShockwave;
             case UtilsPlayer.ID_MINER_LUCK: return player.PlayerData.LevelStatLuck;
         }
     }

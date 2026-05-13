@@ -9,29 +9,30 @@ public class EditorJobBlacksmithData : Editor
     private const int ID_CRAFTSPEED = 0;
     private const int ID_EFFICIENCY = 1;
     private const int ID_LUCK = 2;
+    private const int ID_METALLURGY = 3;
 
-    private const int ID_BASE_EXP = 4;
-    private const int ID_EXPO_EXP = 5;
-    private const int ID_FLAT_EXP = 6;
+    private const int ID_BASE_EXP = 5;
+    private const int ID_EXPO_EXP = 6;
+    private const int ID_FLAT_EXP = 7;
 
-    private const int ID_HELMET_MAXHP_LINEAR = 8;
-    private const int ID_HELMET_MAXHP_QUADRATIC = 9;
+    private const int ID_HELMET_MAXHP_LINEAR = 9;
+    private const int ID_HELMET_MAXHP_QUADRATIC = 10;
 
-    private const int ID_ARMOR_DEF_LINEAR = 10;
-    private const int ID_ARMOR_DEF_QUADRATIC = 11;
+    private const int ID_ARMOR_DEF_LINEAR = 11;
+    private const int ID_ARMOR_DEF_QUADRATIC = 12;
 
 
-    private const int ID_GLOVES_ATKSPD_LINEAR = 12;
-    private const int ID_GLOVES_ATKSPD_QUADRATIC = 13;
+    private const int ID_GLOVES_ATKSPD_LINEAR = 13;
+    private const int ID_GLOVES_ATKSPD_QUADRATIC = 14;
 
-    private const int ID_GLOVES_CRITDMG_LINEAR = 14;
-    private const int ID_GLOVES_CRITDMG_QUADRATIC = 15;
+    private const int ID_GLOVES_CRITDMG_LINEAR = 15;
+    private const int ID_GLOVES_CRITDMG_QUADRATIC = 16;
 
-    private const int ID_BOOTS_DEF_LINEAR = 16;
-    private const int ID_BOOTS_DEF_QUADRATIC = 17;
+    private const int ID_BOOTS_DEF_LINEAR = 17;
+    private const int ID_BOOTS_DEF_QUADRATIC = 18;
                          
-    private const int ID_BOOTS_CRITRATE_LINEAR = 18;
-    private const int ID_BOOTS_CRITRATE_QUADRATIC = 19;
+    private const int ID_BOOTS_CRITRATE_LINEAR = 19;
+    private const int ID_BOOTS_CRITRATE_QUADRATIC = 20;
 
 
 
@@ -66,8 +67,8 @@ public class EditorJobBlacksmithData : Editor
         // get filepath from so
         List<string> datas = UtilsGeneral.GetFileStrings(m_Script.DataPath);
 
-        // first read warrior statistics
-        for (int i = 0; i < 3; i++)
+        // first read blacksmith statistics
+        for (int i = 0; i < 4; i++)
         {
             string[] parts = datas[i].Split(",", System.StringSplitOptions.None);
 
@@ -90,10 +91,15 @@ public class EditorJobBlacksmithData : Editor
                     m_Script.SetPerLevelGainLuck(gain);
                     m_Script.SetMaxLevelLuck(maxLevel);
                     break;
+
+                case ID_METALLURGY:
+                    m_Script.SetPerLevelGainMetallurgy(gain);
+                    m_Script.SetMaxLevelMetallurgy(maxLevel);
+                    break;
             }
         }
 
-        for (int i = 4; i < 7; i++)
+        for (int i = 5; i < 8; i++)
         {
             string[] parts = datas[i].Split(",", System.StringSplitOptions.None);
 
@@ -108,7 +114,7 @@ public class EditorJobBlacksmithData : Editor
         }
 
         // Helmet
-        for (int i = 8; i < 10; i++)
+        for (int i = 9; i < 11; i++)
         {
             string[] parts = datas[i].Split(",", System.StringSplitOptions.None);
 
@@ -122,7 +128,7 @@ public class EditorJobBlacksmithData : Editor
         }
 
         // Armor
-        for (int i = 10; i < 12; i++)
+        for (int i = 11; i < 13; i++)
         {
             string[] parts = datas[i].Split(",", System.StringSplitOptions.None);
 
@@ -136,7 +142,7 @@ public class EditorJobBlacksmithData : Editor
         }
 
         // Gloves
-        for (int i = 12; i < 16; i++)
+        for (int i = 13; i < 17; i++)
         {
             string[] parts = datas[i].Split(",", System.StringSplitOptions.None);
 
@@ -152,7 +158,7 @@ public class EditorJobBlacksmithData : Editor
         }
 
         // Boots
-        for (int i = 16; i < 20; i++)
+        for (int i = 17; i < 21; i++)
         {
             string[] parts = datas[i].Split(",", System.StringSplitOptions.None);
 

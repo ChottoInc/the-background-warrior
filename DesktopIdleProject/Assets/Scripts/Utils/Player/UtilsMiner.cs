@@ -4,12 +4,12 @@ public static class UtilsMiner
 {
     public static float PER_LEVEL_MINER_GAIN_POWER = 2;
     public static float PER_LEVEL_MINER_GAIN_SMASHSPEED = 0.02f;
-    public static float PER_LEVEL_MINER_GAIN_PRECISION = 0.01f;
+    public static float PER_LEVEL_MINER_GAIN_SHOCKWAVE = 0.01f;
     public static float PER_LEVEL_MINER_GAIN_LUCK = 0.01f;
            
     public static int PER_LEVEL_MINER_MAX_POWER = 50;
     public static int PER_LEVEL_MINER_MAX_SMASHSPEED = 40;
-    public static int PER_LEVEL_MINER_MAX_PRECISION = 30;
+    public static int PER_LEVEL_MINER_MAX_SHOCKWAVE = 25;
     public static int PER_LEVEL_MINER_MAX_LUCK = 40;
 
 
@@ -35,20 +35,20 @@ public static class UtilsMiner
 
         PER_LEVEL_MINER_GAIN_POWER = jobDataSO.PerLevelGainPower;
         PER_LEVEL_MINER_GAIN_SMASHSPEED = jobDataSO.PerLevelGainSmashSpeed;
-        PER_LEVEL_MINER_GAIN_PRECISION = jobDataSO.PerLevelGainPrecision;
+        PER_LEVEL_MINER_GAIN_SHOCKWAVE = jobDataSO.PerLevelGainShockwave;
         PER_LEVEL_MINER_GAIN_LUCK = jobDataSO.PerLevelGainLuck;
 
 
         PER_LEVEL_MINER_MAX_POWER = jobDataSO.MaxLevelPower;
         PER_LEVEL_MINER_MAX_SMASHSPEED = jobDataSO.MaxLevelSmashSpeed;
-        PER_LEVEL_MINER_MAX_PRECISION = jobDataSO.MaxLevelPrecision;
+        PER_LEVEL_MINER_MAX_SHOCKWAVE = jobDataSO.MaxLevelShockwave;
         PER_LEVEL_MINER_MAX_LUCK = jobDataSO.MaxLevelLuck;
 
 
         MAX_LEVEL_MINER =
             PER_LEVEL_MINER_MAX_POWER +
             PER_LEVEL_MINER_MAX_SMASHSPEED +
-            PER_LEVEL_MINER_MAX_PRECISION +
+            PER_LEVEL_MINER_MAX_SHOCKWAVE +
             PER_LEVEL_MINER_MAX_LUCK;
 
 

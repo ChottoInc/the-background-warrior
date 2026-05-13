@@ -84,6 +84,11 @@ public class UIBlacksmithPanelSelectOre : MonoBehaviour
 
         selectedPrefab = prefab;
         selectedOre = oreSO;
+
+        if (selectedPrefab != null)
+        {
+            selectedPrefab.Select();
+        }
     }
 
     public void Close()
@@ -94,15 +99,11 @@ public class UIBlacksmithPanelSelectOre : MonoBehaviour
 
     public void OnButtonCancel()
     {
-        AudioManager.Instance.PlayClickUI();
-
         Close();
     }
 
     public void OnButtonConfirm()
     {
-        AudioManager.Instance.PlayClickUI();
-
         if (selectedOre != null)
             tabBlacksmith.OnSelectedOre(selectedOre);
 

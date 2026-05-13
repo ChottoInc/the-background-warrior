@@ -144,7 +144,6 @@ public class UITabPlayerStatus : UITabWindow
 
     protected virtual void SaveChanges()
     {
-        AudioManager.Instance.PlayClickUI();
         OnStatusSave?.Invoke();
     }
 

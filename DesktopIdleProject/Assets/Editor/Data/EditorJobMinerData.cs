@@ -8,7 +8,7 @@ public class EditorJobMinerData : Editor
 {
     private const int ID_POWER = 0;
     private const int ID_SMASHSPEED = 1;
-    private const int ID_PRECISION = 2;
+    private const int ID_SHOCKWAVE = 2;
     private const int ID_LUCK = 3;
 
     private const int ID_BASE_EXP = 5;
@@ -71,9 +71,9 @@ public class EditorJobMinerData : Editor
                     m_Script.SetMaxLevelSmashSpeed(maxLevel);
                     break;
 
-                case ID_PRECISION:
-                    m_Script.SetPerLevelGainPrecision(gain);
-                    m_Script.SetMaxLevelPrecision(maxLevel);
+                case ID_SHOCKWAVE:
+                    m_Script.SetPerLevelGainShockwave(gain);
+                    m_Script.SetMaxLevelShockwave(maxLevel);
                     break;
 
                 case ID_LUCK:

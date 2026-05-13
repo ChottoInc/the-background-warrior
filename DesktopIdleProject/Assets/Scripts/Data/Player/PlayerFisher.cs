@@ -39,17 +39,17 @@ public class PlayerFisher : Player
 
     private void Start()
     {
-        timer5Mins = 300f;
+        timer5Mins = UtilsGeneral.TIMER_5MIN_IN_SECONDS;
     }
 
     private void Update()
     {
         // every 5 mins give some exp to the player
-        // 80 is a rough esteem, probably need to tweak it
         if(timer5Mins <= 0)
         {
-            playerData.AddExp(80);
-            timer5Mins = 300f;
+            playerData.AddExp(UtilsFisher.PASSIVE_EXP);
+            timer5Mins = UtilsGeneral.TIMER_5MIN_IN_SECONDS;
+
             PlayerManager.Instance.UpdateFisherData(playerData);
             PlayerManager.Instance.SaveFisherData();
         }
@@ -156,7 +156,7 @@ public class PlayerFisher : Player
         // fish go back into pool, nothing happens
 
         // Give player some exp, half of the minimum rarity, might tweak it later
-        long rewardedExp = 1500;
+        long rewardedExp = UtilsFisher.UNCAUGHT_EXP;
         playerData.AddExp(rewardedExp);
     }
 

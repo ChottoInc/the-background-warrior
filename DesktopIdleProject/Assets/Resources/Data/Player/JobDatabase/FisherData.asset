@@ -23,5 +23,5 @@ MonoBehaviour:
   <MaxLevelKnowledge>k__BackingField: 30
   <MaxLevelLuck>k__BackingField: 40
   <BaseExpGrowth>k__BackingField: 50
-  <ExpoExpGrowth>k__BackingField: 1.08
+  <ExpoExpGrowth>k__BackingField: 1.05
   <FlatExpGrowth>k__BackingField: 10

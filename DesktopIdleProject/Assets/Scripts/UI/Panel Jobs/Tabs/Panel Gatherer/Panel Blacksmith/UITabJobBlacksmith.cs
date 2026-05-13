@@ -41,6 +41,13 @@ public class UITabJobBlacksmith : UITabWindow
     [SerializeField] Image imageSelectedOre;
     [SerializeField] Image imageRefinedMetal;
 
+    [Space(5)]
+    [SerializeField] TMP_InputField inputRefineQuantity;
+
+    private UIInfiniteInputQuantity customInput;
+
+    private int selectedInputRefineQuantity;
+
     [Space(10)]
     [SerializeField] Button buttonLevelUp;
 
@@ -65,6 +72,10 @@ public class UITabJobBlacksmith : UITabWindow
 
     private PlayerBlacksmith player;
 
+    private void Awake()
+    {
+        customInput = inputRefineQuantity.GetComponent<UIInfiniteInputQuantity>();
+    }
 
     public override void Open()
     {
@@ -97,22 +108,22 @@ public class UITabJobBlacksmith : UITabWindow
 
         switch (currentGear)
         {
-            case UtilsGather.ID_BLACKSMITH_HELMET: 
+            case UtilsBlacksmith.ID_BLACKSMITH_HELMET: 
                 lastWeaponLevel = data.HelmetLevel;
                 lastSelectedGearButton = buttonHelmet;
                 break;
 
-            case UtilsGather.ID_BLACKSMITH_ARMOR: 
+            case UtilsBlacksmith.ID_BLACKSMITH_ARMOR: 
                 lastWeaponLevel = data.ArmorLevel;
                 lastSelectedGearButton = buttonArmor;
                 break;
 
-            case UtilsGather.ID_BLACKSMITH_GLOVES:
+            case UtilsBlacksmith.ID_BLACKSMITH_GLOVES:
                 lastWeaponLevel = data.GlovesLevel;
                 lastSelectedGearButton = buttonGloves;
                 break;
 
-            case UtilsGather.ID_BLACKSMITH_BOOTS: 
+            case UtilsBlacksmith.ID_BLACKSMITH_BOOTS: 
                 lastWeaponLevel = data.BootsLevel;
                 lastSelectedGearButton = buttonBoots;
                 break;
@@ -190,13 +201,13 @@ public class UITabJobBlacksmith : UITabWindow
 
         switch (idGear)
         {
-            case UtilsGather.ID_BLACKSMITH_HELMET: gearLevel = PlayerManager.Instance.PlayerBlacksmithData.HelmetLevel + 1; break;
-            case UtilsGather.ID_BLACKSMITH_ARMOR: gearLevel = PlayerManager.Instance.PlayerBlacksmithData.ArmorLevel + 1; break;
-            case UtilsGather.ID_BLACKSMITH_GLOVES: gearLevel = PlayerManager.Instance.PlayerBlacksmithData.GlovesLevel + 1; break;
-            case UtilsGather.ID_BLACKSMITH_BOOTS: gearLevel = PlayerManager.Instance.PlayerBlacksmithData.BootsLevel + 1; break;
+            case UtilsBlacksmith.ID_BLACKSMITH_HELMET: gearLevel = PlayerManager.Instance.PlayerBlacksmithData.HelmetLevel + 1; break;
+            case UtilsBlacksmith.ID_BLACKSMITH_ARMOR: gearLevel = PlayerManager.Instance.PlayerBlacksmithData.ArmorLevel + 1; break;
+            case UtilsBlacksmith.ID_BLACKSMITH_GLOVES: gearLevel = PlayerManager.Instance.PlayerBlacksmithData.GlovesLevel + 1; break;
+            case UtilsBlacksmith.ID_BLACKSMITH_BOOTS: gearLevel = PlayerManager.Instance.PlayerBlacksmithData.BootsLevel + 1; break;
         }
 
-        requirements = UtilsGather.GetRequirementsForBlacksmithGearLevel(idGear, gearLevel);
+        requirements = UtilsBlacksmith.GetRequirementsForBlacksmithGearLevel(idGear, gearLevel);
     }
 
     private void FillRequirementsUI()
@@ -238,7 +249,7 @@ public class UITabJobBlacksmith : UITabWindow
     {
         switch (currentGear)
         {
-            case UtilsGather.ID_BLACKSMITH_HELMET:
+            case UtilsBlacksmith.ID_BLACKSMITH_HELMET:
                 if (lastWeaponLevel >= UtilsBlacksmith.BLACKSMITH_HELMET_MAX_LEVEL)
                 {
                     //Debug.Log("gear level: " + lastWeaponLevel);
@@ -246,17 +257,17 @@ public class UITabJobBlacksmith : UITabWindow
                 }
                 break;
 
-            case UtilsGather.ID_BLACKSMITH_ARMOR:
+            case UtilsBlacksmith.ID_BLACKSMITH_ARMOR:
                 if (lastWeaponLevel >= UtilsBlacksmith.BLACKSMITH_ARMOR_MAX_LEVEL)
                     return true;
                 break;
 
-            case UtilsGather.ID_BLACKSMITH_GLOVES:
+            case UtilsBlacksmith.ID_BLACKSMITH_GLOVES:
                 if (lastWeaponLevel >= UtilsBlacksmith.BLACKSMITH_GLOVES_MAX_LEVEL)
                     return true;
                 break;
 
-            case UtilsGather.ID_BLACKSMITH_BOOTS:
+            case UtilsBlacksmith.ID_BLACKSMITH_BOOTS:
                 if (lastWeaponLevel >= UtilsBlacksmith.BLACKSMITH_BOOTS_MAX_LEVEL)
                     return true;
                 break;
@@ -292,6 +303,29 @@ public class UITabJobBlacksmith : UITabWindow
             if(oreGroup.Quantity < ore.RefinedMetal.RequiredOres)
             {
                 colorString = "878787";
+
+                // disable infinite
+                data.SetInfiniteForging(false);
+
+                customInput.SetInfinite(false);
+                inputRefineQuantity.text = "0";
+
+                selectedInputRefineQuantity = 0;
+            }
+            else
+            {
+                // update input quantity UI
+                customInput.SetInfinite(data.IsInfiniteForging);
+
+                if (data.IsInfiniteForging)
+                {
+                    selectedInputRefineQuantity = -1;
+                }
+                else
+                {
+                    inputRefineQuantity.text = data.CurrentForgingQuantity.ToString();
+                    selectedInputRefineQuantity = data.CurrentForgingQuantity;
+                }
             }
 
             textRequired.text = string.Format("<color=#{0}>{1}</color> ({2})", colorString, oreGroup.Quantity, ore.RefinedMetal.RequiredOres);
@@ -300,7 +334,19 @@ public class UITabJobBlacksmith : UITabWindow
         {
             imageSelectedOre.sprite = defaultOreIcon;
             imageRefinedMetal.gameObject.SetActive(false);
+
+            // disable infinite
+            data.SetInfiniteForging(false);
+
+            customInput.SetInfinite(false);
+            inputRefineQuantity.text = "0";
         }
+    }
+
+    private int GetPossibleRefinedMetalQuantity(ItemGroup group, OreSO ore)
+    {
+        int neededForSingleMetal = ore.RefinedMetal.RequiredOres;
+        return group.Quantity / neededForSingleMetal;
     }
 
     /// <summary>
@@ -323,21 +369,21 @@ public class UITabJobBlacksmith : UITabWindow
 
         switch (currentGear)
         {
-            case UtilsGather.ID_BLACKSMITH_HELMET: gearLevel = data.HelmetLevel; break;
-            case UtilsGather.ID_BLACKSMITH_ARMOR: gearLevel = data.ArmorLevel; break;
-            case UtilsGather.ID_BLACKSMITH_GLOVES: gearLevel = data.GlovesLevel; break;
-            case UtilsGather.ID_BLACKSMITH_BOOTS: gearLevel = data.BootsLevel; break;
+            case UtilsBlacksmith.ID_BLACKSMITH_HELMET: gearLevel = data.HelmetLevel; break;
+            case UtilsBlacksmith.ID_BLACKSMITH_ARMOR: gearLevel = data.ArmorLevel; break;
+            case UtilsBlacksmith.ID_BLACKSMITH_GLOVES: gearLevel = data.GlovesLevel; break;
+            case UtilsBlacksmith.ID_BLACKSMITH_BOOTS: gearLevel = data.BootsLevel; break;
         }
 
-        int indexBlacksmithGearSprite = gearLevel / UtilsGather.CHANGE_BLACKSMITH_GEARS_EVERY;
+        int indexBlacksmithGearSprite = gearLevel / UtilsBlacksmith.CHANGE_BLACKSMITH_GEARS_EVERY;
 
         // check for different sprite
         bool isDifferentLevel = lastWeaponLevel != gearLevel;
 
-        Sprite sprite = UtilsGather.GetBlacksmithGearSpriteByIndex(currentGear, indexBlacksmithGearSprite);
+        Sprite sprite = UtilsBlacksmith.GetBlacksmithGearSpriteByIndex(currentGear, indexBlacksmithGearSprite);
         if (sprite == null)
         {
-            sprite = UtilsGather.GetBlacksmithGearSpriteByIndex(currentGear, UtilsGather.GetAllBlacksmithGearSprites(currentGear).Length - 1);
+            sprite = UtilsBlacksmith.GetBlacksmithGearSpriteByIndex(currentGear, UtilsBlacksmith.GetAllBlacksmithGearSprites(currentGear).Length - 1);
         }
 
         textLevel.text = $"Lv. {gearLevel}";
@@ -347,19 +393,19 @@ public class UITabJobBlacksmith : UITabWindow
         List<UtilsGeneral.UIStatMultInfo> uiStatsInfos = new List<UtilsGeneral.UIStatMultInfo>();
         switch (currentGear)
         {
-            case UtilsGather.ID_BLACKSMITH_HELMET:
+            case UtilsBlacksmith.ID_BLACKSMITH_HELMET:
                 float maxHp = UtilsBlacksmith.GetBlacksmithHelmetMaxHpMultiplier(data.HelmetLevel);
 
                 uiStatsInfos.Add(new UtilsGeneral.UIStatMultInfo("Max Hp", maxHp));
                 break;
 
-            case UtilsGather.ID_BLACKSMITH_ARMOR:
+            case UtilsBlacksmith.ID_BLACKSMITH_ARMOR:
                 float aDef = UtilsBlacksmith.GetBlacksmithArmorDefMultiplier(data.ArmorLevel);
 
                 uiStatsInfos.Add(new UtilsGeneral.UIStatMultInfo("Def", aDef));
                 break;
 
-            case UtilsGather.ID_BLACKSMITH_GLOVES:
+            case UtilsBlacksmith.ID_BLACKSMITH_GLOVES:
                 float atkSpd = UtilsBlacksmith.GetBlacksmithGlovesAtkSpdMultiplier(data.GlovesLevel);
                 float critDmg = UtilsBlacksmith.GetBlacksmithGlovesCritDmgMultiplier(data.GlovesLevel);
 
@@ -367,7 +413,7 @@ public class UITabJobBlacksmith : UITabWindow
                 uiStatsInfos.Add(new UtilsGeneral.UIStatMultInfo("Crit Dmg", critDmg));
                 break;
 
-            case UtilsGather.ID_BLACKSMITH_BOOTS:
+            case UtilsBlacksmith.ID_BLACKSMITH_BOOTS:
                 float bDef = UtilsBlacksmith.GetBlacksmithBootsDefMultiplier(data.BootsLevel);
                 float critRate = UtilsBlacksmith.GetBlacksmithBootsCritRateMultiplier(data.BootsLevel);
 
@@ -483,7 +529,7 @@ public class UITabJobBlacksmith : UITabWindow
     {
         AudioManager.Instance.PlayClickUI();
 
-        currentGear = UtilsGather.ID_BLACKSMITH_HELMET;
+        currentGear = UtilsBlacksmith.ID_BLACKSMITH_HELMET;
         Open();
     }
 
@@ -491,7 +537,7 @@ public class UITabJobBlacksmith : UITabWindow
     {
         AudioManager.Instance.PlayClickUI();
 
-        currentGear = UtilsGather.ID_BLACKSMITH_ARMOR;
+        currentGear = UtilsBlacksmith.ID_BLACKSMITH_ARMOR;
         Open();
     }
 
@@ -499,7 +545,7 @@ public class UITabJobBlacksmith : UITabWindow
     {
         AudioManager.Instance.PlayClickUI();
 
-        currentGear = UtilsGather.ID_BLACKSMITH_GLOVES;
+        currentGear = UtilsBlacksmith.ID_BLACKSMITH_GLOVES;
         Open();
     }
 
@@ -507,7 +553,7 @@ public class UITabJobBlacksmith : UITabWindow
     {
         AudioManager.Instance.PlayClickUI();
 
-        currentGear = UtilsGather.ID_BLACKSMITH_BOOTS;
+        currentGear = UtilsBlacksmith.ID_BLACKSMITH_BOOTS;
         Open();
     }
 
@@ -519,7 +565,6 @@ public class UITabJobBlacksmith : UITabWindow
             if (!player.IsForging)
             {
                 // if it's not already forging, start
-                AudioManager.Instance.PlayClickUI();
                 player.OnTryForge();
             }
             else
@@ -527,7 +572,6 @@ public class UITabJobBlacksmith : UITabWindow
                 // if it's already forging, but a different item, stop current and start new
                 if(player.CurrentOreId != player.PlayerData.CurrentForgingOre)
                 {
-                    AudioManager.Instance.PlayClickUI();
                     player.OnTryForge();
                 }
             }
@@ -536,8 +580,6 @@ public class UITabJobBlacksmith : UITabWindow
         }
         else
         {
-            AudioManager.Instance.PlayClickUI();
-
             LastSceneSettings settings = new LastSceneSettings();
             settings.lastSceneName = "BlacksmithScene";
             settings.lastSceneType = SceneLoaderManager.SceneType.Blacksmith;
@@ -555,8 +597,6 @@ public class UITabJobBlacksmith : UITabWindow
             return;
         }
 
-        AudioManager.Instance.PlayClickUI();
-
         // remove requirements from inventory
         foreach (var requirement in requirements)
         {
@@ -572,10 +612,10 @@ public class UITabJobBlacksmith : UITabWindow
             // update directly from save if not in blacksmith scene
             switch (currentGear)
             {
-                case UtilsGather.ID_BLACKSMITH_HELMET: PlayerManager.Instance.PlayerBlacksmithData.AddBlacksmithHelmetLevel(1); break;
-                case UtilsGather.ID_BLACKSMITH_ARMOR: PlayerManager.Instance.PlayerBlacksmithData.AddBlacksmithArmorLevel(1); break;
-                case UtilsGather.ID_BLACKSMITH_GLOVES: PlayerManager.Instance.PlayerBlacksmithData.AddBlacksmithGlovesLevel(1); break;
-                case UtilsGather.ID_BLACKSMITH_BOOTS: PlayerManager.Instance.PlayerBlacksmithData.AddBlacksmithBootsLevel(1); break;
+                case UtilsBlacksmith.ID_BLACKSMITH_HELMET: PlayerManager.Instance.PlayerBlacksmithData.AddBlacksmithHelmetLevel(1); break;
+                case UtilsBlacksmith.ID_BLACKSMITH_ARMOR: PlayerManager.Instance.PlayerBlacksmithData.AddBlacksmithArmorLevel(1); break;
+                case UtilsBlacksmith.ID_BLACKSMITH_GLOVES: PlayerManager.Instance.PlayerBlacksmithData.AddBlacksmithGlovesLevel(1); break;
+                case UtilsBlacksmith.ID_BLACKSMITH_BOOTS: PlayerManager.Instance.PlayerBlacksmithData.AddBlacksmithBootsLevel(1); break;
             }
         }
         else
@@ -593,6 +633,194 @@ public class UITabJobBlacksmith : UITabWindow
 
         // update ui
         RefreshRequirements();
+    }
+
+    public void OnButtonLess()
+    {
+        AudioManager.Instance.PlayClickUI();
+
+        // if infinite, reduce to maximum, else reduce 1 and check
+        if(selectedInputRefineQuantity == -1)
+        {
+            // get data
+            PlayerBlacksmithData data;
+
+            if (player != null)
+            {
+                data = player.PlayerData;
+            }
+            else
+            {
+                data = PlayerManager.Instance.PlayerBlacksmithData;
+            }
+
+            // get ore, if not selected ignore
+            OreSO ore = null;
+            if (data.CurrentForgingOre != -1)
+            {
+                ore = UtilsItem.GetItemById(data.CurrentForgingOre) as OreSO;
+            }
+
+            if (ore == null)
+            {
+                selectedInputRefineQuantity = 0;
+                RefreshInputAmountUI();
+                return;
+            }
+
+            // get quantity
+            int groupIndex = PlayerManager.Instance.Inventory.GetGroupIndex(ore.Id);
+            ItemGroup oreGroup = PlayerManager.Instance.Inventory.ItemGroups[groupIndex];
+            int maxItem = GetPossibleRefinedMetalQuantity(oreGroup, ore);
+
+            data.SetInfiniteForging(false);
+            customInput.SetInfinite(false);
+
+            selectedInputRefineQuantity = maxItem;
+            data.SetCurrentForgingQuantity(selectedInputRefineQuantity);
+            inputRefineQuantity.text = selectedInputRefineQuantity.ToString();
+
+            PlayerManager.Instance.UpdateBlacksmithData(data);
+            PlayerManager.Instance.SaveBlacksmithData();
+        }
+        else
+        {
+            selectedInputRefineQuantity--;
+            inputRefineQuantity.text = selectedInputRefineQuantity.ToString();
+            OnInputQuantityValueChange(inputRefineQuantity.text);
+        }
+    }
+
+    public void OnButtonMore()
+    {
+        AudioManager.Instance.PlayClickUI();
+
+        // if infinite, nothing, else increase 1 and check
+        if (selectedInputRefineQuantity == -1)
+        {
+            return;
+        }
+        else
+        {
+            selectedInputRefineQuantity++;
+            inputRefineQuantity.text = selectedInputRefineQuantity.ToString();
+            OnInputQuantityValueChange(inputRefineQuantity.text);
+        }
+    }
+
+    public void OnButtonForever()
+    {
+        AudioManager.Instance.PlayClickUI();
+
+        // get data
+        PlayerBlacksmithData data;
+
+        if (player != null)
+        {
+            data = player.PlayerData;
+        }
+        else
+        {
+            data = PlayerManager.Instance.PlayerBlacksmithData;
+        }
+
+        // get ore, if not selected ignore
+        OreSO ore = null;
+        if (data.CurrentForgingOre != -1)
+        {
+            ore = UtilsItem.GetItemById(data.CurrentForgingOre) as OreSO;
+        }
+
+        if (ore == null)
+        {
+            selectedInputRefineQuantity = 0;
+            RefreshInputAmountUI();
+            return;
+        }
+
+        // get quantity
+        int groupIndex = PlayerManager.Instance.Inventory.GetGroupIndex(ore.Id);
+        ItemGroup oreGroup = PlayerManager.Instance.Inventory.ItemGroups[groupIndex];
+        int maxItem = GetPossibleRefinedMetalQuantity(oreGroup, ore);
+
+        // invert infinite
+        if (data.IsInfiniteForging)
+        {
+            data.SetInfiniteForging(false);
+
+            selectedInputRefineQuantity = maxItem;
+            data.SetCurrentForgingQuantity(selectedInputRefineQuantity);
+            RefreshInputAmountUI();
+        }
+        else
+        {
+            data.SetInfiniteForging(true);
+            selectedInputRefineQuantity = -1;
+        }
+
+        customInput.SetInfinite(data.IsInfiniteForging);
+
+        // update data
+        PlayerManager.Instance.UpdateBlacksmithData(data);
+        PlayerManager.Instance.SaveBlacksmithData();
+    }
+
+    public void OnInputQuantityValueChange(string value)
+    {
+        // get data
+        PlayerBlacksmithData data;
+
+        if (player != null)
+        {
+            data = player.PlayerData;
+        }
+        else
+        {
+            data = PlayerManager.Instance.PlayerBlacksmithData;
+        }
+
+        // get ore, if not selected ignore
+        OreSO ore = null;
+        if (data.CurrentForgingOre != -1)
+        {
+            ore = UtilsItem.GetItemById(data.CurrentForgingOre) as OreSO;
+        }
+
+        if(ore == null)
+        {
+            selectedInputRefineQuantity = 0;
+            RefreshInputAmountUI();
+            return;
+        }
+
+        // get quantity
+        int groupIndex = PlayerManager.Instance.Inventory.GetGroupIndex(ore.Id);
+        ItemGroup oreGroup = PlayerManager.Instance.Inventory.ItemGroups[groupIndex];
+        int maxItem = GetPossibleRefinedMetalQuantity(oreGroup, ore);
+
+        // set quantity
+        if(int.TryParse(value, out int parsed))
+        {
+            if (parsed < 0)
+                parsed = 0;
+
+            if (parsed > maxItem)
+                parsed = maxItem;
+
+            // update ui
+            selectedInputRefineQuantity = parsed;
+            RefreshInputAmountUI();
+
+            // update data
+            data.SetCurrentForgingQuantity(selectedInputRefineQuantity);
+            PlayerManager.Instance.UpdateBlacksmithData(data);
+            PlayerManager.Instance.SaveBlacksmithData();
+        }
+    }
+
+    private void RefreshInputAmountUI()
+    {
+        inputRefineQuantity.text = selectedInputRefineQuantity.ToString();
     }
 
 

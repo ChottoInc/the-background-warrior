@@ -28,6 +28,9 @@ MonoBehaviour:
     statId: 0
     amountStat: 0
     mapId: 1
-    rewardAmount: 30
+    questBefriendSpecific: 0
+    companionSO: {fileID: 0}
+    amountBefriend: 0
+    rewardAmount: 40
   nexts:
   - {fileID: 11400000, guid: 08e9921fd8562354f9525dba32dfbbd7, type: 2}

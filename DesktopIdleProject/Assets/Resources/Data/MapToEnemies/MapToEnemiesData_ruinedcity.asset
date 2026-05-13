@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a45d4151484b4d80f7e9aa8d4413d, type: 3}
+  m_Name: MapToEnemiesData_ruinedcity
+  m_EditorClassIdentifier: 
+  mapSO: {fileID: 11400000, guid: a933d249c9d844640a51eb73c8b2b547, type: 2}
+  possibleEnemies:
+  - value: {fileID: 11400000, guid: ab75dbc73ef822c409f7a94d2e3c0591, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 74887b9840d13f849bf060814619d990, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 34536e106658f6f47ab26907818060fa, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: a9d48a72b615b9148a0f732377c44086, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 769a004fb0031e242a7800f77937689f, type: 2}
+    chanches: 10
+  - value: {fileID: 11400000, guid: 371da543a3db23047a5e635969d5d4a0, type: 2}
+    chanches: 10

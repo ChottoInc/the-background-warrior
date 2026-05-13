@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a45d4151484b4d80f7e9aa8d4413d, type: 3}
+  m_Name: MapToEnemiesData_shore
+  m_EditorClassIdentifier: 
+  mapSO: {fileID: 11400000, guid: d3f40e550da51b44ca905cfb42b62b94, type: 2}
+  possibleEnemies:
+  - value: {fileID: 11400000, guid: f3477248de671124094867e2b0a1e755, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 934fc02ae28e1744790bb8af18d87260, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 7d4eebdb9175a8b40927b728a3f34f89, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 3b10046ed09301f43b7185841ffc7a70, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 7a7e3b9f99b12394c8b675d59ec4d87b, type: 2}
+    chanches: 10
+  - value: {fileID: 11400000, guid: 18ffb32893b104f4bafdcc25f6f02399, type: 2}
+    chanches: 10
+  - value: {fileID: 11400000, guid: 36dbfbae6234a3546aa5871ae10c4655, type: 2}
+    chanches: 10

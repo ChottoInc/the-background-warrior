@@ -45,6 +45,15 @@ public class PlayerFightData
     private int levelStatLuck = 1;
 
 
+    private int startLevelMaxHp = 1;
+    private int startLevelAtk = 1;
+    private int startLevelDef = 1;
+    private int startLevelAtkSpd = 1;
+    private int startLevelCritRate = 1;
+    private int startLevelCritDmg = 1;
+    private int startLevelLuck = 1;
+
+
     public List<int> AvailableMaps => availableMaps;
 
 
@@ -133,6 +142,7 @@ public class PlayerFightData
     public event Action OnLevelUp;
 
     public event Action OnHpChange;
+    public event Action<int> OnTakeDamage;
 
 
     public event Action<int, int> OnStatChange;
@@ -167,10 +177,34 @@ public class PlayerFightData
         levelStatLuck = saveData.levelStatLuck;
 
 
+        levelStatMaxHp = Math.Min(levelStatMaxHp, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_MAXHP);
+        levelStatAtk = Math.Min(levelStatAtk, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_ATK);
+        levelStatDef = Math.Min(levelStatDef, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_DEF);
+        levelStatAtkSpd = Math.Min(levelStatAtkSpd, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_ATK_SPEED);
+        levelStatCritRate = Math.Min(levelStatCritRate, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_CRIT_RATE);
+        levelStatCritDmg = Math.Min(levelStatCritDmg, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_CRIT_DMG);
+        levelStatLuck = Math.Min(levelStatLuck, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_LUCK);
+
+
         availableStatPoints = saveData.availableStatPoints;
 
         currentLevel = saveData.currentLevel;
         currentExp = saveData.currentExp;
+
+        int sumLevels =
+            levelStatMaxHp + levelStatAtk + levelStatDef + levelStatAtkSpd + levelStatCritRate + levelStatCritDmg + levelStatLuck -
+            startLevelMaxHp - startLevelAtk - startLevelDef - startLevelAtkSpd - startLevelCritRate - startLevelCritDmg - startLevelLuck +
+            availableStatPoints +
+            1;
+
+        currentLevel = Math.Min(currentLevel, sumLevels);
+
+        // reset available points to 0 if previous bugs occured, and set exp to 0
+        if (currentLevel > UtilsWarrior.MAX_LEVEL_WARRIOR)
+        {
+            availableStatPoints = 0;
+            currentExp = 0;
+        }
 
         currentHp = MaxHp;
     }
@@ -185,6 +219,20 @@ public class PlayerFightData
 
         currentLevel = 1;
         currentExp = 0;
+
+
+        levelStatMaxHp = startLevelMaxHp;
+
+        levelStatAtk = startLevelAtk;
+        levelStatDef = startLevelDef;
+
+        levelStatAtkSpd = startLevelAtkSpd;
+
+        levelStatCritRate = startLevelCritRate;
+        levelStatCritDmg = startLevelCritDmg;
+
+        levelStatLuck = startLevelLuck;
+
 
         baseMaxHp = BASE_MAXHP;
         currentHp = MaxHp;
@@ -282,6 +330,8 @@ public class PlayerFightData
         //Debug.Log("current hp: " + currentHp);
         //Debug.Log("max hp: " + MaxHp);
 
+        OnTakeDamage?.Invoke(Mathf.FloorToInt(total));
+
         if (currentHp <= 0f)
         {
             currentHp = 0;
@@ -301,6 +351,8 @@ public class PlayerFightData
         currentHp -= total;
 
         OnHpChange?.Invoke();
+
+        OnTakeDamage?.Invoke(Mathf.FloorToInt(total));
 
         if (currentHp <= 0f)
         {

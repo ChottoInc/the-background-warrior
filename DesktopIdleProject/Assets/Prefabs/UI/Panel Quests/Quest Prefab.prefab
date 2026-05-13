@@ -498,7 +498,7 @@ MonoBehaviour:
   textQuest: {fileID: 1938863426684724805}
   progressBar: {fileID: 1027636711192397985}
   panelButtonClaim: {fileID: 1615125436495912838}
-  buttonClaim: {fileID: 3975953190822992636}
+  buttonClaim: {fileID: 2710531059064322275}
   panelReward: {fileID: 6153748076399757166}
   textReward: {fileID: 7306940184577997173}
 --- !u!1 &3495349689721860255
@@ -995,7 +995,7 @@ GameObject:
   - component: {fileID: 538061928442367129}
   - component: {fileID: 411613274232829640}
   - component: {fileID: 7701829437563255659}
-  - component: {fileID: 3975953190822992636}
+  - component: {fileID: 2710531059064322275}
   m_Layer: 5
   m_Name: Button Claim
   m_TagString: Untagged
@@ -1062,7 +1062,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.8
---- !u!114 &3975953190822992636
+--- !u!114 &2710531059064322275
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8976974353430536816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1118,6 +1118,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  multiplier: 0.9
+  timerShrink: 0.1
 --- !u!1 &9059709713535823679
 GameObject:
   m_ObjectHideFlags: 0

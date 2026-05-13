@@ -16,5 +16,5 @@ MonoBehaviour:
   companionName: Shemoon
   iconCompanion: {fileID: 21300000, guid: 5941e9e9f67ab5540a2c03b44517186e, type: 3}
   prefab: {fileID: 8506325778044164994, guid: c023ac59fdac522489c0094e03607d77, type: 3}
-  baseAtkPerc: 0.05
+  baseAtkPerc: 0.1
   baseAtkSpd: 0.5

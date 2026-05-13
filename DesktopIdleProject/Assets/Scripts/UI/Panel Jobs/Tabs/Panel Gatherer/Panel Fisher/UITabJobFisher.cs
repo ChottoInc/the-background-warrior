@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UITabJobFisher : UITabWindow
 {
@@ -12,6 +13,7 @@ public class UITabJobFisher : UITabWindow
     [Space(10)]
     [SerializeField] GameObject fishGroupPrefab;
     [SerializeField] Transform container;
+    [SerializeField] ScrollRect scrollRectFishGroups;
 
     private List<GameObject> groupsObjs;
 
@@ -153,7 +155,7 @@ public class UITabJobFisher : UITabWindow
 
             if (prefab.TryGetComponent(out UIFisherGroupPrefab obj))
             {
-                obj.Setup(groups[i]);
+                obj.Setup(scrollRectFishGroups, groups[i]);
             }
             groupsObjs.Add(prefab);
         }
@@ -165,8 +167,6 @@ public class UITabJobFisher : UITabWindow
         {
             panelJob.OnButtonClose();
         }
-
-        AudioManager.Instance.PlayClickUI();
 
         LastSceneSettings settings = new LastSceneSettings();
         settings.lastSceneName = "FisherScene";

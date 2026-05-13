@@ -28,8 +28,6 @@ public class UITabSettingsGeneral : UITabWindow
 
     public async void OnButtonTitleScreen()
     {
-        AudioManager.Instance.PlayClickUI();
-
         string question = $"Return to title screen?";
 
         TooltipManagerData tooltipData = new TooltipManagerData();
@@ -47,8 +45,6 @@ public class UITabSettingsGeneral : UITabWindow
 
     public async void OnButtonQuit()
     {
-        AudioManager.Instance.PlayClickUI();
-
         string question = $"Close the game?";
 
         TooltipManagerData tooltipData = new TooltipManagerData();

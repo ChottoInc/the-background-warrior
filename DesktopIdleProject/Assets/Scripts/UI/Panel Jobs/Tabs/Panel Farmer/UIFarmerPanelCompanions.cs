@@ -165,7 +165,6 @@ public class UIFarmerPanelCompanions : MonoBehaviour
 
     public void OnButtonCrops()
     {
-        AudioManager.Instance.PlayClickUI();
         tabFarmer.OnButtonCrops();
     }
 }

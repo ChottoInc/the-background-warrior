@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +11,10 @@ public class UITabPlayerJob : UITabWindow
     public const int ID_FISHER_TAB = 3;
     public const int ID_FARMER_TAB = 4;
 
+    [Header("Title")]
+    [SerializeField] TMP_Text textJob;
+
+    [Header("Job Tree")]
     [SerializeField] ScrollRect panelScroll;
     //[SerializeField] UIButtonJobTab[] jobTabs;
 
@@ -75,13 +79,16 @@ public class UITabPlayerJob : UITabWindow
     {
         switch (tab)
         {
-            default: ResetScrollUI(); break;        // show job tree
+            default: ResetScrollUI(); break; // show job tree
+
             case ID_WARRIOR_TAB: tabWarrior.Select(); break;
             case ID_MINER_TAB: tabMiner.Select(); break;
             case ID_BLACKSMITH_TAB: tabBlacksmith.Select(); break;
             case ID_FISHER_TAB: tabFisher.Select(); break;
             case ID_FARMER_TAB: tabFarmer.Select(); break;
         }
+
+        ChangeTitleText(tab);
     }
 
     public void ChangeCurrentTab(UITabWindow window, int id)
@@ -97,7 +104,38 @@ public class UITabPlayerJob : UITabWindow
             ResetScrollUI();
         }
 
+        ChangeTitleText(id);
         currentTab = id;
+    }
+
+    private void ChangeTitleText(int idTab)
+    {
+        switch (idTab)
+        {
+            default:
+                textJob.text = "Jobs";
+                break;
+
+            case ID_WARRIOR_TAB:
+                textJob.text = "Warrior";
+                break;
+
+            case ID_MINER_TAB:
+                textJob.text = "Miner";
+                break;
+
+            case ID_BLACKSMITH_TAB:
+                textJob.text = "Blacksmith";
+                break;
+
+            case ID_FISHER_TAB:
+                textJob.text = "Fisher";
+                break;
+
+            case ID_FARMER_TAB:
+                textJob.text = "Farmer";
+                break;
+        }
     }
 
 

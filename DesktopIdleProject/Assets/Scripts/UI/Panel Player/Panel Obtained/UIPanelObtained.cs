@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIPanelObtained : MonoBehaviour
 {
+    private const int MAX_QUEUE = 5;
+
     [SerializeField] Sprite spriteOre;
     [SerializeField] Sprite spriteCard;
     [SerializeField] Sprite spriteFish;
@@ -20,6 +22,7 @@ public class UIPanelObtained : MonoBehaviour
     [Space(10)]
     [SerializeField] GameObject objectToMove;
     [SerializeField] Image imageObtained;
+
 
 
 
@@ -79,6 +82,8 @@ public class UIPanelObtained : MonoBehaviour
 
     private void AddItemToQueue(ItemSO itemSO)
     {
+        if (queueItems.Count >= MAX_QUEUE) return;
+
         // check if Floating is enabled
         if (SettingsManager.Instance.IsItemCollectionOn)
         {

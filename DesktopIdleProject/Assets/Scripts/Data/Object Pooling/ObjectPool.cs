@@ -31,7 +31,10 @@ public class ObjectPool
     public GameObject Pull()
     {
         if (objects.Count == 0)
+        {
+            Debug.Log("Exceeded objects");
             CreateNewObject();
+        }
 
         GameObject obj = objects.Dequeue();
         obj.SetActive(true);

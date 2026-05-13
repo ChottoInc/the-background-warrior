@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IPoolObject
+public class Enemy : MonoBehaviour, IPoolObject, IDamageable
 {
     [Header("Sprite")]
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -19,9 +20,12 @@ public class Enemy : MonoBehaviour, IPoolObject
 
     private RuntimeAnimatorController animController;
 
-    [Header("Chek Player")]
+    [Header("Check Player")]
     [SerializeField] float hitRadius;
     [SerializeField] LayerMask playerMask;
+
+    [Header("Rigidbody")]
+    [SerializeField] LayerMask excludeLayersRb;
 
     [Header("VFXs")]
     [SerializeField] ParticleSystem deathVFX;
@@ -39,12 +43,17 @@ public class Enemy : MonoBehaviour, IPoolObject
 
     private int enemyIndex;
 
+    public int EnemyIndex => enemyIndex;
+
 
     // --------- MOVEMENT VARS
+
+    private Camera mainCam;
 
     private Vector3 startScale;
 
     private float currentTarget;
+    private Vector2 currentDirection;
 
     private bool isIdling;
     private float timerIdle;
@@ -65,8 +74,9 @@ public class Enemy : MonoBehaviour, IPoolObject
     private bool canFight;
 
     public event Action OnPerformAttack;
+    public event Action<int> OnTakeDamage;
 
-
+    public bool IsAttacking => isAttacking;
 
     public bool CanFight => canFight;
 
@@ -85,10 +95,15 @@ public class Enemy : MonoBehaviour, IPoolObject
     public bool IsDead => enemyData.CurrentHp <= 0;
 
 
+    private void OnEnable()
+    {
+        mainCam = Camera.main;
+    }
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
 
         // Get default speed for animator walk
         startingAttackSpeedAnimationDuration = attackClip.length;
@@ -133,15 +148,15 @@ public class Enemy : MonoBehaviour, IPoolObject
 
         float distance = Mathf.Abs(transform.position.x - currentTarget);
 
-        animator.SetFloat("Velocity", Mathf.Abs(rb.velocity.x));
-
         if (distance > 0.1f && !isIdling)
         {
             // get target dir
-            Vector2 dir = new Vector2(currentTarget - transform.position.x, 0).normalized;
+            currentDirection = new Vector2(currentTarget - transform.position.x, 0).normalized;
 
-            // move with rb
-            rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
+            // move
+            transform.position += speed * Time.fixedDeltaTime * (Vector3)currentDirection;
+
+            animator.SetFloat("Velocity", Mathf.Abs(currentDirection.x));
 
             CheckFlip();
         }
@@ -150,6 +165,8 @@ public class Enemy : MonoBehaviour, IPoolObject
             // handles idling timer before move again
             if (!isIdling)
             {
+                animator.SetFloat("Velocity", 0);
+
                 timerIdle = cooldownIdle;
                 isIdling = true;
             }
@@ -171,7 +188,7 @@ public class Enemy : MonoBehaviour, IPoolObject
     private void CheckFlip()
     {
         // check sprite flip
-        float vx = rb.velocity.x;
+        float vx = currentDirection.x;
         if (vx > 0.01f && faceRight)
         {
             spriteRenderer.transform.localScale = startScale;
@@ -214,7 +231,7 @@ public class Enemy : MonoBehaviour, IPoolObject
     private void GenerateNewTarget()
     {
         currentTarget = UnityEngine.Random.Range(InitializerManager.Instance.GetScreenOffsetBound(), InitializerManager.GetScreenWidth() - InitializerManager.Instance.GetScreenOffsetBound());
-        currentTarget = Camera.main.ScreenToWorldPoint(new Vector2(currentTarget, 0)).x;
+        currentTarget = mainCam.ScreenToWorldPoint(new Vector2(currentTarget, 0)).x;
     }
 
     private void CheckAttack()
@@ -247,24 +264,42 @@ public class Enemy : MonoBehaviour, IPoolObject
     {
         this.enemyData = enemyData;
 
+        enemyData.OnTakeDamage += OnActionTakeDamage;
+
+        //Debug.Log($"Enemytakedamage subscribers: {enemyData.OnTakeDamage?.GetInvocationList().Length ?? 0}");
+
         enemyIndex = index;
 
         this.sceneType = sceneType;
 
         spriteRenderer.sortingOrder = enemyIndex;
-
-        // Setup panel damage ui, after the enemy data has been set
-        panelDamage.Setup();
-
-        StartCoroutine(CoStartingIdle());
     }
 
-    private IEnumerator CoStartingIdle()
+    private void OnActionTakeDamage(int damage)
     {
-        yield return new WaitForSeconds(1.5f);
+        OnTakeDamage?.Invoke(damage);
+    }
+
+    private IEnumerator CoRespawned()
+    {
+        // enable rigidbody
+        rb.bodyType = RigidbodyType2D.Dynamic;
+
+        yield return new WaitForSeconds(2f);
+
+        // destroy rb
+        RemoveRb();
+
+        // can move
+        canMove = true;
 
         // set the enemy can fight
         canFight = true;
+    }
+
+    private void RemoveRb()
+    {
+        rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
     private void HideSprite(bool hide)
@@ -286,8 +321,6 @@ public class Enemy : MonoBehaviour, IPoolObject
 
     public void SetAttacking(bool isAttacking, Vector2 playerDir)
     {
-        rb.velocity = new Vector2(0, rb.velocity.y);
-
         this.isAttacking = isAttacking;
 
         CheckFlipOnEnemy(playerDir);
@@ -330,7 +363,8 @@ public class Enemy : MonoBehaviour, IPoolObject
 
     private void HideAfterDeath()
     {
-        deathVFX.Stop();
+        deathVFX.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
         Die();
     }
 
@@ -338,14 +372,43 @@ public class Enemy : MonoBehaviour, IPoolObject
     {
         HideSprite(false);
 
+        // call coroutine to act after respawn
+        StartCoroutine(CoRespawned());
+
         // attach combat manager OnEnemyKill event, to check nearby player
-        if(CombatManager.Instance != null)
+        if (CombatManager.Instance != null)
             CombatManager.Instance.OnEnemyKill += CheckPlayerPos;
     }
 
     public void OnDespawn()
     {
         canFight = false;
+
+        Resets();
+    }
+
+    private void Resets()
+    {
+        StopAllCoroutines();
+
+        RemoveRb();
+
+        // disable move
+        canMove = false;
+
+        // disable fight
+        canFight = false;
+
+        // detach event and reset data
+        if (enemyData != null)
+        {
+            enemyData.OnTakeDamage -= OnActionTakeDamage;
+            enemyData = null;
+        }
+        else
+        {
+            Debug.Log("enemy data not found");
+        }
 
         // detach combat manager OnEnemyKill event
         if (CombatManager.Instance != null)
@@ -360,16 +423,20 @@ public class Enemy : MonoBehaviour, IPoolObject
                 StageManager.Instance.RemoveFromCurrentEnemiesList(this);
                 PoolManager.Instance.Return(gameObject, enemyData.EnemySO.EnemyPoolName);
                 break;
+
+            case SceneLoaderManager.SceneType.Home:
+                PoolManager.Instance.Return(gameObject, enemyData.EnemySO.EnemyPoolName);
+                break;
         }
     }
 
 
     public void UpdateDamageUI()
     {
-        // check if Floating is enabled
+        // check if floating damage is enabled
         if (SettingsManager.Instance.IsDamageOn)
         {
-            panelDamage.ShowDamage();
+            //panelDamage.ShowDamage();
         }
     }
 

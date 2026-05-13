@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a45d4151484b4d80f7e9aa8d4413d, type: 3}
+  m_Name: MapToEnemiesData_sequoiaforest
+  m_EditorClassIdentifier: 
+  mapSO: {fileID: 11400000, guid: 726058c0cf233fa45900427a9b5721cc, type: 2}
+  possibleEnemies:
+  - value: {fileID: 11400000, guid: 377700adbd8fdf642a47e46f12772122, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: ed26726f812005f4481052f8463a7c26, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 124f5beff81e1c1409026ebc69146897, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: bfe3a344c5498614bafca474269c22ee, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 533b50e6237694e49a60778cbff3d35c, type: 2}
+    chanches: 10
+  - value: {fileID: 11400000, guid: e2c8fecc8bb8b9841b9615c7f092505f, type: 2}
+    chanches: 10

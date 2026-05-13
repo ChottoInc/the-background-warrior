@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-using System.ComponentModel;
 
 public class PlayerBlacksmithSaveData
 {
@@ -8,6 +6,7 @@ public class PlayerBlacksmithSaveData
     public int levelStatCraftSpeed;
     public int levelStatEfficiency;
     public int levelStatLuck;
+    public int levelStatMetallurgy;
 
     // ---- POINTS
 
@@ -30,6 +29,8 @@ public class PlayerBlacksmithSaveData
     // ---- FORGING
 
     public int currentForgingOre;
+    public bool isInfiniteForging;
+    public int currentForgingQuantity;
 
 
 
@@ -40,6 +41,7 @@ public class PlayerBlacksmithSaveData
         levelStatCraftSpeed = data.LevelStatCraftSpeed;
         levelStatEfficiency = data.LevelEfficiency;
         levelStatLuck = data.LevelStatLuck;
+        levelStatMetallurgy = data.LevelStatMetallurgy;
 
 
         availableStatPoints = data.AvailableStatPoints;
@@ -53,5 +55,7 @@ public class PlayerBlacksmithSaveData
         levelBootsBlacksmith = data.BootsLevel;
 
         currentForgingOre = data.CurrentForgingOre;
+        isInfiniteForging = data.IsInfiniteForging;
+        currentForgingQuantity = data.CurrentForgingQuantity;
     }
 }

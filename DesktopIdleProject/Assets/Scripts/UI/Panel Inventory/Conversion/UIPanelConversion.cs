@@ -84,8 +84,6 @@ public class UIPanelConversion : MonoBehaviour
             return;
         }
 
-        AudioManager.Instance.PlayClickUI();
-
         HandleConversion();
     }
 

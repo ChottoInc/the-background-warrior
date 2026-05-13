@@ -16,7 +16,7 @@ MonoBehaviour:
   mapName: Shore
   mapSceneName: ShoreScene
   mapDifficulty: 3
-  baseEnemyLevel: 180
-  enemiesPerStage: 70
+  baseEnemyLevel: 155
+  enemiesPerStage: 60
   stages: 30
   nextMap: {fileID: 11400000, guid: a933d249c9d844640a51eb73c8b2b547, type: 2}

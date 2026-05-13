@@ -116,7 +116,7 @@ public static class UtilsItem
     }
 
     /// <summary>
-    /// Exp given by the smashed rocks
+    /// Exp given by the metals
     /// </summary>
     public static long GetMetalExp(MetalSO metalSO)
     {
@@ -125,11 +125,11 @@ public static class UtilsItem
         switch (metalSO.RockType)
         {
             default:
-            case UtilsGather.RockType.Copper: result = 4; break;
-            case UtilsGather.RockType.Iron: result = 12; break;
-            case UtilsGather.RockType.Bronze: result = 30; break;
-            case UtilsGather.RockType.Silver: result = 75; break;
-            case UtilsGather.RockType.Gold: result = 120; break;
+            case UtilsGather.RockType.Copper: result = 200; break;
+            case UtilsGather.RockType.Iron: result = 600; break;
+            case UtilsGather.RockType.Bronze: result = 1400; break;
+            case UtilsGather.RockType.Silver: result = 2400; break;
+            case UtilsGather.RockType.Gold: result = 4000; break;
         }
         return result * metalSO.RequiredOres * multiplier;
     }
@@ -430,7 +430,7 @@ public static class UtilsItem
             case FishRarity.Deepwater: return 2500;
             case FishRarity.Tideborn: return 4000;
             case FishRarity.Ancient: return 6000;
-            case FishRarity.Mythic: return 10000;
+            case FishRarity.Mythic: return 8500;
         }
     }
 

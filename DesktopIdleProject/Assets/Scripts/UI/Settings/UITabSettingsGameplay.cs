@@ -20,6 +20,7 @@ public class UITabSettingsGameplay : UITabWindow
 
     [Header("Fisher")]
     [SerializeField] Toggle toggleInvertedFishingSpot;
+    [SerializeField] Toggle toggleHideFishingBar;
 
     private void Awake()
     {
@@ -71,6 +72,9 @@ public class UITabSettingsGameplay : UITabWindow
 
         if (toggleInvertedFishingSpot != null)
             toggleInvertedFishingSpot.SetIsOnWithoutNotify(SettingsManager.Instance.IsInvertedFishingSpot);
+
+        if (toggleHideFishingBar != null)
+            toggleHideFishingBar.SetIsOnWithoutNotify(SettingsManager.Instance.IsHiddenFishingBar);
     }
 
 
@@ -125,5 +129,11 @@ public class UITabSettingsGameplay : UITabWindow
     {
         AudioManager.Instance.PlayClickUI();
         SettingsManager.Instance.SetIsInvertedFishingSpotOn(isOn);
+    }
+
+    public void OnToggleHiddenFishingBar(bool isOn)
+    {
+        AudioManager.Instance.PlayClickUI();
+        SettingsManager.Instance.SetIsHiddenFishingSpot(isOn);
     }
 }

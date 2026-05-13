@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 7020211229438509939}
   - component: {fileID: 1981198823711255629}
   - component: {fileID: 2118641268395174699}
-  - component: {fileID: 1288663317623094829}
+  - component: {fileID: 4665296923745239516}
   m_Layer: 5
   m_Name: Button Unequip
   m_TagString: Untagged
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1288663317623094829
+--- !u!114 &4665296923745239516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1228592176183203191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -245,6 +245,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  multiplier: 0.9
+  timerShrink: 0.1
 --- !u!1 &2058860602099846457
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +258,7 @@ GameObject:
   - component: {fileID: 7608360562434498484}
   - component: {fileID: 2333605615706610988}
   - component: {fileID: 2237288421265567408}
-  - component: {fileID: 5920540243069765634}
+  - component: {fileID: 6153662053817250884}
   m_Layer: 5
   m_Name: Button Equip
   m_TagString: Untagged
@@ -322,7 +324,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5920540243069765634
+--- !u!114 &6153662053817250884
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,7 +333,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2058860602099846457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b55d59d769e11554ab6c65f4ade39393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -378,6 +380,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  multiplier: 0.9
+  timerShrink: 0.1
 --- !u!1 &2358202618917374573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,5 +1549,5 @@ MonoBehaviour:
   textName: {fileID: 6765666620975046545}
   textLevel: {fileID: 8600127765468148591}
   panelEquipped: {fileID: 6967432645693137156}
-  buttonEquip: {fileID: 5920540243069765634}
+  buttonEquip: {fileID: 6153662053817250884}
   buttonUnequip: {fileID: 1228592176183203191}

@@ -5,8 +5,8 @@ Precision,0.01,30
 Luck,0.01,40
 ,,
 Base Exp Growth,50,
-Expo Growth,1.08,
-Flat Growth,10,
+Expo Growth,1.1,
+Flat Growth,20,
 ,,
-Weapon Linear Growth,0.25,
-Weapon Quadratic Growth,0.03,
+Weapon Linear Growth,0.3,
+Weapon Quadratic Growth,0.04,

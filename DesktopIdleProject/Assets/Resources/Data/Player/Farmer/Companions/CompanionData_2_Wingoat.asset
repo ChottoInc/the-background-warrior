@@ -16,5 +16,5 @@ MonoBehaviour:
   companionName: Wingoat
   iconCompanion: {fileID: 21300000, guid: 509d53f7889636c4cad54296b6427415, type: 3}
   prefab: {fileID: 8055616151452443993, guid: c257e66385b48a542a58de89be3a44ef, type: 3}
-  baseAtkPerc: 0.15
+  baseAtkPerc: 0.2
   baseAtkSpd: 0.5

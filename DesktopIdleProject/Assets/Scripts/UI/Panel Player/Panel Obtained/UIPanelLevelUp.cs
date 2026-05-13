@@ -6,6 +6,11 @@ public class UIPanelLevelUp : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] GameObject panelText;
+
+    [Space(10)]
+    [SerializeField] bool isMovementEnabled = true;
+
+    [Space(10)]
     [SerializeField] float showFor = 2f;
 
     [Space(10)]
@@ -29,7 +34,7 @@ public class UIPanelLevelUp : MonoBehaviour
     {
         player.OnLevelUp += ShowPanel;
 
-        startPos = panelText.transform.position;
+        startPos = panelText.transform.localPosition;
     }
 
     private void ShowPanel()
@@ -40,7 +45,8 @@ public class UIPanelLevelUp : MonoBehaviour
 
         panelText.SetActive(true);
 
-        tweenMove = panelText.transform.DOMove(movePos.position, moveDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+        if(isMovementEnabled)
+            tweenMove = panelText.transform.DOMove(movePos.position, moveDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
 
         StartCoroutine(CoHidePanel());
     }
@@ -60,6 +66,6 @@ public class UIPanelLevelUp : MonoBehaviour
     {
         tweenMove.Kill();
 
-        panelText.transform.position = startPos;
+        panelText.transform.localPosition = startPos;
     }
 }

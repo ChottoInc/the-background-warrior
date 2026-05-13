@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CropData_1_Lumberry
   m_EditorClassIdentifier: 
   id: 1
-  baseGrowthTime: 1800
+  baseGrowthTime: 600
   cropName: Lumberry
   spriteSeed: {fileID: 21300000, guid: e426be52e0749434db0063ac888ba5a2, type: 3}
   spriteCrop:
@@ -24,3 +24,4 @@ MonoBehaviour:
   - {fileID: -251167038, guid: 91fe4d1a4809c4c4281755d2ec52c932, type: 3}
   attractedCompanions:
   - {fileID: 11400000, guid: 752ba2c10e4afdd4fa8bb4344884194f, type: 2}
+  rewardedExp: 0
