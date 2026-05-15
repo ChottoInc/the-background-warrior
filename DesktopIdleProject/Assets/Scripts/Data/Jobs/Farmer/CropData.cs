@@ -43,7 +43,7 @@ public class CropData
         baseGrowthTime = cropSO.BaseGrowthTime;
         currentGrowth = saveData.currentGrowth;
 
-        currentGrowth = Math.Min(GrowthTime, currentGrowth);
+        currentGrowth = saveData.currentGrowth;
 
         plantedSlot = saveData.plantedSlot;
     }
@@ -73,7 +73,7 @@ public class CropData
         currentGrowth += t;
 
         // set max as growth time
-        currentGrowth = Math.Min(GrowthTime, currentGrowth);
+        currentGrowth = Mathf.Min(GrowthTime, currentGrowth);
 
         // reward exp if growth reaches max
         if(IsFullyGrown)
