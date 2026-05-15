@@ -397,6 +397,32 @@ public static class UtilsQuest
     {
         public bool needSave;
         public bool needNotification;
+        public int counterNotification;
+    }
+
+    public struct CustomEventData
+    {
+        public string questId;
+        public QuestData questData;
+        public QuestType questType;
+
+        public bool needNotification;
+
+        // on enemy killed
+        public EnemySO enemySO;
+
+        // on item obtain
+        public int itemId;
+
+        // on stat up
+        public int statId;
+        public int statAmount;
+
+        // on map unlock
+        public int mapId;
+
+        // on befriend companion
+        public int companionId;
     }
 
     #endregion

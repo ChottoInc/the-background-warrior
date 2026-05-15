@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Quest/Story Data", fileName = "QuestStoryData_")]
-public class QuestStorySO : ScriptableObject
+public class QuestStorySO : ScriptableObject, IQuestScriptable
 {
     [SerializeField] string uniqueId;
 
@@ -20,4 +20,8 @@ public class QuestStorySO : ScriptableObject
     public UtilsQuest.QuestData QuestData => questData;
     public QuestStorySO[] Nexts => nexts;
 
+    public UtilsQuest.QuestData GetQuestaData()
+    {
+        return questData;
+    }
 }

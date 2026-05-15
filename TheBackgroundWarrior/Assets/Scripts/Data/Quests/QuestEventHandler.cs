@@ -1,5 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static UtilsQuest;
 
@@ -9,68 +10,14 @@ public class QuestEventHandler
 
     public void OnEnemyKilled(EnemySO enemySO)
     {
-        bool needSave = false;
+        // create custom event basic data
+        CustomEventData customEventData = new CustomEventData();
+        customEventData.enemySO = enemySO;
 
-        bool needNotification = false;
-
-        // Story quest checks
-        foreach (var quest in QuestManager.Instance.ActiveStoryQuests)
-        {
-            // get so
-            QuestStorySO so = GetStoryQuestById(quest);
-
-            HandleEventResult enemyKilledResult = HandleEnemyKilled(quest, so.QuestData, QuestType.Story, enemySO, needNotification);
-            needSave = enemyKilledResult.needSave;
-
-            if (!needNotification)
-                needNotification = enemyKilledResult.needNotification;
-        }
-
-        // Bounties quest checks
-        foreach (var quest in QuestManager.Instance.ActiveBountyQuests.Values)
-        {
-            // get so
-            QuestBountySO so = GetBountyQuestById(quest);
-
-            HandleEventResult enemyKilledResult = HandleEnemyKilled(quest, so.QuestData, QuestType.Bounties, enemySO, needNotification);
-            needSave = enemyKilledResult.needSave;
-
-            if (!needNotification)
-                needNotification = enemyKilledResult.needNotification;
-        }
-
-        int counterNotificationDailies = 0;
-
-        // Daily quest checks
-        foreach (var quest in QuestManager.Instance.ActiveDailyQuests)
-        {
-            // get so
-            QuestDailySO so = GetDailyQuestById(quest);
-
-            HandleEventResult enemyKilledResult = HandleEnemyKilled(quest, so.QuestData, QuestType.Daily, enemySO, needNotification);
-            needSave = enemyKilledResult.needSave;
-
-            if (!needNotification)
-                counterNotificationDailies++;
-        }
-
-        if (!needNotification && counterNotificationDailies == QuestManager.Instance.ActiveDailyQuests.Count && QuestManager.Instance.ActiveDailyQuests.Count > 0)
-        {
-            needNotification = true;
-        }
-
-        if (needNotification)
-        {
-            QuestManager.Instance.TriggerNotification();
-        }
-
-        if (needSave)
-        {
-            QuestManager.Instance.SaveQuestsData();
-        }
+        HandleEvent(customEventData, HandleEnemyKilled);
     }
 
-    private HandleEventResult HandleEnemyKilled(string questId, QuestData data, QuestType questType, EnemySO enemySO, bool needNotification)
+    private HandleEventResult HandleEnemyKilled(CustomEventData eventData)
     {
         HandleEventResult result = new HandleEventResult()
         {
@@ -78,16 +25,12 @@ public class QuestEventHandler
             needNotification = false
         };
 
-        if (NeedUpdateKillProgress(data, enemySO))
+        if (NeedUpdateKillProgress(eventData.questData, eventData.enemySO))
         {
-            UpdateKillProgress(questType, questId);
+            UpdateKillProgress(eventData.questType, eventData.questId);
             result.needSave = true;
 
-            // even if one notification needs display, do not check again
-            if (!needNotification)
-            {
-                result.needNotification = QuestManager.Instance.CheckNotifications(data, questType, questId);
-            }
+            result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
 
         return result;
@@ -152,65 +95,14 @@ public class QuestEventHandler
 
     public void OnItemObtain(int id)
     {
-        bool needSave = false;
+        // create custom event basic data
+        CustomEventData customEventData = new CustomEventData();
+        customEventData.itemId = id;
 
-        bool needNotification = false;
-
-        // Story quest checks
-        foreach (var quest in QuestManager.Instance.ActiveStoryQuests)
-        {
-            // get so
-            QuestStorySO so = GetStoryQuestById(quest);
-            HandleEventResult itemObtainResult = HandleItemObtain(quest, so.QuestData, QuestType.Story, id, needNotification);
-            needSave = itemObtainResult.needSave;
-
-            if (!needNotification)
-                needNotification = itemObtainResult.needNotification;
-        }
-
-        // Bounties quest checks
-        foreach (var quest in QuestManager.Instance.ActiveBountyQuests.Values)
-        {
-            // get so
-            QuestBountySO so = GetBountyQuestById(quest);
-            HandleEventResult itemObtainResult = HandleItemObtain(quest, so.QuestData, QuestType.Bounties, id, needNotification);
-            needSave = itemObtainResult.needSave;
-
-            if (!needNotification)
-                needNotification = itemObtainResult.needNotification;
-        }
-
-        int counterNotificationDailies = 0;
-
-        // Daily quest checks
-        foreach (var quest in QuestManager.Instance.ActiveDailyQuests)
-        {
-            // get so
-            QuestDailySO so = GetDailyQuestById(quest);
-            HandleEventResult itemObtainResult = HandleItemObtain(quest, so.QuestData, QuestType.Daily, id, needNotification);
-            needSave = itemObtainResult.needSave;
-
-            if (!needNotification)
-                counterNotificationDailies++;
-        }
-
-        if (!needNotification && counterNotificationDailies == QuestManager.Instance.ActiveDailyQuests.Count)
-        {
-            needNotification = true;
-        }
-
-        if (needNotification)
-        {
-            QuestManager.Instance.TriggerNotification();
-        }
-
-        if (needSave)
-        {
-            QuestManager.Instance.SaveQuestsData();
-        }
+        HandleEvent(customEventData, HandleItemObtain);
     }
 
-    private HandleEventResult HandleItemObtain(string questId, QuestData data, QuestType questType, int itemId, bool needNotification)
+    private HandleEventResult HandleItemObtain(CustomEventData eventData)
     {
         HandleEventResult result = new HandleEventResult()
         {
@@ -218,16 +110,12 @@ public class QuestEventHandler
             needNotification = false
         };
 
-        if (NeedUpdateObtainProgress(data, itemId))
+        if (NeedUpdateObtainProgress(eventData.questData, eventData.itemId))
         {
-            UpdateObtainProgress(questType, questId);
+            UpdateObtainProgress(eventData.questType, eventData.questId);
             result.needSave = true;
 
-            // even if one notification needs display, do not check again
-            if (!needNotification)
-            {
-                result.needNotification = QuestManager.Instance.CheckNotifications(data, questType, questId);
-            }
+            result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
 
         return result;
@@ -293,65 +181,15 @@ public class QuestEventHandler
 
     public void OnStatUp(int id, int amount)
     {
-        bool needSave = false;
+        // create custom event basic data
+        CustomEventData customEventData = new CustomEventData();
+        customEventData.statId = id;
+        customEventData.statAmount = amount;
 
-        bool needNotification = false;
-
-        // Story quest checks
-        foreach (var quest in QuestManager.Instance.ActiveStoryQuests)
-        {
-            // get so
-            QuestStorySO so = GetStoryQuestById(quest);
-            HandleEventResult statUpResult = HandleStatUp(quest, so.QuestData, QuestType.Story, id, amount, needNotification);
-            needSave = statUpResult.needSave;
-
-            if (!needNotification)
-                needNotification = statUpResult.needNotification;
-        }
-
-        // Bounties quest checks
-        foreach (var quest in QuestManager.Instance.ActiveBountyQuests.Values)
-        {
-            // get so
-            QuestBountySO so = GetBountyQuestById(quest);
-            HandleEventResult statUpResult = HandleStatUp(quest, so.QuestData, QuestType.Bounties, id, amount, needNotification);
-            needSave = statUpResult.needSave;
-
-            if (!needNotification)
-                needNotification = statUpResult.needNotification;
-        }
-
-        int counterNotificationDailies = 0;
-
-        // Daily quest checks
-        foreach (var quest in QuestManager.Instance.ActiveDailyQuests)
-        {
-            // get so
-            QuestDailySO so = GetDailyQuestById(quest);
-            HandleEventResult statUpResult = HandleStatUp(quest, so.QuestData, QuestType.Story, id, amount, needNotification);
-            needSave = statUpResult.needSave;
-
-            if (!needNotification)
-                counterNotificationDailies++;
-        }
-
-        if (!needNotification && counterNotificationDailies == QuestManager.Instance.ActiveDailyQuests.Count)
-        {
-            needNotification = true;
-        }
-
-        if (needNotification)
-        {
-            QuestManager.Instance.TriggerNotification();
-        }
-
-        if (needSave)
-        {
-            QuestManager.Instance.SaveQuestsData();
-        }
+        HandleEvent(customEventData, HandleStatUp);
     }
 
-    private HandleEventResult HandleStatUp(string questId, QuestData data, QuestType questType, int statId, int amountStat, bool needNotification)
+    private HandleEventResult HandleStatUp(CustomEventData eventData)
     {
         HandleEventResult result = new HandleEventResult()
         {
@@ -359,16 +197,11 @@ public class QuestEventHandler
             needNotification = false
         };
 
-        if (NeedUpdateStatUpProgress(data, statId))
+        if (NeedUpdateStatUpProgress(eventData.questData, eventData.statId))
         {
-            UpdateStatLevelUpProgress(questType, questId, amountStat);
+            UpdateStatLevelUpProgress(eventData.questType, eventData.questId, eventData.statAmount);
             result.needSave = true;
-
-            // even if one notification needs display, do not check again
-            if (!needNotification)
-            {
-                result.needNotification = QuestManager.Instance.CheckNotifications(data, questType, questId);
-            }
+            result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
 
         return result;
@@ -430,65 +263,14 @@ public class QuestEventHandler
 
     public void OnAddMap(int id)
     {
-        bool needSave = false;
+        // create custom event basic data
+        CustomEventData customEventData = new CustomEventData();
+        customEventData.mapId = id;
 
-        bool needNotification = false;
-
-        // Story quest checks
-        foreach (var quest in QuestManager.Instance.ActiveStoryQuests)
-        {
-            // get so
-            QuestStorySO so = GetStoryQuestById(quest);
-            HandleEventResult addMapResult = HandleAddMap(quest, so.QuestData, QuestType.Story, id, needNotification);
-            needSave = addMapResult.needSave;
-
-            if (!needNotification)
-                needNotification = addMapResult.needNotification;
-        }
-
-        // Bounties quest checks
-        foreach (var quest in QuestManager.Instance.ActiveBountyQuests.Values)
-        {
-            // get so
-            QuestBountySO so = GetBountyQuestById(quest);
-            HandleEventResult addMapResult = HandleAddMap(quest, so.QuestData, QuestType.Bounties, id, needNotification);
-            needSave = addMapResult.needSave;
-
-            if (!needNotification)
-                needNotification = addMapResult.needNotification;
-        }
-
-        int counterNotificationDailies = 0;
-
-        // Daily quest checks
-        foreach (var quest in QuestManager.Instance.ActiveDailyQuests)
-        {
-            // get so
-            QuestDailySO so = GetDailyQuestById(quest);
-            HandleEventResult addMapResult = HandleAddMap(quest, so.QuestData, QuestType.Daily, id, needNotification);
-            needSave = addMapResult.needSave;
-
-            if (!needNotification)
-                counterNotificationDailies++;
-        }
-
-        if (!needNotification && counterNotificationDailies == QuestManager.Instance.ActiveDailyQuests.Count)
-        {
-            needNotification = true;
-        }
-
-        if (needNotification)
-        {
-            QuestManager.Instance.TriggerNotification();
-        }
-
-        if (needSave)
-        {
-            QuestManager.Instance.SaveQuestsData();
-        }
+        HandleEvent(customEventData, HandleAddMap);
     }
 
-    private HandleEventResult HandleAddMap(string questId, QuestData data, QuestType questType, int mapId, bool needNotification)
+    private HandleEventResult HandleAddMap(CustomEventData eventData)
     {
         HandleEventResult result = new HandleEventResult()
         {
@@ -496,16 +278,11 @@ public class QuestEventHandler
             needNotification = false
         };
 
-        if (NeedUpdateUnlockMapProgress(data, mapId))
+        if (NeedUpdateUnlockMapProgress(eventData.questData, eventData.mapId))
         {
-            UpdateUnlockMapProgress(questType, questId);
+            UpdateUnlockMapProgress(eventData.questType, eventData.questId);
             result.needSave = true;
-
-            // even if one notification needs display, do not check again
-            if (!needNotification)
-            {
-                result.needNotification = QuestManager.Instance.CheckNotifications(data, questType, questId);
-            }
+            result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
 
         return result;
@@ -557,65 +334,14 @@ public class QuestEventHandler
 
     public void OnBefriend(int id)
     {
-        bool needSave = false;
+        // create custom event basic data
+        CustomEventData customEventData = new CustomEventData();
+        customEventData.companionId = id;
 
-        bool needNotification = false;
-
-        // Story quest checks
-        foreach (var quest in QuestManager.Instance.ActiveStoryQuests)
-        {
-            // get so
-            QuestStorySO so = GetStoryQuestById(quest);
-            HandleEventResult befriendedCompanionResult = HandleBefriendCompanion(quest, so.QuestData, QuestType.Story, id, needNotification);
-            needSave = befriendedCompanionResult.needSave;
-
-            if (!needNotification)
-                needNotification = befriendedCompanionResult.needNotification;
-        }
-
-        // Bounties quest checks
-        foreach (var quest in QuestManager.Instance.ActiveBountyQuests.Values)
-        {
-            // get so
-            QuestBountySO so = GetBountyQuestById(quest);
-            HandleEventResult befriendedCompanionResult = HandleBefriendCompanion(quest, so.QuestData, QuestType.Bounties, id, needNotification);
-            needSave = befriendedCompanionResult.needSave;
-
-            if (!needNotification)
-                needNotification = befriendedCompanionResult.needNotification;
-        }
-
-        int counterNotificationDailies = 0;
-
-        // Daily quest checks
-        foreach (var quest in QuestManager.Instance.ActiveDailyQuests)
-        {
-            // get so
-            QuestDailySO so = GetDailyQuestById(quest);
-            HandleEventResult befriendedCompanionResult = HandleBefriendCompanion(quest, so.QuestData, QuestType.Daily, id, needNotification);
-            needSave = befriendedCompanionResult.needSave;
-
-            if (!needNotification)
-                counterNotificationDailies++;
-        }
-
-        if (!needNotification && counterNotificationDailies == QuestManager.Instance.ActiveDailyQuests.Count)
-        {
-            needNotification = true;
-        }
-
-        if (needNotification)
-        {
-            QuestManager.Instance.TriggerNotification();
-        }
-
-        if (needSave)
-        {
-            QuestManager.Instance.SaveQuestsData();
-        }
+        HandleEvent(customEventData, HandleBefriendCompanion);
     }
 
-    private HandleEventResult HandleBefriendCompanion(string questId, QuestData data, QuestType questType, int companionId, bool needNotification)
+    private HandleEventResult HandleBefriendCompanion(CustomEventData eventData)
     {
         HandleEventResult result = new HandleEventResult()
         {
@@ -623,16 +349,11 @@ public class QuestEventHandler
             needNotification = false
         };
 
-        if (NeedUpdateBefriendProgress(data, companionId))
+        if (NeedUpdateBefriendProgress(eventData.questData, eventData.companionId))
         {
-            UpdateBefriendProgress(questType, questId);
+            UpdateBefriendProgress(eventData.questType, eventData.questId);
             result.needSave = true;
-
-            // even if one notification needs display, do not check again
-            if (!needNotification)
-            {
-                result.needNotification = QuestManager.Instance.CheckNotifications(data, questType, questId);
-            }
+            result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
 
         return result;
@@ -689,4 +410,88 @@ public class QuestEventHandler
     }
 
     #endregion
+
+    /// <summary>
+    /// Iterate through list and returns if needs save or notification
+    /// </summary>
+    /// <param name="questList">List to iterate</param>
+    /// <param name="questType">Type of quests</param>
+    /// <param name="eventData">Custom event data</param>
+    /// <param name="eventFunction">Function for the event raised</param>
+    private HandleEventResult HandleQuestList(List<string> questList, QuestType questType, CustomEventData eventData, Func<CustomEventData, HandleEventResult> eventFunction)
+    {
+        // initialize result
+        HandleEventResult result = new()
+        {
+            needSave = false,
+            needNotification = false
+        };
+
+        // iterate list
+        foreach (var quest in questList)
+        {
+            IQuestScriptable so;
+
+            // get so
+            switch (questType)
+            {
+                default:
+                case QuestType.Story: so = GetStoryQuestById(quest); break;
+                case QuestType.Bounties: so = GetBountyQuestById(quest); break;
+                case QuestType.Daily: so = GetDailyQuestById(quest); break;
+            }
+
+            // populate with missing informations
+            eventData.questId = quest;
+            eventData.questData = so.GetQuestaData();
+            eventData.questType = questType;
+
+            // get result
+            HandleEventResult eventResult = eventFunction(eventData);
+            result.needSave = eventResult.needSave;
+            result.needNotification = eventResult.needNotification;
+
+            if (result.needNotification)
+            {
+                result.counterNotification++;
+            }
+        }
+
+        return result;
+    }
+
+    private void HandleEvent(CustomEventData eventData, Func<CustomEventData, HandleEventResult> eventFunction)
+    {
+        bool needNotification = false;
+
+        // get results from story quests
+        HandleEventResult storyResult = HandleQuestList(QuestManager.Instance.ActiveStoryQuests, QuestType.Story, eventData, eventFunction);
+
+        if (!needNotification)
+            needNotification = storyResult.needNotification;
+
+        // get results from bounty quests
+        HandleEventResult bountyResult = HandleQuestList(QuestManager.Instance.ActiveBountyQuests.Values.ToList(), QuestType.Bounties, eventData, eventFunction);
+
+        if (!needNotification)
+            needNotification = bountyResult.needNotification;
+
+        // get results from daily quests
+        HandleEventResult dailyResult = HandleQuestList(QuestManager.Instance.ActiveDailyQuests, QuestType.Daily, eventData, eventFunction);
+
+        if (!needNotification && dailyResult.counterNotification == QuestManager.Instance.ActiveDailyQuests.Count && QuestManager.Instance.ActiveDailyQuests.Count > 0)
+        {
+            needNotification = true;
+        }
+
+        if (needNotification)
+        {
+            QuestManager.Instance.TriggerNotification();
+        }
+
+        if (storyResult.needSave || bountyResult.needSave || dailyResult.needSave)
+        {
+            QuestManager.Instance.SaveQuestsData();
+        }
+    }
 }

@@ -16,53 +16,41 @@ public class QuestManager : MonoBehaviour
     // --- STORY QUESTS
 
     // Store every quest progress ever made
-    private Dictionary<string, QuestDataProgress> dictQuestsStoryProgress;
+    public Dictionary<string, QuestDataProgress> DictQuestsStoryProgress { get; private set; }
 
     // List of all active story quests
-    private List<string> activeStoryQuests;
+    public List<string> ActiveStoryQuests { get; private set; }
 
 
 
-    public Dictionary<string, QuestDataProgress> DictQuestsStoryProgress => dictQuestsStoryProgress;
 
-    public List<string> ActiveStoryQuests => activeStoryQuests;
+
 
 
     // --- BOUNTY QUESTS
 
-    // Store bounties quest progress
-    private Dictionary<string, QuestDataProgress> dictQuestsBountyProgress;
 
     // Store slot and its active bounty quests
-    private Dictionary<int, string> activeBountyQuests;
+    public Dictionary<string, QuestDataProgress> DictQuestsBountyProgress { get; private set; }
 
-
-    private bool hasInitBountiesRefresh;
-    private long lastCheckBountiesRefreshDate;
-    private List<string> currentPulledBounties;
-    private List<string> acceptedPulledBounties;
+    public Dictionary<int, string> ActiveBountyQuests { get; private set; }
 
 
 
-    public Dictionary<string, QuestDataProgress> DictQuestsBountyProgress => dictQuestsBountyProgress;
+    public bool HasInitBountiesRefresh { get; private set; }
 
-    public Dictionary<int, string> ActiveBountyQuests => activeBountyQuests;
+    public long LastCheckBountiesRefreshDate { get; private set; }
 
+    public List<string> CurrentPulledBounties { get; private set; }
+    public List<string> AcceptedPulledBounties { get; private set; }
 
-
-    public bool HasInitBountiesRefresh => hasInitBountiesRefresh;
-
-    public long LastCheckBountiesRefreshDate => lastCheckBountiesRefreshDate;
-
-    public List<string> CurrentPulledBounties => currentPulledBounties;
-    public List<string> AcceptedPulledBounties => acceptedPulledBounties;
 
     public bool CanRefreshBounties
     {
         get
         {
             // only works when game is launched for the first time
-            if(!hasInitBountiesRefresh)
+            if(!HasInitBountiesRefresh)
             {
                 //Debug.Log("refresh first time");
                 return true;
@@ -73,14 +61,14 @@ public class QuestManager : MonoBehaviour
                 long currentCheckBounties = DateTime.UtcNow.Ticks;
 
                 // make the difference
-                TimeSpan difference = new TimeSpan(currentCheckBounties - lastCheckBountiesRefreshDate);
+                TimeSpan difference = new TimeSpan(currentCheckBounties - LastCheckBountiesRefreshDate);
                 //Debug.Log("difference (m): " + difference.Minutes);
 
                 // check for time
                 if (difference.Minutes >= 20)
                 {
                     // update last check, only in the moment when you can actually refresh
-                    lastCheckBountiesRefreshDate = currentCheckBounties;
+                    LastCheckBountiesRefreshDate = currentCheckBounties;
 
                     //Debug.Log("refresh second time");
                     return true;
@@ -99,21 +87,13 @@ public class QuestManager : MonoBehaviour
     // --- DAILY QUESTS
 
     // Store every quest progress for daily
-    private Dictionary<string, QuestDataProgress> dictQuestsDailyProgress;
+    public Dictionary<string, QuestDataProgress> DictQuestsDailyProgress { get; private set; }
 
     // List of all active daily quests
-    private List<string> activeDailyQuests;
+    public List<string> ActiveDailyQuests { get; private set; }
 
 
-    private long lastDailyCreationDate;
-
-
-    public Dictionary<string, QuestDataProgress> DictQuestsDailyProgress => dictQuestsDailyProgress;
-
-    public List<string> ActiveDailyQuests => activeDailyQuests;
-
-
-    public long LastDailyCreationDate => lastDailyCreationDate;
+    public long LastDailyCreationDate { get; private set; }
 
 
 
@@ -272,8 +252,8 @@ public class QuestManager : MonoBehaviour
             SetupFromDefault();
             SaveQuestsData();
 
-            //Debug.Log("Datas quest: " + dictQuestsStoryProgress.Count);
-            //Debug.Log("Datas quest active: " + activeStoryQuests.Count);
+            //Debug.Log("Datas quest: " + DictQuestsStoryProgress.Count);
+            //Debug.Log("Datas quest active: " + ActiveStoryQuests.Count);
         }
 
         questEventHandler = new QuestEventHandler();
@@ -285,11 +265,11 @@ public class QuestManager : MonoBehaviour
 
     private void SetupFromDefault()
     {
-        hasInitBountiesRefresh = false;
-        lastDailyCreationDate = DateTime.UtcNow.Ticks;
+        HasInitBountiesRefresh = false;
+        LastDailyCreationDate = DateTime.UtcNow.Ticks;
 
-        currentPulledBounties = new List<string>();
-        acceptedPulledBounties = new List<string>();
+        CurrentPulledBounties = new List<string>();
+        AcceptedPulledBounties = new List<string>();
 
         InitializeStoryQuests();
         InitializeBountyQuests();
@@ -303,11 +283,11 @@ public class QuestManager : MonoBehaviour
     {
         // initialize dict and first actives quests
 
-        if(activeStoryQuests == null)
-            activeStoryQuests = new List<string>();
+        if(ActiveStoryQuests == null)
+            ActiveStoryQuests = new List<string>();
 
-        if(dictQuestsStoryProgress == null)
-            dictQuestsStoryProgress = new Dictionary<string, QuestDataProgress>();
+        if(DictQuestsStoryProgress == null)
+            DictQuestsStoryProgress = new Dictionary<string, QuestDataProgress>();
 
         // create default for every story
         QuestStorySO[] storyQuests = GetAllStoryQuests();
@@ -317,7 +297,7 @@ public class QuestManager : MonoBehaviour
             QuestStorySO so = storyQuests[i];
 
             // check if already in dictionary
-            if(!dictQuestsStoryProgress.ContainsKey(so.UniqueId))
+            if(!DictQuestsStoryProgress.ContainsKey(so.UniqueId))
             {
                 // create progress
                 QuestDataProgress questProgress = new QuestDataProgress();
@@ -327,7 +307,7 @@ public class QuestManager : MonoBehaviour
                 // add to active if from start SO
                 if (so.IsActiveFromStart)
                 {
-                    activeStoryQuests.Add(so.UniqueId);
+                    ActiveStoryQuests.Add(so.UniqueId);
                 }
 
                 questProgress.progressCounter = 0;
@@ -336,7 +316,7 @@ public class QuestManager : MonoBehaviour
                 questProgress.isCleared = false;
 
                 // save in dictionary
-                dictQuestsStoryProgress.Add(so.UniqueId, questProgress);
+                DictQuestsStoryProgress.Add(so.UniqueId, questProgress);
             }
         }
     }
@@ -344,8 +324,8 @@ public class QuestManager : MonoBehaviour
     private void InitializeBountyQuests()
     {
         // initialize dict and first actives quests
-        activeBountyQuests = new Dictionary<int, string>();
-        dictQuestsBountyProgress = new Dictionary<string, QuestDataProgress>();
+        ActiveBountyQuests = new Dictionary<int, string>();
+        DictQuestsBountyProgress = new Dictionary<string, QuestDataProgress>();
     }
 
     /// <summary>
@@ -354,8 +334,8 @@ public class QuestManager : MonoBehaviour
     private void InitializeDailyQuests()
     {
         // initialize dict and first actives quests
-        activeDailyQuests = new List<string>();
-        dictQuestsDailyProgress = new Dictionary<string, QuestDataProgress>();
+        ActiveDailyQuests = new List<string>();
+        DictQuestsDailyProgress = new Dictionary<string, QuestDataProgress>();
 
         //TODO:  change 3 with const value or random one between values
         for (int i = 0; i < TOT_DAILY_QUEST; i++)
@@ -373,7 +353,7 @@ public class QuestManager : MonoBehaviour
                 daily = GetRandomDailyQuest();
 
                 // check if daily quest has already been pulled and added to dailies
-                if (activeDailyQuests.Contains(daily.UniqueId))
+                if (ActiveDailyQuests.Contains(daily.UniqueId))
                     valid = false;
 
                 if (valid)
@@ -415,7 +395,7 @@ public class QuestManager : MonoBehaviour
             if (valid)
             {
                 // add to active and create progress
-                activeDailyQuests.Add(daily.UniqueId);
+                ActiveDailyQuests.Add(daily.UniqueId);
 
                 QuestDataProgress questProgress = new QuestDataProgress();
                 questProgress.isActive = true;
@@ -426,7 +406,7 @@ public class QuestManager : MonoBehaviour
                 questProgress.isCleared = false;
 
                 // save in dictionary
-                dictQuestsDailyProgress.Add(daily.UniqueId, questProgress);
+                DictQuestsDailyProgress.Add(daily.UniqueId, questProgress);
             }
         }
     }
@@ -437,17 +417,17 @@ public class QuestManager : MonoBehaviour
 
     private void SetupFromFile(QuestsSaveData saveData)
     {
-        hasInitBountiesRefresh = saveData.hasInitBountiesRefresh;
-        lastCheckBountiesRefreshDate = saveData.lastCheckBountiesRefreshDate;
-        lastDailyCreationDate = saveData.lastDailyCreationDate;
+        HasInitBountiesRefresh = saveData.hasInitBountiesRefresh;
+        LastCheckBountiesRefreshDate = saveData.lastCheckBountiesRefreshDate;
+        LastDailyCreationDate = saveData.lastDailyCreationDate;
 
         // bounties pulled list
-        currentPulledBounties = new List<string>();
-        currentPulledBounties.AddRange(saveData.currentPulledBounties);
+        CurrentPulledBounties = new List<string>();
+        CurrentPulledBounties.AddRange(saveData.currentPulledBounties);
 
         // bounties pulled list
-        acceptedPulledBounties = new List<string>();
-        acceptedPulledBounties.AddRange(saveData.acceptedPulledBounties);
+        AcceptedPulledBounties = new List<string>();
+        AcceptedPulledBounties.AddRange(saveData.acceptedPulledBounties);
 
         // refresh story quests if new ones are added
         InitializeStoryQuests();
@@ -457,11 +437,11 @@ public class QuestManager : MonoBehaviour
         LoadBountyQuests(saveData.bountySaveDatas);
 
         // check for daily using date
-        DateTime lastDailyDate = new DateTime(lastDailyCreationDate, DateTimeKind.Utc);
+        DateTime lastDailyDate = new DateTime(LastDailyCreationDate, DateTimeKind.Utc);
         if(DateTime.UtcNow.Date != lastDailyDate.Date)
         {
             // save new date
-            lastDailyCreationDate = DateTime.UtcNow.Ticks;
+            LastDailyCreationDate = DateTime.UtcNow.Ticks;
 
             // refresh dailies
             InitializeDailyQuests();
@@ -475,11 +455,11 @@ public class QuestManager : MonoBehaviour
 
     private void LoadStoryQuests(List<QuestStorySaveData> datas)
     {
-        if (activeStoryQuests == null)
-            activeStoryQuests = new List<string>();
+        if (ActiveStoryQuests == null)
+            ActiveStoryQuests = new List<string>();
 
-        if (dictQuestsStoryProgress == null)
-            dictQuestsStoryProgress = new Dictionary<string, QuestDataProgress>();
+        if (DictQuestsStoryProgress == null)
+            DictQuestsStoryProgress = new Dictionary<string, QuestDataProgress>();
 
         // used for debug infos
         int exceptionIndex = 0;
@@ -494,18 +474,18 @@ public class QuestManager : MonoBehaviour
                 // save in dictionary
                 QuestDataProgress dataProgress = new QuestDataProgress(datas[i]);
 
-                dictQuestsStoryProgress[datas[i].questId] = dataProgress;
+                DictQuestsStoryProgress[datas[i].questId] = dataProgress;
 
                 // if save is inactive but active by default, remove from list
-                if (!dataProgress.isActive && activeStoryQuests.Contains(datas[i].questId))
+                if (!dataProgress.isActive && ActiveStoryQuests.Contains(datas[i].questId))
                 {
-                    activeStoryQuests.Remove(datas[i].questId);
+                    ActiveStoryQuests.Remove(datas[i].questId);
                 }
 
                 // instead add to active if active from save and not active by default
-                if (dataProgress.isActive && !activeStoryQuests.Contains(datas[i].questId))
+                if (dataProgress.isActive && !ActiveStoryQuests.Contains(datas[i].questId))
                 {
-                    activeStoryQuests.Add(datas[i].questId);
+                    ActiveStoryQuests.Add(datas[i].questId);
 
                     // check on load if unlock map quest is completed
                     if (IsReachedMapQuest(datas[i].questId))
@@ -520,13 +500,13 @@ public class QuestManager : MonoBehaviour
             Debug.LogError("Can't load quest data id: " + datas[exceptionIndex].questId);
         }
 
-        //Debug.Log("Dictionary quests counter: " + dictQuestsStoryProgress.Count);
+        //Debug.Log("Dictionary quests counter: " + DictQuestsStoryProgress.Count);
     }
 
     private void LoadBountyQuests(List<QuestBountySaveData> datas)
     {
-        activeBountyQuests = new Dictionary<int, string>();
-        dictQuestsBountyProgress = new Dictionary<string, QuestDataProgress>();
+        ActiveBountyQuests = new Dictionary<int, string>();
+        DictQuestsBountyProgress = new Dictionary<string, QuestDataProgress>();
 
         // used for debug infos
         int exceptionIndex = 0;
@@ -553,9 +533,9 @@ public class QuestManager : MonoBehaviour
                 {
                     // save in dictionary
                     QuestDataProgress dataProgress = new QuestDataProgress(datas[i]);
-                    dictQuestsBountyProgress.Add(datas[i].questId, dataProgress);
+                    DictQuestsBountyProgress.Add(datas[i].questId, dataProgress);
 
-                    activeBountyQuests.Add(datas[i].slotTab, datas[i].questId);
+                    ActiveBountyQuests.Add(datas[i].slotTab, datas[i].questId);
                 }
             }
         }
@@ -564,12 +544,12 @@ public class QuestManager : MonoBehaviour
             Debug.LogError("Can't load quest data id: " + datas[exceptionIndex].questId);
         }
 
-        //Debug.Log("Dictionary quests counter: " + dictQuestsBountyProgress.Count);
+        //Debug.Log("Dictionary quests counter: " + DictQuestsBountyProgress.Count);
     }
 
     public bool IsBountyActiveById(string id)
     {
-        foreach (var activeId in activeBountyQuests.Values)
+        foreach (var activeId in ActiveBountyQuests.Values)
         {
             if (activeId == id)
                 return true;
@@ -579,26 +559,26 @@ public class QuestManager : MonoBehaviour
 
     public void FillPossibleBountiesList(List<string> list)
     {
-        if (currentPulledBounties == null)
-            currentPulledBounties = new List<string>();
+        if (CurrentPulledBounties == null)
+            CurrentPulledBounties = new List<string>();
 
-        currentPulledBounties.Clear();
-        currentPulledBounties.AddRange(list);
+        CurrentPulledBounties.Clear();
+        CurrentPulledBounties.AddRange(list);
     }
 
     public void FillAcceptedBountiesList(List<string> list)
     {
-        if (acceptedPulledBounties == null)
-            acceptedPulledBounties = new List<string>();
+        if (AcceptedPulledBounties == null)
+            AcceptedPulledBounties = new List<string>();
 
-        acceptedPulledBounties.Clear();
-        acceptedPulledBounties.AddRange(list);
+        AcceptedPulledBounties.Clear();
+        AcceptedPulledBounties.AddRange(list);
     }
 
     private void LoadDailyQuests(List<QuestDailySaveData> datas)
     {
-        activeDailyQuests = new List<string>();
-        dictQuestsDailyProgress = new Dictionary<string, QuestDataProgress>();
+        ActiveDailyQuests = new List<string>();
+        DictQuestsDailyProgress = new Dictionary<string, QuestDataProgress>();
 
         // used for debug infos
         int exceptionIndex = 0;
@@ -611,12 +591,12 @@ public class QuestManager : MonoBehaviour
 
                 // save in dictionary
                 QuestDataProgress dataProgress = new QuestDataProgress(datas[i]);
-                dictQuestsDailyProgress.Add(datas[i].questId, dataProgress);
+                DictQuestsDailyProgress.Add(datas[i].questId, dataProgress);
 
                 // set active from reading
                 if (dataProgress.isActive)
                 {
-                    activeDailyQuests.Add(datas[i].questId);
+                    ActiveDailyQuests.Add(datas[i].questId);
                 }
             }
         }
@@ -625,7 +605,7 @@ public class QuestManager : MonoBehaviour
             Debug.LogError("Can't load quest data id: " + datas[exceptionIndex].questId);
         }
 
-        //Debug.Log("Dictionary quests counter: " + dictQuestsStoryProgress.Count);
+        //Debug.Log("Dictionary quests counter: " + DictQuestsStoryProgress.Count);
     }
 
     #endregion
@@ -633,21 +613,21 @@ public class QuestManager : MonoBehaviour
     public void AddActiveBountyQuest(int slot, string id)
     {
         // add to active
-        activeBountyQuests.Add(slot, id);
+        ActiveBountyQuests.Add(slot, id);
 
         // add to dictionary
         QuestDataProgress progress = new QuestDataProgress();
         progress.isActive = true;
-        dictQuestsBountyProgress.Add(id, progress);
+        DictQuestsBountyProgress.Add(id, progress);
     }
 
     #region STORY
 
     public void SetStoryQuestCleared(string id)
     {
-        QuestDataProgress progressData = dictQuestsStoryProgress[id];
+        QuestDataProgress progressData = DictQuestsStoryProgress[id];
         progressData.isCleared = true;
-        dictQuestsStoryProgress[id] = progressData;
+        DictQuestsStoryProgress[id] = progressData;
     }
 
     public void UpdateStoryQuests()
@@ -658,7 +638,7 @@ public class QuestManager : MonoBehaviour
         // list of unlock quests that need to be updated after the new quests are added
         List<string> unlockMapUpdates = new List<string>();
 
-        foreach (var pair in dictQuestsStoryProgress)
+        foreach (var pair in DictQuestsStoryProgress)
         {
             if (pair.Value.isCleared && pair.Value.isActive)
             {
@@ -679,7 +659,7 @@ public class QuestManager : MonoBehaviour
                 {
                     foreach(var next in nexts)
                     {
-                        activeStoryQuests.Add(next.UniqueId);
+                        ActiveStoryQuests.Add(next.UniqueId);
 
                         if (IsReachedMapQuest(next.UniqueId))
                         {
@@ -688,7 +668,7 @@ public class QuestManager : MonoBehaviour
                     }
                 }
 
-                activeStoryQuests.Remove(pair.Key);
+                ActiveStoryQuests.Remove(pair.Key);
                 //Debug.Log("removed story quest: " + pair.Key);
             }
             else
@@ -697,14 +677,14 @@ public class QuestManager : MonoBehaviour
             }
         }
 
-        dictQuestsStoryProgress = copyDict;
+        DictQuestsStoryProgress = copyDict;
 
         // update progress after list update
-        foreach (var active in activeStoryQuests)
+        foreach (var active in ActiveStoryQuests)
         {
-            QuestDataProgress copyProgress = dictQuestsStoryProgress[active];
+            QuestDataProgress copyProgress = DictQuestsStoryProgress[active];
             copyProgress.isActive = true;
-            dictQuestsStoryProgress[active] = copyProgress;
+            DictQuestsStoryProgress[active] = copyProgress;
         }
 
         // add to dict updated unlock maps
@@ -741,9 +721,9 @@ public class QuestManager : MonoBehaviour
 
     public void SetBountyQuestCleared(string id)
     {
-        QuestDataProgress progressData = dictQuestsBountyProgress[id];
+        QuestDataProgress progressData = DictQuestsBountyProgress[id];
         progressData.isCleared = true;
-        dictQuestsBountyProgress[id] = progressData;
+        DictQuestsBountyProgress[id] = progressData;
     }
 
     public void UpdateBountyQuests()
@@ -752,14 +732,14 @@ public class QuestManager : MonoBehaviour
         Dictionary<int, string> copyDict = new Dictionary<int, string>();
 
         // cycle active bounties
-        foreach (var pair in activeBountyQuests)
+        foreach (var pair in ActiveBountyQuests)
         {
             // check progress
-            QuestDataProgress progress = dictQuestsBountyProgress[pair.Value];
+            QuestDataProgress progress = DictQuestsBountyProgress[pair.Value];
             if (progress.isCleared)
             {
                 // remove progerss from dictionary
-                dictQuestsBountyProgress.Remove(pair.Value);
+                DictQuestsBountyProgress.Remove(pair.Value);
             }
             else
             {
@@ -767,15 +747,15 @@ public class QuestManager : MonoBehaviour
             }
         }
 
-        activeBountyQuests = copyDict;
+        ActiveBountyQuests = copyDict;
 
         SaveQuestsData();
     }
 
     public void SetHasInitBountyFirstTime()
     {
-        hasInitBountiesRefresh = true;
-        lastCheckBountiesRefreshDate = DateTime.UtcNow.Ticks;
+        HasInitBountiesRefresh = true;
+        LastCheckBountiesRefreshDate = DateTime.UtcNow.Ticks;
     }
 
     #endregion
@@ -784,8 +764,8 @@ public class QuestManager : MonoBehaviour
 
     public void ClearDailyQuests()
     {
-        activeDailyQuests.Clear();
-        dictQuestsDailyProgress.Clear();
+        ActiveDailyQuests.Clear();
+        DictQuestsDailyProgress.Clear();
     }
 
     #endregion
@@ -809,703 +789,20 @@ public class QuestManager : MonoBehaviour
         {
             default:
             case QuestType.Story:
-                progress = dictQuestsStoryProgress[questId];
+                progress = DictQuestsStoryProgress[questId];
                 break;
 
             case QuestType.Bounties:
-                progress = dictQuestsBountyProgress[questId];
+                progress = DictQuestsBountyProgress[questId];
                 break;
 
             case QuestType.Daily:
-                progress = dictQuestsDailyProgress[questId];
+                progress = DictQuestsDailyProgress[questId];
                 break;
         }
 
         return CanClaim(data, progress);
     }
-
-    /*
-    private void OnEnemyKilled(EnemySO enemySO)
-    {
-        bool needSave = false;
-
-        bool needNotification = false;
-
-        // Story quest checks
-        foreach (var quest in activeStoryQuests)
-        {
-            // get so
-            QuestStorySO so = GetStoryQuestById(quest);
-
-            HandleEventResult enemyKilledResult = HandleEnemyKilled(quest, so.QuestData, QuestType.Story, enemySO, needNotification);
-            needSave = enemyKilledResult.needSave;
-
-            if (!needNotification)
-                needNotification = enemyKilledResult.needNotification;
-        }
-
-        // Bounties quest checks
-        foreach (var quest in activeBountyQuests.Values)
-        {
-            // get so
-            QuestBountySO so = GetBountyQuestById(quest);
-
-            HandleEventResult enemyKilledResult = HandleEnemyKilled(quest, so.QuestData, QuestType.Bounties, enemySO, needNotification);
-            needSave = enemyKilledResult.needSave;
-
-            if(!needNotification)
-                needNotification = enemyKilledResult.needNotification;
-        }
-
-        int counterNotificationDailies = 0;
-
-        // Daily quest checks
-        foreach (var quest in activeDailyQuests)
-        {
-            // get so
-            QuestDailySO so = GetDailyQuestById(quest);
-
-            HandleEventResult enemyKilledResult = HandleEnemyKilled(quest, so.QuestData, QuestType.Daily, enemySO, needNotification);
-            needSave = enemyKilledResult.needSave;
-
-            if (!needNotification)
-                counterNotificationDailies++;
-        }
-
-        if(!needNotification && counterNotificationDailies == activeDailyQuests.Count && activeDailyQuests.Count > 0)
-        {
-            needNotification = true;
-        }
-
-        if(needNotification)
-        {
-            OnNeedNotification?.Invoke();
-        }
-
-        if (needSave)
-        {
-            SaveQuestsData();
-        }
-    }
-
-    private HandleEventResult HandleEnemyKilled(string questId, QuestData data, QuestType questType, EnemySO enemySO, bool needNotification)
-    {
-        HandleEventResult result = new HandleEventResult()
-        {
-            needSave = false,
-            needNotification = false
-        };
-
-        if (NeedUpdateKillProgress(data, enemySO))
-        {
-            UpdateKillProgress(questType, questId);
-            result.needSave = true;
-
-            // even if one notification needs display, do not check again
-            if (!needNotification)
-            {
-                result.needNotification = CheckNotifications(data, questType, questId);
-            }
-        }
-
-        return result;
-    }
-
-    private bool NeedUpdateKillProgress(QuestData data, EnemySO enemySO)
-    {
-        if (data.questObjectiveType == QuestObjectiveType.Kill)
-        {
-            // check specific
-            if (data.questKillSpecific)
-            {
-                // Check actual pooling name, since the prefabs are identical
-                // If the check is on the id, different monsters data would be compared instead of monster type
-                string enemyName = UtilsEnemy.GetEnemySOById(data.monsterId).EnemyPoolName;
-                if (enemyName == enemySO.EnemyPoolName)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void UpdateKillProgress(QuestType questType, string questId)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = dictQuestsStoryProgress[questId];
-
-                progress.progressCounter++;
-                dictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = dictQuestsBountyProgress[questId];
-
-                progress.progressCounter++;
-                dictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = dictQuestsDailyProgress[questId];
-
-                progress.progressCounter++;
-                dictQuestsDailyProgress[questId] = progress;
-                break;
-        }
-    }
-    */
-
-    /*
-    private void OnItemObtain(int id)
-    {
-        bool needSave = false;
-
-        bool needNotification = false;
-
-        // Story quest checks
-        foreach (var quest in activeStoryQuests)
-        {
-            // get so
-            QuestStorySO so = GetStoryQuestById(quest);
-
-            if (NeedUpdateObtainProgress(so.QuestData, id))
-            {
-                UpdateObtainProgress(QuestType.Story, quest);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    needNotification = CheckNotifications(so.QuestData, QuestType.Story, quest);
-                }
-            }
-        }
-
-        // Bounties quest checks
-        foreach (var quest in activeBountyQuests.Values)
-        {
-            // get so
-            QuestBountySO so = GetBountyQuestById(quest);
-
-            if (NeedUpdateObtainProgress(so.QuestData, id))
-            {
-                UpdateObtainProgress(QuestType.Bounties, quest);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    needNotification = CheckNotifications(so.QuestData, QuestType.Bounties, quest);
-                }
-            }
-        }
-
-        int counterNotificationDailies = 0;
-
-        // Daily quest checks
-        foreach (var quest in activeDailyQuests)
-        {
-            // get so
-            QuestDailySO so = GetDailyQuestById(quest);
-
-            if (NeedUpdateObtainProgress(so.QuestData, id))
-            {
-                UpdateObtainProgress(QuestType.Daily, quest);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    // check notification on all dailies
-                    if (CheckNotifications(so.QuestData, QuestType.Daily, quest))
-                    {
-                        counterNotificationDailies++;
-                    }
-                }
-            }
-        }
-
-        if (!needNotification && counterNotificationDailies == activeDailyQuests.Count)
-        {
-            needNotification = true;
-        }
-
-        if (needNotification)
-        {
-            OnNeedNotification?.Invoke();
-        }
-
-        if (needSave)
-        {
-            SaveQuestsData();
-        }
-    }
-
-    private bool NeedUpdateObtainProgress(QuestData data, int itemId)
-    {
-        if (data.questObjectiveType == QuestObjectiveType.Obtain)
-        {
-            // check specific
-            if (data.questObtainSpecific)
-            {
-                if (data.itemId == itemId)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                ItemSO so = UtilsItem.GetItemById(itemId);
-                if(data.itemType == so.ItemType)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private void UpdateObtainProgress(QuestType questType, string questId)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = dictQuestsStoryProgress[questId];
-
-                progress.progressCounter++;
-                dictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = dictQuestsBountyProgress[questId];
-
-                progress.progressCounter++;
-                dictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = dictQuestsDailyProgress[questId];
-
-                progress.progressCounter++;
-                dictQuestsDailyProgress[questId] = progress;
-                break;
-        }
-    }
-    */
-
-    /*
-    private void OnStatUp(int id, int amount)
-    {
-        bool needSave = false;
-
-        bool needNotification = false;
-
-        // Story quest checks
-        foreach (var quest in activeStoryQuests)
-        {
-            // get so
-            QuestStorySO so = GetStoryQuestById(quest);
-
-            if (NeedUpdateStatUpProgress(so.QuestData, id))
-            {
-                UpdateStatLevelUpProgress(QuestType.Story, quest, amount);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    needNotification = CheckNotifications(so.QuestData, QuestType.Story, quest);
-                }
-            }
-        }
-
-        // Bounties quest checks
-        foreach (var quest in activeBountyQuests.Values)
-        {
-            // get so
-            QuestBountySO so = GetBountyQuestById(quest);
-
-            if (NeedUpdateStatUpProgress(so.QuestData, id))
-            {
-                UpdateStatLevelUpProgress(QuestType.Bounties, quest, amount);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    needNotification = CheckNotifications(so.QuestData, QuestType.Bounties, quest);
-                }
-            }
-        }
-
-        int counterNotificationDailies = 0;
-
-        // Daily quest checks
-        foreach (var quest in activeDailyQuests)
-        {
-            // get so
-            QuestDailySO so = GetDailyQuestById(quest);
-
-            if (NeedUpdateStatUpProgress(so.QuestData, id))
-            {
-                UpdateStatLevelUpProgress(QuestType.Daily, quest, amount);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    // check notification on all dailies
-                    if (CheckNotifications(so.QuestData, QuestType.Daily, quest))
-                    {
-                        counterNotificationDailies++;
-                    }
-                }
-            }
-        }
-
-        if (!needNotification && counterNotificationDailies == activeDailyQuests.Count)
-        {
-            needNotification = true;
-        }
-
-        if (needNotification)
-        {
-            OnNeedNotification?.Invoke();
-        }
-
-        if (needSave)
-        {
-            SaveQuestsData();
-        }
-    }
-
-    private bool NeedUpdateStatUpProgress(QuestData data, int statId)
-    {
-        if (data.questObjectiveType == QuestObjectiveType.LevelUp)
-        {
-            // check specific
-            if (data.questLevelUpSpecific)
-            {
-                if (data.statId == statId)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void UpdateStatLevelUpProgress(QuestType questType, string questId, int amount)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = dictQuestsStoryProgress[questId];
-
-                progress.progressCounter += amount;
-                dictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = dictQuestsBountyProgress[questId];
-
-                progress.progressCounter += amount;
-                dictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = dictQuestsDailyProgress[questId];
-
-                progress.progressCounter += amount;
-                dictQuestsDailyProgress[questId] = progress;
-                break;
-        }
-    }
-    */
-
-    /*
-    private void OnAddMap(int id)
-    {
-        bool needSave = false;
-
-        bool needNotification = false;
-
-        // Story quest checks
-        foreach (var quest in activeStoryQuests)
-        {
-            // get so
-            QuestStorySO so = GetStoryQuestById(quest);
-
-            if (NeedUpdateUnlockMapProgress(so.QuestData, id))
-            {
-                UpdateUnlockMapProgress(QuestType.Story, quest);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    needNotification = CheckNotifications(so.QuestData, QuestType.Story, quest);
-                }
-            }
-        }
-
-        // Bounties quest checks
-        foreach (var quest in activeBountyQuests.Values)
-        {
-            // get so
-            QuestBountySO so = GetBountyQuestById(quest);
-
-            if (NeedUpdateUnlockMapProgress(so.QuestData, id))
-            {
-                UpdateUnlockMapProgress(QuestType.Bounties, quest);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    needNotification = CheckNotifications(so.QuestData, QuestType.Bounties, quest);
-                }
-            }
-        }
-
-        int counterNotificationDailies = 0;
-
-        // Daily quest checks
-        foreach (var quest in activeDailyQuests)
-        {
-            // get so
-            QuestDailySO so = GetDailyQuestById(quest);
-
-            if (NeedUpdateUnlockMapProgress(so.QuestData, id))
-            {
-                UpdateUnlockMapProgress(QuestType.Daily, quest);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    // check notification on all dailies
-                    if (CheckNotifications(so.QuestData, QuestType.Daily, quest))
-                    {
-                        counterNotificationDailies++;
-                    }
-                }
-            }
-        }
-
-        if (!needNotification && counterNotificationDailies == activeDailyQuests.Count)
-        {
-            needNotification = true;
-        }
-
-        if (needNotification)
-        {
-            OnNeedNotification?.Invoke();
-        }
-
-        if (needSave)
-        {
-            SaveQuestsData();
-        }
-    }
-
-    private bool NeedUpdateUnlockMapProgress(QuestData data, int mapId)
-    {
-        if (data.questObjectiveType == QuestObjectiveType.UnlockMap)
-        {
-            if (data.mapId == mapId)
-                return true;
-        }
-        return false;
-    }
-
-    private void UpdateUnlockMapProgress(QuestType questType, string questId)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = dictQuestsStoryProgress[questId];
-
-                progress.progressCompleted = true;
-                dictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = dictQuestsBountyProgress[questId];
-
-                progress.progressCompleted = true;
-                dictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = dictQuestsDailyProgress[questId];
-
-                progress.progressCompleted = true;
-                dictQuestsDailyProgress[questId] = progress;
-                break;
-        }
-    }
-    */
-
-    /*
-    private void OnBefriend(int id)
-    {
-        bool needSave = false;
-
-        bool needNotification = false;
-
-        // Story quest checks
-        foreach (var quest in activeStoryQuests)
-        {
-            // get so
-            QuestStorySO so = GetStoryQuestById(quest);
-
-            if (NeedUpdateBefriendProgress(so.QuestData, id))
-            {
-                UpdateBefriendProgress(QuestType.Story, quest);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    needNotification = CheckNotifications(so.QuestData, QuestType.Story, quest);
-                }
-            }
-        }
-
-        // Bounties quest checks
-        foreach (var quest in activeBountyQuests.Values)
-        {
-            // get so
-            QuestBountySO so = GetBountyQuestById(quest);
-
-            if (NeedUpdateBefriendProgress(so.QuestData, id))
-            {
-                UpdateBefriendProgress(QuestType.Bounties, quest);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    needNotification = CheckNotifications(so.QuestData, QuestType.Bounties, quest);
-                }
-            }
-        }
-
-        int counterNotificationDailies = 0;
-
-        // Daily quest checks
-        foreach (var quest in activeDailyQuests)
-        {
-            // get so
-            QuestDailySO so = GetDailyQuestById(quest);
-
-            if (NeedUpdateBefriendProgress(so.QuestData, id))
-            {
-                UpdateBefriendProgress(QuestType.Daily, quest);
-                needSave = true;
-
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    // check notification on all dailies
-                    if (CheckNotifications(so.QuestData, QuestType.Daily, quest))
-                    {
-                        counterNotificationDailies++;
-                    }
-                }
-            }
-        }
-
-        if (!needNotification && counterNotificationDailies == activeDailyQuests.Count)
-        {
-            needNotification = true;
-        }
-
-        if (needNotification)
-        {
-            OnNeedNotification?.Invoke();
-        }
-
-        if (needSave)
-        {
-            SaveQuestsData();
-        }
-    }
-
-    private bool NeedUpdateBefriendProgress(QuestData data, int companionId)
-    {
-        if (data.questObjectiveType == QuestObjectiveType.Befriend)
-        {
-            // check specific
-            if (data.questBefriendSpecific)
-            {
-                if (data.companionSO.Id == companionId)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void UpdateBefriendProgress(QuestType questType, string questId)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = dictQuestsStoryProgress[questId];
-
-                progress.progressCounter++;
-                dictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = dictQuestsBountyProgress[questId];
-
-                progress.progressCounter++;
-                dictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = dictQuestsDailyProgress[questId];
-
-                progress.progressCounter++;
-                dictQuestsDailyProgress[questId] = progress;
-                break;
-        }
-    }
-    */
 
     #endregion
 

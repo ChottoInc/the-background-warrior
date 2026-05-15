@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Quest/Bounty Data", fileName = "QuestBountyData_")]
-public class QuestBountySO : ScriptableObject
+public class QuestBountySO : ScriptableObject, IQuestScriptable
 {
     [SerializeField] string uniqueId;
 
@@ -13,4 +13,9 @@ public class QuestBountySO : ScriptableObject
     public string UniqueId => uniqueId;
     public UtilsPlayer.PlayerJob[] AvailableFor => availableFor;
     public UtilsQuest.QuestData QuestData => questData;
+
+    public UtilsQuest.QuestData GetQuestaData()
+    {
+        return questData;   
+    }
 }

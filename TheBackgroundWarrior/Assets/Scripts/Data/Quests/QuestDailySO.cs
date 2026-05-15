@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Quest/Daily Data", fileName = "QuestDailyData_")]
-public class QuestDailySO : ScriptableObject
+public class QuestDailySO : ScriptableObject, IQuestScriptable
 {
     [SerializeField] string uniqueId;
 
@@ -13,4 +13,9 @@ public class QuestDailySO : ScriptableObject
     public string UniqueId => uniqueId;
     public UtilsPlayer.PlayerJob[] AvailableFor => availableFor;
     public UtilsQuest.QuestData QuestData => questData;
+
+    public UtilsQuest.QuestData GetQuestaData()
+    {
+        return questData;
+    }
 }
