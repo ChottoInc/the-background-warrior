@@ -11,6 +11,8 @@ public class QuestManager : MonoBehaviour
 
     private IDataService saveService;
 
+    private QuestEventHandler questEventHandler;
+
     // --- STORY QUESTS
 
     // Store every quest progress ever made
@@ -118,8 +120,11 @@ public class QuestManager : MonoBehaviour
 
 
 
-
+    // check if player manager has been setup
     private bool isPlayerObserverInit;
+
+    // check if quest manager is done setupping
+    private bool isSetup;
 
 
     private PlayerFight playerFight;
@@ -167,25 +172,25 @@ public class QuestManager : MonoBehaviour
         //Called here because is destroyd on scene switch
 
         if (CombatManager.Instance != null)
-            CombatManager.Instance.OnEnemyKill -= OnEnemyKilled;
+            CombatManager.Instance.OnEnemyKill -= questEventHandler.OnEnemyKilled;
 
         if (playerFight != null)
         {
-            playerFight.OnStatChange -= OnStatUp;
-            playerFight.OnAddMap -= OnAddMap;
+            playerFight.OnStatChange -= questEventHandler.OnStatUp;
+            playerFight.OnAddMap -= questEventHandler.OnAddMap;
         }
 
         if (playerMiner != null)
-            playerMiner.OnStatChange -= OnStatUp;
+            playerMiner.OnStatChange -= questEventHandler.OnStatUp;
 
         if (playerBlacksmith != null)
-            playerBlacksmith.OnStatChange -= OnStatUp;
+            playerBlacksmith.OnStatChange -= questEventHandler.OnStatUp;
 
         if (playerFisher != null)
-            playerFisher.OnStatChange -= OnStatUp;
+            playerFisher.OnStatChange -= questEventHandler.OnStatUp;
 
         if (playerFarmer != null)
-            playerFarmer.OnStatChange -= OnStatUp;
+            playerFarmer.OnStatChange -= questEventHandler.OnStatUp;
     }
 
     private void OnDestroy()
@@ -195,8 +200,8 @@ public class QuestManager : MonoBehaviour
         // Called here because player manager is non destroyable
         if (PlayerManager.Instance != null)
         {
-            PlayerManager.Instance.OnItemAdd -= OnItemObtain;
-            PlayerManager.Instance.OnCompanionBefriended -= OnBefriend;
+            PlayerManager.Instance.OnItemAdd -= questEventHandler.OnItemObtain;
+            PlayerManager.Instance.OnCompanionBefriended -= questEventHandler.OnBefriend;
         }
     }
 
@@ -212,30 +217,30 @@ public class QuestManager : MonoBehaviour
         {
             case SceneLoaderManager.SceneType.CombatMap:
                 playerFight = FindFirstObjectByType<PlayerFight>();
-                playerFight.OnStatChange += OnStatUp;
-                playerFight.OnAddMap += OnAddMap;
+                playerFight.OnStatChange += questEventHandler.OnStatUp;
+                playerFight.OnAddMap += questEventHandler.OnAddMap;
 
-                CombatManager.Instance.OnEnemyKill += OnEnemyKilled;
+                CombatManager.Instance.OnEnemyKill += questEventHandler.OnEnemyKilled;
                 break;
 
             case SceneLoaderManager.SceneType.Miner:
                 playerMiner = FindFirstObjectByType<PlayerMiner>();
-                playerMiner.OnStatChange += OnStatUp;
+                playerMiner.OnStatChange += questEventHandler.OnStatUp;
                 break;
 
             case SceneLoaderManager.SceneType.Blacksmith:
                 playerBlacksmith = FindFirstObjectByType<PlayerBlacksmith>();
-                playerBlacksmith.OnStatChange += OnStatUp;
+                playerBlacksmith.OnStatChange += questEventHandler.OnStatUp;
                 break;
 
             case SceneLoaderManager.SceneType.Fisher:
                 playerFisher = FindFirstObjectByType<PlayerFisher>();
-                playerFisher.OnStatChange += OnStatUp;
+                playerFisher.OnStatChange += questEventHandler.OnStatUp;
                 break;
 
             case SceneLoaderManager.SceneType.Farmer:
                 playerFarmer = FindFirstObjectByType<PlayerFarmer>();
-                playerFarmer.OnStatChange += OnStatUp;
+                playerFarmer.OnStatChange += questEventHandler.OnStatUp;
                 break;
         }
     }
@@ -244,10 +249,10 @@ public class QuestManager : MonoBehaviour
     {
         if (isPlayerObserverInit) return;
 
-        if(PlayerManager.Instance != null)
+        if(PlayerManager.Instance != null && isSetup)
         {
-            PlayerManager.Instance.OnItemAdd += OnItemObtain;
-            PlayerManager.Instance.OnCompanionBefriended += OnBefriend;
+            PlayerManager.Instance.OnItemAdd += questEventHandler.OnItemObtain;
+            PlayerManager.Instance.OnCompanionBefriended += questEventHandler.OnBefriend;
             isPlayerObserverInit = true;
         }
     }
@@ -271,7 +276,9 @@ public class QuestManager : MonoBehaviour
             //Debug.Log("Datas quest active: " + activeStoryQuests.Count);
         }
 
-        
+        questEventHandler = new QuestEventHandler();
+
+        isSetup = true;
     }
 
     #region DEFAULT
@@ -725,7 +732,7 @@ public class QuestManager : MonoBehaviour
     private void UpdateQuestAlreadyReachedMap(string questId)
     {
         QuestStorySO so = GetStoryQuestById(questId);
-        OnAddMap(so.QuestData.mapId);
+        questEventHandler.OnAddMap(so.QuestData.mapId);
     }
 
     #endregion
@@ -783,13 +790,18 @@ public class QuestManager : MonoBehaviour
 
     #endregion
 
+    public void TriggerNotification()
+    {
+        OnNeedNotification?.Invoke();
+    }
+
 
     #region EVENT ACTIONS
 
     /// <summary>
     /// Check the progress and returns if the quest can be claimed
     /// </summary>
-    private bool CheckNotifications(QuestData data, QuestType questType, string questId)
+    public bool CheckNotifications(QuestData data, QuestType questType, string questId)
     {
         QuestDataProgress progress;
 
@@ -812,7 +824,7 @@ public class QuestManager : MonoBehaviour
         return CanClaim(data, progress);
     }
 
-
+    /*
     private void OnEnemyKilled(EnemySO enemySO)
     {
         bool needSave = false;
@@ -825,17 +837,11 @@ public class QuestManager : MonoBehaviour
             // get so
             QuestStorySO so = GetStoryQuestById(quest);
 
-            if(NeedUpdateKillProgress(so.QuestData, enemySO))
-            {
-                UpdateKillProgress(QuestType.Story, quest);
-                needSave = true;
+            HandleEventResult enemyKilledResult = HandleEnemyKilled(quest, so.QuestData, QuestType.Story, enemySO, needNotification);
+            needSave = enemyKilledResult.needSave;
 
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    needNotification = CheckNotifications(so.QuestData, QuestType.Story, quest);
-                }
-            }
+            if (!needNotification)
+                needNotification = enemyKilledResult.needNotification;
         }
 
         // Bounties quest checks
@@ -844,17 +850,11 @@ public class QuestManager : MonoBehaviour
             // get so
             QuestBountySO so = GetBountyQuestById(quest);
 
-            if (NeedUpdateKillProgress(so.QuestData, enemySO))
-            {
-                UpdateKillProgress(QuestType.Bounties, quest);
-                needSave = true;
+            HandleEventResult enemyKilledResult = HandleEnemyKilled(quest, so.QuestData, QuestType.Bounties, enemySO, needNotification);
+            needSave = enemyKilledResult.needSave;
 
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    needNotification = CheckNotifications(so.QuestData, QuestType.Bounties, quest);
-                }
-            }
+            if(!needNotification)
+                needNotification = enemyKilledResult.needNotification;
         }
 
         int counterNotificationDailies = 0;
@@ -865,21 +865,11 @@ public class QuestManager : MonoBehaviour
             // get so
             QuestDailySO so = GetDailyQuestById(quest);
 
-            if (NeedUpdateKillProgress(so.QuestData, enemySO))
-            {
-                UpdateKillProgress(QuestType.Daily, quest);
-                needSave = true;
+            HandleEventResult enemyKilledResult = HandleEnemyKilled(quest, so.QuestData, QuestType.Daily, enemySO, needNotification);
+            needSave = enemyKilledResult.needSave;
 
-                // even if one notification needs display, do not check again
-                if (!needNotification)
-                {
-                    // check notification on all dailies
-                    if(CheckNotifications(so.QuestData, QuestType.Daily, quest))
-                    {
-                        counterNotificationDailies++;
-                    }
-                }
-            }
+            if (!needNotification)
+                counterNotificationDailies++;
         }
 
         if(!needNotification && counterNotificationDailies == activeDailyQuests.Count && activeDailyQuests.Count > 0)
@@ -896,6 +886,29 @@ public class QuestManager : MonoBehaviour
         {
             SaveQuestsData();
         }
+    }
+
+    private HandleEventResult HandleEnemyKilled(string questId, QuestData data, QuestType questType, EnemySO enemySO, bool needNotification)
+    {
+        HandleEventResult result = new HandleEventResult()
+        {
+            needSave = false,
+            needNotification = false
+        };
+
+        if (NeedUpdateKillProgress(data, enemySO))
+        {
+            UpdateKillProgress(questType, questId);
+            result.needSave = true;
+
+            // even if one notification needs display, do not check again
+            if (!needNotification)
+            {
+                result.needNotification = CheckNotifications(data, questType, questId);
+            }
+        }
+
+        return result;
     }
 
     private bool NeedUpdateKillProgress(QuestData data, EnemySO enemySO)
@@ -950,9 +963,9 @@ public class QuestManager : MonoBehaviour
                 break;
         }
     }
+    */
 
-
-
+    /*
     private void OnItemObtain(int id)
     {
         bool needSave = false;
@@ -1091,8 +1104,9 @@ public class QuestManager : MonoBehaviour
                 break;
         }
     }
+    */
 
-
+    /*
     private void OnStatUp(int id, int amount)
     {
         bool needSave = false;
@@ -1227,7 +1241,9 @@ public class QuestManager : MonoBehaviour
                 break;
         }
     }
+    */
 
+    /*
     private void OnAddMap(int id)
     {
         bool needSave = false;
@@ -1352,7 +1368,9 @@ public class QuestManager : MonoBehaviour
                 break;
         }
     }
+    */
 
+    /*
     private void OnBefriend(int id)
     {
         bool needSave = false;
@@ -1487,6 +1505,7 @@ public class QuestManager : MonoBehaviour
                 break;
         }
     }
+    */
 
     #endregion
 

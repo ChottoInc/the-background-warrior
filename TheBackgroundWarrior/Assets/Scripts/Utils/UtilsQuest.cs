@@ -392,5 +392,12 @@ public static class UtilsQuest
         public bool isCleared;
     }
 
+
+    public struct HandleEventResult
+    {
+        public bool needSave;
+        public bool needNotification;
+    }
+
     #endregion
 }
