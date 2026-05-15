@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
 
 
     // --- INVENTORY
-    private Inventory inventory;
+    public Inventory Inventory { get; private set; }
 
     // Trigger used for quests
     public event Action<int> OnItemAdd;
@@ -15,18 +15,18 @@ public class PlayerManager : MonoBehaviour
 
     // ------- JOBS -------------
 
-    private PlayerJobsData playerJobsData;
 
+    public PlayerJobsData PlayerJobsData { get; private set; }
 
-    private PlayerFightData playerFightData;
+    public PlayerFightData PlayerFightData { get; private set; }
 
-    private PlayerMinerData playerMinerData;
+    public PlayerMinerData PlayerMinerData { get; private set; }
 
-    private PlayerBlacksmithData playerBlacksmithData;
+    public PlayerBlacksmithData PlayerBlacksmithData { get; private set; }
 
-    private PlayerFisherData playerFisherData;
+    public PlayerFisherData PlayerFisherData { get; private set; }
 
-    private PlayerFarmerData playerFarmerData;
+    public PlayerFarmerData PlayerFarmerData { get; private set; }
 
 
     // --- COMPANIONS
@@ -38,21 +38,11 @@ public class PlayerManager : MonoBehaviour
 
 
 
-    public Inventory Inventory => inventory;
+    
 
 
 
-    public PlayerJobsData PlayerJobsData => playerJobsData;
-
-    public PlayerFightData PlayerFightData => playerFightData;
-
-    public PlayerMinerData PlayerMinerData => playerMinerData;
-
-    public PlayerBlacksmithData PlayerBlacksmithData => playerBlacksmithData;
-
-    public PlayerFisherData PlayerFisherData => playerFisherData;
-
-    public PlayerFarmerData PlayerFarmerData => playerFarmerData;
+    
 
 
 
@@ -60,26 +50,26 @@ public class PlayerManager : MonoBehaviour
     // ---- PLAYER GLOBAL VARIABLES ----
 
     // Miner
-    public float WeaponMinerMultiplier => UtilsMiner.GetMinerWeaponMultiplier(playerMinerData.WeaponLevel);
+    public float WeaponMinerMultiplier => UtilsMiner.GetMinerWeaponMultiplier(PlayerMinerData.WeaponLevel);
 
     // Blacksmith
-    public float HelmetMaxHpBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithHelmetMaxHpMultiplier(playerBlacksmithData.HelmetLevel);
-    public float ArmorDefBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithArmorDefMultiplier(playerBlacksmithData.ArmorLevel);
-    public float GlovesAtkSpdBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithGlovesAtkSpdMultiplier(playerBlacksmithData.GlovesLevel);
-    public float GlovesCritDmgBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithGlovesCritDmgMultiplier(playerBlacksmithData.GlovesLevel);
-    public float BootsDefBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithBootsDefMultiplier(playerBlacksmithData.BootsLevel);
-    public float BootsCritRateBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithBootsCritRateMultiplier(playerBlacksmithData.BootsLevel);
+    public float HelmetMaxHpBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithHelmetMaxHpMultiplier(PlayerBlacksmithData.HelmetLevel);
+    public float ArmorDefBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithArmorDefMultiplier(PlayerBlacksmithData.ArmorLevel);
+    public float GlovesAtkSpdBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithGlovesAtkSpdMultiplier(PlayerBlacksmithData.GlovesLevel);
+    public float GlovesCritDmgBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithGlovesCritDmgMultiplier(PlayerBlacksmithData.GlovesLevel);
+    public float BootsDefBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithBootsDefMultiplier(PlayerBlacksmithData.BootsLevel);
+    public float BootsCritRateBlacksmithMultiplier => UtilsBlacksmith.GetBlacksmithBootsCritRateMultiplier(PlayerBlacksmithData.BootsLevel);
 
     //Fisher
-    public float FisherLifeSeriesMultiplier => playerFisherData.IsLifeSeriesCompleted ? UtilsGather.FISHER_LIFE_SERIES_COMPLETE_MULTIPLIER : 1f;
-    public float FisherPredatorSeriesMultiplier => playerFisherData.IsPredatorSeriesCompleted ? UtilsGather.FISHER_PREDATOR_SERIES_COMPLETE_MULTIPLIER : 1f;
-    public float FisherGuardianSeriesMultiplier => playerFisherData.IsGuardianSeriesCompleted ? UtilsGather.FISHER_GUARDIAN_SERIES_COMPLETE_MULTIPLIER : 1f;
-    public float FisherDartSeriesMultiplier => playerFisherData.IsDartSeriesCompleted ? UtilsGather.FISHER_DART_SERIES_COMPLETE_MULTIPLIER : 1f;
-    public float FisherSharpSeriesMultiplier => playerFisherData.IsSharpSeriesCompleted ? UtilsGather.FISHER_SHARP_SERIES_COMPLETE_MULTIPLIER : 1f;
-    public float FisherPiercingSeriesMultiplier => playerFisherData.IsPiercingSeriesCompleted ? UtilsGather.FISHER_PIERCING_SERIES_COMPLETE_MULTIPLIER : 1f;
-    public float FisherGoldenSeriesMultiplier => playerFisherData.IsGoldenSeriesCompleted ? UtilsGather.FISHER_GOLDEN_SERIES_COMPLETE_MULTIPLIER : 1f;
-    public float FisherElderSeriesMultiplier => playerFisherData.IsElderSeriesCompleted ? UtilsGather.FISHER_ELDER_SERIES_COMPLETE_MULTIPLIER : 1f;
-    public float FisherQuickSeriesMultiplier => playerFisherData.IsQuickSeriesCompleted ? UtilsGather.FISHER_QUICK_SERIES_COMPLETE_MULTIPLIER : 1f;
+    public float FisherLifeSeriesMultiplier => PlayerFisherData.IsLifeSeriesCompleted ? UtilsGather.FISHER_LIFE_SERIES_COMPLETE_MULTIPLIER : 1f;
+    public float FisherPredatorSeriesMultiplier => PlayerFisherData.IsPredatorSeriesCompleted ? UtilsGather.FISHER_PREDATOR_SERIES_COMPLETE_MULTIPLIER : 1f;
+    public float FisherGuardianSeriesMultiplier => PlayerFisherData.IsGuardianSeriesCompleted ? UtilsGather.FISHER_GUARDIAN_SERIES_COMPLETE_MULTIPLIER : 1f;
+    public float FisherDartSeriesMultiplier => PlayerFisherData.IsDartSeriesCompleted ? UtilsGather.FISHER_DART_SERIES_COMPLETE_MULTIPLIER : 1f;
+    public float FisherSharpSeriesMultiplier => PlayerFisherData.IsSharpSeriesCompleted ? UtilsGather.FISHER_SHARP_SERIES_COMPLETE_MULTIPLIER : 1f;
+    public float FisherPiercingSeriesMultiplier => PlayerFisherData.IsPiercingSeriesCompleted ? UtilsGather.FISHER_PIERCING_SERIES_COMPLETE_MULTIPLIER : 1f;
+    public float FisherGoldenSeriesMultiplier => PlayerFisherData.IsGoldenSeriesCompleted ? UtilsGather.FISHER_GOLDEN_SERIES_COMPLETE_MULTIPLIER : 1f;
+    public float FisherElderSeriesMultiplier => PlayerFisherData.IsElderSeriesCompleted ? UtilsGather.FISHER_ELDER_SERIES_COMPLETE_MULTIPLIER : 1f;
+    public float FisherQuickSeriesMultiplier => PlayerFisherData.IsQuickSeriesCompleted ? UtilsGather.FISHER_QUICK_SERIES_COMPLETE_MULTIPLIER : 1f;
 
 
 
@@ -105,9 +95,9 @@ public class PlayerManager : MonoBehaviour
     {
         if (Instance != this) return;
 
-        if (inventory != null)
+        if (Inventory != null)
         {
-            inventory.OnItemAdd -= ItemAdd;
+            Inventory.OnItemAdd -= ItemAdd;
         }
     }
 
@@ -134,11 +124,11 @@ public class PlayerManager : MonoBehaviour
         try
         {
             PlayerJobsSaveData jobsSaveData = saveService.LoadData<PlayerJobsSaveData>(UtilsSave.GetPlayerJobsFile(), SettingsManager.Instance.FileEncryption);
-            playerJobsData = new PlayerJobsData(jobsSaveData);
+            PlayerJobsData = new PlayerJobsData(jobsSaveData);
         }
         catch
         {
-            playerJobsData = new PlayerJobsData();
+            PlayerJobsData = new PlayerJobsData();
             SaveJobsData();
         }
     }
@@ -151,7 +141,7 @@ public class PlayerManager : MonoBehaviour
 
     public void SaveJobsData()
     {
-        PlayerJobsSaveData data = new PlayerJobsSaveData(playerJobsData);
+        PlayerJobsSaveData data = new PlayerJobsSaveData(PlayerJobsData);
         saveService.SaveData(UtilsSave.GetPlayerJobsFile(), data, SettingsManager.Instance.FileEncryption);
     }
 
@@ -164,15 +154,15 @@ public class PlayerManager : MonoBehaviour
         try
         {
             InventorySaveData inventorySaveData = saveService.LoadData<InventorySaveData>(UtilsSave.GetPlayerInventoryFile(), SettingsManager.Instance.FileEncryption);
-            inventory = new Inventory(inventorySaveData);
+            Inventory = new Inventory(inventorySaveData);
         }
         catch
         {
-            inventory = new Inventory();
+            Inventory = new Inventory();
             SaveInventoryData();
         }
 
-        inventory.OnItemAdd += ItemAdd;
+        Inventory.OnItemAdd += ItemAdd;
     }
 
     /*
@@ -183,7 +173,7 @@ public class PlayerManager : MonoBehaviour
 
     public void SaveInventoryData()
     {
-        InventorySaveData data = new InventorySaveData(inventory);
+        InventorySaveData data = new InventorySaveData(Inventory);
         saveService.SaveData(UtilsSave.GetPlayerInventoryFile(), data, SettingsManager.Instance.FileEncryption);
     }
 
@@ -201,11 +191,11 @@ public class PlayerManager : MonoBehaviour
         try
         {
             PlayerFightSaveData fightSaveData = saveService.LoadData<PlayerFightSaveData>(UtilsSave.GetPlayerFightFile(), SettingsManager.Instance.FileEncryption);
-            playerFightData = new PlayerFightData(fightSaveData);
+            PlayerFightData = new PlayerFightData(fightSaveData);
         }
         catch
         {
-            playerFightData = new PlayerFightData();
+            PlayerFightData = new PlayerFightData();
             SaveFightData();
         }
 
@@ -213,13 +203,13 @@ public class PlayerManager : MonoBehaviour
 
     public void UpdateFightData(PlayerFightData data)
     {
-        playerFightData = data;
+        PlayerFightData = data;
         SaveFightData();
     }
 
     public void SaveFightData()
     {
-        PlayerFightSaveData data = new PlayerFightSaveData(playerFightData);
+        PlayerFightSaveData data = new PlayerFightSaveData(PlayerFightData);
         saveService.SaveData(UtilsSave.GetPlayerFightFile(), data, SettingsManager.Instance.FileEncryption);
     }
 
@@ -232,11 +222,11 @@ public class PlayerManager : MonoBehaviour
         try
         {
             PlayerMinerSaveData minerSaveData = saveService.LoadData<PlayerMinerSaveData>(UtilsSave.GetPlayerMinerFile(), SettingsManager.Instance.FileEncryption);
-            playerMinerData = new PlayerMinerData(minerSaveData);
+            PlayerMinerData = new PlayerMinerData(minerSaveData);
         }
         catch
         {
-            playerMinerData = new PlayerMinerData();
+            PlayerMinerData = new PlayerMinerData();
             SaveMinerData();
         }
 
@@ -244,13 +234,13 @@ public class PlayerManager : MonoBehaviour
 
     public void UpdateMinerData(PlayerMinerData data)
     {
-        playerMinerData = data;
+        PlayerMinerData = data;
         SaveMinerData();
     }
 
     public void SaveMinerData()
     {
-        PlayerMinerSaveData data = new PlayerMinerSaveData(playerMinerData);
+        PlayerMinerSaveData data = new PlayerMinerSaveData(PlayerMinerData);
         saveService.SaveData(UtilsSave.GetPlayerMinerFile(), data, SettingsManager.Instance.FileEncryption);
     }
 
@@ -263,11 +253,11 @@ public class PlayerManager : MonoBehaviour
         try
         {
             PlayerBlacksmithSaveData blacksmithSaveData = saveService.LoadData<PlayerBlacksmithSaveData>(UtilsSave.GetPlayerBlacksmithFile(), SettingsManager.Instance.FileEncryption);
-            playerBlacksmithData = new PlayerBlacksmithData(blacksmithSaveData);
+            PlayerBlacksmithData = new PlayerBlacksmithData(blacksmithSaveData);
         }
         catch
         {
-            playerBlacksmithData = new PlayerBlacksmithData();
+            PlayerBlacksmithData = new PlayerBlacksmithData();
             SaveBlacksmithData();
         }
 
@@ -275,13 +265,13 @@ public class PlayerManager : MonoBehaviour
 
     public void UpdateBlacksmithData(PlayerBlacksmithData data)
     {
-        playerBlacksmithData = data;
+        PlayerBlacksmithData = data;
         SaveBlacksmithData();
     }
 
     public void SaveBlacksmithData()
     {
-        PlayerBlacksmithSaveData data = new PlayerBlacksmithSaveData(playerBlacksmithData);
+        PlayerBlacksmithSaveData data = new PlayerBlacksmithSaveData(PlayerBlacksmithData);
         saveService.SaveData(UtilsSave.GetPlayerBlacksmithFile(), data, SettingsManager.Instance.FileEncryption);
     }
 
@@ -294,11 +284,11 @@ public class PlayerManager : MonoBehaviour
         try
         {
             PlayerFisherSaveData fisherSaveData = saveService.LoadData<PlayerFisherSaveData>(UtilsSave.GetPlayerFisherFile(), SettingsManager.Instance.FileEncryption);
-            playerFisherData = new PlayerFisherData(fisherSaveData);
+            PlayerFisherData = new PlayerFisherData(fisherSaveData);
         }
         catch
         {
-            playerFisherData = new PlayerFisherData();
+            PlayerFisherData = new PlayerFisherData();
             SaveFisherData();
         }
 
@@ -306,13 +296,13 @@ public class PlayerManager : MonoBehaviour
 
     public void UpdateFisherData(PlayerFisherData data)
     {
-        playerFisherData = data;
+        PlayerFisherData = data;
         SaveFisherData();
     }
 
     public void SaveFisherData()
     {
-        PlayerFisherSaveData data = new PlayerFisherSaveData(playerFisherData);
+        PlayerFisherSaveData data = new PlayerFisherSaveData(PlayerFisherData);
         saveService.SaveData(UtilsSave.GetPlayerFisherFile(), data, SettingsManager.Instance.FileEncryption);
     }
 
@@ -325,11 +315,11 @@ public class PlayerManager : MonoBehaviour
         try
         {
             PlayerFarmerSaveData farmerSaveData = saveService.LoadData<PlayerFarmerSaveData>(UtilsSave.GetPlayerFarmerFile(), SettingsManager.Instance.FileEncryption);
-            playerFarmerData = new PlayerFarmerData(farmerSaveData);
+            PlayerFarmerData = new PlayerFarmerData(farmerSaveData);
         }
         catch
         {
-            playerFarmerData = new PlayerFarmerData();
+            PlayerFarmerData = new PlayerFarmerData();
             SaveFarmerData();
         }
 
@@ -337,13 +327,13 @@ public class PlayerManager : MonoBehaviour
 
     public void UpdateFarmerData(PlayerFarmerData data)
     {
-        playerFarmerData = data;
+        PlayerFarmerData = data;
         SaveFarmerData();
     }
 
     public void SaveFarmerData()
     {
-        PlayerFarmerSaveData data = new PlayerFarmerSaveData(playerFarmerData);
+        PlayerFarmerSaveData data = new PlayerFarmerSaveData(PlayerFarmerData);
         saveService.SaveData(UtilsSave.GetPlayerFarmerFile(), data, SettingsManager.Instance.FileEncryption);
     }
 

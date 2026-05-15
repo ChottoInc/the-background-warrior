@@ -18,10 +18,7 @@ public class SettingsManager : MonoBehaviour
 
     // ---- TUTORIAL ----
 
-    private bool hasSeenIntroTutorial;
-
-
-    public bool HasSeenIntroTutorial => hasSeenIntroTutorial;
+    public bool HasSeenIntroTutorial { get; private set; }
 
 
 
@@ -40,34 +37,29 @@ public class SettingsManager : MonoBehaviour
 
     // --- SETTINGS ---
 
-    private long lastLoginDate;
-
-    private bool firstOpen;
-
-
-    public long LastLoginDate => lastLoginDate;
-    public bool FirstOpen => firstOpen;
+    public long LastLoginDate { get; private set; }
+    public bool FirstOpen { get; private set; }
 
 
     // --------- GAMEPLAY
 
     // -- Battle
-    private bool isAutoBattleOn;
+    public bool IsAutoBattleOn { get; private set; }
 
     // -- HUD
-    private bool isInvertedHUDOn;
+    public bool IsInvertedHudOn { get; private set; }
 
     // -- Floating HUD
-    private bool isDamageOn;
-    private bool isItemCollectionOn;
-    private bool areTooltipsOn;
+    public bool IsDamageOn { get; private set; }
+    public bool IsItemCollectionOn { get; private set; }
+    public bool AreTooltipsOn { get; private set; }
 
     // -- Animations
-    private bool areLevelUpEquipmentOn;
+    public bool AreLevelUpEquipmentOn { get; private set; }
 
     // -- Fisher
-    private bool isInvertedFishingSpot;
-    private bool isHiddenFishingBar;
+    public bool IsInvertedFishingSpot { get; private set; }
+    public bool IsHiddenFishingBar { get; private set; }
 
 
     public event Action<bool> OnInvertedHUDChange;
@@ -75,27 +67,14 @@ public class SettingsManager : MonoBehaviour
     public event Action<bool> OnIsHiddenFishingBarChange;
 
 
-    public bool IsAutoBattleOn => isAutoBattleOn;
-
-    public bool IsInvertedHudOn => isInvertedHUDOn;
-
-    public bool IsDamageOn => isDamageOn;
-    public bool IsItemCollectionOn => isItemCollectionOn;
-    public bool AreTooltipsOn => areTooltipsOn;
-
-    public bool AreLevelUpEquipmentOn => areLevelUpEquipmentOn;
-
-
-    public bool IsInvertedFishingSpot => isInvertedFishingSpot;
-    public bool IsHiddenFishingBar => isHiddenFishingBar;
 
 
     // --------- VIDEO
 
-    private bool isAlwaysOnTop;
-    private bool isClickThrough;
-    private bool is60FPS;
-    private int currentMonitorIndex;
+    public bool IsAlwaysOnTop { get; private set; }
+    public bool IsClickThrough { get; private set; }
+    public bool Is60FPS { get; private set; }
+    public int CurrentMonitorIndex { get; private set; }
 
 
 
@@ -103,18 +82,10 @@ public class SettingsManager : MonoBehaviour
     public event Action<bool> OnClickThroughChange;
 
 
-    public bool IsAlwaysOnTop => isAlwaysOnTop;
-    public bool IsClickThrough => isClickThrough;
-    public bool Is60FPS => is60FPS;
-    public int CurrentMonitorIndex => currentMonitorIndex;
-
 
     // --------- AUDIO
 
-    private float masterVolume;
-
-
-    public float MasterVolume => masterVolume;
+    public float MasterVolume { get; private set; }
 
 
 
@@ -166,7 +137,7 @@ public class SettingsManager : MonoBehaviour
         catch
         {
             SetupFromDefault();
-            firstOpen = true;
+            FirstOpen = true;
 
             Save();
         }
@@ -176,7 +147,7 @@ public class SettingsManager : MonoBehaviour
     {
         // tutorial
 
-        hasSeenIntroTutorial = saveData.hasSeenIntroTutorial;
+        HasSeenIntroTutorial = saveData.hasSeenIntroTutorial;
 
 
         // last scene
@@ -188,7 +159,7 @@ public class SettingsManager : MonoBehaviour
 
         // settings
 
-        lastLoginDate = saveData.lastLoginDate;
+        LastLoginDate = saveData.lastLoginDate;
 
         // --- gameplay
         SetIsAutoBattle(saveData.isAutoBattleOn, false);
@@ -217,7 +188,7 @@ public class SettingsManager : MonoBehaviour
     private void SetupFromDefault()
     {
         // tutorial
-        hasSeenIntroTutorial = false;
+        HasSeenIntroTutorial = false;
 
 
         // last scene
@@ -230,7 +201,7 @@ public class SettingsManager : MonoBehaviour
 
         // settings
 
-        lastLoginDate = DateTime.UtcNow.Ticks;
+        LastLoginDate = DateTime.UtcNow.Ticks;
 
         // --- gameplay
         SetIsAutoBattle(true, false);
@@ -285,7 +256,7 @@ public class SettingsManager : MonoBehaviour
         switch (idTutorial)
         {
             default:
-            case UtilsGeneral.ID_INTRO_TUTORIAL: hasSeenIntroTutorial = true; break;
+            case UtilsGeneral.ID_INTRO_TUTORIAL: HasSeenIntroTutorial = true; break;
         }
 
         if (save)
@@ -337,7 +308,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SetIsAutoBattle(bool isOn, bool save = true)
     {
-        isAutoBattleOn = isOn;
+        IsAutoBattleOn = isOn;
 
         if(save)
             Save();
@@ -346,7 +317,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SetIsInvertedHUDOn(bool isOn, bool save = true)
     {
-        isInvertedHUDOn = isOn;
+        IsInvertedHudOn = isOn;
         OnInvertedHUDChange?.Invoke(isOn);
 
         if (save)
@@ -356,7 +327,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SetIsDamageOn(bool isOn, bool save = true)
     {
-        isDamageOn = isOn;
+        IsDamageOn = isOn;
 
         if (save)
             Save();
@@ -364,7 +335,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SetIsItemCollectionOn(bool isOn, bool save = true)
     {
-        isItemCollectionOn = isOn;
+        IsItemCollectionOn = isOn;
 
         if (save)
             Save();
@@ -372,7 +343,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SetAreTooltipsOn(bool isOn, bool save = true)
     {
-        areTooltipsOn = isOn;
+        AreTooltipsOn = isOn;
 
         if (save)
             Save();
@@ -381,7 +352,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SetAreLevelUpEquipmentAnimationOn(bool isOn, bool save = true)
     {
-        areLevelUpEquipmentOn = isOn;
+        AreLevelUpEquipmentOn = isOn;
 
         if (save)
             Save();
@@ -390,7 +361,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SetIsInvertedFishingSpotOn(bool isOn, bool save = true)
     {
-        isInvertedFishingSpot = isOn;
+        IsInvertedFishingSpot = isOn;
         OnInvertedFishingSpotChange?.Invoke(isOn);
 
         if (save)
@@ -399,7 +370,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SetIsHiddenFishingSpot(bool isOn, bool save = true)
     {
-        isHiddenFishingBar = isOn;
+        IsHiddenFishingBar = isOn;
         OnIsHiddenFishingBarChange?.Invoke(isOn);
 
         if (save)
@@ -413,8 +384,8 @@ public class SettingsManager : MonoBehaviour
 
     public void SetIsAlwaysOnTop(bool isOn, bool save = true)
     {
-        isAlwaysOnTop = isOn;
-        OnAlwaysOnTopChange?.Invoke(isAlwaysOnTop);
+        IsAlwaysOnTop = isOn;
+        OnAlwaysOnTopChange?.Invoke(IsAlwaysOnTop);
 
         if (save)
             Save();
@@ -422,8 +393,8 @@ public class SettingsManager : MonoBehaviour
 
     public void SetIsClickThrough(bool isOn, bool save = true)
     {
-        isClickThrough = isOn;
-        OnClickThroughChange?.Invoke(isClickThrough);
+        IsClickThrough = isOn;
+        OnClickThroughChange?.Invoke(IsClickThrough);
 
         if (save)
             Save();
@@ -431,9 +402,9 @@ public class SettingsManager : MonoBehaviour
 
     public void SetIs60FPS(bool isOn, bool save = true)
     {
-        is60FPS = isOn;
+        Is60FPS = isOn;
 
-        if (is60FPS)
+        if (Is60FPS)
         {
             Application.targetFrameRate = 60;
         }
@@ -448,14 +419,14 @@ public class SettingsManager : MonoBehaviour
 
     public void SetCurrentMonitorIndex(int index, bool fromDefault, bool save = true)
     {
-        currentMonitorIndex = index;
+        CurrentMonitorIndex = index;
 
         int possibleIndexes = Display.displays.Length;
 
         // if the saved index is greater than the displays reset to 0
-        if (currentMonitorIndex >= possibleIndexes)
+        if (CurrentMonitorIndex >= possibleIndexes)
         {
-            currentMonitorIndex = 0;
+            CurrentMonitorIndex = 0;
         }
 
         // check if a setting has been changed from menu or is already saved
@@ -472,7 +443,7 @@ public class SettingsManager : MonoBehaviour
                 }
             }
             */
-            StartCoroutine(InitializerManager.Instance.CoChangeMonitor(currentMonitorIndex));
+            StartCoroutine(InitializerManager.Instance.CoChangeMonitor(CurrentMonitorIndex));
         }
 
         if (save)
@@ -485,9 +456,9 @@ public class SettingsManager : MonoBehaviour
 
     public void SetMasterVolume(float value, bool save = true)
     {
-        masterVolume = value;
+        MasterVolume = value;
 
-        AudioManager.Instance.SetMasterVolume(masterVolume);
+        AudioManager.Instance.SetMasterVolume(MasterVolume);
 
         if (save)
             Save();
@@ -498,7 +469,7 @@ public class SettingsManager : MonoBehaviour
 
     public void Save()
     {
-        lastLoginDate = DateTime.UtcNow.Ticks;
+        LastLoginDate = DateTime.UtcNow.Ticks;
 
         SettingsSaveData data = new SettingsSaveData(this);
         saveService.SaveData(UtilsSave.GetSettingsFile(), data, FileEncryption);
