@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFightData
+public class PlayerFightData : IBasePlayerData
 {
     // ---- VISITABLE MAPS
 
@@ -259,6 +259,16 @@ public class PlayerFightData
     public void RemoveStatPoints(int amount)
     {
         availableStatPoints -= amount;
+    }
+
+    public void AddLevel(int amount)
+    {
+        if (currentLevel + amount > UtilsWarrior.MAX_LEVEL_WARRIOR)
+        {
+            amount = UtilsWarrior.MAX_LEVEL_WARRIOR - currentLevel;
+        }
+        currentLevel += amount;
+        availableStatPoints += amount;
     }
 
     public void AddExp(int amount)

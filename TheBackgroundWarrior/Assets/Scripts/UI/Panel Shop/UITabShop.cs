@@ -19,8 +19,11 @@ public class UITabShop : UITabWindow
     private UIShopFilterButton currentFilterButton;
 
     [Header("Redeem")]
-    [SerializeField] GameObject buttonRedeem;
     [SerializeField] GameObject panelRedeem;
+
+    [Header("Debug")]
+    [SerializeField] GameObject buttonDebug;
+    [SerializeField] GameObject panelDebug;
 
     public override void Open()
     {
@@ -35,15 +38,16 @@ public class UITabShop : UITabWindow
             PlayerManager.Instance.Inventory.HasItem(ID_CARD_ERIS_4) &&
             PlayerManager.Instance.Inventory.HasItem(ID_CARD_ERIS_5))
         {
-            buttonRedeem.SetActive(true);
+            buttonDebug.SetActive(true);
         }
         else
         {
-            buttonRedeem.SetActive(false);
+            buttonDebug.SetActive(false);
         }
 
-        // By default open scroll shop, and panel redeem is hidden
+        // By default open scroll shop, and panel debug is hidden
         panelShopItems.gameObject.SetActive(true);
+        panelDebug.SetActive(false);
         panelRedeem.SetActive(false);
 
         // select first filter by default
@@ -68,15 +72,25 @@ public class UITabShop : UITabWindow
             currentFilterButton.SelectButton(true);
         }
 
-        if (filter == UtilsShop.ID_SHOP_FILTER_REDEEM)
+        if (filter == UtilsShop.ID_SHOP_FILTER_DEBUG)
+        {
+            panelDebug.SetActive(true);
+
+            panelShopItems.gameObject.SetActive(false);
+            panelRedeem.SetActive(false);
+        }
+        else if(filter == UtilsShop.ID_SHOP_FILTER_REDEEM)
         {
             panelRedeem.SetActive(true);
+
+            panelDebug.SetActive(false);
             panelShopItems.gameObject.SetActive(false);
         }
         else
         {
             panelShopItems.gameObject.SetActive(true);
             panelRedeem.SetActive(false);
+            panelDebug.SetActive(false);
 
             panelShopItems.Setup(filter);
         }

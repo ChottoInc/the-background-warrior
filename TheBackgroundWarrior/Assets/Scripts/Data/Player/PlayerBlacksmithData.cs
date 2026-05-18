@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using static UtilsPlayer;
 
-public class PlayerBlacksmithData
+public class PlayerBlacksmithData : IBasePlayerData
 {
     // ---- BASE STAT VALUES
 
@@ -194,6 +194,16 @@ public class PlayerBlacksmithData
     public void RemoveStatPoints(int amount)
     {
         availableStatPoints -= amount;
+    }
+
+    public void AddLevel(int amount)
+    {
+        if (currentLevel + amount > UtilsBlacksmith.MAX_LEVEL_BLACKSMITH)
+        {
+            amount = UtilsBlacksmith.MAX_LEVEL_BLACKSMITH - currentLevel;
+        }
+        currentLevel += amount;
+        availableStatPoints += amount;
     }
 
     public void AddExp(long amount)

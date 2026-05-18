@@ -2224,8 +2224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333f4b071b8e9241868c7ced5f7034d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableCheats: 1
-  fileEncryption: 0
+  enableCheats: 0
+  fileEncryption: 1
 --- !u!4 &903364526
 Transform:
   m_ObjectHideFlags: 0
@@ -3157,7 +3157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154e2e9ce70cbf64e8b84e203719168a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnabled: 1
+  isEnabled: 0
 --- !u!4 &1171033273
 Transform:
   m_ObjectHideFlags: 0

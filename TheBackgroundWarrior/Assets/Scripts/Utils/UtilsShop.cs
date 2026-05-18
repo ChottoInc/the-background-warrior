@@ -5,7 +5,8 @@ public static class UtilsShop
 {
     public const int ID_SHOP_FILTER_CARDPACKS = 0;
     public const int ID_SHOP_FILTER_JOBS = 1;
-    public const int ID_SHOP_FILTER_REDEEM = 10;
+    public const int ID_SHOP_FILTER_REDEEM = 9;
+    public const int ID_SHOP_FILTER_DEBUG = 10;
 
 
     public const string REDEEM_ERIS_CODE = "85641";

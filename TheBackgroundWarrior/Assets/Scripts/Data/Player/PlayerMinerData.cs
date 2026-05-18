@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using static UtilsPlayer;
 
-public class PlayerMinerData
+public class PlayerMinerData : IBasePlayerData
 {
     // ---- BASE STAT VALUES
 
@@ -146,6 +146,16 @@ public class PlayerMinerData
     public void RemoveStatPoints(int amount)
     {
         availableStatPoints -= amount;
+    }
+
+    public void AddLevel(int amount)
+    {
+        if (currentLevel + amount > UtilsMiner.MAX_LEVEL_MINER)
+        {
+            amount = UtilsMiner.MAX_LEVEL_MINER - currentLevel;
+        }
+        currentLevel += amount;
+        availableStatPoints += amount;
     }
 
     public void AddExp(long amount)

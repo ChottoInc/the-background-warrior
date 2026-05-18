@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFarmerData
+public class PlayerFarmerData : IBasePlayerData
 {
     // ---- BASE STAT VALUES
 
@@ -175,6 +175,16 @@ public class PlayerFarmerData
     public void RemoveStatPoints(int amount)
     {
         availableStatPoints -= amount;
+    }
+
+    public void AddLevel(int amount)
+    {
+        if (currentLevel + amount > UtilsFarmer.MAX_LEVEL_FARMER)
+        {
+            amount = UtilsFarmer.MAX_LEVEL_FARMER - currentLevel;
+        }
+        currentLevel += amount;
+        availableStatPoints += amount;
     }
 
     public void AddExp(long amount)

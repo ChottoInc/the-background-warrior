@@ -20,6 +20,8 @@ public class UIPanelHome : MonoBehaviour
 
     private bool isInit;
 
+    private bool isChangingScene;
+
 
     public void Start()
     {
@@ -60,17 +62,24 @@ public class UIPanelHome : MonoBehaviour
 
     public void OnButtonContinue()
     {
+        if (isChangingScene) return;
+
+        isChangingScene = true;
         SceneLoaderManager.Instance.LoadScene(SettingsManager.Instance.LastSceneSettings);
     }
 
     public async void OnButtonNew()
     {
-        if(!InitializerManager.Instance.HasSaveFile)
+        if (isChangingScene) return;
+
+        if (!InitializerManager.Instance.HasSaveFile)
         {
             // last scene setting is initalized by default from initializer
             InitializerManager.Instance.SetHasSaveFile();
 
             SceneLoaderManager.Instance.LoadScene(SettingsManager.Instance.LastSceneSettings);
+
+            isChangingScene = true;
         }
         else
         {
@@ -91,6 +100,8 @@ public class UIPanelHome : MonoBehaviour
                 // switch to first scene
                 InitializerManager.Instance.SetHasSaveFile();
                 SceneLoaderManager.Instance.LoadScene(SettingsManager.Instance.LastSceneSettings);
+
+                isChangingScene= true;
             }
         }
     }
