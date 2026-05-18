@@ -181,37 +181,37 @@ public static class UtilsPlayer
             default: return "N/A";
 
             // FIGHT DATA
-            case ID_WARRIOR_MAXHP: return UtilsText.text_tooltip_stat_warrior_maxhp;
-            case ID_WARRIOR_ATK: return UtilsText.text_tooltip_stat_warrior_atk;
-            case ID_WARRIOR_DEF: return UtilsText.text_tooltip_stat_warrior_def;
-            case ID_WARRIOR_ATKSPD: return UtilsText.text_tooltip_stat_warrior_atkspd;
-            case ID_WARRIOR_CRITRATE: return UtilsText.text_tooltip_stat_warrior_critrate;
-            case ID_WARRIOR_CRITDMG: return UtilsText.text_tooltip_stat_warrior_critdmg;
-            case ID_WARRIOR_LUCK: return UtilsText.text_tooltip_stat_warrior_luck;
+            case ID_WARRIOR_MAXHP: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_warrior_maxhp];
+            case ID_WARRIOR_ATK: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_warrior_atk];
+            case ID_WARRIOR_DEF: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_warrior_def];
+            case ID_WARRIOR_ATKSPD: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_warrior_atkspd];
+            case ID_WARRIOR_CRITRATE: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_warrior_critrate];
+            case ID_WARRIOR_CRITDMG: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_warrior_critdmg];
+            case ID_WARRIOR_LUCK: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_warrior_luck];
 
             // MINER DATA
-            case ID_MINER_POWER: return UtilsText.text_tooltip_stat_miner_power;
-            case ID_MINER_SMASHSPEED: return UtilsText.text_tooltip_stat_miner_smashspeed;
-            case ID_MINER_SHOCKWAVE: return UtilsText.text_tooltip_stat_miner_shockwave;
-            case ID_MINER_LUCK: return UtilsText.text_tooltip_stat_miner_luck;
+            case ID_MINER_POWER: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_miner_power];
+            case ID_MINER_SMASHSPEED: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_miner_smashspeed];
+            case ID_MINER_SHOCKWAVE: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_miner_shockwave];
+            case ID_MINER_LUCK: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_miner_luck];
 
             // BLACKSMITH DATA
-            case ID_BLACKSMITH_CRAFTSPEED: return UtilsText.text_tooltip_stat_blacksmith_craftspeed;
-            case ID_BLACKSMITH_EFFICIENCY: return UtilsText.text_tooltip_stat_blacksmith_efficiency;
-            case ID_BLACKSMITH_LUCK: return UtilsText.text_tooltip_stat_blacksmith_luck;
-            case ID_BLACKSMITH_METALLURGY: return UtilsText.text_tooltip_stat_blacksmith_metallurgy;
+            case ID_BLACKSMITH_CRAFTSPEED: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_blacksmith_craftspeed];
+            case ID_BLACKSMITH_EFFICIENCY: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_blacksmith_efficiency];
+            case ID_BLACKSMITH_LUCK: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_blacksmith_luck];
+            case ID_BLACKSMITH_METALLURGY: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_blacksmith_metallurgy];
 
             // FISHER DATA
-            case ID_FISHER_CALMNESS: return UtilsText.text_tooltip_stat_fisher_calmness;
-            case ID_FISHER_REFLEX: return UtilsText.text_tooltip_stat_fisher_reflex;
-            case ID_FISHER_KNOWLEDGE: return UtilsText.text_tooltip_stat_fisher_knowledge;
-            case ID_FISHER_LUCK: return UtilsText.text_tooltip_stat_fisher_luck;
+            case ID_FISHER_CALMNESS: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_fisher_calmness];
+            case ID_FISHER_REFLEX: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_fisher_reflex];
+            case ID_FISHER_KNOWLEDGE: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_fisher_knowledge];
+            case ID_FISHER_LUCK: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_fisher_luck];
 
             // FARMER DATA
-            case ID_FARMER_GREENTHUMB: return UtilsText.text_tooltip_stat_farmer_greenthumb;
-            case ID_FARMER_AGRONOMY: return UtilsText.text_tooltip_stat_farmer_agronomy;
-            case ID_FARMER_KINDNESS: return UtilsText.text_tooltip_stat_farmer_kindness;
-            case ID_FARMER_LUCK: return UtilsText.text_tooltip_stat_farmer_luck;
+            case ID_FARMER_GREENTHUMB: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_farmer_greenthumb];
+            case ID_FARMER_AGRONOMY: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_farmer_agronomy];
+            case ID_FARMER_KINDNESS: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_farmer_kindness];
+            case ID_FARMER_LUCK: return UtilsText.AllTextDictionary[UtilsText.text_tooltip_stat_farmer_luck];
         }
     }
 
