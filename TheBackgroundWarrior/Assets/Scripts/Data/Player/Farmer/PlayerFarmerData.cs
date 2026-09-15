@@ -36,10 +36,10 @@ public class PlayerFarmerData : BasePlayerData
     public long ExpToNextLevel => UtilsFarmer.RequiredExpForFarmerLevel(CurrentLevel + 1);
 
 
-    public float CurrentGreenthumb => baseGreenthumb + UtilsFarmer.PER_LEVEL_FARMER_GAIN_GREENTHUMB * (levelStatGreenthumb - 1);
+    public float CurrentGreenthumb => baseGreenthumb + UtilsFarmer.PER_LEVEL_FARMER_GAIN_GREENTHUMB * (levelStatGreenthumb - 1)+ (_inspirationModifier - 1f);
     public float CurrentAgronomy => baseAgronomy + UtilsFarmer.PER_LEVEL_FARMER_GAIN_AGRONOMY * (levelstatAgronomy);
-    public float CurrentKindness => baseKindness + UtilsFarmer.PER_LEVEL_FARMER_GAIN_KINDNESS * (levelstatKindness - 1);
-    public float CurrentLuck => baseLuck + UtilsFarmer.PER_LEVEL_FARMER_GAIN_LUCK * (levelStatLuck - 1);
+    public float CurrentKindness => baseKindness + UtilsFarmer.PER_LEVEL_FARMER_GAIN_KINDNESS * (levelstatKindness - 1) + (_inspirationModifier - 1f);
+    public float CurrentLuck => baseLuck + UtilsFarmer.PER_LEVEL_FARMER_GAIN_LUCK * (levelStatLuck - 1) + (_inspirationModifier - 1f);
 
 
     // ---- PLANTED CROPS

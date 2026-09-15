@@ -2070,6 +2070,7 @@ MonoBehaviour:
   buttonInventory: {fileID: 1403177481}
   buttonQuests: {fileID: 1437274624}
   buttonShop: {fileID: 925932013}
+  buttonBuffs: {fileID: 2082149618}
   buttonSetting: {fileID: 1724291092}
   panelStage: {fileID: 625208070}
   panelAutoBattle: {fileID: 1827974397}
@@ -2447,6 +2448,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 588262930}
   m_SourcePrefab: {fileID: 100100000, guid: e893aefd93740714b999573b02916984, type: 3}
+--- !u!1 &2082149618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1702104812114410754, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
+  m_PrefabInstance: {fileID: 3577316717385707922}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2146624747
 GameObject:
   m_ObjectHideFlags: 0

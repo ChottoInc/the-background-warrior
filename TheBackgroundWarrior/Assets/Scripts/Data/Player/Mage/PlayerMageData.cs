@@ -32,8 +32,8 @@ public class PlayerMageData : BasePlayerData
     public long ExpToNextLevel => UtilsMage.RequiredExpForMageLevel(CurrentLevel + 1);
 
 
-    public float CurrentInsight => baseInsight + UtilsMage.PER_LEVEL_MAGE_GAIN_INSIGHT * (LevelStatInsight - 1);
-    public float CurrentCastSpeed => baseCastSpeed + UtilsMage.PER_LEVEL_MAGE_GAIN_CASTSPEED * (LevelStatCastSpeed - 1);
+    public float CurrentInsight => baseInsight + UtilsMage.PER_LEVEL_MAGE_GAIN_INSIGHT * (LevelStatInsight - 1) + (_inspirationModifier - 1f);
+    public float CurrentCastSpeed => baseCastSpeed + UtilsMage.PER_LEVEL_MAGE_GAIN_CASTSPEED * (LevelStatCastSpeed - 1) + (_inspirationModifier - 1f);
     public float CurrentScholar => baseScholar + UtilsMage.PER_LEVEL_MAGE_GAIN_SCHOLAR * LevelStatScholar;
     public float CurrentProficiency => baseProficiency + UtilsMage.PER_LEVEL_MAGE_GAIN_PROFICIENCY * LevelStatProficiency;
 

@@ -193,5 +193,6 @@
     "text_necromancer_ritual_summon_desc": "While advancing through the stages, the Warrior will summon Undeads to help him",
     "text_necromancer_ritual_arise_desc": "When an Undead is summoned, there is a chance it will be stronger than average undeads",
     "text_necromancer_ritual_afterlife_desc": "When an undead dies, it will create an explosion around it, damaging the enemies",
-    "text_necromancer_ritual_ade_desc": "Permanently increase your maximum horde counter by 1"
+    "text_necromancer_ritual_ade_desc": "Permanently increase your maximum horde counter by 1",
+    "text_shopitem_job_bard_desc": "Unlock the Bard Class"
 }

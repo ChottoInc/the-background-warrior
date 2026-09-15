@@ -38,10 +38,10 @@ public class PlayerNecromancerData : BasePlayerData
 
     public float CurrentAptitude => baseAptitude + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_APTITUDE * LevelStatAptitude;
     public float CurrentSummon => baseSummon + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_SUMMON * (LevelStatSummon - 1);
-    public float CurrentMight => baseMight + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_MIGHT * (LevelStatMight - 1);
-    public float CurrentLifespan => baseLifespan + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_LIFESPAN * (LevelStatLifespan - 1);
+    public float CurrentMight => baseMight + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_MIGHT * (LevelStatMight - 1) + (_inspirationModifier - 1f);
+    public float CurrentLifespan => baseLifespan + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_LIFESPAN * (LevelStatLifespan - 1) + (_inspirationModifier - 1f);
     public float CurrentHorde => baseHorde + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_HORDE * LevelStatHorde;
-    public float CurrentLuck => baseLuck + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_LUCK * (LevelStatLuck - 1);
+    public float CurrentLuck => baseLuck + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_LUCK * (LevelStatLuck - 1) + (_inspirationModifier - 1f);
 
 
     public bool IsAriseRitualUnlocked =>

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoaderManager : MonoBehaviour
 {
-    public enum SceneType { Home, CombatMap, Miner, Blacksmith, Fisher, Farmer, Mage, Alchemist, Necromancer }
+    public enum SceneType { Home, CombatMap, Miner, Blacksmith, Fisher, Farmer, Mage, Alchemist, Necromancer, Bard }
 
 
     [SerializeField] Material fadeMaterial;
@@ -91,6 +91,7 @@ public class SceneLoaderManager : MonoBehaviour
                 case SceneType.Mage: break;     //TODO: ADD handle switch scene
                 case SceneType.Alchemist: FindFirstObjectByType<PlayerAlchemist>().HandleSwitchScene(); break;
                 case SceneType.Necromancer: break;
+                case SceneType.Bard: FindFirstObjectByType<PlayerBard>().StopMusic(); break;
             }
         }
 
@@ -141,6 +142,7 @@ public class SceneLoaderManager : MonoBehaviour
                 case SceneType.Mage: break;     //TODO: ADD handle switch scene
                 case SceneType.Alchemist: FindFirstObjectByType<PlayerAlchemist>().HandleSwitchScene(); break;
                 case SceneType.Necromancer: break;
+                case SceneType.Bard: FindFirstObjectByType<PlayerBard>().StopMusic(); break;
             }
         }
 
@@ -233,6 +235,10 @@ public class SceneLoaderManager : MonoBehaviour
 
                 case SceneType.Necromancer:
                     FindFirstObjectByType<PlayerNecromancer>().Setup(PlayerManager.Instance.PlayerNecromancerData);
+                    break;
+
+                case SceneType.Bard:
+                    FindFirstObjectByType<PlayerBard>().Setup(PlayerManager.Instance.PlayerBardData);
                     break;
             }
 

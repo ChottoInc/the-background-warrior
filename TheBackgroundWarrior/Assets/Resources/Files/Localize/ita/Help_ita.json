@@ -18,5 +18,7 @@
     "text_description_blacksmith_equipment": "Livello massimo dell'equipaggiamento: {0}",
     "text_description_mage_slots": "Gli incantesimi possono essere equipaggiati negli slot vuoti. Ogni 5 livelli dell'abilità Competenza, verrà sbloccato un nuovo slot",
     "text_help_necromancer": "<align=\"center\">Necromancer<br>----------------------------</align><br>Porta al massimo le abilità del Necromante per sbloccare nuovi rituali permanenti.<br>Il Necromante si allena facendo combattere le sue evocazioni tra di loro, aumentare l'abilità Inclinazione aumenterà anche il numero di evocazioni.<br>Tutte le abilità del Necromante aumenteranno le statistiche delle evocazioni, eccetto per Inclinazione e Fortuna, che aumenterà anche l'esperienza guadagnata dal Necromante.",
-    "text_description_necromancer": "Descrizione:<br>Porta al massimo le abilità del Necromante per sbloccare nuovi rituali permanenti"
+    "text_description_necromancer": "Descrizione:<br>Porta al massimo le abilità del Necromante per sbloccare nuovi rituali permanenti",
+    "text_help_bard": "<align=\"center\">Bardo<br>----------------------------</align><br>Le canzoni suonate dal Bardo non hanno un impatto diretto sul gameplay, puoi scegliere di riprodurre le canzoni in ordine casuale o continuare ad ascoltare la stessa canzone.<br>Quando si cambia lavoro, alcune abilità avranno un bonus del 10% per metà del tempo in cui il Bardo ha suonato.",
+    "text_description_bard": "Descrizione:<br>Suona alcune canzoni per rilassarti. Ottieni un bonus del 10% su alcune abilità per metà del tempo in cui il Bardo ha suonato"
 }

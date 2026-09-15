@@ -169,6 +169,7 @@ public class PlayerFarmer : Player
             UtilsBuffs.BuffType.Greed,
             UtilsBuffs.BuffType.Veteran,
             UtilsBuffs.BuffType.Tamer,
+            UtilsBuffs.BuffType.Inspiration,
         };
     }
 

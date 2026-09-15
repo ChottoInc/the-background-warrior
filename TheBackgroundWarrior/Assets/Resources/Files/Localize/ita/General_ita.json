@@ -293,7 +293,7 @@
     "text_settings_gameplay_option_showadvancedstats": "Mostra statistiche avanzate",
     "text_quest_desc_craft_specific": "Crea {0} {1}",
     "text_quest_desc_craft_nonspecific": "Crea {0} Miscele",
-    "text_job_necromancer_unlockconditions": "In arrivo",
+    "text_job_necromancer_unlockconditions": "Porta al massimo l'abilità Studioso del Mago",
     "text_button_help_filter_necromancer": "Necromante",
     "text_name_class_necromancer": "Necromante",
     "text_name_necromancer_stat_aptitude": "Inclinazione",
@@ -312,5 +312,11 @@
     "text_job_necromancer_afterlife_unlockconditions": "Sblocca aumentando al massimo le abilità Inclinazione e Vigore",
     "text_job_necromancer_ade_unlockconditions": "Sblocca aumentando al massimo le abilità Forza vitale e Fortuna",
     "text_job_necromancer_ritual_locked": "Rituale bloccato",
-    "text_button_chant": "Recita"
+    "text_button_chant": "Recita",
+    "text_quest_desc_summon_plural": "Evoca {0} Non morti con il Guerriero",
+    "text_job_bard_unlockconditions": "Acquistabile nel negozio",
+    "text_button_play": "Suona",
+    "text_button_help_filter_bard": "Bardo",
+    "text_name_buff_inspiration": "Ispirazione",
+    "text_name_buff_inspiration_effect": "Grazie alle canzoni suonate precedentemente, alcune abilità hanno un incremento del 10%."
 }

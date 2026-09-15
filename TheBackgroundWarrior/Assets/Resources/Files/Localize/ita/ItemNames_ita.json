@@ -220,5 +220,6 @@
     "text_necromancer_ritual_summon_name": "Evocazione",
     "text_necromancer_ritual_arise_name": "Sorgi",
     "text_necromancer_ritual_afterlife_name": "Aldilà",
-    "text_necromancer_ritual_ade_name": "Ade"
+    "text_necromancer_ritual_ade_name": "Ade",
+    "text_shopitem_job_bard_name": "Lavoro: Bardo"
 }

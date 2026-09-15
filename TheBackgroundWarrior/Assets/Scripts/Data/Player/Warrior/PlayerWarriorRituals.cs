@@ -98,6 +98,8 @@ public class PlayerWarriorRituals : MonoBehaviour
         }
 
         CurrentHorde++;
+
+        PlayerManager.Instance.OnSummonEvent(1);
     }
 
     public void DecreaseHorde()

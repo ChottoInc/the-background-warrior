@@ -45,6 +45,11 @@ public class UITabBuffs : UITabWindow
 
     private void CreateSinglePrefab(Buff buff)
     {
+        if(buff.BuffType == UtilsBuffs.BuffType.Inspiration)
+        {
+            if (buff.RemainingTime <= 0) return;
+        }
+
         GameObject prefab = Instantiate(buffPrefab, transform.position, Quaternion.identity);
         prefab.transform.SetParent(container);
 

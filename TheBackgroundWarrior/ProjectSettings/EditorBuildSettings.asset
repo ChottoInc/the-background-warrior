@@ -59,4 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NecromancerScene.unity
     guid: 4ce15d97bb8ad1d4d9c7e5827d057b17
+  - enabled: 1
+    path: Assets/Scenes/BardScene.unity
+    guid: 7da01af92941fba42bab68f682b54528
   m_configObjects: {}

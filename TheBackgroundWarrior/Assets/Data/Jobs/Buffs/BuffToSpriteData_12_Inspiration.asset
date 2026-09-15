@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294ea4086c5671e42978f78be2883c4f, type: 3}
+  m_Name: BuffToSpriteData_12_Inspiration
+  m_EditorClassIdentifier: 
+  id: 12
+  _buffType: 100
+  _sprite: {fileID: 21300000, guid: cca20b0e9605b494b8646abe3b17bbe8, type: 3}
+  _itemNameTextId: text_name_buff_inspiration
+  _itemName: Inspiration
+  _itemDescTextId: text_name_buff_inspiration_effect
+  _itemDesc: Thanks to the songs played earlier, some abilities have a 10% boost.

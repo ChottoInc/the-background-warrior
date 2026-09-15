@@ -10,6 +10,19 @@ public class BasePlayerData : IBasePlayerData
     public int AvailableStatPoints { get; protected set; }
 
 
+    protected float _inspirationModifier
+    {
+        get
+        {
+            float inspirationModifier = 1f;
+            if (PlayerManager.Instance.PlayerBuffsData.IsInspirationBuffActive())
+                inspirationModifier = 1.1f;
+
+            return inspirationModifier;
+        }
+    }
+
+
     public event Action OnAddedExp;
     public event Action OnLevelUp;
     public event Action<int, int> OnStatChange;

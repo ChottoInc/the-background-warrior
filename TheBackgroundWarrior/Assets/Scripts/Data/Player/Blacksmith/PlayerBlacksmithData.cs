@@ -64,9 +64,9 @@ public class PlayerBlacksmithData : BasePlayerData
     public long ExpToNextLevel => UtilsBlacksmith.RequiredExpForBlacksmithLevel(CurrentLevel + 1);
 
 
-    public float CurrentCraftSpeed => baseCraftSpeed + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_CRAFTSPEED * (levelStatCraftSpeed - 1);
-    public float CurrentEfficiency => baseEfficiency + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_EFFICIENCY * (levelEfficiency - 1);
-    public float CurrentLuck => baseLuck + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_LUCK * (levelStatLuck - 1);
+    public float CurrentCraftSpeed => baseCraftSpeed + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_CRAFTSPEED * (levelStatCraftSpeed - 1) * _inspirationModifier;
+    public float CurrentEfficiency => baseEfficiency + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_EFFICIENCY * (levelEfficiency - 1) + (_inspirationModifier - 1f);
+    public float CurrentLuck => baseLuck + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_LUCK * (levelStatLuck - 1) + (_inspirationModifier - 1f);
     public float CurrentMetallurgy => baseMetallurgy + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_METALLURGY * (levelStatMetallurgy);
 
     public float CurrentCraftTime => 60f / CurrentCraftSpeed;

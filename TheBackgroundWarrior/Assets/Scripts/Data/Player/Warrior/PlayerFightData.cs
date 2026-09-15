@@ -90,49 +90,61 @@ public class PlayerFightData : BasePlayerData
     public long ExpToNextLevel => UtilsWarrior.RequiredExpForWarriorLevel(CurrentLevel + 1);
 
 
+    
     public float MaxHp => 
         (baseMaxHp + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_MAXHP * (levelStatMaxHp - 1)) *
         PlayerManager.Instance.HelmetMaxHpBlacksmithMultiplier *
         PlayerManager.Instance.FisherLifeSeriesMultiplier *
-        maxHpModifier;
+        maxHpModifier *
+        _inspirationModifier;
+        
 
     public float CurrentHp { get; private set; }
 
-    public float CurrentAtk => 
+    public float CurrentAtk =>
         (baseAtk + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_ATK * (levelStatAtk - 1)) *
         PlayerManager.Instance.WeaponMinerMultiplier *
         PlayerManager.Instance.FisherPredatorSeriesMultiplier *
-        atkModifier;
+        atkModifier *
+        _inspirationModifier;
 
-    public float CurrentDef => 
+
+
+    public float CurrentDef =>
         (baseDef + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_DEF * (levelStatDef - 1)) *
         PlayerManager.Instance.ArmorDefBlacksmithMultiplier *
         PlayerManager.Instance.BootsDefBlacksmithMultiplier *
         PlayerManager.Instance.FisherGuardianSeriesMultiplier *
-        defModifier;
+        defModifier *
+        _inspirationModifier;
+        
 
     // todo: if more mehods will be available to increase atk spd and crit rate, then check if you want those stats to be past the max threshold
     public float CurrentAtkSpd => 
         (baseAtkSpd + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_ATK_SPEED * (levelStatAtkSpd - 1)) *
         PlayerManager.Instance.GlovesAtkSpdBlacksmithMultiplier *
         PlayerManager.Instance.FisherDartSeriesMultiplier *
-        atkSpdModifier;
+        atkSpdModifier *
+        _inspirationModifier;
 
     public float CurrentCritRate => 
         (baseCritRate + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_CRIT_RATE * (levelStatCritRate - 1)) *
         PlayerManager.Instance.BootsCritRateBlacksmithMultiplier *
-        PlayerManager.Instance.FisherSharpSeriesMultiplier;
+        PlayerManager.Instance.FisherSharpSeriesMultiplier *
+        _inspirationModifier;
 
     public float CurrentCritDmg => 
         (baseCritDmg + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_CRIT_DMG * (levelStatCritDmg - 1)) *
         PlayerManager.Instance.GlovesCritDmgBlacksmithMultiplier *
         PlayerManager.Instance.FisherPiercingSeriesMultiplier *
-        critDmgModifier;
+        critDmgModifier *
+        _inspirationModifier;
 
     // affects card drop rates, and gives a one more chance to crit rate check
     public float CurrentLuck => 
         (baseLuck + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_LUCK * (levelStatLuck - 1)) *
-        PlayerManager.Instance.FisherGoldenSeriesMultiplier;
+        PlayerManager.Instance.FisherGoldenSeriesMultiplier +
+        (_inspirationModifier - 1f); // so adds .1
 
 
     // ----- SHIELD 

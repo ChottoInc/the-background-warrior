@@ -61,6 +61,9 @@ public class EditorQuestDailySO : Editor
 
     private SerializedProperty s_amountRank;
 
+    // --------- Quest Summon ---------
+    private SerializedProperty s_amountSummon;
+
 
 
     private void OnEnable()
@@ -95,6 +98,8 @@ public class EditorQuestDailySO : Editor
         s_questSpellSpecific = s_questData.FindPropertyRelative("questSpellSpecific");
         s_spellSO = s_questData.FindPropertyRelative("spellSO");
         s_amountRank = s_questData.FindPropertyRelative("amountRank");
+
+        s_amountSummon = s_questData.FindPropertyRelative("amountSummon");
     }
 
     public override void OnInspectorGUI()
@@ -204,6 +209,12 @@ public class EditorQuestDailySO : Editor
 
                     EditorGUILayout.Space();
                     EditorGUILayout.PropertyField(s_amountRank);
+
+                    break;
+
+                case QuestObjectiveType.Summon:
+                    EditorGUILayout.Space();
+                    EditorGUILayout.PropertyField(s_amountSummon);
 
                     break;
             }

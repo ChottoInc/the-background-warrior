@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(TMP_Text))]
-public class UITextHoverChangeColor : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UITextHoverChangeColor : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] float _timerColor = 0.5f;
     [SerializeField] Color _hoverColor;
@@ -46,5 +46,10 @@ public class UITextHoverChangeColor : MonoBehaviour, IPointerEnterHandler, IPoin
         _tweenColor?.Kill();
 
         _tweenColor = _text.DOColor(_startingColor, _timerColor).SetEase(Ease.InOutSine).SetLink(gameObject, LinkBehaviour.KillOnDestroy).SetUpdate(true);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Unpaint();
     }
 }

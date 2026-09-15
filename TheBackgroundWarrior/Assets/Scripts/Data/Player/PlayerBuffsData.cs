@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using static UtilsBuffs;
 
 public class PlayerBuffsData
@@ -69,7 +70,17 @@ public class PlayerBuffsData
         if (HasBuff(buff))
         {
             var buffInList = GetBuffByType(buff.BuffType);
-            buff.AddTimer(buff.StartDuration);
+
+            // custom add if buff is ispiration
+            if(buff.BuffType == BuffType.Inspiration)
+            {
+                buffInList.AddTimer(buff.RemainingTime);
+                //Debug.Log("remaining: " + buffInList.RemainingTime);
+            }
+            else
+            {
+                buffInList.AddTimer(buff.StartDuration);
+            }
         }
         else
         {
@@ -109,7 +120,24 @@ public class PlayerBuffsData
         // get buff from the list
         var buff = GetBuffByType(buffType);
 
-        // remove from list
-        RemoveBuff(buff);
+        if(buffType != BuffType.Inspiration)
+        {
+            // remove from list
+            RemoveBuff(buff);
+        }
+        else
+        {
+            // just don't remove it, let it idle if it's Inspiration buff
+        }
+    }
+
+    public bool IsInspirationBuffActive()
+    {
+        if (HasBuff(BuffType.Inspiration))
+        {
+            var inspirationBuff = GetBuffByType(BuffType.Inspiration);
+            return inspirationBuff.RemainingTime > 0 ? true : false;
+        }
+        return false;
     }
 }

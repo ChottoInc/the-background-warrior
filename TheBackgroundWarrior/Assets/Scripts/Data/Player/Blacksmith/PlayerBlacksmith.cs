@@ -75,6 +75,7 @@ public class PlayerBlacksmith : Player
             UtilsBuffs.BuffType.Greed,
             UtilsBuffs.BuffType.Veteran,
             UtilsBuffs.BuffType.Dwarf,
+            UtilsBuffs.BuffType.Inspiration,
         };
 
         OnTryForge();

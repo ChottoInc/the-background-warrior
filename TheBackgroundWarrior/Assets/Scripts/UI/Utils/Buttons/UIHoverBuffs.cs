@@ -20,9 +20,17 @@ public class UIHoverBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _tabBuff.OnDeselected -= Deselected;
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        gameObject.SetActive(PlayerManager.Instance.PlayerJobsData.AvailableJobs.Contains(UtilsPlayer.PlayerJob.Alchemist));
+        if (!PlayerManager.Instance.PlayerJobsData.AvailableJobs.Contains(UtilsPlayer.PlayerJob.Alchemist) &&
+            !PlayerManager.Instance.PlayerJobsData.AvailableJobs.Contains(UtilsPlayer.PlayerJob.Bard))
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+        }
     }
 
     private void Selected()
@@ -42,7 +50,18 @@ public class UIHoverBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (PlayerManager.Instance.PlayerBuffsData.ActiveBuffs.Count < 1) return;
+        var buffDatas = PlayerManager.Instance.PlayerBuffsData;
+
+        // check if on buffs or if the only one is inspiration with no remaining time, don't show in that case
+        if (buffDatas.ActiveBuffs.Count < 1) 
+            return;
+        else if(buffDatas.ActiveBuffs.Count == 1)
+        {
+            if (buffDatas.ActiveBuffs[0].BuffType == UtilsBuffs.BuffType.Inspiration)
+            {
+                if (buffDatas.ActiveBuffs[0].RemainingTime <= 0) return;
+            }
+        }
 
         if (_isTabbed) return;
 
@@ -55,7 +74,7 @@ public class UIHoverBuffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (PlayerManager.Instance.PlayerBuffsData.ActiveBuffs.Count < 1) return;
+        if (!_isOpen) return;
 
         OnExit();
     }

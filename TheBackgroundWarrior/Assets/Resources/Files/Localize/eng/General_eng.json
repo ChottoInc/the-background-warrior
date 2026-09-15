@@ -293,7 +293,7 @@
     "text_settings_gameplay_option_showadvancedstats": "Show advanced stats",
     "text_quest_desc_craft_specific": "Craft {0} {1}",
     "text_quest_desc_craft_nonspecific": "Craft {0} Concoctions",
-    "text_job_necromancer_unlockconditions": "Coming soon",
+    "text_job_necromancer_unlockconditions": "Max out Mage's Scholar ability",
     "text_button_help_filter_necromancer": "Necromancer",
     "text_name_class_necromancer": "Necromancer",
     "text_name_necromancer_stat_aptitude": "Aptitude",
@@ -312,5 +312,11 @@
     "text_job_necromancer_afterlife_unlockconditions": "Max out Aptitude and Might abilities to unlock",
     "text_job_necromancer_ade_unlockconditions": "Max out Lifespan and Luck abilities to unlock",
     "text_job_necromancer_ritual_locked": "Ritual locked",
-    "text_button_chant": "Chant"
+    "text_button_chant": "Chant",
+    "text_quest_desc_summon_plural": "Summon {0} Undeads with the Warrior",
+    "text_job_bard_unlockconditions": "Purchasable from the shop",
+    "text_button_play": "Play",
+    "text_button_help_filter_bard": "Bard",
+    "text_name_buff_inspiration": "Inspiration",
+    "text_name_buff_inspiration_effect": "Thanks to the songs played earlier, some abilities have a 10% boost."
 }

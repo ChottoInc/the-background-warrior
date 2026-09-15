@@ -16,6 +16,7 @@ public static class UtilsQuestDescriptions
             case QuestObjectiveType.UnlockMap: return HandleUnlockMapDescription(data);
             case QuestObjectiveType.Befriend: return HandleBefriendDescription(data);
             case QuestObjectiveType.SpellRank: return HandleSpellRankUpDescription(data);
+            case QuestObjectiveType.Summon: return HandleSummonDescription(data);
         }
     }
 
@@ -143,5 +144,10 @@ public static class UtilsQuestDescriptions
                 ? string.Format(AllText[text_quest_desc_spellrankup_nonspecific_multiple], data.amountRank  )
                 : string.Format(AllText[text_quest_desc_spellrankup_nonspecific_once], data.amountStat);
         }
+    }
+
+    private static string HandleSummonDescription(QuestData data)
+    {
+        return string.Format(AllText[text_quest_desc_summon_plural], data.amountSummon);
     }
 }

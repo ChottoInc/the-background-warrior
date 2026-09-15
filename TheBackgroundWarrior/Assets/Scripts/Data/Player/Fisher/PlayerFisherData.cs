@@ -38,9 +38,9 @@ public class PlayerFisherData : BasePlayerData
     public long ExpToNextLevel => UtilsFisher.RequiredExpForFisherLevel(CurrentLevel + 1);
 
     public float CurrentCalmness => baseCalmness + UtilsFisher.PER_LEVEL_FISHER_GAIN_CALMNESS * (LevelStatCalmness);
-    public float CurrentReflex => baseReflex + UtilsFisher.PER_LEVEL_FISHER_GAIN_REFLEX * (LevelStatReflex - 1);
-    public float CurrentKnowledge => baseKnowledge + UtilsFisher.PER_LEVEL_FISHER_GAIN_KNOWLEDGE * (LevelStatKnowledge - 1);
-    public float CurrentLuck => baseLuck + UtilsFisher.PER_LEVEL_FISHER_GAIN_LUCK * (LevelStatLuck - 1);
+    public float CurrentReflex => baseReflex + UtilsFisher.PER_LEVEL_FISHER_GAIN_REFLEX * (LevelStatReflex - 1) + (_inspirationModifier - 1f);
+    public float CurrentKnowledge => baseKnowledge + UtilsFisher.PER_LEVEL_FISHER_GAIN_KNOWLEDGE * (LevelStatKnowledge - 1) + (_inspirationModifier - 1f);
+    public float CurrentLuck => baseLuck + UtilsFisher.PER_LEVEL_FISHER_GAIN_LUCK * (LevelStatLuck - 1) + (_inspirationModifier - 1f);
 
 
     // ---- FISH GROUPS CHECKS COMPLETION

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8063adf197e70e4eab893f6b612c4e2, type: 3}
+  m_Name: ShopJobBard
+  m_EditorClassIdentifier: 
+  id: 1
+  uniqueId: shopjob_bard
+  isUnique: 1
+  isDaily: 0
+  shopItemType: 1
+  itemNameTextId: text_shopitem_job_bard_name
+  itemName: 'Class: Bard'
+  itemDescTextId: text_shopitem_job_bard_desc
+  itemDesc: Unlock the Bard Class
+  price: 2000
+  sprite: {fileID: 21300000, guid: 0bfbda23b1a63a144a3d126fe269f971, type: 3}
+  shoppingJob: 9

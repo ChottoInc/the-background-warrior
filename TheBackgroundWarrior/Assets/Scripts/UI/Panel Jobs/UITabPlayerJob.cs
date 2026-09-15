@@ -21,6 +21,7 @@ public class UITabPlayerJob : UITabWindow
     [SerializeField] UITab tabMage;
     [SerializeField] UITab tabAlchemist;
     [SerializeField] UITab tabNecromancer;
+    [SerializeField] UITab tabBard;
 
     private List<UIButtonJobTab> jobTabs;
 
@@ -53,6 +54,7 @@ public class UITabPlayerJob : UITabWindow
                 case SceneLoaderManager.SceneType.Mage: currentTab = UtilsPlayer.PlayerJob.Mage; break;
                 case SceneLoaderManager.SceneType.Alchemist: currentTab = UtilsPlayer.PlayerJob.Alchemist; break;
                 case SceneLoaderManager.SceneType.Necromancer: currentTab = UtilsPlayer.PlayerJob.Necromancer; break;
+                case SceneLoaderManager.SceneType.Bard: currentTab = UtilsPlayer.PlayerJob.Bard; break;
             }
             ChangeCurrentTab(currentTab);
         }
@@ -75,7 +77,8 @@ public class UITabPlayerJob : UITabWindow
                 tabFarmer.GetComponent<UIButtonJobTab>(),
                 tabMage.GetComponent<UIButtonJobTab>(),
                 tabAlchemist.GetComponent<UIButtonJobTab>(),
-                tabNecromancer.GetComponent<UIButtonJobTab>()
+                tabNecromancer.GetComponent<UIButtonJobTab>(),
+                tabBard.GetComponent<UIButtonJobTab>()
             };
         }
     }
@@ -94,6 +97,7 @@ public class UITabPlayerJob : UITabWindow
             case UtilsPlayer.PlayerJob.Mage: tabMage.Select(); break;
             case UtilsPlayer.PlayerJob.Alchemist: tabAlchemist.Select(); break;
             case UtilsPlayer.PlayerJob.Necromancer: tabNecromancer.Select(); break;
+            case UtilsPlayer.PlayerJob.Bard: tabBard.Select(); break;
         }
 
         ChangeTitleText(tab);
@@ -129,6 +133,7 @@ public class UITabPlayerJob : UITabWindow
             case UtilsPlayer.PlayerJob.Mage: textJob.text = UtilsText.AllText[UtilsText.text_button_help_filter_mage]; break;
             case UtilsPlayer.PlayerJob.Alchemist: textJob.text = UtilsText.AllText[UtilsText.text_button_help_filter_alchemist]; break;
             case UtilsPlayer.PlayerJob.Necromancer: textJob.text = UtilsText.AllText[UtilsText.text_button_help_filter_necromancer]; break;
+            case UtilsPlayer.PlayerJob.Bard: textJob.text = UtilsText.AllText[UtilsText.text_button_help_filter_bard]; break;
         }
     }
 

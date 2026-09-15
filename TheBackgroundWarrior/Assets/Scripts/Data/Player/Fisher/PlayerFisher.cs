@@ -9,6 +9,9 @@ public class PlayerFisher : Player
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] bool faceRight;
 
+    [Header("Focus Fishing")]
+    [SerializeField] FocusFishingManager _focusFighingManager;
+
 
     private float timer5Mins;
 
@@ -52,6 +55,7 @@ public class PlayerFisher : Player
             UtilsBuffs.BuffType.MorningAngler,
             UtilsBuffs.BuffType.AfternoonAngler,
             UtilsBuffs.BuffType.NightAngler,
+            UtilsBuffs.BuffType.Inspiration,
         };
     }
 
@@ -222,6 +226,12 @@ public class PlayerFisher : Player
             FishSpawnManager.Instance.CheckBuffs();
             OnBaitChange?.Invoke();
         }
+    }
+
+
+    public void OnButtonFocusFishing()
+    {
+        _focusFighingManager.Open();
     }
 
 

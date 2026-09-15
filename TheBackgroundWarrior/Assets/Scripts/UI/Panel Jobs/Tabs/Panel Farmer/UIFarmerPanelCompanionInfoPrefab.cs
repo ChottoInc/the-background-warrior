@@ -30,7 +30,7 @@ public class UIFarmerPanelCompanionInfoPrefab : MonoBehaviour
         imageIconCompanion.sprite = companionData.CompanionSO.IconCompanion;
 
         textName.text = companionData.CompanionSO.CompanionName;
-        textLevel.text = companionData.CurrentLevel.ToString();
+        textLevel.text = string.Format(UtilsText.AllText[UtilsText.text_job_current_stat_level], companionData.CurrentLevel);
         barExp.Setup(companionData.ExpToNextLevel, companionData.CurrentExp);
 
         float valueStat = companionData.CompanionSO.StatModifier.BaseModifierValue + (companionData.CompanionSO.StatModifier.IncreasePerLevelValue * (companionData.CurrentLevel - 1));

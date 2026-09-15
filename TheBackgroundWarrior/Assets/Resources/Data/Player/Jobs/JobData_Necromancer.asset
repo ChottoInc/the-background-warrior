@@ -16,4 +16,4 @@ MonoBehaviour:
   requiredJobs: 06000000
   jobName: Necromancer
   unlockConditionsTextId: text_job_necromancer_unlockconditions
-  unlockConditions: Coming soon
+  unlockConditions: Max out Mage's Scholar ability

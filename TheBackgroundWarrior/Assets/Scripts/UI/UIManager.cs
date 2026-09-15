@@ -34,7 +34,8 @@ public class UIManager : MonoBehaviour
 
     public virtual void Setup()
     {
-        playerExpBar.Setup();
+        if(playerExpBar != null)
+            playerExpBar.Setup();
     }
 
     protected virtual void OnInvertedHUD(bool isOn)

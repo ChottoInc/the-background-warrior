@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2728cf02cf06c1b4298480f9c95eb84b, type: 3}
+  m_Name: QuestDailyData_Necromancer_2
+  m_EditorClassIdentifier: 
+  uniqueId: daily_necromancer_2
+  availableFor: 08000000
+  questData:
+    questObjectiveType: 7
+    questKillSpecific: 1
+    monsterId: 14
+    amountKill: 20
+    itemType: 1
+    questObtainSpecific: 0
+    itemId: 3
+    amountObtain: 5
+    questLevelUpSpecific: 1
+    statId: 83
+    amountStat: 1
+    mapId: 0
+    questBefriendSpecific: 0
+    companionSO: {fileID: 0}
+    amountBefriend: 0
+    questSpellSpecific: 0
+    spellSO: {fileID: 0}
+    amountRank: 0
+    amountSummon: 20
+    rewardAmount: 0

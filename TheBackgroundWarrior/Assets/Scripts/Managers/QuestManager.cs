@@ -193,6 +193,7 @@ public class QuestManager : MonoBehaviour
             PlayerManager.Instance.OnItemAdd -= questEventHandler.OnItemObtain;
             PlayerManager.Instance.OnCompanionBefriended -= questEventHandler.OnBefriend;
             PlayerManager.Instance.OnSpellRankUp -= questEventHandler.OnSpellRankUp;
+            PlayerManager.Instance.OnSummon -= questEventHandler.OnSummon;
         }
     }
 
@@ -255,6 +256,7 @@ public class QuestManager : MonoBehaviour
             PlayerManager.Instance.OnItemAdd += questEventHandler.OnItemObtain;
             PlayerManager.Instance.OnCompanionBefriended += questEventHandler.OnBefriend;
             PlayerManager.Instance.OnSpellRankUp += questEventHandler.OnSpellRankUp;
+            PlayerManager.Instance.OnSummon += questEventHandler.OnSummon;
             isPlayerObserverInit = true;
         }
     }

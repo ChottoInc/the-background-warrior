@@ -2860,6 +2860,127 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: FishingRockHit
+    tag: 
+    clip: {fileID: 8300000, guid: e495d5c0c743f9443ae68c9d45260c03, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FishingStarHit
+    tag: 
+    clip: {fileID: 8300000, guid: d92fd1163cb3e3a4490f36163be64c67, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ReelingFish
+    tag: 
+    clip: {fileID: 8300000, guid: 7ab0a5594345976418bef9f7c830517c, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  musics:
+  - name: Moonlight
+    tag: 
+    clip: {fileID: 8300000, guid: 9574241102351f249a21817199c6aa35, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HollowVale
+    tag: 
+    clip: {fileID: 8300000, guid: aa9a3b19304e4294b86d6c119a38d351, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HiddenSprings
+    tag: 
+    clip: {fileID: 8300000, guid: fde81eaa1788cc943b056595d659e86a, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BeyondMist
+    tag: 
+    clip: {fileID: 8300000, guid: 00d5e7a9fd2623c4288a6be3d6f6b6ce, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WhisperingPines
+    tag: 
+    clip: {fileID: 8300000, guid: 4bffd8957d5df7e4da4d6a4b37747de3, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PaleWaters
+    tag: 
+    clip: {fileID: 8300000, guid: eae3fd58129690b44b3f67d260baf7ba, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FrozenHollow
+    tag: 
+    clip: {fileID: 8300000, guid: 500dcfa0f902a6a44ad5a5513f9c4a2d, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SapphireGlade
+    tag: 
+    clip: {fileID: 8300000, guid: b516c6cb77fcedf4eac422695a97b11a, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WhiteMoss
+    tag: 
+    clip: {fileID: 8300000, guid: 8f504113fccd5374386ae8be5ad93f04, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ShroudedWaters
+    tag: 
+    clip: {fileID: 8300000, guid: 00c5f3263f56d3142ae747f693fbbf90, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SilentReach
+    tag: 
+    clip: {fileID: 8300000, guid: 672ce620c5fa97e45986b2d4d0ba5427, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ForgottenWaters
+    tag: 
+    clip: {fileID: 8300000, guid: 3068b748e2f3c3644ab2ec91d33abca2, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   mixer: {fileID: 24100000, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
 --- !u!4 &1299317318
 Transform:

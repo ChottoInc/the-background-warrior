@@ -193,5 +193,6 @@
     "text_necromancer_ritual_summon_desc": "Mentre avanzerà per le zone, il Guerriero evocherà non morti che lo assisteranno",
     "text_necromancer_ritual_arise_desc": "Quando un non morto viene evocato, c'è la possibilità che sia più forte rispetto agli altri",
     "text_necromancer_ritual_afterlife_desc": "Quando un non morto muore, genererà un'esplosione intorno a lui, danneggiando i nemici",
-    "text_necromancer_ritual_ade_desc": "Aumenta permanentemente la tua orda massima di 1"
+    "text_necromancer_ritual_ade_desc": "Aumenta permanentemente la tua orda massima di 1",
+    "text_shopitem_job_bard_desc": "Sblocca il Lavoro del Bardo"
 }

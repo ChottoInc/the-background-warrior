@@ -20,6 +20,8 @@ public static class UtilsBuffs
         NightAngler = 32,           // find night fishes
 
         IronSkin = 40,              // gain 20% max hp shield warrior
+
+        Inspiration = 100,
     }
 
     private static Dictionary<int, ListableGameDataSO> _dictBuffToSprite;

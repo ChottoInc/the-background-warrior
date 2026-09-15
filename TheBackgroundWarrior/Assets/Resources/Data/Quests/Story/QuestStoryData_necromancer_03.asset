@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d05ce0d79a62e439bccafccf5010d1, type: 3}
+  m_Name: QuestStoryData_necromancer_03
+  m_EditorClassIdentifier: 
+  uniqueId: necromancer_03
+  isActiveFromStart: 0
+  availableFor: 08000000
+  questData:
+    questObjectiveType: 7
+    questKillSpecific: 1
+    monsterId: 0
+    amountKill: 100
+    itemType: 1
+    questObtainSpecific: 0
+    itemId: 0
+    amountObtain: 0
+    questLevelUpSpecific: 1
+    statId: 82
+    amountStat: 5
+    mapId: 0
+    questBefriendSpecific: 0
+    companionSO: {fileID: 0}
+    amountBefriend: 0
+    questSpellSpecific: 1
+    spellSO: {fileID: 11400000, guid: d71eefb396908844486905bfeb3bae89, type: 2}
+    amountRank: 1
+    amountSummon: 20
+    rewardAmount: 20
+  nexts:
+  - {fileID: 11400000, guid: c74bbfc90f2ae4249acc17fd901890fd, type: 2}

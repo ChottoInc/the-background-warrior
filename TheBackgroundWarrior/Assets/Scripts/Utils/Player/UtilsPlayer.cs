@@ -6,7 +6,7 @@ public static class UtilsPlayer
 {
     public enum AdvanceStatType { None, Flat, Multiplier }
 
-    public enum PlayerJob { None, Warrior, Miner, Blacksmith, Fisher, Farmer, Mage, Alchemist, Necromancer }
+    public enum PlayerJob { None, Warrior, Miner, Blacksmith, Fisher, Farmer, Mage, Alchemist, Necromancer, Bard }
 
     private static PlayerJobSO[] jobs;
 

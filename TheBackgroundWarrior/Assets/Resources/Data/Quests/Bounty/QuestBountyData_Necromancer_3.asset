@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5620acb1e6c7d71438f111e01474049d, type: 3}
+  m_Name: QuestBountyData_Necromancer_3
+  m_EditorClassIdentifier: 
+  uniqueId: bounty_necromancer_3
+  availableFor: 08000000
+  questData:
+    questObjectiveType: 7
+    questKillSpecific: 0
+    monsterId: 14
+    amountKill: 1000
+    itemType: 1
+    questObtainSpecific: 0
+    itemId: 0
+    amountObtain: 30
+    questLevelUpSpecific: 0
+    statId: 0
+    amountStat: 5
+    mapId: 0
+    questBefriendSpecific: 0
+    companionSO: {fileID: 0}
+    amountBefriend: 0
+    questSpellSpecific: 0
+    spellSO: {fileID: 0}
+    amountRank: 0
+    amountSummon: 150
+    rewardAmount: 120

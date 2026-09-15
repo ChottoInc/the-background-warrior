@@ -18,5 +18,7 @@
     "text_description_blacksmith_equipment": "Equipment max level: {0}",
     "text_description_mage_slots": "Spells can be equipped in empty slots. A new slot is unlocked every 5 levels of Proficiency ability",
     "text_help_necromancer": "<align=\"center\">Necromancer<br>----------------------------</align><br>Max out your Necromancer abilities to unlock new permanent rituals.<br>The Necromancer trains by making is summons fight themselves, increasing the Aptitude ability will also increase the amount of summons that will fight.<br>All Necromancer abilities will increase the summon statistics, except for aptitude and luck, that will also increase the amount of experience gained by the Necromancer.",
-    "text_description_necromancer": "Description:<br>Max out your Necromancer abilities to unlock new permanent rituals"
+    "text_description_necromancer": "Description:<br>Max out your Necromancer abilities to unlock new permanent rituals",
+    "text_help_bard": "<align=\"center\">Bard<br>----------------------------</align><br>The songs played by the Bard have no direct impact on the gameplay, you can chose whether play in random order or looping a single song.<br>When switching job, some abilities will have a 10% boost for half of the time the Bard played.",
+    "text_description_bard": "Description:<br>Play songs to chill a bit. Get a 10% boost on some abilities for half the time of played songs"
 }

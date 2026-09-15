@@ -6,7 +6,7 @@ public static class UtilsQuest
 {
     public enum QuestType { Story, Daily, Bounties }
 
-    public enum QuestObjectiveType { Kill, Obtain, LevelUp, UnlockMap, Befriend, SpellRank, Craft }
+    public enum QuestObjectiveType { Kill, Obtain, LevelUp, UnlockMap, Befriend, SpellRank, Craft, Summon }
 
 
     private static QuestStorySO[] storySOs;
@@ -158,6 +158,10 @@ public static class UtilsQuest
             case QuestObjectiveType.SpellRank:
                 result += string.Format("\n{0}/{1}", progress.progressCounter, data.amountRank);
                 break;
+
+            case QuestObjectiveType.Summon:
+                result += string.Format("\n{0}/{1}", progress.progressCounter, data.amountSummon);
+                break;
         }
 
         return result;
@@ -189,6 +193,9 @@ public static class UtilsQuest
 
             case QuestObjectiveType.UnlockMap:
                 return HandleCompletedQuestCheck(progress.progressCompleted);
+
+            case QuestObjectiveType.Summon:
+                return HandleCounterQuestCheck(data.amountSummon, progress.progressCounter);
         }
     }
 
@@ -292,6 +299,10 @@ public static class UtilsQuest
 
         public int amountRank;
 
+        // --------- Quest Summon ---------
+
+        public int amountSummon;
+
 
         // --------- Reward ---------
         public int rewardAmount;
@@ -375,6 +386,9 @@ public static class UtilsQuest
 
         // on rank spell level up
         public int spellId;
+
+        // on summon
+        public int summonAmount;
     }
 
     #endregion

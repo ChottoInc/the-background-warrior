@@ -33,6 +33,8 @@ public class PlayerManager : MonoBehaviour
 
     public PlayerNecromancerData PlayerNecromancerData { get; private set; }
 
+    public PlayerBardData PlayerBardData { get; private set; }
+
 
 
     // TRIGGERS FOR QUESTS
@@ -40,6 +42,7 @@ public class PlayerManager : MonoBehaviour
     public event Action<int> OnItemAdd;
     public event Action<int> OnCompanionBefriended;
     public event Action<int> OnSpellRankUp;
+    public event Action<int> OnSummon;
 
 
 
@@ -99,6 +102,13 @@ public class PlayerManager : MonoBehaviour
         {
             Inventory.OnItemAdd -= ItemAdd;
         }
+
+        // ensure at close the inspiration buff is removed, it's added again on startup
+        if(PlayerBuffsData != null)
+        {
+            Buff bardBuff = new Buff(UtilsBuffs.BuffType.Inspiration, 0);
+            PlayerBuffsData.RemoveBuff(bardBuff);
+        }
     }
 
     // Called after Settings Manager setup
@@ -120,6 +130,7 @@ public class PlayerManager : MonoBehaviour
             LoadMageData();
             LoadAlchemistData();
             LoadNecromancerData();
+            LoadBardData();
 
             LoadFightData();
         }
@@ -552,7 +563,7 @@ public class PlayerManager : MonoBehaviour
         catch (ConversionException e)
         {
             Debug.LogError(e.Message);
-            throw new FatalLoadException("Cannot load alchemist data");
+            throw new FatalLoadException("Cannot load necromancer data");
         }
         catch (FileNotFoundException e)
         {
@@ -575,6 +586,48 @@ public class PlayerManager : MonoBehaviour
         saveService.SaveData(UtilsSave.GetPlayerNecromancerFile(), data, SettingsManager.Instance.FileEncryption);
     }
 
+    public void OnSummonEvent(int amount)
+    {
+        OnSummon?.Invoke(amount);
+    }
+
+    #endregion
+
+    #region BARD DATA
+
+    private void LoadBardData()
+    {
+        try
+        {
+            PlayerBardSaveData bardSaveData = saveService.LoadData<PlayerBardSaveData>(UtilsSave.GetPlayerBardFile(), SettingsManager.Instance.FileEncryption);
+            PlayerBardData = new PlayerBardData(bardSaveData);
+        }
+        catch (ConversionException e)
+        {
+            Debug.LogError(e.Message);
+            throw new FatalLoadException("Cannot load bard data");
+        }
+        catch (FileNotFoundException e)
+        {
+            Debug.LogWarning(e.Message);
+
+            PlayerBardData = new PlayerBardData();
+            SaveBardData();
+        }
+    }
+
+    public void UpdateBardData(PlayerBardData data)
+    {
+        PlayerBardData = data;
+        SaveBardData();
+    }
+
+    public void SaveBardData()
+    {
+        PlayerBardSaveData data = new PlayerBardSaveData(PlayerBardData);
+        saveService.SaveData(UtilsSave.GetPlayerBardFile(), data, SettingsManager.Instance.FileEncryption);
+    }
+
     #endregion
 
     public void SaveAll()
@@ -588,6 +641,8 @@ public class PlayerManager : MonoBehaviour
         SaveFarmerData();
         SaveMageData();
         SaveAlchemistData();
+        SaveNecromancerData();
+        SaveBardData();
 
         SaveJobsData();
     }

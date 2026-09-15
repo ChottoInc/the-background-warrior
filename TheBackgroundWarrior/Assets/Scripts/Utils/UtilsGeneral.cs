@@ -57,8 +57,8 @@ public static class UtilsGeneral
             new TutorialDialogueNeedPos(TUTORIAL_INTRO_5, true),
             new TutorialDialogueNeedPos(TUTORIAL_INTRO_6, false),
 
-            new TutorialDialogueNeedPos(TUTORIAL_INTRO_7, false),
-            new TutorialDialogueNeedPos(TUTORIAL_INTRO_8, true),
+            new TutorialDialogueNeedPos(TUTORIAL_INTRO_7, true),
+            new TutorialDialogueNeedPos(TUTORIAL_INTRO_8, false),
 
             new TutorialDialogueNeedPos(TUTORIAL_INTRO_9, true),
 

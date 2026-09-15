@@ -88,6 +88,7 @@ public class PlayerMiner : Player
             UtilsBuffs.BuffType.Greed,
             UtilsBuffs.BuffType.Veteran,
             UtilsBuffs.BuffType.Stoned,
+            UtilsBuffs.BuffType.Inspiration,
         };
     }
 

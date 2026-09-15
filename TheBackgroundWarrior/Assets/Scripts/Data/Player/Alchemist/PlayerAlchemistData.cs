@@ -34,10 +34,10 @@ public class PlayerAlchemistData : BasePlayerData
     public long ExpToNextLevel => UtilsAlchemist.RequiredExpForAlchemistLevel(CurrentLevel + 1);
 
 
-    public float CurrentRoutine => baseRoutine + UtilsAlchemist.PER_LEVEL_ALCHEMIST_GAIN_ROUTINE * (LevelStatRoutine - 1);
+    public float CurrentRoutine => baseRoutine + UtilsAlchemist.PER_LEVEL_ALCHEMIST_GAIN_ROUTINE * (LevelStatRoutine - 1) + (_inspirationModifier - 1f);
     public float CurrentYield => baseYield + UtilsAlchemist.PER_LEVEL_ALCHEMIST_GAIN_YIELD * (LevelStatYield - 1);
     public float CurrentResearch => baseResearch + UtilsAlchemist.PER_LEVEL_ALCHEMIST_GAIN_RESEARCH * LevelStatResearch;
-    public float CurrentStability => baseStability + UtilsAlchemist.PER_LEVEL_ALCHEMIST_GAIN_STABILITY * (LevelStatStability - 1);
+    public float CurrentStability => baseStability + UtilsAlchemist.PER_LEVEL_ALCHEMIST_GAIN_STABILITY * (LevelStatStability - 1) + (_inspirationModifier - 1f);
 
 
 

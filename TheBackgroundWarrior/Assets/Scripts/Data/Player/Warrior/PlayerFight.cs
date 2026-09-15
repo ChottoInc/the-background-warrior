@@ -121,6 +121,7 @@ public class PlayerFight : Player, IDamageable, IHealable
             UtilsBuffs.BuffType.Veteran,
             UtilsBuffs.BuffType.Storyteller,
             UtilsBuffs.BuffType.IronSkin,
+            UtilsBuffs.BuffType.Inspiration,
         };
     }
 

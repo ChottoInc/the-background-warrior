@@ -51,6 +51,7 @@ public class PlayerMage : Player
             UtilsBuffs.BuffType.Greed,
             UtilsBuffs.BuffType.Veteran,
             UtilsBuffs.BuffType.Arcanist,
+            UtilsBuffs.BuffType.Inspiration,
         };
     }
 

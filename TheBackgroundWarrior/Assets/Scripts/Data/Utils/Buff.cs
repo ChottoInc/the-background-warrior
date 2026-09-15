@@ -47,6 +47,12 @@ public class Buff
     public void DecreaseTimer(float val)
     {
         RemainingTime -= val;
-        if (IsExpired) OnBuffExpired?.Invoke(BuffType);
+
+        if (IsExpired)
+        {
+            RemainingTime = 0;
+            OnBuffExpired?.Invoke(BuffType);
+        }
+        
     }
 }

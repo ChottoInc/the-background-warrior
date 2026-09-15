@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using static UtilsQuest;
 
 public class QuestEventHandler
@@ -461,6 +460,65 @@ public class QuestEventHandler
     }
 
     private void UpdateSpellRankProgress(QuestType questType, string questId)
+    {
+        QuestDataProgress progress;
+
+        switch (questType)
+        {
+            default:
+            case QuestType.Story:
+                progress = QuestManager.Instance.DictQuestsStoryProgress[questId];
+
+                progress.progressCounter++;
+                QuestManager.Instance.DictQuestsStoryProgress[questId] = progress;
+                break;
+
+            case QuestType.Bounties:
+                progress = QuestManager.Instance.DictQuestsBountyProgress[questId];
+
+                progress.progressCounter++;
+                QuestManager.Instance.DictQuestsBountyProgress[questId] = progress;
+                break;
+
+            case QuestType.Daily:
+                progress = QuestManager.Instance.DictQuestsDailyProgress[questId];
+
+                progress.progressCounter++;
+                QuestManager.Instance.DictQuestsDailyProgress[questId] = progress;
+                break;
+        }
+    }
+
+    #endregion
+
+    #region SUMMON EVENT
+
+    public void OnSummon(int amount)
+    {
+        // create custom event basic data
+        CustomEventData customEventData = new CustomEventData();
+        customEventData.summonAmount = amount;
+
+        HandleEvent(customEventData, HandleSummon);
+    }
+
+    private HandleEventResult HandleSummon(CustomEventData eventData)
+    {
+        HandleEventResult result = new HandleEventResult()
+        {
+            needSave = false,
+            needNotification = false
+        };
+
+        UpdateSummonProgress(eventData.questType, eventData.questId);
+        result.needSave = true;
+
+        result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
+
+        return result;
+    }
+
+    private void UpdateSummonProgress(QuestType questType, string questId)
     {
         QuestDataProgress progress;
 

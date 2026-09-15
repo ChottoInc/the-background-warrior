@@ -49,6 +49,7 @@ public static class UtilsText
     public const string text_name_buff_afternoonangler = "text_name_buff_afternoonangler";
     public const string text_name_buff_nightangler = "text_name_buff_nightangler";
     public const string text_name_buff_ironskin = "text_name_buff_ironskin";
+    public const string text_name_buff_inspiration = "text_name_buff_inspiration";
 
     public const string text_name_buff_greed_effect = "text_name_buff_greed_effect";
     public const string text_name_buff_veteran_effect = "text_name_buff_veteran_effect";
@@ -62,6 +63,7 @@ public static class UtilsText
     public const string text_name_buff_afternoonangler_effect = "text_name_buff_afternoonangler_effect";
     public const string text_name_buff_nightangler_effect = "text_name_buff_nightangler_effect";
     public const string text_name_buff_ironskin_effect = "text_name_buff_ironskin_effect";
+    public const string text_name_buff_inspiration_effect = "text_name_buff_inspiration_effect";
 
     public const string text_name_class_warrior = "text_name_class_warrior";
     public const string text_name_class_miner = "text_name_class_miner";
@@ -248,6 +250,8 @@ public static class UtilsText
     public const string text_quest_desc_spellrankup_nonspecific_once = "text_quest_desc_spellrankup_nonspecific_once";
     public const string text_quest_desc_spellrankup_nonspecific_multiple = "text_quest_desc_spellrankup_nonspecific_multiple";
 
+    public const string text_quest_desc_summon_plural = "text_quest_desc_summon_plural";
+
     public const string text_quest_reward_bounty = "text_quest_reward_bounty";
 
     // -------------------- SETTINGS --------------------- //
@@ -301,6 +305,7 @@ public static class UtilsText
     public const string text_job_mage_unlockconditions = "text_job_mage_unlockconditions";
     public const string text_job_alchemist_unlockconditions = "text_job_alchemist_unlockconditions";
     public const string text_job_necromancer_unlockconditions = "text_job_necromancer_unlockconditions";
+    public const string text_job_bard_unlockconditions = "text_job_bard_unlockconditions";
 
     public const string text_job_necromancer_arise_unlockconditions = "text_job_necromancer_arise_unlockconditions";
     public const string text_job_necromancer_afterlife_unlockconditions = "text_job_necromancer_afterlife_unlockconditions";
@@ -367,6 +372,7 @@ public static class UtilsText
     public const string text_button_gather = "text_button_gather";
     public const string text_button_forge = "text_button_forge";
     public const string text_button_chant = "text_button_chant";
+    public const string text_button_play = "text_button_play";
 
     public const string text_button_farm = "text_button_farm";
     public const string text_button_companions = "text_button_companions";
@@ -406,6 +412,7 @@ public static class UtilsText
     public const string text_button_help_filter_mage = "text_button_help_filter_mage";
     public const string text_button_help_filter_alchemist = "text_button_help_filter_alchemist";
     public const string text_button_help_filter_necromancer = "text_button_help_filter_necromancer";
+    public const string text_button_help_filter_bard = "text_button_help_filter_bard";
 
     public const string text_button_inventory_filter_all = "text_button_inventory_filter_all";
     public const string text_button_inventory_filter_ores = "text_button_inventory_filter_ores";
@@ -664,6 +671,7 @@ public static class UtilsText
 
 
     public const string text_shopitem_job_farmer_name = "text_shopitem_job_farmer_name";
+    public const string text_shopitem_job_bard_name = "text_shopitem_job_bard_name";
 
 
     public const string text_shopitem_bait_normalmorning_name = "text_shopitem_bait_normalmorning_name";
@@ -883,6 +891,7 @@ public static class UtilsText
 
 
     public const string text_shopitem_job_farmer_desc = "text_shopitem_job_farmer_desc";
+    public const string text_shopitem_job_bard_desc = "text_shopitem_job_bard_desc";
 
 
     public const string text_shopitem_bait_normalmorning_desc = "text_shopitem_bait_normalmorning_desc";
@@ -924,6 +933,7 @@ public static class UtilsText
     public const string text_help_mage = "text_help_mage";
     public const string text_help_alchemist = "text_help_alchemist";
     public const string text_help_necromancer = "text_help_necromancer";
+    public const string text_help_bard = "text_help_bard";
 
     public const string text_description_warrior = "text_description_warrior";
     public const string text_description_miner = "text_description_miner";
@@ -937,6 +947,7 @@ public static class UtilsText
     public const string text_description_mage_slots = "text_description_mage_slots";
     public const string text_description_alchemist = "text_description_alchemist";
     public const string text_description_necromancer = "text_description_necromancer";
+    public const string text_description_bard = "text_description_bard";
 
     #endregion
 
@@ -1051,6 +1062,7 @@ public static class UtilsText
             { text_name_buff_afternoonangler, "Afternoon Angler" },
             { text_name_buff_nightangler, "Night Angler" },
             { text_name_buff_ironskin, "Iron Skin" },
+            { text_name_buff_inspiration, "Inspiration" },
 
             { text_name_buff_greed_effect, "Increase Bits gain from all sources by 20% for {0} minutes." },
             { text_name_buff_veteran_effect, "Increase Experience gain from all sources by 20% for {0} minutes." },
@@ -1063,7 +1075,7 @@ public static class UtilsText
             { text_name_buff_morningangler_effect, "Attracts fishes normally found in the morning." },
             { text_name_buff_afternoonangler_effect, "Attracts fishes normally found in the afternoon." },
             { text_name_buff_nightangler_effect, "Attracts fishes normally found in the night." },
-            { text_name_buff_ironskin_effect, "At the start of a stage, gain a shield equal to 20% of Warrior Max Hp, lasts for {0} minutes." },
+            { text_name_buff_inspiration_effect, "Thanks to the songs played earlier, some abilities have a 10% boost." },
 
 
 
@@ -1257,6 +1269,8 @@ public static class UtilsText
             { text_quest_desc_spellrankup_nonspecific_once, "Rank up any spell {0} time" },
             { text_quest_desc_spellrankup_nonspecific_multiple, "Rank up any spell {0} times" },
 
+            { text_quest_desc_summon_plural, "Summon {0} Undeads with the Warrior" },
+
             { text_quest_reward_bounty, "Reward: {0} bits" },
 
              // -------------------- SETTINGS --------------------- //
@@ -1311,7 +1325,8 @@ public static class UtilsText
             { text_job_blacksmith_unlockconditions, "Collect at least 1 gold ore." },
             { text_job_mage_unlockconditions, "Find the Ancient Tome card" },
             { text_job_alchemist_unlockconditions, "Find the Debug mode code" },
-            { text_job_necromancer_unlockconditions, "Coming soon" },
+            { text_job_necromancer_unlockconditions, "Max out Mage's Scholar ability" },
+            { text_job_bard_unlockconditions, "Purchasable from the shop" },
 
             { text_job_necromancer_arise_unlockconditions, "Max out Summon and Horde abilities to unlock" },
             { text_job_necromancer_afterlife_unlockconditions, "Max out Aptitude and Might abilities to unlock" },
@@ -1379,6 +1394,7 @@ public static class UtilsText
             { text_button_gather, "Gather" },
             { text_button_forge, "Forge" },
             { text_button_chant, "Chant" },
+            { text_button_play, "Play" },
 
             { text_button_farm, "Farm" },
             { text_button_companions, "Companions" },
@@ -1418,6 +1434,7 @@ public static class UtilsText
             { text_button_help_filter_mage, "Mage" },
             { text_button_help_filter_alchemist, "Alchemist" },
             { text_button_help_filter_necromancer, "Necromancer" },
+            { text_button_help_filter_bard, "Bard" },
 
             { text_button_inventory_filter_all, "All" },
             { text_button_inventory_filter_ores, "Ores" },
@@ -1672,6 +1689,7 @@ public static class UtilsText
 
                                       
             { text_shopitem_job_farmer_name, "Class: Farmer" },
+            { text_shopitem_job_bard_name, "Class: Bard" },
 
 
             { text_shopitem_bait_normalmorning_name, "Box of Earthworm Baits" },
@@ -1915,6 +1933,7 @@ public static class UtilsText
 
                                        
             { text_shopitem_job_farmer_desc, "Unlock the Farmer Class" },
+            { text_shopitem_job_bard_desc, "Unlock the Bard Class" },
 
 
             { text_shopitem_bait_normalmorning_desc, "Contains 10 Earthworm Baits<br>Effect:{0}" },
@@ -1950,7 +1969,10 @@ public static class UtilsText
 
             { text_credits_sound,
                 "<align=\"center\">Sound<br>----------------------------</align><br>\"confirm 1.wav\" (used for UI click sounds) by JDWasabi (https://jdwasabi.itch.io/8-bit-16-bit-sound-effects-pack) " +
-                "licensed under an Attribution License<br><br>\"The Journey.wav\" (used in trailers) original music by Marllon Silva/xDeviruchi (https://www.youtube.com/xdeviruchi) licensed under an Attribution License"
+                "licensed under an Attribution License<br><br>" +
+                "\"The Journey.wav\" (used in trailers) original music by Marllon Silva/xDeviruchi (https://www.youtube.com/xdeviruchi) " +
+                "licensed under an Attribution License<br><br>" +
+                "\"Magical Fantasy Music Pack\" (Bard songs) original album by AlkaCrab (https://alkakrab.itch.io/free-12-magical-fantasy-tracks-music-pack-no-ai) licensed with CC0"
             },
 
             { text_credits_font,
@@ -2005,6 +2027,12 @@ public static class UtilsText
                 "All Necromancer abilities will increase the summon statistics, except for aptitude and luck, that will also increase the amount of experience gained by the Necromancer."
             },
 
+            { text_help_bard,
+                "<align=\"center\">Bard<br>----------------------------</align><br>The songs played by the Bard have no direct impact on the gameplay, " +
+                "you can chose whether play in random order or looping a single song.<br>" +
+                "When switching job, some abilities will have a 10% boost for half of the time the Bard played."
+            },
+
 
 
             { text_description_warrior,
@@ -2054,6 +2082,10 @@ public static class UtilsText
 
             { text_description_necromancer,
                 "Description:<br>Max out your Necromancer abilities to unlock new permanent rituals"
+            },
+
+            { text_description_bard,
+                "Description:<br>Play songs to chill a bit. Get a 10% boost on some stats for half the time of played songs"
             },
         };
     }
