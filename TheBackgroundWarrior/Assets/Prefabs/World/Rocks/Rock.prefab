@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6323284408116224053}
+  _timerChangeTransparency: 0.35
   smashVFX: {fileID: 9061979779493806944}
   durabilityBar: {fileID: 6808945624547708251}
 --- !u!61 &2828076969808884865
@@ -176,7 +177,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a68af13c92b00d458688e8bd7719d4a, type: 2}
+  - {fileID: 2100000, guid: 31a7453600e4e814fa8b25a8e83b2a9d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

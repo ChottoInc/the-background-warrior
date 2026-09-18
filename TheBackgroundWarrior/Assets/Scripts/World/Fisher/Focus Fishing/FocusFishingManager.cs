@@ -16,6 +16,7 @@ public class FocusFishingManager : MonoBehaviour
     private int _collectedStars;
 
     [Header("Fish")]
+    [SerializeField] PlayerFisher _player;
     [SerializeField] HookingFish _fish;
 
     [Header("Rocks")]
@@ -26,6 +27,10 @@ public class FocusFishingManager : MonoBehaviour
 
     [Header("Stars")]
     [SerializeField] FishingRockSpawner _starSpawner;
+
+
+    private FishSO _currentHookedFish;
+
 
     public bool CanCount { get; private set; }
     public bool HasGameStarted { get; private set; }
@@ -96,6 +101,8 @@ public class FocusFishingManager : MonoBehaviour
             star.ResetStar();
         }
 
+        _currentHookedFish = FishSpawnManager.Instance.GetRandomFishFromPool(false);
+
         CanCount = true;
     }
 
@@ -118,6 +125,8 @@ public class FocusFishingManager : MonoBehaviour
             StartCoroutine(CoLose());
 
             AudioManager.Instance.StopEffect("ReelingFish");
+
+            AudioManager.Instance.PlayEffect("LoseFocusFishing");
 
             //Debug.Log("Lose");
         }
@@ -146,6 +155,8 @@ public class FocusFishingManager : MonoBehaviour
 
         _fish.SetMoveWin(false);
 
+        _player.HandleCaughtFocusFishing(_currentHookedFish);
+
         Close();
     }
 
@@ -170,6 +181,7 @@ public class FocusFishingManager : MonoBehaviour
             StartCoroutine(CoWin());
 
             AudioManager.Instance.StopEffect("ReelingFish");
+            AudioManager.Instance.PlayEffect("WinFocusFishing");
 
             //Debug.Log("Win");
         }

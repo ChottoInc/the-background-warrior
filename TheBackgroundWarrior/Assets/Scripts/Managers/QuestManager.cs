@@ -314,9 +314,9 @@ public class QuestManager : MonoBehaviour
     {
         // initialize dict and first actives quests
 
-        ActiveStoryQuests ??= new List<string>();
+        ActiveStoryQuests = new List<string>();
 
-        DictQuestsStoryProgress ??= new Dictionary<string, QuestDataProgress>();
+        DictQuestsStoryProgress = new Dictionary<string, QuestDataProgress>();
 
         // create default for every story
         QuestStorySO[] storyQuests = GetAllStoryQuests();

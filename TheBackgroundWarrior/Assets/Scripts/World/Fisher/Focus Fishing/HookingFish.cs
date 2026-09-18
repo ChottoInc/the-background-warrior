@@ -1,7 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class HookingFish : MonoBehaviour
 {
+    private int transparencyAmount = Shader.PropertyToID("_Transparency");
+
     [Header("Manager")]
     [SerializeField] FocusFishingManager _manager;
 
@@ -11,6 +14,16 @@ public class HookingFish : MonoBehaviour
 
     [Space(10)]
     [SerializeField] GameObject _hook;
+
+    [Space(10)]
+    [SerializeField] float _timerChangeTransparency = 0.35f;
+
+    private bool _isAnimatingRockHit;
+
+    private SpriteRenderer _spriteRenderer;
+    private Material _matImageWeapon;
+
+    private bool isInitialized;
 
     [Header("Pond Bounds")]
     [SerializeField] float _topBound = 3f;
@@ -25,9 +38,27 @@ public class HookingFish : MonoBehaviour
 
     private Vector3 _startPos;
 
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Start()
     {
         _startPos = transform.localPosition;
+
+        InitializedIfNeeded();
+    }
+
+    private void InitializedIfNeeded()
+    {
+        if (isInitialized) return;
+
+        // copy material image ui
+        _matImageWeapon = new Material(_spriteRenderer.material);
+        _spriteRenderer.material = _matImageWeapon;
+
+        isInitialized = true;
     }
 
     private void Update()
@@ -117,6 +148,11 @@ public class HookingFish : MonoBehaviour
             }
 
             LoseStar();
+
+            if (!_isAnimatingRockHit)
+            {
+                StartCoroutine(CoFlashSprite());
+            }
         }
         else if (other.CompareTag("FishingStar"))
         {
@@ -163,5 +199,30 @@ public class HookingFish : MonoBehaviour
         
         _isHolding = false;
         _currentVelocityY = 0f;
+    }
+
+    private IEnumerator CoFlashSprite()
+    {
+        _isAnimatingRockHit = true;
+
+        _matImageWeapon.SetFloat(transparencyAmount, 1);
+
+        float elapsedTime = 0;
+
+        float lerpedTransparency = 0;
+
+        // lerp from 0 to 1
+        while (elapsedTime < _timerChangeTransparency)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+
+            lerpedTransparency = Mathf.Lerp(1f, 0f, elapsedTime / _timerChangeTransparency);
+
+            _matImageWeapon.SetFloat(transparencyAmount, lerpedTransparency);
+
+            yield return null;
+        }
+
+        _isAnimatingRockHit = false;
     }
 }

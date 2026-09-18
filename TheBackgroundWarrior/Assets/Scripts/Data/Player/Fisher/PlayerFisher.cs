@@ -144,19 +144,7 @@ public class PlayerFisher : Player
         animator.SetTrigger("Caught");
 
         long rewardedExp;
-        /*
-        // Fish caught
-        bool hasAlreadyFish = PlayerManager.Instance.Inventory.HasItem(hookedFish.Id);
 
-        // add to inventort even if already hasve, to trigger quest progress
-        if (hasAlreadyFish)
-        {
-            // Dismantle fish into bits? for now
-            // TODO: remake this option?
-            int bitsToAdd = UtilsItem.DismantleFish(hookedFish.FishRarity);
-            PlayerManager.Instance.Inventory.AddBits(bitsToAdd);
-        }
-        */
         // Add fish to caught
         PlayerManager.Instance.Inventory.AddItem(hookedFish.Id, 1);
 
@@ -174,6 +162,32 @@ public class PlayerFisher : Player
 
         // Give player full exp
         rewardedExp = UtilsItem.GetFishExp(hookedFish.FishRarity);
+        playerData.AddExp(rewardedExp);
+
+        OnFishCaught?.Invoke(hookedFish);
+    }
+
+    public void HandleCaughtFocusFishing(FishSO hookedFish)
+    {
+        long rewardedExp;
+
+        // Add fish to caught
+        PlayerManager.Instance.Inventory.AddItem(hookedFish.Id, 1);
+
+        // check for fishgroups
+        playerData.FillFishGroupsSeriesCompletion();
+
+        // Save ivnentory
+        PlayerManager.Instance.SaveInventoryData();
+
+        // Remove from pool if caught
+        //FishSpawnManager.Instance.RemoveFishFromPool(hookedFish);
+
+        // refill pool
+        //FishSpawnManager.Instance.FillPool();
+
+        // Give player full exp - for now halves the amount of exp since you can spam that game
+        rewardedExp = UtilsItem.GetFishExp(hookedFish.FishRarity) / 2;
         playerData.AddExp(rewardedExp);
 
         OnFishCaught?.Invoke(hookedFish);

@@ -1,9 +1,22 @@
+using System.Collections;
 using UnityEngine;
 
 public class Rock : MonoBehaviour, IPoolObject
 {
+    private int transparencyAmount = Shader.PropertyToID("_Transparency");
+
+
     [Header("Sprite")]
     [SerializeField] SpriteRenderer spriteRenderer;
+
+    [Space(10)]
+    [SerializeField] float _timerChangeTransparency = 0.35f;
+
+    private bool _isAnimatingRockHit;
+
+    private Material _matImageWeapon;
+
+    private bool isInitialized;
 
     [Header("Death")]
     [SerializeField] ParticleSystem smashVFX;
@@ -51,6 +64,19 @@ public class Rock : MonoBehaviour, IPoolObject
     private void Start()
     {
         smashVFXDuration = smashVFX.main.duration;
+
+        InitializedIfNeeded();
+    }
+
+    private void InitializedIfNeeded()
+    {
+        if (isInitialized) return;
+
+        // copy material image ui
+        _matImageWeapon = new Material(spriteRenderer.material);
+        spriteRenderer.material = _matImageWeapon;
+
+        isInitialized = true;
     }
 
     private void Update()
@@ -155,11 +181,40 @@ public class Rock : MonoBehaviour, IPoolObject
         }
 
         UpdateDurabilityUI();
+
+        if(!_isAnimatingRockHit)
+            StartCoroutine(CoFlashSprite());
     }
 
     private void UpdateDurabilityUI()
     {
         durabilityBar.SetCurrentValue(rockData.CurrentDurability);
+    }
+
+
+    private IEnumerator CoFlashSprite()
+    {
+        _isAnimatingRockHit = true;
+
+        _matImageWeapon.SetFloat(transparencyAmount, 1);
+
+        float elapsedTime = 0;
+
+        float lerpedTransparency = 0;
+
+        // lerp from 0 to 1
+        while (elapsedTime < _timerChangeTransparency)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+
+            lerpedTransparency = Mathf.Lerp(1f, 0f, elapsedTime / _timerChangeTransparency);
+
+            _matImageWeapon.SetFloat(transparencyAmount, lerpedTransparency);
+
+            yield return null;
+        }
+
+        _isAnimatingRockHit = false;
     }
 
 

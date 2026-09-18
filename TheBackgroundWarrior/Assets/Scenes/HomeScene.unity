@@ -2880,9 +2880,25 @@ MonoBehaviour:
     tag: 
     clip: {fileID: 8300000, guid: 7ab0a5594345976418bef9f7c830517c, type: 3}
     group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
-    volume: 0.2
+    volume: 0.35
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: LoseFocusFishing
+    tag: 
+    clip: {fileID: 8300000, guid: 15565d234241fc94c9e115b5d572f56a, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.35
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WinFocusFishing
+    tag: 
+    clip: {fileID: 8300000, guid: 3886930dd04e34843ac015cf02c31653, type: 3}
+    group: {fileID: 24300002, guid: 73acddc00b5ac284e825c086f35789ee, type: 2}
+    volume: 0.35
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
   musics:
   - name: Moonlight
