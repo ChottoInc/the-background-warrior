@@ -1922,6 +1922,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stats
       objectReference: {fileID: 0}
+    - target: {fileID: 7210499173450634437, guid: 7599263bee32ba245ab0f181d6ff3b9f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7215758082684871587, guid: 7599263bee32ba245ab0f181d6ff3b9f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

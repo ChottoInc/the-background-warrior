@@ -318,5 +318,8 @@
     "text_button_play": "Play",
     "text_button_help_filter_bard": "Bard",
     "text_name_buff_inspiration": "Inspiration",
-    "text_name_buff_inspiration_effect": "Thanks to the songs played earlier, some abilities have a 10% boost."
+    "text_name_buff_inspiration_effect": "Thanks to the songs played earlier, some abilities have a 10% boost.",
+    "text_job_miner_weapon_nextlevel": "Next level",
+    "text_tooltip_focusfishing": "Play a minigame to catch a fish manually",
+    "text_rules_focusfishing": "Hold left mouse button to move up and down the fish, dodge the rocks and collect 5 stars to catch it."
 }

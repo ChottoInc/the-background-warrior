@@ -12,6 +12,11 @@ public class PlayerFisher : Player
     [Header("Focus Fishing")]
     [SerializeField] FocusFishingManager _focusFighingManager;
 
+    [Space(10)]
+    [SerializeField] GameObject _buttonFocus;
+
+    private bool _isButtonFocusShow = true;
+
 
     private float timer5Mins;
 
@@ -68,8 +73,25 @@ public class PlayerFisher : Player
     {
         base.Update();
 
+        if (_isButtonFocusShow)
+        {
+            if (Time.timeScale == 0f)
+            {
+                _isButtonFocusShow = false;
+                _buttonFocus.SetActive(false);
+            }
+        }
+        else
+        {
+            if (Time.timeScale > 0f)
+            {
+                _isButtonFocusShow = true;
+                _buttonFocus.SetActive(true);
+            }
+        }
+
         // every 5 mins give some exp to the player
-        if(timer5Mins <= 0)
+        if (timer5Mins <= 0)
         {
             playerData.AddExp(UtilsFisher.PASSIVE_EXP);
             timer5Mins = UtilsGeneral.TIMER_5MIN_IN_SECONDS;

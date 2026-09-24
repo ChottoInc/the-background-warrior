@@ -50,7 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6323284408116224053}
-  _timerChangeTransparency: 0.35
+  _timerHit: 0.35
+  _scaleX: 0.95
+  _scaleY: 1.15
   smashVFX: {fileID: 9061979779493806944}
   durabilityBar: {fileID: 6808945624547708251}
 --- !u!61 &2828076969808884865
@@ -177,7 +179,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31a7453600e4e814fa8b25a8e83b2a9d, type: 2}
+  - {fileID: 2100000, guid: fa58312c2a126294da4b392f9cb951f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -375,6 +377,14 @@ PrefabInstance:
     - target: {fileID: 4863630681667937511, guid: 225ded0b066d596459686362e5070184, type: 3}
       propertyPath: m_Name
       value: Canvas Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092217998242648201, guid: 225ded0b066d596459686362e5070184, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092217998242648201, guid: 225ded0b066d596459686362e5070184, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

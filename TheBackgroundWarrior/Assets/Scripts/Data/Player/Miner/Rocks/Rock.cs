@@ -10,13 +10,17 @@ public class Rock : MonoBehaviour, IPoolObject
     [SerializeField] SpriteRenderer spriteRenderer;
 
     [Space(10)]
-    [SerializeField] float _timerChangeTransparency = 0.35f;
+    [SerializeField] float _timerHit = 0.35f;
 
     private bool _isAnimatingRockHit;
 
     private Material _matImageWeapon;
 
     private bool isInitialized;
+
+    [Header("Scale")]
+    [SerializeField] float _scaleX = 0.95f;
+    [SerializeField] float _scaleY = 1.15f;
 
     [Header("Death")]
     [SerializeField] ParticleSystem smashVFX;
@@ -35,6 +39,8 @@ public class Rock : MonoBehaviour, IPoolObject
 
 
     private int rockIndex;
+
+    private Vector3 _startScale;
 
 
     // ------- DEATH
@@ -75,6 +81,8 @@ public class Rock : MonoBehaviour, IPoolObject
         // copy material image ui
         _matImageWeapon = new Material(spriteRenderer.material);
         spriteRenderer.material = _matImageWeapon;
+
+        _startScale = transform.localScale;
 
         isInitialized = true;
     }
@@ -182,8 +190,20 @@ public class Rock : MonoBehaviour, IPoolObject
 
         UpdateDurabilityUI();
 
-        if(!_isAnimatingRockHit)
-            StartCoroutine(CoFlashSprite());
+        if(_isAnimatingRockHit)
+        {
+            // reset all
+            StopAllCoroutines();
+
+            ResetFlash();
+            ResetScale();
+
+            _isAnimatingRockHit = false;
+        }
+
+        // flash and scale at every hit
+        StartCoroutine(CoFlashSprite());
+        StartCoroutine(CoScaleSprite());
     }
 
     private void UpdateDurabilityUI()
@@ -203,11 +223,11 @@ public class Rock : MonoBehaviour, IPoolObject
         float lerpedTransparency = 0;
 
         // lerp from 0 to 1
-        while (elapsedTime < _timerChangeTransparency)
+        while (elapsedTime < _timerHit)
         {
             elapsedTime += Time.unscaledDeltaTime;
 
-            lerpedTransparency = Mathf.Lerp(1f, 0f, elapsedTime / _timerChangeTransparency);
+            lerpedTransparency = Mathf.Lerp(1f, 0f, elapsedTime / _timerHit);
 
             _matImageWeapon.SetFloat(transparencyAmount, lerpedTransparency);
 
@@ -217,7 +237,35 @@ public class Rock : MonoBehaviour, IPoolObject
         _isAnimatingRockHit = false;
     }
 
+    private void ResetFlash()
+    {
+        _matImageWeapon.SetFloat(transparencyAmount, 0f);
+    }
 
+    private IEnumerator CoScaleSprite()
+    {
+        float elapsedTime = 0;
+
+        transform.localScale = new Vector3(_startScale.x * _scaleX, _startScale.y * _scaleY, _startScale.z);
+
+        // lerp from 0 to 1
+        while (elapsedTime < _timerHit)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+
+            float xScale = Mathf.Lerp(transform.localScale.x, _startScale.x, elapsedTime / _timerHit);
+            float yScale = Mathf.Lerp(transform.localScale.y, _startScale.y, elapsedTime / _timerHit);
+
+            transform.localScale = new Vector3(xScale, yScale, _startScale.z);
+
+            yield return null;
+        }
+    }
+
+    private void ResetScale()
+    {
+        transform.localScale = _startScale;
+    }
 
 
     public override bool Equals(object other)

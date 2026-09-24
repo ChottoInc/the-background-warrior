@@ -61,6 +61,12 @@ public class UITabWarriorMap : MonoBehaviour
         }
     }
 
+    public void RefreshStage()
+    {
+        CombatMapSaveData mapData = SettingsManager.Instance.GetCombatMapSaveData(mapSO);
+        textMapStage.text = string.Format(UtilsText.AllText[UtilsText.text_job_warrior_mapstage], mapData.currentStage, mapSO.Stages);
+    }
+
     public void OnButtonClick()
     {
         uiTabWarrior.OnMapSelected(mapSO.MapSceneName, mapSO.IdMap);

@@ -93,6 +93,7 @@ MonoBehaviour:
   timeToFade: 0.3
   imageBackground: {fileID: 5773136870655420812}
   imageCard: {fileID: 7140078959203352451}
+  _spriteUnowned: {fileID: 21300000, guid: b80c0b32635a0a14088d439295661cca, type: 3}
   imageRarity: {fileID: 8608840232490480598}
   textRarity: {fileID: 7303591709461804683}
   textNumber: {fileID: 4058388480198989090}

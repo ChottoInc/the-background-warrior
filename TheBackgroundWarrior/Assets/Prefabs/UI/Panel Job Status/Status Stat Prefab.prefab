@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
+    m_Left: 5
+    m_Right: 5
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
@@ -1687,7 +1687,7 @@ MonoBehaviour:
   _content: {fileID: 1550039626814888771}
   _viewport: {fileID: 7662175470222533251}
   _contentSizeFitter: {fileID: 1602543865537441312}
-  _scrollSpeed: 0.2
+  _scrollSpeed: 0.3
   _resumeDelay: 2
   _wheelSensitivity: 0.2
   _text: {fileID: 6992850321002461425}

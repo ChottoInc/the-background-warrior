@@ -24,6 +24,8 @@ public class UITabJobBlacksmith : UITabWindow
     [SerializeField] Image imageGear;
     [SerializeField] TMP_Text textLevel;
     [SerializeField] TMP_Text textStats;
+    [SerializeField] TMP_Text textNextLevel;
+    [SerializeField] TMP_Text textNextStats;
 
     [Space(10)]
     [SerializeField] float timerChangeTransparency = 0.75f;
@@ -436,6 +438,59 @@ public class UITabJobBlacksmith : UITabWindow
         }
 
         textStats.text = result;
+
+        if (!IsGearMaxLevel())
+        {
+            textNextLevel.text = string.Format(UtilsText.AllText[UtilsText.text_job_miner_weapon_nextlevel]);
+
+            List<UtilsGeneral.UIStatMultInfo> uiStatsInfosNext = new List<UtilsGeneral.UIStatMultInfo>();
+            switch (currentGear)
+            {
+                case UtilsBlacksmith.BlacksmithGear.Helmet:
+                    float maxHp = UtilsBlacksmith.GetBlacksmithHelmetMaxHpMultiplier(data.HelmetLevel + 1);
+
+                    uiStatsInfosNext.Add(new UtilsGeneral.UIStatMultInfo(UtilsText.AllText[UtilsText.text_name_warrior_stat_maxhp], maxHp));
+                    break;
+
+                case UtilsBlacksmith.BlacksmithGear.Armor:
+                    float aDef = UtilsBlacksmith.GetBlacksmithArmorDefMultiplier(data.ArmorLevel + 1);
+
+                    uiStatsInfosNext.Add(new UtilsGeneral.UIStatMultInfo(UtilsText.AllText[UtilsText.text_name_warrior_stat_def], aDef));
+                    break;
+
+                case UtilsBlacksmith.BlacksmithGear.Gloves:
+                    float atkSpd = UtilsBlacksmith.GetBlacksmithGlovesAtkSpdMultiplier(data.GlovesLevel + 1);
+                    float critDmg = UtilsBlacksmith.GetBlacksmithGlovesCritDmgMultiplier(data.GlovesLevel + 1);
+
+                    uiStatsInfosNext.Add(new UtilsGeneral.UIStatMultInfo(UtilsText.AllText[UtilsText.text_name_warrior_stat_atkspd], atkSpd));
+                    uiStatsInfosNext.Add(new UtilsGeneral.UIStatMultInfo(UtilsText.AllText[UtilsText.text_name_warrior_stat_critdmg], critDmg));
+                    break;
+
+                case UtilsBlacksmith.BlacksmithGear.Boots:
+                    float bDef = UtilsBlacksmith.GetBlacksmithBootsDefMultiplier(data.BootsLevel + 1);
+                    float critRate = UtilsBlacksmith.GetBlacksmithBootsCritRateMultiplier(data.BootsLevel + 1);
+
+                    uiStatsInfosNext.Add(new UtilsGeneral.UIStatMultInfo(UtilsText.AllText[UtilsText.text_name_warrior_stat_def], bDef));
+                    uiStatsInfosNext.Add(new UtilsGeneral.UIStatMultInfo(UtilsText.AllText[UtilsText.text_name_warrior_stat_critrate], critRate));
+                    break;
+            }
+
+            string resultNext = string.Empty;
+            foreach (var info in uiStatsInfosNext)
+            {
+                resultNext += string.Format(UtilsText.AllText[UtilsText.text_job_blacksmith_gear_currentstats], info.statName, UtilsGeneral.FormatDecimal((info.multValue * 100f) - 100f));
+                //Debug.Log("stat: " + info.statName + ", mult val: " + info.multValue);
+            }
+            textNextStats.text = resultNext;
+
+            textNextLevel.gameObject.SetActive(true);
+            textNextStats.gameObject.SetActive(true);
+        }
+        else
+        {
+            textNextLevel.gameObject.SetActive(false);
+            textNextStats.gameObject.SetActive(false);
+        }
 
         // Check if need change
         if (!isDifferentLevel)

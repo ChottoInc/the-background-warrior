@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UITabQuestsBounties : UITabWindow
@@ -13,18 +11,21 @@ public class UITabQuestsBounties : UITabWindow
     [Header("Slot 1")]
     [SerializeField] Transform slot1Container;
     [SerializeField] UIBountyRequestPrefab bountyRequest1;
+    [SerializeField] GameObject _slot1Border;
 
     private GameObject bountyQuest1;
 
     [Header("Slot 1")]
     [SerializeField] Transform slot2Container;
     [SerializeField] UIBountyRequestPrefab bountyRequest2;
+    [SerializeField] GameObject _slot2Border;
 
     private GameObject bountyQuest2;
 
     [Header("Slot 1")]
     [SerializeField] Transform slot3Container;
     [SerializeField] UIBountyRequestPrefab bountyRequest3;
+    [SerializeField] GameObject _slot3Border;
 
     private GameObject bountyQuest3;
 
@@ -49,6 +50,10 @@ public class UITabQuestsBounties : UITabWindow
 
     public void FillQuests()
     {
+        _slot1Border.SetActive(true);
+        _slot2Border.SetActive(true);
+        _slot3Border.SetActive(true);
+
         if (bountyQuest1 != null)
         {
             Destroy(bountyQuest1);
@@ -72,6 +77,7 @@ public class UITabQuestsBounties : UITabWindow
             // vars to store right slot settings
             Transform slotContainer;
             UIBountyRequestPrefab requestPrefab;
+            GameObject borderToHide;
 
             UtilsQuest.QuestData questData = UtilsQuest.GetBountyQuestById(pair.Value).QuestData;
             UtilsQuest.QuestDataProgress questProgress = QuestManager.Instance.DictQuestsBountyProgress[pair.Value];
@@ -83,6 +89,7 @@ public class UITabQuestsBounties : UITabWindow
                 case 0:
                     slotContainer = slot1Container;
                     requestPrefab = bountyRequest1;
+                    borderToHide = _slot1Border;
 
                     bountyQuest1 = CreateQuestPrefab(pair.Value, questData, questProgress, slotContainer);
 
@@ -91,6 +98,7 @@ public class UITabQuestsBounties : UITabWindow
                 case 1:
                     slotContainer = slot2Container;
                     requestPrefab = bountyRequest2;
+                    borderToHide = _slot2Border;
 
                     bountyQuest2 = CreateQuestPrefab(pair.Value, questData, questProgress, slotContainer);
 
@@ -99,6 +107,7 @@ public class UITabQuestsBounties : UITabWindow
                 case 2:
                     slotContainer = slot3Container;
                     requestPrefab = bountyRequest3;
+                    borderToHide = _slot3Border;
 
                     bountyQuest3 = CreateQuestPrefab(pair.Value, questData, questProgress, slotContainer);
 
@@ -107,6 +116,7 @@ public class UITabQuestsBounties : UITabWindow
 
             // disable request prefab
             requestPrefab.gameObject.SetActive(false);
+            borderToHide.SetActive(false);
         }
 
         // Set active bounty choose if not active

@@ -318,5 +318,8 @@
     "text_button_play": "Suona",
     "text_button_help_filter_bard": "Bardo",
     "text_name_buff_inspiration": "Ispirazione",
-    "text_name_buff_inspiration_effect": "Grazie alle canzoni suonate precedentemente, alcune abilità hanno un incremento del 10%."
+    "text_name_buff_inspiration_effect": "Grazie alle canzoni suonate precedentemente, alcune abilità hanno un incremento del 10%.",
+    "text_job_miner_weapon_nextlevel": "Prossimo livello",
+    "text_tooltip_focusfishing": "Cattura manualmente un pesce con un minigioco",
+    "text_rules_focusfishing": "Tieni premuto il tasto sinistro del mouse per muovere il pesce in alto e in basso, schiva le rocce e raccogli 5 stelle per catturarlo."
 }

@@ -88,21 +88,21 @@ public class UIScrollHelper : MonoBehaviour
         // Call resume if not at the bottom
         if (_barHorizontal.value < _offsetStart)
         {
-            _triangleLeft.Resume();
-        }
-        else
-        {
-            _triangleLeft.Pause();
-        }
-
-        // Call resume if not at the top
-        if (_barHorizontal.value > _offsetEnd)
-        {
             _triangleRight.Resume();
         }
         else
         {
             _triangleRight.Pause();
+        }
+
+        // Call resume if not at the top
+        if (_barHorizontal.value > _offsetEnd)
+        {
+            _triangleLeft.Resume();
+        }
+        else
+        {
+            _triangleLeft.Pause();
         }
     }
 

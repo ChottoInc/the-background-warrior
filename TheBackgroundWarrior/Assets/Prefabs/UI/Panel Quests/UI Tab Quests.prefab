@@ -1305,7 +1305,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8927222580246936950}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.00000011920929}
+  m_AnchorMin: {x: 0, y: 0.014552355}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -2256,7 +2256,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8532581596545752887}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999999
+  m_Size: 0.98544765
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3295,10 +3295,13 @@ MonoBehaviour:
   questPrefab: {fileID: 3102570948380609935, guid: 40e19bb51e1dbff4890a742b1aa15e66, type: 3}
   slot1Container: {fileID: 7263179918589382888}
   bountyRequest1: {fileID: 901239566975671003}
+  _slot1Border: {fileID: 4226320540434934233}
   slot2Container: {fileID: 238661317706587391}
   bountyRequest2: {fileID: 449411815990406624}
+  _slot2Border: {fileID: 4904555677784995838}
   slot3Container: {fileID: 2275020481051768150}
   bountyRequest3: {fileID: 8585969274281950220}
+  _slot3Border: {fileID: 6804994133103657473}
 --- !u!1 &4583734785584860749
 GameObject:
   m_ObjectHideFlags: 0

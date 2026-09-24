@@ -49,8 +49,15 @@ public class UITabJobWarrior : UITabWindow
                 scrollMaps.verticalNormalizedPosition = 1f / (float)mapsCount;
             }
         }
+        else
+        {
+            foreach (var mapObj in mapObjs)
+            {
+                mapObj.GetComponent<UITabWarriorMap>().RefreshStage();
+            }
+        }
 
-        if(cards == null)
+        if (cards == null)
         {
             cards = UtilsItem.GetAllTypeItem<CardSO>();
             FillCards();

@@ -15,6 +15,9 @@ public class FocusFishingManager : MonoBehaviour
 
     private int _collectedStars;
 
+    [Space(10)]
+    [SerializeField] GameObject _buttonFocus;
+
     [Header("Fish")]
     [SerializeField] PlayerFisher _player;
     [SerializeField] HookingFish _fish;
@@ -37,15 +40,15 @@ public class FocusFishingManager : MonoBehaviour
 
     private void Update()
     {
-        if(CanCount && !HasGameStarted)
+        if (CanCount && !HasGameStarted)
         {
-            if(_timerCountdown <= 0)
+            if (_timerCountdown <= 0)
             {
                 _countdown--;
 
                 _timerCountdown = UtilsGeneral.TIMER_1SECONDS;
 
-                if(_countdown <= 0)
+                if (_countdown <= 0)
                 {
                     _panelCountdown.SetActive(false);
 
@@ -69,6 +72,8 @@ public class FocusFishingManager : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
+
+        _buttonFocus.SetActive(false);
 
         StartCoroutine(CoWaitFrame());
     }
@@ -191,5 +196,6 @@ public class FocusFishingManager : MonoBehaviour
     {
         HasGameStarted = false;
         gameObject.SetActive(false);
+        _buttonFocus.SetActive(true);
     }
 }

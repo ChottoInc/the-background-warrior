@@ -446,7 +446,7 @@ public class StageManager : MonoBehaviour
 
     private void UpdateStageUI()
     {
-        textStage.text = $"{CombatManager.Instance.MapSO.MapName} - {CurrentStage}";
+        textStage.text = $"{CombatManager.Instance.MapSO.MapName} - {CurrentStage}/{CombatManager.Instance.MapSO.Stages}";
     }
 
     #endregion

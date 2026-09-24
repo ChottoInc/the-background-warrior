@@ -195,6 +195,9 @@ public static class UtilsText
     public const string text_tooltip_stat_necromancer_horde = "text_tooltip_stat_necromancer_horde";
     public const string text_tooltip_stat_necromancer_luck = "text_tooltip_stat_necromancer_luck";
 
+    public const string text_tooltip_focusfishing = "text_tooltip_focusfishing";
+    public const string text_rules_focusfishing = "text_rules_focusfishing";
+
     // -------------------- TITLE --------------------- //
 
     public const string text_title_buffs = "text_title_buffs";
@@ -317,6 +320,7 @@ public static class UtilsText
 
 
     public const string text_job_miner_weapon_currentlevel = "text_job_miner_weapon_currentlevel";
+    public const string text_job_miner_weapon_nextlevel = "text_job_miner_weapon_nextlevel";
     public const string text_job_miner_weapon_currentstats = "text_job_miner_weapon_currentstats";
     public const string text_job_miner_requirements_levelup = "text_job_miner_requirements_levelup";
     public const string text_job_blacksmith_gear_currentstats = "text_job_blacksmith_gear_currentstats";
@@ -1214,6 +1218,9 @@ public static class UtilsText
             { text_tooltip_stat_necromancer_horde, "Every 5 levels the Warrior maximum horde counter is increased by 1" },
             { text_tooltip_stat_necromancer_luck, "Increase experience gained by the Necromancer and increase Warrior chance to summon a powerful undead" },
 
+            { text_tooltip_focusfishing, "Play a minigame to catch a fish manually" },
+            { text_rules_focusfishing, "Hold left mouse button to move up and down the fish, dodge the rocks and collect 5 stars to catch it." },
+
             // -------------------- TITLE --------------------- //
 
             { text_title_buffs, "Buffs" },
@@ -1338,6 +1345,7 @@ public static class UtilsText
 
 
             { text_job_miner_weapon_currentlevel, "Lv. {0}" },
+            { text_job_miner_weapon_nextlevel, "Next level" },
             { text_job_miner_weapon_currentstats, "Dmg: +{0:.0}%" },
             { text_job_miner_requirements_levelup, "Requirements for level up" },
             { text_job_blacksmith_gear_currentstats, "{0}: +{1:.0}%<br>" },

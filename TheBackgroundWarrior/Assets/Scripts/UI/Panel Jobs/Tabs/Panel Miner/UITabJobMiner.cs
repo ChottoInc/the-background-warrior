@@ -23,6 +23,8 @@ public class UITabJobMiner : UITabWindow
     [SerializeField] Image imageSword;
     [SerializeField] TMP_Text textLevel;
     [SerializeField] TMP_Text textStats;
+    [SerializeField] TMP_Text textNextLevel;
+    [SerializeField] TMP_Text textNextStats;
 
     [Space(10)]
     [SerializeField] float timerChangeTransparency = 0.75f;
@@ -217,6 +219,23 @@ public class UITabJobMiner : UITabWindow
         float multiplier = UtilsMiner.GetMinerWeaponMultiplier(data.WeaponLevel);
         textStats.text = string.Format(UtilsText.AllText[UtilsText.text_job_miner_weapon_currentstats], UtilsGeneral.FormatDecimal((multiplier * 100f) - 100f));
         //Debug.Log("dmg: " + multiplier);
+
+        if (!IsWeaponMaxLevel())
+        {
+            textNextLevel.text = string.Format(UtilsText.AllText[UtilsText.text_job_miner_weapon_nextlevel]);
+
+            // Multiply by 100 to get percentage, and minus 100 to remove base multiplier
+            float multiplierNextLevel = UtilsMiner.GetMinerWeaponMultiplier(data.WeaponLevel + 1);
+            textNextStats.text = string.Format(UtilsText.AllText[UtilsText.text_job_miner_weapon_currentstats], UtilsGeneral.FormatDecimal((multiplierNextLevel * 100f) - 100f));
+
+            textNextLevel.gameObject.SetActive(true);
+            textNextStats.gameObject.SetActive(true);
+        }
+        else
+        {
+            textNextLevel.gameObject.SetActive(false);
+            textNextStats.gameObject.SetActive(false);
+        }
 
         // Check if need change
         if (!isDifferentLevel)

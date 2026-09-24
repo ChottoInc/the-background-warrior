@@ -62,7 +62,7 @@ public class UICollectionCard : MonoBehaviour
 
     public void OnPointerEnter()
     {
-        if (cardSO != null && hasCard)
+        if (cardSO != null)
         {
             TooltipManagerData tooltipData = new TooltipManagerData();
             tooltipData.idTooltip = UITooltipManager.ID_SHOW_CARD;
@@ -73,8 +73,6 @@ public class UICollectionCard : MonoBehaviour
 
     public void OnPointerExit()
     {
-        if (!hasCard) return;
-
         UITooltipManager.Instance.Hide(UITooltipManager.ID_SHOW_CARD, true);
     }
 

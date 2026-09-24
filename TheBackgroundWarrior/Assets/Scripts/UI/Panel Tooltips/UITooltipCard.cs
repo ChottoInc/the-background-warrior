@@ -13,6 +13,7 @@ public class UITooltipCard : MonoBehaviour
     [Space(10)]
     [SerializeField] Image imageBackground;
     [SerializeField] Image imageCard;
+    [SerializeField] Sprite _spriteUnowned;
 
     [Space(10)]
     [SerializeField] Image imageRarity;
@@ -23,7 +24,7 @@ public class UITooltipCard : MonoBehaviour
     [Space(10)]
     [SerializeField] TMP_Text textDesc;
 
-    private CardSO cardSO;
+    private bool _owned;
 
     private Tween tweenFade;
 
@@ -34,11 +35,23 @@ public class UITooltipCard : MonoBehaviour
 
     public void Show(CardSO cardSO, bool fade = false)
     {
-        this.cardSO = cardSO;
+        _owned = PlayerManager.Instance.Inventory.HasItem(cardSO.Id);
+
+        imageBackground.sprite = cardSO.BackgoundSprite;
 
         // set card
-        imageBackground.sprite = cardSO.BackgoundSprite;
-        imageCard.sprite = cardSO.Sprite;
+        if (_owned)
+        {
+            imageCard.sprite = cardSO.Sprite;
+
+            textDesc.text = cardSO.ItemDesc;
+        }
+        else
+        {
+            imageCard.sprite = _spriteUnowned;
+
+            textDesc.text = string.Empty;
+        }
 
         imageRarity.color = UtilsColor.GetColorByRarity(cardSO.CardRarity);
         textRarity.text = cardSO.CardRarityName;
@@ -46,8 +59,7 @@ public class UITooltipCard : MonoBehaviour
         textNumber.text = $"{cardSO.CardNumber}";
 
         textName.text = cardSO.ItemName;
-
-        textDesc.text = cardSO.ItemDesc;
+            
 
         gameObject.SetActive(true);
 

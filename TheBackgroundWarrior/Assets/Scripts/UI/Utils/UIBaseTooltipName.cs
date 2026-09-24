@@ -6,6 +6,11 @@ public class UIBaseTooltipName : MonoBehaviour, ITooltipNameable
     [Header("Tooltip")]
     [SerializeField] Transform _tooltipPosition;
 
+    private void OnDisable()
+    {
+        OnPointerExit(null);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         TooltipManagerData tooltipData = new TooltipManagerData();
