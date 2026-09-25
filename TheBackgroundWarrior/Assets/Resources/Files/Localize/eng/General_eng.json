@@ -235,7 +235,7 @@
     "text_tooltip_stat_mage_castspeed": "Increase Mage and Warrior casting speed",
     "text_tooltip_stat_mage_scholar": "Unlock a new spell for the Mage to learn every 5 levels",
     "text_tooltip_stat_mage_proficiency": "Every 5 levels unlock a slot to equip a spell to cast when advancing through the stages",
-    "text_job_mage_unlockconditions": "Find the Ancient Tome card",
+    "text_job_mage_unlockconditions": "Find the Ancient Tome card, found in Mountains map, or in card packs from the shop",
     "text_job_mage_spell_locked": "Spell locked",
     "text_button_learn": "Learn",
     "text_button_help_filter_mage": "Mage",

@@ -235,7 +235,7 @@
     "text_tooltip_stat_mage_castspeed": "Aumenta la velocità di lancio degli incantesimi di Mago e Guerriero",
     "text_tooltip_stat_mage_scholar": "Ogni 5 livelli, sblocca un nuovo incantesimo da imparare per il Mago",
     "text_tooltip_stat_mage_proficiency": "Ogni 5 livelli, sblocca uno slot di equipaggiamento per un incantesimo utilizzabile mentre si avanza tra le zone",
-    "text_job_mage_unlockconditions": "Trova la carta Tomo Antico",
+    "text_job_mage_unlockconditions": "Trova la carta Tomo Antico, ottenibile nella mappa Montagne, o nei pacchetti del negozio",
     "text_job_mage_spell_locked": "Incantesimo bloccato",
     "text_button_learn": "Impara",
     "text_button_help_filter_mage": "Mago",

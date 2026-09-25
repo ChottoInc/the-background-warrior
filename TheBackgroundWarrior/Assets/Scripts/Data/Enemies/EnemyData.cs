@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class EnemyData
@@ -86,21 +85,21 @@ public class EnemyData
     private float CalculateMaxHp()
     {
         // exp growth
-        float p = 1.25f;
+        float p = 1.2f;
         return EnemySO.BaseMaxHp + MAXHP_GAIN_PER_LEVEL * Mathf.Pow(CurrentLevel - 1, p);
     }
 
     private float CalculateAtk()
     {
         // exp growth
-        float p = 1.35f;
+        float p = 1.3f;
         return EnemySO.BaseAtk + ATK_GAIN_PER_LEVEL * Mathf.Pow(CurrentLevel - 1, p);
     }
 
     private float CalculateDef()
     {
         // exp growth
-        float p = 1.12f;
+        float p = 1.1f;
         return EnemySO.BaseDef + DEF_GAIN_PER_LEVEL * Mathf.Pow(CurrentLevel - 1, p);
     }
 
@@ -133,48 +132,6 @@ public class EnemyData
 
         return EnemySO.BaseCritDmg + maxCritDmg * (CurrentLevel / (CurrentLevel + k));
     }
-
-    /*
-    private float CalculateMaxHp()
-    {
-        float result;
-
-        result =
-            baseMaxHp *
-            Mathf.Pow(PER_STAGE_GAIN_MAXHP, StageManager.Instance.CurrentStage - 1) *
-            Mathf.Pow(PER_SUBSTAGE_MULTIPLIER_MAXHP, StageManager.Instance.CurrentEnemyIndex - 1) *
-            StageManager.Instance.CurrentPrestige;
-
-        return result;
-    }
-
-    private float CalculateAtk()
-    {
-        float result;
-
-        result =
-            baseAtk *
-            Mathf.Pow(PER_STAGE_GAIN_ATK, StageManager.Instance.CurrentStage - 1) *
-            Mathf.Pow(PER_SUBSTAGE_MULTIPLIER_ATK, StageManager.Instance.CurrentEnemyIndex - 1) *
-            StageManager.Instance.CurrentPrestige;
-
-        return result;
-    }
-
-    private float CalculateDef()
-    {
-        float result;
-
-        result =
-            baseDef *
-            Mathf.Pow(PER_STAGE_GAIN_DEF, StageManager.Instance.CurrentStage - 1) *
-            Mathf.Pow(PER_SUBSTAGE_MULTIPLIER_DEF, StageManager.Instance.CurrentEnemyIndex - 1) *
-            StageManager.Instance.CurrentPrestige;
-
-        return result;
-    }
-
-    */
 
     #region COMABT SYSTEM
 

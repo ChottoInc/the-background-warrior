@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class SmashManager : MonoBehaviour
@@ -116,9 +117,10 @@ public class SmashManager : MonoBehaviour
 
         // give exp to player
         player.PlayerData.AddExp(rewardedExp);
-        PlayerManager.Instance.UpdateMinerData(player.PlayerData);
 
         GiveLoot(currentRock);
+
+        PlayerManager.Instance.UpdateMinerData(player.PlayerData);
 
         // always spawn next rock
         RockSpawnManager.Instance.SpawnNextRock();
@@ -208,6 +210,32 @@ public class SmashManager : MonoBehaviour
                         PlayerManager.Instance.PlayerJobsData.AddAvailableJob(UtilsPlayer.PlayerJob.Blacksmith);
                     }
                 }
+            }
+        }
+
+        // add a check for when the miner is maxed out, handles giving more metal to player
+        if(player.PlayerData.CurrentLevel >= UtilsMiner.MAX_LEVEL_MINER)
+        {
+            float randVal = Random.value;
+            float checkVal = float.MaxValue;
+            switch (rock.RockData.RockSO.RockType)
+            {
+                case UtilsMiner.RockType.Copper: checkVal = 0.025f; break;
+                case UtilsMiner.RockType.Iron: checkVal = 0.05f; break;
+                case UtilsMiner.RockType.Bronze: checkVal = 0.1f; break;
+                case UtilsMiner.RockType.Silver: checkVal = 0.2f; break;
+                case UtilsMiner.RockType.Gold: checkVal = 0.4f; break;
+            }
+
+            if(checkVal <= randVal)
+            {
+                // gives correspondig metal to player
+                var metal = UtilsItem.GetAllTypeItem<MetalSO>().FirstOrDefault(m => m.RockType == rock.RockData.RockSO.RockType);
+                if (metal != null)
+                {
+                    PlayerManager.Instance.Inventory.AddItem(metal.Id, 1);
+                }
+                
             }
         }
     }

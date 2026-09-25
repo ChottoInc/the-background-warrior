@@ -35,8 +35,8 @@ public static class UtilsMiner
 
     // ----------- ROCKS ------------- //
 
-    private const float BASE_ROCK_DURABILITY = 35f;
-    private const float ROCK_DURABILITY_SCALE = 2.5f;
+    private const float BASE_ROCK_DURABILITY = 45f;
+    private const float ROCK_DURABILITY_SCALE = 2.8f;
 
 
     // ----------- WEAPON ------------- //
@@ -171,11 +171,11 @@ public static class UtilsMiner
         switch (rockType)
         {
             default:
-            case RockType.Copper: return 4;
-            case RockType.Iron: return 12;
-            case RockType.Bronze: return 30;
-            case RockType.Silver: return 75;
-            case RockType.Gold: return 120;
+            case RockType.Copper: return 2;
+            case RockType.Iron: return 6;
+            case RockType.Bronze: return 12;
+            case RockType.Silver: return 20;
+            case RockType.Gold: return 40;
         }
     }
 

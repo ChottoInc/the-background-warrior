@@ -116,11 +116,11 @@ public static class UtilsCombatMap
     // Used to calculate from base exp given
     public static float[] DifficultyExpMultiplier = 
     {
-        0.85f,   // VeryEasy
-        0.95f,   // Easy
-        1.25f,   // Normal
-        1.55f,   // Hard
-        2.0f    // VeryHard
+        0.55f,   // VeryEasy
+        0.65f,   // Easy
+        0.75f,   // Normal
+        0.85f,   // Hard
+        1.0f    // VeryHard
     };
 
     // Used to calculate actual stats
