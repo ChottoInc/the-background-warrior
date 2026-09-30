@@ -135,6 +135,7 @@ public class UITooltipCardOpening : UITooltipBase
     public void OnButtonClose()
     {
         AudioManager.Instance.PlayClickUI();
+        _isRevealAllPressed = false;
         Hide(true);
     }
 }

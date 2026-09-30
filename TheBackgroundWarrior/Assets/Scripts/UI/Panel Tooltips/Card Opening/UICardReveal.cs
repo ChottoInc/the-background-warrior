@@ -21,11 +21,14 @@ public class UICardReveal : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] float _vibrationRot = 8.5f;
     [SerializeField] float _vibrationTime = 0.15f;
 
+    [Header("VFX")]
+    [SerializeField] GameObject _importantCardVFX;
+
     public bool IsFlipped { get; private set; }
 
 
 
-    //private CardSO cardSO;
+    private CardSO _cardSO;
 
     private Vector3 _startRotation;
 
@@ -49,9 +52,10 @@ public class UICardReveal : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void Setup(CardSO cardSO)
     {
-        //this.cardSO = cardSO;
+        _cardSO = cardSO;
 
         imageRarity.gameObject.SetActive(false);
+        imageRarity.color = UtilsColor.GetColorByRarity(cardSO.CardRarity);
 
         panelFront.SetActive(false);
 
@@ -75,8 +79,38 @@ public class UICardReveal : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             panelBack.SetActive(false);
             panelFront.SetActive(true);
 
+            imageRarity.gameObject.SetActive(true);
+
+            if (IsImportantCard()) StartVFX();
+
             _tweenRot2 = transform.DORotate(new Vector3(0, 0, 0), flip90Time).SetEase(Ease.InOutSine).SetUpdate(true);
         });
+    }
+
+    private bool IsImportantCard()
+    {
+        if (_cardSO == null) return false;
+
+        switch(_cardSO.Id)
+        {
+            default: return false;
+            case 80:
+            case 83:
+            case 84:
+            case 85:
+            case 86:
+            case 87: return true;
+        }
+    }
+
+
+    private void StartVFX()
+    {
+        GameObject prefab = Instantiate(_importantCardVFX, transform.position, _importantCardVFX.transform.rotation);
+        prefab.SetActive(true);
+        prefab.transform.parent = transform;
+
+        prefab.transform.localScale = new Vector3(1, 1, 1);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

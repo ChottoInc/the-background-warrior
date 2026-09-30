@@ -10,6 +10,7 @@ public static class UtilsColor
     public const string CARD_COMMON_RARITY = "#f36c60";
     public const string CARD_UNCOMMON_RARITY = "#4fc3f7";
     public const string CARD_RARE_RARITY = "#ffca28";
+    //ab47bc
 
 
     public const string EQUIPPED_COMPANION = "#8d6e63";

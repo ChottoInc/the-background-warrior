@@ -286,6 +286,11 @@ public static class UtilsGeneral
         return value % 1 == 0 ? value.ToString("0") : value.ToString("0.0");
     }
 
+    public static string FormatDoubleDecimal(float value)
+    {
+        return value % 1 == 0 ? value.ToString("0") : value.ToString("0.00");
+    }
+
     #region GENERAL CHANCES
 
     [System.Serializable]

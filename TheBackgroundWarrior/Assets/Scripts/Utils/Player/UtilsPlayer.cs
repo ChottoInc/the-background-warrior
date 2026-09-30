@@ -547,8 +547,8 @@ public static class UtilsPlayer
         switch(type)
         {
             case AdvanceStatType.None: return res;
-            case AdvanceStatType.Flat: res = UtilsGeneral.FormatDecimal(stat); break;
-            case AdvanceStatType.Multiplier: res = UtilsGeneral.FormatDecimal(stat * 100f).ToString() + "%"; break;
+            case AdvanceStatType.Flat: res = UtilsGeneral.FormatDoubleDecimal(stat); break;
+            case AdvanceStatType.Multiplier: res = UtilsGeneral.FormatDoubleDecimal(stat * 100f).ToString() + "%"; break;
         }
 
         return res;

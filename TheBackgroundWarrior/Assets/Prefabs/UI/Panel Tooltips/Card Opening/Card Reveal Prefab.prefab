@@ -641,3 +641,4 @@ MonoBehaviour:
   flip90Time: 0.5
   _vibrationRot: 8.5
   _vibrationTime: 0.25
+  _importantCardVFX: {fileID: 6335127154251465606, guid: c04302f8c0f1afc44a99b8b64f6bfbdb, type: 3}
