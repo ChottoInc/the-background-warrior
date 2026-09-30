@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
-public class UICardReveal : MonoBehaviour
+public class UICardReveal : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image imageRarity;
 
@@ -16,27 +17,39 @@ public class UICardReveal : MonoBehaviour
     [Space(10)]
     [SerializeField] float flip90Time = 0.5f;
 
-    private bool isFlipped;
+    [Header("Vibration")]
+    [SerializeField] float _vibrationRot = 8.5f;
+    [SerializeField] float _vibrationTime = 0.15f;
+
+    public bool IsFlipped { get; private set; }
 
 
 
-    private CardSO cardSO;
+    //private CardSO cardSO;
+
+    private Vector3 _startRotation;
 
 
+    private Tween _tweenRot1;
+    private Tween _tweenRot2;
 
-    private Tween tweenRot1;
-    private Tween tweenRot2;
+    private Tween _tweenVibration;
 
 
     private void OnDestroy()
     {
-        tweenRot1?.Kill();
-        tweenRot2?.Kill();
+        _tweenRot1?.Kill();
+        _tweenRot2?.Kill();
+    }
+
+    private void Awake()
+    {
+        _startRotation = transform.localEulerAngles;
     }
 
     public void Setup(CardSO cardSO)
     {
-        this.cardSO = cardSO;
+        //this.cardSO = cardSO;
 
         imageRarity.gameObject.SetActive(false);
 
@@ -48,34 +61,42 @@ public class UICardReveal : MonoBehaviour
         imageCard.sprite = cardSO.Sprite;
     }
 
-
-
-    public void OnPointerEnter()
-    {
-        if (isFlipped) return;
-
-        imageRarity.gameObject.SetActive(true);
-    }
-
-    public void OnPointerExit()
-    {
-        if (isFlipped) return;
-
-        imageRarity.gameObject.SetActive(false);
-    }
-
-
-
     public void Flip()
     {
-        isFlipped = true;
+        if (IsFlipped) return;
 
-        tweenRot1 = transform.DORotate(new Vector3(0, 90f, 0), flip90Time).SetEase(Ease.InOutSine).SetUpdate(true).OnComplete(() =>
+        _tweenVibration?.Kill();
+        transform.localEulerAngles = _startRotation;
+
+        IsFlipped = true;
+
+        _tweenRot1 = transform.DORotate(new Vector3(0, 90f, 0), flip90Time).SetEase(Ease.InOutSine).SetUpdate(true).OnComplete(() =>
         {
             panelBack.SetActive(false);
             panelFront.SetActive(true);
 
-            tweenRot2 = transform.DORotate(new Vector3(0, 0, 0), flip90Time).SetEase(Ease.InOutSine).SetUpdate(true);
+            _tweenRot2 = transform.DORotate(new Vector3(0, 0, 0), flip90Time).SetEase(Ease.InOutSine).SetUpdate(true);
         });
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (IsFlipped) return;
+
+        imageRarity.gameObject.SetActive(true);
+
+        transform.localEulerAngles = new Vector3(0f, 0f, -_vibrationRot);
+
+        _tweenVibration = transform.DORotate(new Vector3(0f, 0f, _vibrationRot), _vibrationTime).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetUpdate(true).SetLink(gameObject, LinkBehaviour.KillOnDestroy);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (IsFlipped) return;
+
+        imageRarity.gameObject.SetActive(false);
+
+        _tweenVibration.Kill();
+        transform.localEulerAngles = _startRotation;
     }
 }

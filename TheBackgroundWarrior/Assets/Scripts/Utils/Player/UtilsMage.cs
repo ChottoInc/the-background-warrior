@@ -93,9 +93,18 @@ public static class UtilsMage
     {
         if (data == null) return -1;
 
-        return Mathf.FloorToInt(data.SpellSO.BaseLearningPoints *   // base points
-            (1f +                                                   // add to base mutliplier
-            (0.1f * ((float)data.CurrentRank - 1))));               // adds 10% for every rank
+        float mult = 1f;
+
+        switch (data.CurrentRank)
+        {
+            default: break;
+            case 1: mult = 1.5f; break;
+            case 2: mult = 2.5f; break;
+            case 3: mult = 4f; break;
+            case 4: mult = 6f; break;
+        }
+
+        return Mathf.FloorToInt(data.SpellSO.BaseLearningPoints * mult);
     }
 
     private static void LoadDictSpells()

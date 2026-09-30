@@ -223,7 +223,7 @@
     "text_quest_desc_obtain_item_category_cards_plural": "carte",
     "text_quest_desc_obtain_item_category_metals_plural": "metalli",
     "text_quest_desc_obtain_item_category_fishes_plural": "pesci",
-    "text_job_miner_weapon_currentlevel": "Liv. {0}",
+    "text_job_miner_weapon_currentlevel": "<color=#ffd54f>Liv. {0}</color>",
     "text_job_miner_weapon_currentstats": "Danni: +{0:.0}%",
     "text_job_blacksmith_gear_currentstats": "{0}: +{1:.0}%<br>",
     "text_name_class_mage": "Mago",
@@ -321,5 +321,7 @@
     "text_name_buff_inspiration_effect": "Grazie alle canzoni suonate precedentemente, alcune abilità hanno un incremento del 10%.",
     "text_job_miner_weapon_nextlevel": "Prossimo livello",
     "text_tooltip_focusfishing": "Cattura manualmente un pesce con un minigioco",
-    "text_rules_focusfishing": "Tieni premuto il tasto sinistro del mouse per muovere il pesce in alto e in basso, schiva le rocce e raccogli 5 stelle per catturarlo."
+    "text_rules_focusfishing": "Tieni premuto il tasto sinistro del mouse per muovere il pesce in alto e in basso, schiva le rocce e raccogli 5 stelle per catturarlo.",
+    "text_shop_isdaily": "Acquisto giornaliero.",
+    "text_shop_isunique": "Acquistabile una sola volta."
 }

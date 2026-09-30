@@ -16,13 +16,13 @@ public class UIShopPanelInfo : MonoBehaviour
     [Space(10)]
     [SerializeField] Transform confirmBuyPosition;
 
-    private ShopItemSO itemSO;
-    private int currentFilter;
+    private ShopItemSO _itemSO;
+    private int _currentFilter;
 
     public void Setup(ShopItemSO itemSO, int currentFilter)
     {
-        this.itemSO = itemSO;
-        this.currentFilter = currentFilter;
+        _itemSO = itemSO;
+        _currentFilter = currentFilter;
         
         imageItem.sprite = itemSO.Sprite;
         textName.text = itemSO.ItemName;
@@ -32,17 +32,30 @@ public class UIShopPanelInfo : MonoBehaviour
 
     private void HandleDesc()
     {
-        switch (itemSO.ShopItemType)
+        string resultText = string.Empty;
+
+        switch (_itemSO.ShopItemType)
         {
-            default: textDesc.text = itemSO.ItemDesc; break;
-            case UtilsShop.ShopItemType.Baits: HandleBaitDesc(); break;
+            default: resultText = _itemSO.ItemDesc; break;
+            case UtilsShop.ShopItemType.Baits: resultText = HandleBaitDesc(); break;
         }
+
+        if (_itemSO.IsDaily)
+        {
+            resultText += string.Format("<br>{0}", UtilsText.AllText[UtilsText.text_shop_isdaily]);
+        }
+        else if(_itemSO.IsUnique)
+        {
+            resultText += string.Format("<br>{0}", UtilsText.AllText[UtilsText.text_shop_isunique]);
+        }
+
+        textDesc.text = resultText;
     }
 
-    private void HandleBaitDesc()
+    private string HandleBaitDesc()
     {
-        ShopBaitSO shopBaitSO = itemSO as ShopBaitSO;
-        textDesc.text = string.Format(shopBaitSO.ItemDesc, shopBaitSO.BaitSO.ItemDesc);
+        ShopBaitSO shopBaitSO = _itemSO as ShopBaitSO;
+        return string.Format(shopBaitSO.ItemDesc, shopBaitSO.BaitSO.ItemDesc);
     }
 
     public void Show(bool show)
@@ -54,9 +67,9 @@ public class UIShopPanelInfo : MonoBehaviour
     {
         if (UITooltipManager.Instance.IsCallbackOpen) return;
 
-        if (PlayerManager.Instance.Inventory.CurrentBits < itemSO.Price) return;
+        if (PlayerManager.Instance.Inventory.CurrentBits < _itemSO.Price) return;
 
-        string question = string.Format(UtilsText.AllText[UtilsText.text_yesno_question_buy], itemSO.ItemName, itemSO.Price);
+        string question = string.Format(UtilsText.AllText[UtilsText.text_yesno_question_buy], _itemSO.ItemName, _itemSO.Price);
 
         TooltipManagerData tooltipData = new TooltipManagerData();
         tooltipData.idTooltip = UITooltipManager.ID_SHOW_YESNO;
@@ -69,18 +82,18 @@ public class UIShopPanelInfo : MonoBehaviour
             bool needClose = false;
 
             // remove bits
-            PlayerManager.Instance.Inventory.RemoveBits(itemSO.Price);
+            PlayerManager.Instance.Inventory.RemoveBits(_itemSO.Price);
 
             // update shop data
-            ShopManager.Instance.UpdateShopItemPurchase(itemSO);
+            ShopManager.Instance.UpdateShopItemPurchase(_itemSO);
             ShopManager.Instance.SaveShopData();
 
             // update shop, auto hide panel info
-            panelItems.Setup(currentFilter);
+            panelItems.Setup(_currentFilter);
             tabShop.UpdateBitsUI();
 
             // check if need the shop to close
-            switch (itemSO.ShopItemType)
+            switch (_itemSO.ShopItemType)
             {
                 case UtilsShop.ShopItemType.CardPack: needClose = true; break;
                 case UtilsShop.ShopItemType.Job: needClose = false; break;
@@ -93,11 +106,11 @@ public class UIShopPanelInfo : MonoBehaviour
             }
 
             // handle item purchase if add to inventory or something else
-            switch (itemSO.ShopItemType)
+            switch (_itemSO.ShopItemType)
             {
-                case UtilsShop.ShopItemType.CardPack: HandleCardPack(itemSO as ShopCardPackSO); break;
-                case UtilsShop.ShopItemType.Job: HandleShopJob(itemSO as ShopJobSO); break;
-                case UtilsShop.ShopItemType.Baits: HandleShopBait(itemSO as ShopBaitSO); break;
+                case UtilsShop.ShopItemType.CardPack: HandleCardPack(_itemSO as ShopCardPackSO); break;
+                case UtilsShop.ShopItemType.Job: HandleShopJob(_itemSO as ShopJobSO); break;
+                case UtilsShop.ShopItemType.Baits: HandleShopBait(_itemSO as ShopBaitSO); break;
             }
         }
     }

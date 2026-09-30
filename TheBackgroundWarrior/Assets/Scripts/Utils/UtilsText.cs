@@ -217,6 +217,9 @@ public static class UtilsText
     public const string text_shop_insertredeeem = "text_shop_insertredeeem";
     public const string text_shop_insertdebug = "text_shop_insertdebug";
 
+    public const string text_shop_isdaily = "text_shop_isdaily";
+    public const string text_shop_isunique = "text_shop_isunique";
+
     // -------------------- QUESTS --------------------- //
 
     public const string text_quest_desc_kill_specific = "text_quest_desc_kill_specific";
@@ -1239,6 +1242,9 @@ public static class UtilsText
             { text_shop_item_purchased, "Purchased" },
             { text_shop_insertredeeem, "Insert the redeem code" },
             { text_shop_insertdebug, "Insert the debug code" },
+
+            { text_shop_isdaily, "Daily purchase." },
+            { text_shop_isunique, "One-time purchase." },
             
             // -------------------- QUESTS --------------------- //
 

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f171d6aaa94954a8f9f8f695d19e50, type: 3}
   m_Name: CardPackData_0
   m_EditorClassIdentifier: 
+  id: 0
   uniqueId: cardpack_01
   isUnique: 0
-  isDaily: 1
+  isDaily: 0
   shopItemType: 0
   itemNameTextId: text_shopitem_cardpack01_name
   itemName: Copper Pack

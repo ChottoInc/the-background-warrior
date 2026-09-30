@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UITooltipCardOpening : UITooltipBase
 {
@@ -8,28 +9,41 @@ public class UITooltipCardOpening : UITooltipBase
     [SerializeField] GameObject cardOpeningPrefab;
     [SerializeField] Transform container;
 
-    private List<CardSO> cards;
+    private GridLayoutGroup _gridGroup;
+
+    private List<CardSO> _cards;
 
     private List<GameObject> cardObjs;
 
     [Header("Texts")]
     [SerializeField] TMP_Text textButtonrevealAll;
 
-    
+    private bool _isRevealAllPressed;
+
+    /*
+     * >10 120x180 sp x80 y30
+     * >5 168x252 sp x80 y30
+     * >0 192x288 sp x80 y30
+     * */
+
+    private void Awake()
+    {
+        _gridGroup = container.GetComponent<GridLayoutGroup>();
+    }
 
     public void Show(TooltipManagerData data, Vector2 position, bool fade = false)
     {
         if (Time.timeScale == 1f) Time.timeScale = 0f;
 
         // clear previuos list
-        if (this.cards != null) this.cards.Clear();
+        if (_cards != null) _cards.Clear();
 
-        this.cards = data.openingCards;
+        _cards = data.openingCards;
+
+        Appear(data, fade, position);
 
         // populate list cards
         Setup();
-
-        Appear(data, fade, position);
 
         RefreshTexts();
     }
@@ -50,6 +64,19 @@ public class UITooltipCardOpening : UITooltipBase
     {
         cardObjs = ClearList(cardObjs);
 
+        if(_cards.Count < 6)
+        {
+            _gridGroup.cellSize = new Vector2(192f, 288f);
+        }
+        else if(_cards.Count < 11)
+        {
+            _gridGroup.cellSize = new Vector2(162f, 252f);
+        }
+        else
+        {
+            _gridGroup.cellSize = new Vector2(120f, 180f);
+        }
+
         FillWindow();
     }
 
@@ -69,9 +96,9 @@ public class UITooltipCardOpening : UITooltipBase
 
     private void FillWindow()
     {
-        for (int i = 0; i < cards.Count; i++)
+        for (int i = 0; i < _cards.Count; i++)
         {
-            CreateSinglePrefab(cards[i]);
+            CreateSinglePrefab(_cards[i]);
         }
     }
 
@@ -92,7 +119,10 @@ public class UITooltipCardOpening : UITooltipBase
 
     public void OnButtonRevealAll()
     {
-        AudioManager.Instance.PlayClickUI();
+        if (_isRevealAllPressed) return;
+
+        _isRevealAllPressed = true;
+
         foreach (var item in cardObjs)
         {
             if (item.TryGetComponent(out UICardReveal obj))

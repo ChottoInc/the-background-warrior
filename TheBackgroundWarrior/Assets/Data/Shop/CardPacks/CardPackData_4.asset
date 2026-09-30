@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 4
   uniqueId: cardpack_05
   isUnique: 0
-  isDaily: 1
+  isDaily: 0
   shopItemType: 0
   itemNameTextId: text_shopitem_cardpack05_name
   itemName: Gold Pack

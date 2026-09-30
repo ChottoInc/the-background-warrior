@@ -21,6 +21,8 @@ public class UIButtonTabQuests : MonoBehaviour
     public void EnableNotification() 
     {
         notificationObj.SetActive(true);
+
+        //InitializerManager.Instance.FlashNotification();
     }
 
     public void DisableNotification()

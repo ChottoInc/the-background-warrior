@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 1
   uniqueId: cardpack_02
   isUnique: 0
-  isDaily: 1
+  isDaily: 0
   shopItemType: 0
   itemNameTextId: text_shopitem_cardpack02_name
   itemName: Iron Pack

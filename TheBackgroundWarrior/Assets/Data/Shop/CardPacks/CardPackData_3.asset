@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 3
   uniqueId: cardpack_04
   isUnique: 0
-  isDaily: 1
+  isDaily: 0
   shopItemType: 0
   itemNameTextId: text_shopitem_cardpack04_name
   itemName: Silver Pack

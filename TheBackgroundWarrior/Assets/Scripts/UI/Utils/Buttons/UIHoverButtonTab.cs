@@ -53,7 +53,10 @@ public class UIHoverButtonTab : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public virtual void OnPointerClick(PointerEventData eventData)
     {
-        _manager.ChangeSelected(this);
+        // prevent the border to disappear
+        if(!IsSelected)
+            _manager.ChangeSelected(this);
+
         IsSelected = true;
 
         if (_highlight)

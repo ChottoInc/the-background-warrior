@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -13,29 +12,20 @@ public class ShopManager : MonoBehaviour
 
 
     // Store every shop item purchase info
-    private Dictionary<string, ShopItemPurchaseInfo> dictItemPurchaseInfo;
+
+
+    public Dictionary<string, ShopItemPurchaseInfo> DictItemPurchaseInfo { get; private set; }
+
 
     // List of all shop items
-    private List<string> shopItemsList;
+    public List<string> ShopItemsList { get; private set; }
 
-
-    private long lastDailyCreationDate;
+    public long LastDailyCreationDate { get; private set; }
 
 
     // Redeem codes
 
-    private bool hasRedeemedErisCode;
-
-
-
-    public Dictionary<string, ShopItemPurchaseInfo> DictItemPurchaseInfo => dictItemPurchaseInfo;
-
-    public List<string> ShopItemsList => shopItemsList;
-
-    public long LastDailyCreationDate => lastDailyCreationDate;
-
-
-    public bool HasRedeemedErisCode => hasRedeemedErisCode;
+    public bool HasRedeemedErisCode { get; private set; }
 
 
 
@@ -97,7 +87,7 @@ public class ShopManager : MonoBehaviour
          * check on daily, if day changed reset purchase
          * */
 
-        lastDailyCreationDate = DateTime.UtcNow.Ticks;
+        LastDailyCreationDate = DateTime.UtcNow.Ticks;
 
         InitializeAllItems();
 
@@ -108,11 +98,11 @@ public class ShopManager : MonoBehaviour
     {
         // initialize dict and all items
 
-        if(shopItemsList == null)
-            shopItemsList = new List<string>();
+        if(ShopItemsList == null)
+            ShopItemsList = new List<string>();
 
-        if(dictItemPurchaseInfo == null)
-            dictItemPurchaseInfo = new Dictionary<string, ShopItemPurchaseInfo>();
+        if(DictItemPurchaseInfo == null)
+            DictItemPurchaseInfo = new Dictionary<string, ShopItemPurchaseInfo>();
 
         // create default for every item
         ShopItemSO[] allItems = GetAllItems().ToArray();
@@ -122,7 +112,7 @@ public class ShopManager : MonoBehaviour
             ShopItemSO so = allItems[i];
 
             // init if item isn't in dict
-            if (!dictItemPurchaseInfo.ContainsKey(so.UniqueId))
+            if (!DictItemPurchaseInfo.ContainsKey(so.UniqueId))
             {
                 ShopItemPurchaseInfo purchaseInfo = new ShopItemPurchaseInfo();
 
@@ -130,14 +120,14 @@ public class ShopManager : MonoBehaviour
                 purchaseInfo.purchaseCount = 0;
 
                 // save in dictionary
-                dictItemPurchaseInfo.Add(so.UniqueId, purchaseInfo);
+                DictItemPurchaseInfo.Add(so.UniqueId, purchaseInfo);
             }
         }
     }
 
     private void InitializeRedeemCodes()
     {
-        hasRedeemedErisCode = false;
+        HasRedeemedErisCode = false;
     }
 
     #endregion
@@ -146,28 +136,31 @@ public class ShopManager : MonoBehaviour
 
     private void SetupFromFile(ShopSaveData saveData)
     {
-        lastDailyCreationDate = saveData.lastDailyCreationDate;
+        LastDailyCreationDate = saveData.lastDailyCreationDate;
 
         LoadShopItems(saveData.shopItemSaveDatas);
 
         // check for daily using date
-        DateTime lastDailyDate = new DateTime(lastDailyCreationDate, DateTimeKind.Utc);
-        if (DateTime.UtcNow.Date != lastDailyDate)
+        DateTime lastDailyDate = new DateTime(LastDailyCreationDate, DateTimeKind.Utc);
+        if (DateTime.UtcNow.Date != lastDailyDate.Date)
         {
+            //Debug.Log("Diffrent date shop");
+            LastDailyCreationDate = DateTime.UtcNow.Ticks;
             ResetDailyItems();
         }
 
+        HasRedeemedErisCode = saveData.hasRedeemedErisCode;
 
-        hasRedeemedErisCode = saveData.hasRedeemedErisCode;
+        SaveShopData();
     }
 
     private void LoadShopItems(List<ShopItemSaveData> datas)
     {
-        if (shopItemsList == null)
-            shopItemsList = new List<string>();
+        if (ShopItemsList == null)
+            ShopItemsList = new List<string>();
 
-        if (dictItemPurchaseInfo == null)
-            dictItemPurchaseInfo = new Dictionary<string, ShopItemPurchaseInfo>();
+        if (DictItemPurchaseInfo == null)
+            DictItemPurchaseInfo = new Dictionary<string, ShopItemPurchaseInfo>();
 
         // used for debug infos
         int exceptionIndex = 0;
@@ -182,7 +175,10 @@ public class ShopManager : MonoBehaviour
                 // save in dictionary
                 ShopItemPurchaseInfo dataProgress = new ShopItemPurchaseInfo(datas[i]);
                 //dictItemPurchaseInfo.Add(datas[i].shopItemId, dataProgress);
-                dictItemPurchaseInfo[datas[i].shopItemId] = dataProgress;
+                DictItemPurchaseInfo[datas[i].shopItemId] = dataProgress;
+
+                //Debug.Log("unique id: " + datas[i].shopItemId + ", ispurch: " + dataProgress.isPurchased);
+                //Debug.Log("unique id: " + datas[i].shopItemId + ", ispurch: " + dictItemPurchaseInfo[datas[i].shopItemId].isPurchased);
             }
         }
         catch
@@ -211,7 +207,7 @@ public class ShopManager : MonoBehaviour
                 purchaseInfo.isPurchased = false;
 
                 // copy informations
-                purchaseInfo.purchaseCount = dictItemPurchaseInfo[so.UniqueId].purchaseCount;
+                purchaseInfo.purchaseCount = DictItemPurchaseInfo[so.UniqueId].purchaseCount;
 
 
                 dictToUpdate.Add(so.UniqueId, purchaseInfo);
@@ -221,7 +217,7 @@ public class ShopManager : MonoBehaviour
         // update dictionary
         foreach (var pair in dictToUpdate)
         {
-            dictItemPurchaseInfo[pair.Key] = pair.Value;
+            DictItemPurchaseInfo[pair.Key] = pair.Value;
         }
     }
 
@@ -230,7 +226,7 @@ public class ShopManager : MonoBehaviour
 
     public void UpdateShopItemPurchase(ShopItemSO itemSO)
     {
-        ShopItemPurchaseInfo itemInfo = dictItemPurchaseInfo[itemSO.UniqueId];
+        ShopItemPurchaseInfo itemInfo = DictItemPurchaseInfo[itemSO.UniqueId];
 
         if (itemSO.IsDaily || itemSO.IsUnique)
         {
@@ -239,7 +235,7 @@ public class ShopManager : MonoBehaviour
 
         itemInfo.purchaseCount++;
 
-        dictItemPurchaseInfo[itemSO.UniqueId] = itemInfo;
+        DictItemPurchaseInfo[itemSO.UniqueId] = itemInfo;
     }
 
 
@@ -249,7 +245,7 @@ public class ShopManager : MonoBehaviour
         {
             default: Debug.Log("Invalid redeem code id: " + id); break;
 
-            case ID_REDEEM_ERIS_CODE: hasRedeemedErisCode = true; break;
+            case ID_REDEEM_ERIS_CODE: HasRedeemedErisCode = true; break;
         }
     }
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 2
   uniqueId: cardpack_03
   isUnique: 0
-  isDaily: 1
+  isDaily: 0
   shopItemType: 0
   itemNameTextId: text_shopitem_cardpack03_name
   itemName: Bronze Pack

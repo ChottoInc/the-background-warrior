@@ -469,6 +469,7 @@ public class QuestManager : MonoBehaviour
         DateTime lastDailyDate = new DateTime(LastDailyCreationDate, DateTimeKind.Utc);
         if(DateTime.UtcNow.Date != lastDailyDate.Date)
         {
+            //Debug.Log("Diffrent date quest");
             // save new date
             LastDailyCreationDate = DateTime.UtcNow.Ticks;
 
