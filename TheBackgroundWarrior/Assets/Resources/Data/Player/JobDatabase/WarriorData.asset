@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   dataPath: Files/Player/PlayerDatas - Warrior
-  <PerLevelGainMaxHp>k__BackingField: 45
+  <PerLevelGainMaxHp>k__BackingField: 58
   <PerLevelGainAtk>k__BackingField: 0.75
   <PerLevelGainDef>k__BackingField: 0.2
   <PerLevelGainAtkSpd>k__BackingField: 0.01

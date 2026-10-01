@@ -231,7 +231,7 @@
     "text_name_mage_stat_castspeed": "Vel. di lancio",
     "text_name_mage_stat_scholar": "Studioso",
     "text_name_mage_stat_proficiency": "Competenza",
-    "text_tooltip_stat_mage_insight": "Aumenta la velocità di apprendimento di un incantesimo",
+    "text_tooltip_stat_mage_insight": "Diminuisce i punti necessari degli incantesimi del Mago per aumentare di rango.",
     "text_tooltip_stat_mage_castspeed": "Aumenta la velocità di lancio degli incantesimi di Mago e Guerriero",
     "text_tooltip_stat_mage_scholar": "Ogni 5 livelli, sblocca un nuovo incantesimo da imparare per il Mago",
     "text_tooltip_stat_mage_proficiency": "Ogni 5 livelli, sblocca uno slot di equipaggiamento per un incantesimo utilizzabile mentre si avanza tra le zone",
@@ -323,5 +323,7 @@
     "text_tooltip_focusfishing": "Cattura manualmente un pesce con un minigioco",
     "text_rules_focusfishing": "Tieni premuto il tasto sinistro del mouse per muovere il pesce in alto e in basso, schiva le rocce e raccogli 5 stelle per catturarlo.",
     "text_shop_isdaily": "Acquisto giornaliero.",
-    "text_shop_isunique": "Acquistabile una sola volta."
+    "text_shop_isunique": "Acquistabile una sola volta.",
+    "text_settings_gameplay_titlemage": "Mago",
+    "text_settings_gameplay_option_showcurrentspell": "Mostra l'incantesimo"
 }

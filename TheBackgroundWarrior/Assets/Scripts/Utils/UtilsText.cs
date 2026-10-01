@@ -286,8 +286,10 @@ public static class UtilsText
     public const string text_settings_gameplay_titleanimations = "text_settings_gameplay_titleanimations";
     public const string text_settings_gameplay_option_equipmentlevelup = "text_settings_gameplay_option_equipmentlevelup";
     public const string text_settings_gameplay_titlefisher = "text_settings_gameplay_titlefisher";
+    public const string text_settings_gameplay_titlemage = "text_settings_gameplay_titlemage";
     public const string text_settings_gameplay_option_invertfishingspot = "text_settings_gameplay_option_invertfishingspot";
     public const string text_settings_gameplay_option_hidefishingbar = "text_settings_gameplay_option_hidefishingbar";
+    public const string text_settings_gameplay_option_showcurrentspell = "text_settings_gameplay_option_showcurrentspell";
 
     public const string text_settings_video_option_alwaysontop = "text_settings_video_option_alwaysontop";
     public const string text_settings_video_option_clickthrough = "text_settings_video_option_clickthrough";
@@ -1314,8 +1316,10 @@ public static class UtilsText
             { text_settings_gameplay_titleanimations, "Animations" },
             { text_settings_gameplay_option_equipmentlevelup, "Equipment Level Up" },
             { text_settings_gameplay_titlefisher, "Fisher" },
+            { text_settings_gameplay_titlemage, "Mage" },
             { text_settings_gameplay_option_invertfishingspot, "Invert fishing spot" },
             { text_settings_gameplay_option_hidefishingbar, "Hide fishing bar" },
+            { text_settings_gameplay_option_showcurrentspell, "Show current spell" },
 
             { text_settings_video_option_alwaysontop, "Always on top" },
             { text_settings_video_option_clickthrough, "Click through background" },

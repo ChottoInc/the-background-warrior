@@ -44,6 +44,10 @@ public class SettingsSaveData
     public bool isInvertedFishingSpot;
     public bool isHiddenFishingBar;
 
+    // -- Mage
+
+    public bool isCurrentSpellShowing;
+
     // ------------ VIDEO
 
     public bool isAlwaysOnTop;
@@ -95,6 +99,8 @@ public class SettingsSaveData
 
         isInvertedFishingSpot = manager.IsInvertedFishingSpot;
         isHiddenFishingBar = manager.IsHiddenFishingBar;
+
+        isCurrentSpellShowing = manager.IsCurrentSpellShowing;
 
 
 

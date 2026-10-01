@@ -37,11 +37,11 @@ public static class UtilsMage
 
 
 
-    private const long FIREBALL_EXP = 50;
-    private const long EXPLOSION_EXP = 75;
-    private const long CHILLWIND_EXP = 100;
-    private const long POISONGAS_EXP = 125;
-    private const long ZAP_EXP = 150;
+    private const long FIREBALL_EXP = 30;
+    private const long EXPLOSION_EXP = 40;
+    private const long CHILLWIND_EXP = 50;
+    private const long POISONGAS_EXP = 60;
+    private const long ZAP_EXP = 70;
 
 
 

@@ -379,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4584299889865631702}
+  _panelLearningSpell: {fileID: 5599819065212848243}
   _imageLearningSpell: {fileID: 1775817854034158483}
   dummyPosition: {fileID: 0}
   castPosition: {fileID: 5315258251827070847}

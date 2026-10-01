@@ -220,11 +220,11 @@ public class SmashManager : MonoBehaviour
             float checkVal = float.MaxValue;
             switch (rock.RockData.RockSO.RockType)
             {
-                case UtilsMiner.RockType.Copper: checkVal = 0.025f; break;
-                case UtilsMiner.RockType.Iron: checkVal = 0.05f; break;
-                case UtilsMiner.RockType.Bronze: checkVal = 0.1f; break;
-                case UtilsMiner.RockType.Silver: checkVal = 0.2f; break;
-                case UtilsMiner.RockType.Gold: checkVal = 0.4f; break;
+                case UtilsMiner.RockType.Copper: checkVal = UtilsMiner.ROCK_METAL_MAX_LEVEL_COPPER; break;
+                case UtilsMiner.RockType.Iron: checkVal = UtilsMiner.ROCK_METAL_MAX_LEVEL_IRON; break;
+                case UtilsMiner.RockType.Bronze: checkVal = UtilsMiner.ROCK_METAL_MAX_LEVEL_BRONZE; break;
+                case UtilsMiner.RockType.Silver: checkVal = UtilsMiner.ROCK_METAL_MAX_LEVEL_SILVER; break;
+                case UtilsMiner.RockType.Gold: checkVal = UtilsMiner.ROCK_METAL_MAX_LEVEL_GOLD; break;
             }
 
             if(checkVal <= randVal)

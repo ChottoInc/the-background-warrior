@@ -17,9 +17,29 @@ public class UIButtonJobTab : MonoBehaviour
 
     private PlayerJobSO jobSO;
 
+    [Header("Notification")]
+    [SerializeField] UITab _tabButton;
+    [SerializeField] GameObject notificationObj;
+
+    public bool IsNotificationShowing { get; private set; }
+
+
     private bool isActive;
     private bool isShow;
-    
+
+
+    private void OnDestroy()
+    {
+        PlayerManager.Instance.PlayerJobsData.OnJobUnlocked -= EnableNotification;
+        _tabButton.OnDeselected -= DisableNotification;
+    }
+
+    private void Awake()
+    {
+        PlayerManager.Instance.PlayerJobsData.OnJobUnlocked += EnableNotification;
+        _tabButton.OnDeselected += DisableNotification;
+    }
+
     public void Refresh()
     {
         // Initialize
@@ -73,5 +93,22 @@ public class UIButtonJobTab : MonoBehaviour
         if (isActive) return;
 
         UITooltipManager.Instance.Hide(UITooltipManager.ID_SHOW_TEXT, true);
+    }
+
+    
+
+    public void EnableNotification(UtilsPlayer.PlayerJob jobUnlocked)
+    {
+        if(job == jobUnlocked)
+        {
+            notificationObj.SetActive(true);
+            IsNotificationShowing = true;
+        }
+    }
+
+    public void DisableNotification()
+    {
+        notificationObj.SetActive(false);
+        IsNotificationShowing = false;
     }
 }

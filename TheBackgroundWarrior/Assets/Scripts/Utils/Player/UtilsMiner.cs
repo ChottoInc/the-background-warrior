@@ -38,6 +38,12 @@ public static class UtilsMiner
     private const float BASE_ROCK_DURABILITY = 45f;
     private const float ROCK_DURABILITY_SCALE = 2.8f;
 
+    public const float ROCK_METAL_MAX_LEVEL_COPPER = 0.025f;
+    public const float ROCK_METAL_MAX_LEVEL_IRON = 0.05f;
+    public const float ROCK_METAL_MAX_LEVEL_BRONZE = 0.1f;
+    public const float ROCK_METAL_MAX_LEVEL_SILVER = 0.15f;
+    public const float ROCK_METAL_MAX_LEVEL_GOLD = 0.25f;
+
 
     // ----------- WEAPON ------------- //
 

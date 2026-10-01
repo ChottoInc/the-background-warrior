@@ -71,12 +71,17 @@ public class SettingsManager : MonoBehaviour
     public bool IsInvertedFishingSpot { get; private set; }
     public bool IsHiddenFishingBar { get; private set; }
 
+    // -- Mage
+    public bool IsCurrentSpellShowing { get; private set; }
+
 
     public event Action<bool> OnInvertedHUDChange;
     public event Action<bool> OnAutocloseHUDChange;
 
     public event Action<bool> OnInvertedFishingSpotChange;
     public event Action<bool> OnIsHiddenFishingBarChange;
+
+    public event Action<bool> OnIsCurrentSpellShowingChange;
 
 
 
@@ -197,6 +202,8 @@ public class SettingsManager : MonoBehaviour
         SetIsInvertedFishingSpotOn(saveData.isInvertedFishingSpot, false);
         SetIsHiddenFishingSpot(saveData.isHiddenFishingBar, false);
 
+        SetIsCurrentSpellShowing(saveData.isCurrentSpellShowing, false);
+
         // --- video
         SetIsAlwaysOnTop(saveData.isAlwaysOnTop, false);
         SetIsClickThrough(saveData.isClickThrough, false);
@@ -242,6 +249,8 @@ public class SettingsManager : MonoBehaviour
 
         SetIsInvertedFishingSpotOn(false, false);
         SetIsHiddenFishingSpot(false, false);
+
+        SetIsCurrentSpellShowing(true, false);
 
         // --- video
         SetIsAlwaysOnTop(false, false);
@@ -427,6 +436,15 @@ public class SettingsManager : MonoBehaviour
     {
         IsHiddenFishingBar = isOn;
         OnIsHiddenFishingBarChange?.Invoke(isOn);
+
+        if (save)
+            Save();
+    }
+
+    public void SetIsCurrentSpellShowing(bool isOn, bool save = true)
+    {
+        IsCurrentSpellShowing = isOn;
+        OnIsCurrentSpellShowingChange?.Invoke(isOn);
 
         if (save)
             Save();

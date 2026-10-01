@@ -16,11 +16,12 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: 9af774dca6fd9414183f3910562ef8ad, type: 3}
   itemNameTextId: text_item_card_31_name
+  itemNamePluralTextId: 
   itemName: Monster Stampede, ancient tome
   itemDescTextId: text_item_card_31_desc
   itemDesc: No author, the title is barely visible. History about peace, endless
     monsters, and a powerful spell. Only the strongest can handle it, and the more
     people use it, the faster are the effects.
-  cardRarity: 0
+  cardRarity: 2
   backgroundSprite: {fileID: 21300000, guid: 81301cdeeeb39214abc70d9f24111733, type: 3}
   cardNumber: 31

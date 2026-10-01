@@ -9,6 +9,7 @@ public class PlayerMage : Player
     [SerializeField] Animator animator;
 
     [Header("Casting")]
+    [SerializeField] GameObject _panelLearningSpell;
     [SerializeField] Image _imageLearningSpell;
 
     [Space(10)]
@@ -42,6 +43,8 @@ public class PlayerMage : Player
         base.Awake();
 
         OnStatChange += CheckSpellBar;
+
+        SettingsManager.Instance.OnIsCurrentSpellShowingChange += OnShowCurrentSpell;
     }
 
     private void Start()
@@ -53,7 +56,10 @@ public class PlayerMage : Player
             UtilsBuffs.BuffType.Arcanist,
             UtilsBuffs.BuffType.Inspiration,
         };
+
+        OnShowCurrentSpell(SettingsManager.Instance.IsCurrentSpellShowing);
     }
+
 
 
     protected override void OnDestroy()
@@ -61,6 +67,8 @@ public class PlayerMage : Player
         base.OnDestroy();
 
         OnStatChange -= CheckSpellBar;
+
+        SettingsManager.Instance.OnIsCurrentSpellShowingChange -= OnShowCurrentSpell;
 
         if (PlayerData != null)
         {
@@ -129,6 +137,11 @@ public class PlayerMage : Player
             _timerCast -= Time.deltaTime;
             UpdateCooldowBar();
         }
+    }
+
+    private void OnShowCurrentSpell(bool isOn)
+    {
+        _panelLearningSpell.SetActive(isOn);
     }
 
     private void CastSpell()

@@ -27,6 +27,9 @@ public class UITabSettingsGameplay : UITabWindow
     [SerializeField] Toggle toggleInvertedFishingSpot;
     [SerializeField] Toggle toggleHideFishingBar;
 
+    [Header("Mage")]
+    [SerializeField] Toggle toggleShowCurrentSpell;
+
     private void Awake()
     {
         panelAutoBattleSettings.OnSet += OnToggleAutoBattleSettings;
@@ -103,6 +106,11 @@ public class UITabSettingsGameplay : UITabWindow
 
         if (toggleHideFishingBar != null)
             toggleHideFishingBar.SetIsOnWithoutNotify(SettingsManager.Instance.IsHiddenFishingBar);
+
+
+
+        if (toggleShowCurrentSpell != null)
+            toggleShowCurrentSpell.SetIsOnWithoutNotify(SettingsManager.Instance.IsCurrentSpellShowing);
     }
 
 
@@ -180,5 +188,12 @@ public class UITabSettingsGameplay : UITabWindow
     {
         AudioManager.Instance.PlayClickUI();
         SettingsManager.Instance.SetIsHiddenFishingSpot(isOn);
+    }
+
+
+    public void OnToggleShowCurrentSpell(bool isOn)
+    {
+        AudioManager.Instance.PlayClickUI();
+        SettingsManager.Instance.SetIsCurrentSpellShowing(isOn);
     }
 }
