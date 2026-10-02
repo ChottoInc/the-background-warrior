@@ -187,6 +187,23 @@ public class PlayerFisherData : BasePlayerData
         return result;
     }
 
+    public bool IsGroupCaughtCheckVar(FishGroupSO fishGroupSO)
+    {
+        switch (fishGroupSO.GroupType)
+        {
+            default: return false;
+            case UtilsFisher.FishGroupType.Life: return IsLifeSeriesCompleted;
+            case UtilsFisher.FishGroupType.Predator: return IsPredatorSeriesCompleted;
+            case UtilsFisher.FishGroupType.Guardian: return IsGuardianSeriesCompleted;
+            case UtilsFisher.FishGroupType.Dart: return IsDartSeriesCompleted;
+            case UtilsFisher.FishGroupType.Sharp: return IsSharpSeriesCompleted;
+            case UtilsFisher.FishGroupType.Piercing: return IsPiercingSeriesCompleted;
+            case UtilsFisher.FishGroupType.Golden: return IsGoldenSeriesCompleted;
+            case UtilsFisher.FishGroupType.Elder: return IsElderSeriesCompleted;
+            case UtilsFisher.FishGroupType.Quick: return IsQuickSeriesCompleted;
+        }
+    }
+
     public void AddExp(long amount)
     {
         base.AddExp(

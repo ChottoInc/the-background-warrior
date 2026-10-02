@@ -116,6 +116,7 @@ public class QuestManager : MonoBehaviour
     private PlayerFarmer playerFarmer;
     private PlayerMage playerMage;
     private PlayerAlchemist playerAlchemist;
+    private PlayerNecromancer playerNecromancer;
 
 
 
@@ -181,6 +182,9 @@ public class QuestManager : MonoBehaviour
 
         if (playerAlchemist != null)
             playerAlchemist.OnStatChange -= questEventHandler.OnStatUp;
+
+        if (playerNecromancer != null)
+            playerNecromancer.OnStatChange -= questEventHandler.OnStatUp;
     }
 
     private void OnDestroy()
@@ -243,6 +247,11 @@ public class QuestManager : MonoBehaviour
             case SceneLoaderManager.SceneType.Alchemist:
                 playerAlchemist = FindFirstObjectByType<PlayerAlchemist>();
                 playerAlchemist.OnStatChange += questEventHandler.OnStatUp;
+                break;
+
+            case SceneLoaderManager.SceneType.Necromancer:
+                playerNecromancer = FindFirstObjectByType<PlayerNecromancer>();
+                playerNecromancer.OnStatChange += questEventHandler.OnStatUp;
                 break;
         }
     }
@@ -532,7 +541,7 @@ public class QuestManager : MonoBehaviour
             // get non saved quest ids
             List<string> nonSavedIds = UtilsGeneral.GetNonSharedValues(DictQuestsStoryProgress.Keys.ToList(), alreadySavedDataIds);
 
-            // loop non saved datas and active the once next to another
+            // loop non saved datas and active the ones next to another
             foreach (var id in nonSavedIds)
             {
                 if (IsQuestNextToAnother(id))

@@ -25,7 +25,7 @@ MonoBehaviour:
     amountObtain: 5
     questLevelUpSpecific: 1
     statId: 83
-    amountStat: 1
+    amountStat: 2
     mapId: 0
     questBefriendSpecific: 0
     companionSO: {fileID: 0}

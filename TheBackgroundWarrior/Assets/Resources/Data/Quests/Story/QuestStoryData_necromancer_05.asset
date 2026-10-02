@@ -35,5 +35,5 @@ MonoBehaviour:
     spellSO: {fileID: 11400000, guid: d71eefb396908844486905bfeb3bae89, type: 2}
     amountRank: 1
     amountSummon: 100
-    rewardAmount: 70
+    rewardAmount: 15
   nexts: []

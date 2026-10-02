@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using static UtilsQuest;
 
 public class QuestEventHandler
@@ -153,7 +154,6 @@ public class QuestEventHandler
             default:
             case QuestType.Story:
                 progress = QuestManager.Instance.DictQuestsStoryProgress[questId];
-
                 progress.progressCounter++;
                 QuestManager.Instance.DictQuestsStoryProgress[questId] = progress;
                 break;
@@ -587,10 +587,10 @@ public class QuestEventHandler
 
             // get result
             HandleEventResult eventResult = eventFunction(eventData);
-            result.needSave = eventResult.needSave;
-            result.needNotification = eventResult.needNotification;
+            result.needSave = result.needSave || eventResult.needSave;
+            result.needNotification = result.needNotification || eventResult.needNotification;
 
-            if (result.needNotification)
+            if (eventResult.needNotification)
             {
                 result.counterNotification++;
             }
@@ -605,7 +605,6 @@ public class QuestEventHandler
 
         // get results from story quests
         HandleEventResult storyResult = HandleQuestList(QuestManager.Instance.ActiveStoryQuests, QuestType.Story, eventData, eventFunction);
-
         if (!needNotification)
             needNotification = storyResult.needNotification;
 

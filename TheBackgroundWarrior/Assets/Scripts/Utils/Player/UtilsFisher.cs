@@ -54,7 +54,7 @@ public static class UtilsFisher
 
 
     public const long PASSIVE_EXP = 50;
-    public const long UNCAUGHT_EXP = 300;
+    public const long UNCAUGHT_EXP = 400;
 
 
 

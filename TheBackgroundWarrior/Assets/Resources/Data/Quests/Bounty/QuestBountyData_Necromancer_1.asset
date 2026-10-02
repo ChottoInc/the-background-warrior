@@ -34,4 +34,4 @@ MonoBehaviour:
     spellSO: {fileID: 0}
     amountRank: 0
     amountSummon: 20
-    rewardAmount: 10
+    rewardAmount: 2

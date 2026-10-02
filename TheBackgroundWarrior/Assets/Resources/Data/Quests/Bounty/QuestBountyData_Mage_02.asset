@@ -33,4 +33,5 @@ MonoBehaviour:
     questSpellSpecific: 0
     spellSO: {fileID: 0}
     amountRank: 5
-    rewardAmount: 60
+    amountSummon: 0
+    rewardAmount: 20

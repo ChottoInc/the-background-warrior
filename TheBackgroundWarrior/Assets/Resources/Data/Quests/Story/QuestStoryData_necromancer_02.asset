@@ -35,6 +35,6 @@ MonoBehaviour:
     spellSO: {fileID: 11400000, guid: d71eefb396908844486905bfeb3bae89, type: 2}
     amountRank: 1
     amountSummon: 0
-    rewardAmount: 20
+    rewardAmount: 3
   nexts:
   - {fileID: 11400000, guid: 1d043bed437af5742af52831f0d04101, type: 2}

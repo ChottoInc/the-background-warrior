@@ -31,6 +31,10 @@ MonoBehaviour:
     questBefriendSpecific: 1
     companionSO: {fileID: 11400000, guid: 752ba2c10e4afdd4fa8bb4344884194f, type: 2}
     amountBefriend: 10
-    rewardAmount: 30
+    questSpellSpecific: 0
+    spellSO: {fileID: 0}
+    amountRank: 0
+    amountSummon: 0
+    rewardAmount: 12
   nexts:
   - {fileID: 11400000, guid: 3a6c4f1995730264791db31d71106ccb, type: 2}

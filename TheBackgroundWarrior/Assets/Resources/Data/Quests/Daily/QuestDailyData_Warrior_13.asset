@@ -22,9 +22,16 @@ MonoBehaviour:
     itemType: 1
     questObtainSpecific: 0
     itemId: 3
-    amountObtain: 5
+    amountObtain: 3
     questLevelUpSpecific: 1
     statId: 3
     amountStat: 1
     mapId: 0
+    questBefriendSpecific: 0
+    companionSO: {fileID: 0}
+    amountBefriend: 0
+    questSpellSpecific: 0
+    spellSO: {fileID: 0}
+    amountRank: 0
+    amountSummon: 0
     rewardAmount: 0

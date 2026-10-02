@@ -23,7 +23,7 @@ MonoBehaviour:
     itemType: 6
     questObtainSpecific: 1
     itemId: 504
-    amountObtain: 15
+    amountObtain: 10
     questLevelUpSpecific: 0
     statId: 0
     amountStat: 0
@@ -34,6 +34,7 @@ MonoBehaviour:
     questSpellSpecific: 0
     spellSO: {fileID: 0}
     amountRank: 0
-    rewardAmount: 30
+    amountSummon: 0
+    rewardAmount: 9
   nexts:
   - {fileID: 11400000, guid: 1bfbc5b7584ce214da04ab96ffc4e039, type: 2}

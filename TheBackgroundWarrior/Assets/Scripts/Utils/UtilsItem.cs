@@ -14,6 +14,8 @@ public static class UtilsItem
      * Concoctions ids start from 500
      * */
 
+    public const int MAX_ITEM_IN_INVENTORY = 999999;
+
     public const int ID_GOLD_ORE = 4;
 
     public const int ID_CARD_ANCIENTTOME = 80;
@@ -164,11 +166,11 @@ public static class UtilsItem
         switch (rarity)
         {
             default:
-            case FishRarity.Riverfolk: return 1500;
+            case FishRarity.Riverfolk: return 2000;
             case FishRarity.Deepwater: return 2500;
-            case FishRarity.Tideborn: return 4000;
-            case FishRarity.Ancient: return 6000;
-            case FishRarity.Mythic: return 8500;
+            case FishRarity.Tideborn: return 3500;
+            case FishRarity.Ancient: return 5000;
+            case FishRarity.Mythic: return 7000;
         }
     }
 

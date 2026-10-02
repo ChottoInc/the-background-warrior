@@ -95,13 +95,15 @@ public class Inventory
             //ItemSO itemSO = UtilsItem.GetItemById(id);
 
             int index = GetGroupIndex(id);
-            ItemGroups[index].AddQuantity(quantity);
-            /*
-            if (itemSO.ItemType != UtilsItem.ItemType.Fish)
+
+            if (ItemGroups[index].Quantity + quantity > UtilsItem.MAX_ITEM_IN_INVENTORY)
             {
-                int index = GetGroupIndex(id);
-                itemGroups[index].AddQuantity(quantity);
-            }*/
+                ItemGroups[index].AddQuantity(UtilsItem.MAX_ITEM_IN_INVENTORY - ItemGroups[index].Quantity);
+            }
+            else
+            {
+                ItemGroups[index].AddQuantity(quantity);
+            }
         }
 
         ItemGroups.Sort();

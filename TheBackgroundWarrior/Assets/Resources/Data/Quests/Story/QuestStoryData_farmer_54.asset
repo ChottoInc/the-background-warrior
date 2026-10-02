@@ -34,6 +34,7 @@ MonoBehaviour:
     questSpellSpecific: 0
     spellSO: {fileID: 0}
     amountRank: 0
-    rewardAmount: 30
+    amountSummon: 0
+    rewardAmount: 6
   nexts:
   - {fileID: 11400000, guid: b75e24d209f3cdf4cbee0eb4b6d2b287, type: 2}

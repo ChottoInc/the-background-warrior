@@ -1929,7 +1929,7 @@ MonoBehaviour:
   imageToHighlight: {fileID: 8647075103637129872}
   colorSelected: {r: 0.14117648, g: 0.90588236, b: 0.23529412, a: 1}
   tooltipPosition: {fileID: 5688142054361754054}
-  timerTooltip: 0.35
+  timerTooltip: 0.05
 --- !u!1 &8062598109139973147
 GameObject:
   m_ObjectHideFlags: 0

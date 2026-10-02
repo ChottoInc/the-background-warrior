@@ -46,7 +46,7 @@ public class UITabJobWarrior : UITabWindow
             int mapsCount = PlayerManager.Instance.PlayerFightData.AvailableMaps.Count;
             if (mapsCount > 3)
             {
-                scrollMaps.verticalNormalizedPosition = 1f / (float)mapsCount;
+                scrollMaps.verticalNormalizedPosition = 1- (1f / (float)mapsCount);
             }
         }
         else

@@ -48,6 +48,11 @@ public class UIFisherGroupPrefab : MonoBehaviour
         // clear list and refresh to see if new fishes are caught
         panelFishesObjs = ClearList(panelFishesObjs);
         RefreshFishes();
+        
+        if (PlayerManager.Instance.PlayerFisherData.IsGroupCaughtCheckVar(fishGroupSO))
+        {
+            textGroupName.text = string.Format("<color=#ffd54f>{0}</color>", fishGroupSO.GroupName);
+        }
     }
 
     private List<GameObject> ClearList(List<GameObject> list)
