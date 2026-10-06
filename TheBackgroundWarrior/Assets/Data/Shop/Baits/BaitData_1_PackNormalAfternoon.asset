@@ -21,7 +21,7 @@ MonoBehaviour:
   itemName: Box of Cricket Baits
   itemDescTextId: text_shopitem_bait_normalafternoon_desc
   itemDesc: Box containing 10 Cricket Baits<br>{0}:{1}
-  price: 50
+  price: 15
   sprite: {fileID: 21300000, guid: 14d05baf4fbe34a468c88bfb0187a4d7, type: 3}
   bait: {fileID: 11400000, guid: 1d8587b7055534143bbb1856188e615e, type: 2}
   quantity: 10

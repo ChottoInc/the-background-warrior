@@ -5147,15 +5147,15 @@ PrefabInstance:
       objectReference: {fileID: 3571909012638661717}
     - target: {fileID: 7000263470824527091, guid: 0ee1977df358bb34bbe29cc6b37b4a07, type: 3}
       propertyPath: alwaysBefriendCheat
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7000263470824527091, guid: 0ee1977df358bb34bbe29cc6b37b4a07, type: 3}
       propertyPath: reducedGrowthTimeCheat
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7000263470824527091, guid: 0ee1977df358bb34bbe29cc6b37b4a07, type: 3}
       propertyPath: reducedLureCooldownCheat
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

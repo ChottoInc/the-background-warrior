@@ -5977,7 +5977,6 @@ MonoBehaviour:
   panelShopItems: {fileID: 1668902288124397742}
   firstFilterButton: {fileID: 6938938253067471753}
   panelRedeem: {fileID: 1034079194095472465}
-  buttonDebug: {fileID: 8148873170854449942}
   panelDebug: {fileID: 6261288859278740664}
 --- !u!114 &1114125447682547754
 MonoBehaviour:
@@ -10416,7 +10415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5314965322110100859, guid: e94862ef59ffb074d9f68e8ea0619022, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6272067002112015542, guid: e94862ef59ffb074d9f68e8ea0619022, type: 3}
       propertyPath: _manager
@@ -10521,11 +10520,6 @@ MonoBehaviour:
 --- !u!224 &5021577365921765322 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9035393171855597991, guid: e94862ef59ffb074d9f68e8ea0619022, type: 3}
-  m_PrefabInstance: {fileID: 4094915783650047597}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8148873170854449942 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5314965322110100859, guid: e94862ef59ffb074d9f68e8ea0619022, type: 3}
   m_PrefabInstance: {fileID: 4094915783650047597}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4820718753351617809

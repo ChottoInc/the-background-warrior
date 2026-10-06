@@ -21,7 +21,7 @@ MonoBehaviour:
   itemName: Box of Earthworm Baits Plus
   itemDescTextId: text_shopitem_bait_greatmorning_desc
   itemDesc: Box containing 10 Earthworm Baits Plus<br>{0}:{1}
-  price: 150
+  price: 30
   sprite: {fileID: 21300000, guid: 45ec5aac5b3357d4f9316e7f29d9c2a6, type: 3}
   bait: {fileID: 11400000, guid: a3c0edadbe56f3840a5d208a6ad365a0, type: 2}
   quantity: 10

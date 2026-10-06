@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8063adf197e70e4eab893f6b612c4e2, type: 3}
   m_Name: ShopJobFarmer
   m_EditorClassIdentifier: 
+  id: 0
   uniqueId: shopjob_farmer
   isUnique: 1
   isDaily: 0
@@ -20,6 +21,6 @@ MonoBehaviour:
   itemName: 'Class: Farmer'
   itemDescTextId: text_shopitem_job_farmer_desc
   itemDesc: Unlock the Farmer Class
-  price: 750
+  price: 450
   sprite: {fileID: 21300000, guid: 5b9ec5880385d9c4aa59eb9d2a4a6959, type: 3}
   shoppingJob: 5

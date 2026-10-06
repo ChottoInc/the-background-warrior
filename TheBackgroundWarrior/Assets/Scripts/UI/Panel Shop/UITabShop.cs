@@ -22,7 +22,6 @@ public class UITabShop : UITabWindow
     [SerializeField] GameObject panelRedeem;
 
     [Header("Debug")]
-    [SerializeField] GameObject buttonDebug;
     [SerializeField] GameObject panelDebug;
 
     public override void Open()
@@ -30,20 +29,6 @@ public class UITabShop : UITabWindow
         base.Open();
 
         UpdateBitsUI();
-
-        // Check for redeem filter to appear
-        if( PlayerManager.Instance.Inventory.HasItem(ID_CARD_ERIS_1) &&
-            PlayerManager.Instance.Inventory.HasItem(ID_CARD_ERIS_2) &&
-            PlayerManager.Instance.Inventory.HasItem(ID_CARD_ERIS_3) &&
-            PlayerManager.Instance.Inventory.HasItem(ID_CARD_ERIS_4) &&
-            PlayerManager.Instance.Inventory.HasItem(ID_CARD_ERIS_5))
-        {
-            buttonDebug.SetActive(true);
-        }
-        else
-        {
-            buttonDebug.SetActive(false);
-        }
 
         // By default open scroll shop, and panel debug is hidden
         panelShopItems.gameObject.SetActive(true);

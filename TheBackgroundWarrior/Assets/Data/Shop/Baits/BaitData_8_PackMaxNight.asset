@@ -21,7 +21,7 @@ MonoBehaviour:
   itemName: Box of Shrimp Baits Max
   itemDescTextId: text_shopitem_bait_maxnight_desc
   itemDesc: Box containing 10 Shrimp Baits Max<br>{0}:{1}
-  price: 300
+  price: 50
   sprite: {fileID: 21300000, guid: 98857a2e1b241da4a99a9e1d5139c769, type: 3}
   bait: {fileID: 11400000, guid: 3a7db6a50808f45489c8d88345025415, type: 2}
   quantity: 10

@@ -21,7 +21,7 @@ MonoBehaviour:
   itemName: Box of Cricket Baits Plus
   itemDescTextId: text_shopitem_bait_greatafternoon_desc
   itemDesc: Box containing 10 Cricket Baits Plus<br>{0}:{1}
-  price: 150
+  price: 30
   sprite: {fileID: 21300000, guid: dbd4d76fa01b54a42bb027a89ed704c6, type: 3}
   bait: {fileID: 11400000, guid: 22568cc951ab656429a710aa799058db, type: 2}
   quantity: 10

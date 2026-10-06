@@ -9,8 +9,18 @@ public class HookingFish : MonoBehaviour
     [SerializeField] FocusFishingManager _manager;
 
     [Header("Movement")]
+    [SerializeField] float _riseAcceleration = 22f;   // upward force while holding
+    [SerializeField] float _gravity = 14f;            // downward force while released
+    [SerializeField] float _maxRiseSpeed = 6f;
+    [SerializeField] float _maxFallSpeed = 9f;        // higher = waiting longer hurts more
+
+
     [SerializeField] float _riseSpeed = 4f;
-    [SerializeField] float _fallSpeed = 3f;
+
+    [Header("Bounce")]
+    [SerializeField, Range(0f, 1f)] float _bottomBounce = 0.4f;
+    [SerializeField, Range(0f, 1f)] float _topBounce = 0f;
+    [SerializeField] float _minBounceSpeed = 0.5f;    // below this, just stop instead of bouncing
 
     [Space(10)]
     [SerializeField] GameObject _hook;
@@ -87,20 +97,15 @@ public class HookingFish : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            _isHolding = true;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            _isHolding = false;
-        }
+        _isHolding = Input.GetMouseButton(0);
     }
 
     private void HandleMovement()
     {
-        float targetSpeed = _isHolding ? _riseSpeed : -_fallSpeed;
-        _currentVelocityY = targetSpeed;
+        float acceleration = _isHolding ? _riseAcceleration : -_gravity;
+
+        _currentVelocityY += acceleration * Time.deltaTime;
+        _currentVelocityY = Mathf.Clamp(_currentVelocityY, -_maxFallSpeed, _maxRiseSpeed);
 
         transform.localPosition += Vector3.up * _currentVelocityY * Time.deltaTime;
 
@@ -117,7 +122,29 @@ public class HookingFish : MonoBehaviour
     private void ClampToPondBounds()
     {
         Vector3 pos = transform.localPosition;
-        pos.y = Mathf.Clamp(pos.y, _bottomBound, _topBound);
+
+        if (pos.y <= _bottomBound)
+        {
+            pos.y = _bottomBound;
+            if (_currentVelocityY < 0f)
+            {
+                // small bounce off the bottom, like Stardew
+                _currentVelocityY = -_currentVelocityY > _minBounceSpeed
+                    ? -_currentVelocityY * _bottomBounce
+                    : 0f;
+            }
+        }
+        else if (pos.y >= _topBound)
+        {
+            pos.y = _topBound;
+            if (_currentVelocityY > 0f)
+            {
+                _currentVelocityY = _currentVelocityY > _minBounceSpeed
+                    ? -_currentVelocityY * _topBounce
+                    : 0f;
+            }
+        }
+
         transform.localPosition = pos;
     }
 
