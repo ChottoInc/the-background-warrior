@@ -33,6 +33,6 @@ MonoBehaviour:
   spellDesc: Deals little amount of damage, enemies hit by the spell will take more
     damage from spell for a short time
   prefab: {fileID: 5609092605279843579, guid: 74fba90c92e46564fad3b1522eb99e76, type: 3}
-  baseLearningPoints: 250
+  baseLearningPoints: 300
   baseCooldownCastWarrior: 30
   maxRank: 5

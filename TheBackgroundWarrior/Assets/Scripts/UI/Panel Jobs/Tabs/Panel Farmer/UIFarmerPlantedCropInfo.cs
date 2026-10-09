@@ -42,7 +42,10 @@ public class UIFarmerPlantedCropInfo : MonoBehaviour
             textName.text = cropData.CropSO.ItemName;
 
             textGrowth.gameObject.SetActive(true);
-            textGrowth.text = string.Format("Growth: {0:0}%", (cropData.CurrentGrowth/cropData.GrowthTime) * 100f);
+
+            float percGrowth = (cropData.CurrentGrowth / cropData.GrowthTime) * 100f;
+            percGrowth = Mathf.Min(percGrowth, 100f); // ensure it doesn't exceed 100%
+            textGrowth.text = string.Format("Growth: {0:0}%", percGrowth);
 
             barGrowth.gameObject.SetActive(true);
             barGrowth.Setup(cropData.GrowthTime, cropData.CurrentGrowth);
@@ -51,7 +54,6 @@ public class UIFarmerPlantedCropInfo : MonoBehaviour
 
     public void OnButtonAddCrop()
     {
-        AudioManager.Instance.PlayClickUI();
         panelCrops.OpenPanelSelectionCrops(slot);
     }
 }

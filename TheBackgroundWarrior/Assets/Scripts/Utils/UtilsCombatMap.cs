@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public static class UtilsCombatMap
@@ -16,7 +17,9 @@ public static class UtilsCombatMap
 
     private static CombatMapSO[] LoadMaps()
     {
-        return Resources.LoadAll<CombatMapSO>("Data/CombatMaps");
+        var cMaps = Resources.LoadAll<CombatMapSO>("Data/CombatMaps");
+        cMaps = cMaps.OrderBy(map => map.IdMap).ToArray();
+        return cMaps;
     }
 
 

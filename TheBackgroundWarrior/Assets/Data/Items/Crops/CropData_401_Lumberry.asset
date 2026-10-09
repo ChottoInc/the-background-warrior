@@ -20,7 +20,7 @@ MonoBehaviour:
   itemName: Lumberry
   itemDescTextId: text_item_crop_2_desc
   itemDesc: 
-  baseGrowthTime: 600
+  baseGrowthTime: 540
   unlocksWithAgronomyLevel: 1
   spriteSeed: {fileID: 21300000, guid: e426be52e0749434db0063ac888ba5a2, type: 3}
   spriteCrop:
@@ -31,4 +31,4 @@ MonoBehaviour:
   - {fileID: -251167038, guid: 91fe4d1a4809c4c4281755d2ec52c932, type: 3}
   attractedCompanions:
   - {fileID: 11400000, guid: 752ba2c10e4afdd4fa8bb4344884194f, type: 2}
-  rewardedExp: 350
+  rewardedExp: 100

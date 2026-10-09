@@ -1834,7 +1834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca6038bedc010144d81ba14acda80306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySO: {fileID: 11400000, guid: 1f37b91e07a27624c957eec6a7641031, type: 2}
+  enemySO: {fileID: 11400000, guid: 45bbf21dff88af24f9f29b00129c02be, type: 2}
   startingEnemies: 10
 --- !u!4 &860269220
 Transform:
@@ -3289,6 +3289,30 @@ MonoBehaviour:
     preloadAmount: 11
   - poolName: Werebear
     prefab: {fileID: 2328850219365591492, guid: 4bd026d4979ce484b9700119adcba47e, type: 3}
+    preloadAmount: 11
+  - poolName: AlphaWerewolf
+    prefab: {fileID: 8522712711114647535, guid: a68c97ff854bd70479d61e4886f2b5ae, type: 3}
+    preloadAmount: 11
+  - poolName: ArmoredAxeman
+    prefab: {fileID: 3314036452374084643, guid: eb937e1e73eb8fe4eb606a02068277b2, type: 3}
+    preloadAmount: 11
+  - poolName: CorruptedPriest
+    prefab: {fileID: 3175253006803771025, guid: c81fe21ac46a528468189489ed460acd, type: 3}
+    preloadAmount: 11
+  - poolName: DarkWizard
+    prefab: {fileID: 4457467756873834640, guid: af82097e2187ce444b76b552a90b4f76, type: 3}
+    preloadAmount: 11
+  - poolName: OrcKing
+    prefab: {fileID: 1874927670196434112, guid: 3d540bd4f18a1d94cb877beb9cdb01d0, type: 3}
+    preloadAmount: 11
+  - poolName: RampagingSkeleton
+    prefab: {fileID: 2462692221703701642, guid: 8f55e17a621c82645a7cd7cf1935690a, type: 3}
+    preloadAmount: 11
+  - poolName: ScorchingSlime
+    prefab: {fileID: 764896083224286426, guid: a6a84aa39801f034298ee4ced267824f, type: 3}
+    preloadAmount: 11
+  - poolName: UndeadSoldier
+    prefab: {fileID: 234706112858169023, guid: 6e6fa6b141b28fa4a82de3d038ecc5c8, type: 3}
     preloadAmount: 11
 --- !u!4 &1445854932
 Transform:

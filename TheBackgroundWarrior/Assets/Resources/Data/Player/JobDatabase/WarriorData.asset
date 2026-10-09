@@ -28,6 +28,6 @@ MonoBehaviour:
   <MaxLevelCritRate>k__BackingField: 20
   <MaxLevelCritDmg>k__BackingField: 30
   <MaxLevelLuck>k__BackingField: 30
-  <BaseExpGrowth>k__BackingField: 60
-  <ExpoExpGrowth>k__BackingField: 1.1
+  <BaseExpGrowth>k__BackingField: 100
+  <ExpoExpGrowth>k__BackingField: 1.25
   <FlatExpGrowth>k__BackingField: 80

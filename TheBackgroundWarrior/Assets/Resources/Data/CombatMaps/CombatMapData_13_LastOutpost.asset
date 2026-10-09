@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab68a0e251bc714480f38bc4b43a258, type: 3}
+  m_Name: CombatMapData_13_LastOutpost
+  m_EditorClassIdentifier: 
+  idMap: 13
+  mapNameId: text_name_map13
+  mapName: Last Outpost
+  mapEngName: Last Outpost
+  mapSceneName: LastOutpostScene
+  mapDifficulty: 4
+  baseEnemyLevel: 245
+  enemiesPerStage: 70
+  stages: 30
+  nextMap: {fileID: 0}

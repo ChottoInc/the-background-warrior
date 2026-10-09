@@ -33,6 +33,6 @@ MonoBehaviour:
   spellDesc: Deals small damage, it will bounce betwween enemies if they are close
     enough, max 10 bounces
   prefab: {fileID: 3309493229059526543, guid: c82fe92ce4a15c34dbe54561dc48b57d, type: 3}
-  baseLearningPoints: 350
+  baseLearningPoints: 500
   baseCooldownCastWarrior: 40
   maxRank: 5

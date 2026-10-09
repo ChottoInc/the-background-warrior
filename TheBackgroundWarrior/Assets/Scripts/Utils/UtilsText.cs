@@ -135,6 +135,10 @@ public static class UtilsText
     public const string text_name_map7 = "text_name_map7";
     public const string text_name_map8 = "text_name_map8";
     public const string text_name_map9 = "text_name_map9";
+    public const string text_name_map10 = "text_name_map10";
+    public const string text_name_map11 = "text_name_map11";
+    public const string text_name_map12 = "text_name_map12";
+    public const string text_name_map13 = "text_name_map13";
 
     public const string text_name_card_rarity_common = "text_name_card_rarity_common";
     public const string text_name_card_rarity_uncommon = "text_name_card_rarity_uncommon";
@@ -343,6 +347,7 @@ public static class UtilsText
     public const string text_job_farmer_crop_companiondesc = "text_job_farmer_crop_companiondesc";
     public const string text_job_farmer_companion_cropdesc = "text_job_farmer_companion_cropdesc";
     public const string text_job_farmer_companion_equipped = "text_job_farmer_companion_equipped";
+    public const string text_job_farmer_companion_empty = "text_job_farmer_companion_empty";
 
 
     public const string text_job_mage_spell_locked = "text_job_mage_spell_locked";
@@ -471,6 +476,22 @@ public static class UtilsText
     public const string text_enemy_eliteorc_name_plural = "text_enemy_eliteorc_name_plural";
     public const string text_enemy_orcrider_name = "text_enemy_orcrider_name";
     public const string text_enemy_orcrider_name_plural = "text_enemy_orcrider_name_plural";
+    public const string text_enemy_alphawerewolf_name = "text_enemy_alphawerewolf_name";
+    public const string text_enemy_alphawerewolf_name_plural = "text_enemy_alphawerewolf_name_plural";
+    public const string text_enemy_armoredaxeman_name = "text_enemy_armoredaxeman_name";
+    public const string text_enemy_armoredaxeman_name_plural = "text_enemy_armoredaxeman_name_plural";
+    public const string text_enemy_corruptedpriest_name = "text_enemy_corruptedpriest_name";
+    public const string text_enemy_corruptedpriest_name_plural = "text_enemy_corruptedpriest_name_plural";
+    public const string text_enemy_darkwizard_name = "text_enemy_darkwizard_name";
+    public const string text_enemy_darkwizard_name_plural = "text_enemy_darkwizard_name_plural";
+    public const string text_enemy_orcking_name = "text_enemy_orcking_name";
+    public const string text_enemy_orcking_name_plural = "text_enemy_orcking_name_plural";
+    public const string text_enemy_rampagingskeleton_name = "text_enemy_rampagingskeleton_name";
+    public const string text_enemy_rampagingskeleton_name_plural = "text_enemy_rampagingskeleton_name_plural";
+    public const string text_enemy_scorchingslime_name = "text_enemy_scorchingslime_name";
+    public const string text_enemy_scorchingslime_name_plural = "text_enemy_scorchingslime_name_plural";
+    public const string text_enemy_undeadsoldier_name = "text_enemy_undeadsoldier_name";
+    public const string text_enemy_undeadsoldier_name_plural = "text_enemy_undeadsoldier_name_plural";
 
     public const string text_item_copperore_name = "text_item_copperore_name";
     public const string text_item_copperore_name_plural = "text_item_copperore_name_plural";
@@ -1159,6 +1180,10 @@ public static class UtilsText
             { text_name_map7, "Sequoia Forest" },
             { text_name_map8, "Shore" },
             { text_name_map9, "Ruined City" },
+            { text_name_map10, "Collapsing Bridge" },
+            { text_name_map11, "Remote island" },
+            { text_name_map12, "Old capital" },
+            { text_name_map13, "Last outpost" },
 
             { text_name_card_rarity_common, "Common" },
             { text_name_card_rarity_uncommon, "Uncommon" },
@@ -1365,11 +1390,12 @@ public static class UtilsText
             { text_job_fisher_caughtsession, "Fishes caught in this session until now:" },
 
 
-            { text_job_farmer_crop_basegrowthtime, "Base growth time: {1}m{2}s<br>" },
+            { text_job_farmer_crop_basegrowthtime, "Growth time: {1}m{2}s<br>" },
             { text_job_farmer_crop_attracts, "Attracts:<br>" },
             { text_job_farmer_crop_companiondesc, "Equip companions that will help you defeating monsters" },
             { text_job_farmer_companion_cropdesc, "Growing Crops" },
             { text_job_farmer_companion_equipped, "Equipped" },
+            { text_job_farmer_companion_empty, "Befriended companions will be shown here" },
 
 
             { text_job_mage_spell_locked, "Spell locked" },
@@ -1505,6 +1531,22 @@ public static class UtilsText
             { text_enemy_eliteorc_name_plural, "Elite Orcs" },
             { text_enemy_orcrider_name, "Orc Rider" },
             { text_enemy_orcrider_name_plural, "Orc Riders" },
+            { text_enemy_alphawerewolf_name, "Alpha Werewolf" },
+            { text_enemy_alphawerewolf_name_plural, "Alpha Werewolves" },
+            { text_enemy_armoredaxeman_name, "Armored Axeman" },
+            { text_enemy_armoredaxeman_name_plural, "Armored Axemen" },
+            { text_enemy_corruptedpriest_name, "Corrupted Priest" },
+            { text_enemy_corruptedpriest_name_plural, "Corrupted Priests" },
+            { text_enemy_darkwizard_name, "Dark Wizard" },
+            { text_enemy_darkwizard_name_plural, "Dark Wizards" },
+            { text_enemy_orcking_name, "Orc King" },
+            { text_enemy_orcking_name_plural, "Orc Kings" },
+            { text_enemy_rampagingskeleton_name, "Rampaging Skeleton" },
+            { text_enemy_rampagingskeleton_name_plural, "Rampaging Skeletons" },
+            { text_enemy_scorchingslime_name, "Scorching Slime" },
+            { text_enemy_scorchingslime_name_plural, "Scorching Slimes" },
+            { text_enemy_undeadsoldier_name, "Undead Soldier" },
+            { text_enemy_undeadsoldier_name_plural, "Undead Soldiers" },
 
             { text_item_copperore_name, "Copper ore" },
             { text_item_copperore_name_plural, "Copper ores" },

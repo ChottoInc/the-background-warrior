@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSO: {fileID: 11400000, guid: dcb00c973e976e74e96b9ac082c17235, type: 2}
   possibleEnemies:
-  - value: {fileID: 11400000, guid: 6aa282b717ceef040b39346fcc5e2a3e, type: 2}
+  - value: {fileID: 11400000, guid: 0b88d46b86f6580478552386cceccc6f, type: 2}
     chanches: 30
-  - value: {fileID: 11400000, guid: 14a355dd1f162634e8ddeaf8f5741e7b, type: 2}
+  - value: {fileID: 11400000, guid: 913a0d826eb12fc4a945bd5705ad5013, type: 2}
     chanches: 30
-  - value: {fileID: 11400000, guid: a783c8489088f1243a5d63d083c15768, type: 2}
+  - value: {fileID: 11400000, guid: 094d1c2c076c503469fd1f58a19fe1b4, type: 2}
     chanches: 20
-  - value: {fileID: 11400000, guid: cad96ad743d41d84e9aaf9364db9c0c7, type: 2}
+  - value: {fileID: 11400000, guid: d9bf8ce25ab52ee408341a6f1398e7dd, type: 2}
     chanches: 10
-  - value: {fileID: 11400000, guid: 1716b0e74fb603747ae3f3f4e175481e, type: 2}
+  - value: {fileID: 11400000, guid: bd83d505beb59a64e957ba917cced824, type: 2}
     chanches: 10

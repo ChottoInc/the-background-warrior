@@ -18,7 +18,7 @@ MonoBehaviour:
   mapEngName: Sequoia Forest
   mapSceneName: SequoiaForestScene
   mapDifficulty: 2
-  baseEnemyLevel: 130
+  baseEnemyLevel: 125
   enemiesPerStage: 50
   stages: 30
   nextMap: {fileID: 11400000, guid: d3f40e550da51b44ca905cfb42b62b94, type: 2}

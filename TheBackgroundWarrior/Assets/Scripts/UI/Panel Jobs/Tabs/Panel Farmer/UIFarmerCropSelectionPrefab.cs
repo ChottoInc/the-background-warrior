@@ -38,14 +38,16 @@ public class UIFarmerCropSelectionPrefab : MonoBehaviour
             }
         }
 
+        float cropGrowthTime = _cropSO.BaseGrowthTime - (_cropSO.BaseGrowthTime * PlayerManager.Instance.PlayerFarmerData.CurrentGreenthumb);
+
         string text = string.Format(
             "{0}\n" +
             UtilsText.AllText[UtilsText.text_job_farmer_crop_basegrowthtime] +
             UtilsText.AllText[UtilsText.text_job_farmer_crop_attracts] +
             "{3}",
             _cropSO.ItemName,
-            Mathf.FloorToInt(_cropSO.BaseGrowthTime / 60f),
-            Mathf.FloorToInt(_cropSO.BaseGrowthTime % 60f),
+            Mathf.FloorToInt(cropGrowthTime / 60f),
+            Mathf.FloorToInt(cropGrowthTime % 60f),
             possibleCompanions);
 
 

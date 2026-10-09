@@ -36,8 +36,9 @@ public class EditorUtilsLoadDataFromFile : Editor
 #if UNITY_EDITOR
 
         UtilsCombatMap.Initialize();
+        UtilsText.Initialize();
 
-        string soBaseFolder = "Assets/Resources/Data/Enemies";
+        string soBaseFolder = "Assets/Data/Enemies/EnemyDatas";
 
         // Filepath is searched from Resources
         string dataFilepath = "Files/Enemies/EnemySODatas";

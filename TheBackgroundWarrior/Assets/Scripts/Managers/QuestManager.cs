@@ -375,7 +375,6 @@ public class QuestManager : MonoBehaviour
         ActiveDailyQuests = new List<string>();
         DictQuestsDailyProgress = new Dictionary<string, QuestDataProgress>();
 
-        //TODO:  change 3 with const value or random one between values
         for (int i = 0; i < TOT_DAILY_QUEST; i++)
         {
             int tries = 0;
@@ -725,6 +724,7 @@ public class QuestManager : MonoBehaviour
 
         // list of unlock quests that need to be updated after the new quests are added
         List<string> unlockMapUpdates = new List<string>();
+        Dictionary<string, int> rankUpQuests = new Dictionary<string, int>();
 
         foreach (var pair in DictQuestsStoryProgress)
         {
@@ -752,6 +752,11 @@ public class QuestManager : MonoBehaviour
                         if (IsReachedMapQuest(next.UniqueId))
                         {
                             unlockMapUpdates.Add(next.UniqueId);
+                        }
+
+                        if(IsRankUpSpellQuestCompleted(next.UniqueId, out int amountToTrigger))
+                        {
+                            rankUpQuests.Add(next.UniqueId, amountToTrigger);
                         }
                     }
                 }
@@ -781,6 +786,12 @@ public class QuestManager : MonoBehaviour
             UpdateQuestAlreadyReachedMap(map);
         }
 
+        // update rank up quests
+        foreach (var pairSpellRankUp in rankUpQuests)
+        {
+            UpdateQuestRankUpSpell(pairSpellRankUp.Key, pairSpellRankUp.Value);
+        }
+
         SaveQuestsData();
     }
 
@@ -801,6 +812,35 @@ public class QuestManager : MonoBehaviour
     {
         QuestStorySO so = GetStoryQuestById(questId);
         questEventHandler.OnAddMap(so.QuestData.mapId);
+    }
+
+    private bool IsRankUpSpellQuestCompleted(string questId, out int amountToTrigger)
+    {
+        QuestStorySO nextSO = GetStoryQuestById(questId);
+        if (nextSO.QuestData.questObjectiveType == QuestObjectiveType.SpellRank)
+        {
+            PlayerMageData data = PlayerManager.Instance.PlayerMageData;
+            SpellData spellData = data.GetSpellByType(nextSO.QuestData.spellSO.SpellType);
+            if (spellData.CurrentRank + nextSO.QuestData.amountRank > spellData.SpellSO.MaxRank)
+            {
+                // once it detects rank is greater than max, return how many rank to trigger quest
+                // amount - (max - current) = amount to trigger quest
+                amountToTrigger = nextSO.QuestData.amountRank - (spellData.SpellSO.MaxRank - spellData.CurrentRank);
+                return true;
+            }
+        }
+        amountToTrigger = 0;
+        return false;
+    }
+
+    private void UpdateQuestRankUpSpell(string questId, int amountToTrigger)
+    {
+        QuestStorySO so = GetStoryQuestById(questId);
+
+        for (int i = 0; i < amountToTrigger; i++)
+        {
+            questEventHandler.OnSpellRankUp(so.QuestData.spellSO.Id);
+        }
     }
 
     #endregion

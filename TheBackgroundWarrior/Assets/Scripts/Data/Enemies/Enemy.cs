@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour, IPoolObject, IDamageable
 
     [Space(10)]
     [SerializeField] Animator animator;
-    [SerializeField] AnimationClip walkClip;
     [SerializeField] AnimationClip attackClip;
 
     private float startingAttackSpeedAnimationDuration;
@@ -21,9 +20,6 @@ public class Enemy : MonoBehaviour, IPoolObject, IDamageable
     [Header("Check Player")]
     [SerializeField] float hitRadius;
     [SerializeField] LayerMask playerMask;
-
-    [Header("Rigidbody")]
-    [SerializeField] LayerMask excludeLayersRb;
 
     [Header("VFXs")]
     [SerializeField] ParticleSystem deathVFX;
@@ -39,9 +35,7 @@ public class Enemy : MonoBehaviour, IPoolObject, IDamageable
 
     private EnemyData enemyData;
 
-    private int enemyIndex;
-
-    public int EnemyIndex => enemyIndex;
+    public int EnemyIndex { get; private set; }
 
 
     // --------- MOVEMENT VARS
@@ -321,11 +315,11 @@ public class Enemy : MonoBehaviour, IPoolObject, IDamageable
 
         //Debug.Log($"Enemytakedamage subscribers: {enemyData.OnTakeDamage?.GetInvocationList().Length ?? 0}");
 
-        enemyIndex = index;
+        EnemyIndex = index;
 
         this.sceneType = sceneType;
 
-        spriteRenderer.sortingOrder = enemyIndex;
+        spriteRenderer.sortingOrder = EnemyIndex;
     }
 
     private void OnActionTakeDamage(int damage)
@@ -498,7 +492,7 @@ public class Enemy : MonoBehaviour, IPoolObject, IDamageable
     public override bool Equals(object other)
     {
         Enemy otherEnemy = other as Enemy;
-        return enemyIndex == otherEnemy.enemyIndex;
+        return EnemyIndex == otherEnemy.EnemyIndex;
     }
 
     public override int GetHashCode()

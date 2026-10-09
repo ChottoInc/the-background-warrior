@@ -33,6 +33,6 @@ MonoBehaviour:
   spellDesc: Deals little amount of damage, enemies hit by the spell will restore
     the player some health when hit
   prefab: {fileID: 6228497887150721019, guid: 4d3174571ba162e45a8b0833a6040bc2, type: 3}
-  baseLearningPoints: 300
+  baseLearningPoints: 400
   baseCooldownCastWarrior: 45
   maxRank: 5

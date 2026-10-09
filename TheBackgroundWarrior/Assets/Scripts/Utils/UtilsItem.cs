@@ -68,11 +68,11 @@ public static class UtilsItem
         switch (metalSO.RockType)
         {
             default:
-            case UtilsMiner.RockType.Copper: result = 200; break;
-            case UtilsMiner.RockType.Iron: result = 600; break;
-            case UtilsMiner.RockType.Bronze: result = 1400; break;
-            case UtilsMiner.RockType.Silver: result = 2400; break;
-            case UtilsMiner.RockType.Gold: result = 4000; break;
+            case UtilsMiner.RockType.Copper: result = 50; break;
+            case UtilsMiner.RockType.Iron: result = 100; break;
+            case UtilsMiner.RockType.Bronze: result = 200; break;
+            case UtilsMiner.RockType.Silver: result = 400; break;
+            case UtilsMiner.RockType.Gold: result = 800; break;
         }
         return result * metalSO.RequiredOres * multiplier;
     }

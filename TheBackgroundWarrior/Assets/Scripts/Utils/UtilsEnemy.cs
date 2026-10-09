@@ -4,7 +4,28 @@ using UnityEngine;
 
 public static class UtilsEnemy
 {
-    public enum EnemyType { ArmoredOrc, ArmoredSkeleton, EliteOrc, GreatswordSkeleton, Orc, OrcRider, Skeleton, SkeletonArcher, Slime, Werebear, Werewolf }
+    public enum EnemyType 
+    { 
+        ArmoredOrc, 
+        ArmoredSkeleton, 
+        EliteOrc, 
+        GreatswordSkeleton, 
+        Orc, 
+        OrcRider, 
+        Skeleton, 
+        SkeletonArcher, 
+        Slime, 
+        Werebear, 
+        Werewolf,
+        AlphaWerewolf,
+        ArmoredAxeman,
+        CorruptedPriest,
+        DarkWizard,
+        OrcKing,
+        RampagingSkeleton,
+        ScorchingSlime,
+        UndeadSoldier
+    }
 
 
     public enum EnemyAffectedStatus { None, Chilled, Poisoned }

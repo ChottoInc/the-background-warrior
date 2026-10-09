@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c5aebbbe8161846ba1101be5a047b7, type: 3}
   m_Name: 58_armoredorc_ruined city
   m_EditorClassIdentifier: 
-  enemyPoolName: armoredorc
-  enemyNameTextId: text_enemy_armoredorc_name
-  enemyName: Armored Orc
   id: 58
+  enemyType: 0
   baseMaxHp: 330
-  baseAtk: 28
+  baseAtk: 32
   baseDef: 28
   baseCritDmg: 1

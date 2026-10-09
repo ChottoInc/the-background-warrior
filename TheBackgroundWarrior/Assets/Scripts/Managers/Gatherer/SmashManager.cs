@@ -227,7 +227,7 @@ public class SmashManager : MonoBehaviour
                 case UtilsMiner.RockType.Gold: checkVal = UtilsMiner.ROCK_METAL_MAX_LEVEL_GOLD; break;
             }
 
-            if(checkVal <= randVal)
+            if(randVal <= checkVal)
             {
                 // gives correspondig metal to player
                 var metal = UtilsItem.GetAllTypeItem<MetalSO>().FirstOrDefault(m => m.RockType == rock.RockData.RockSO.RockType);

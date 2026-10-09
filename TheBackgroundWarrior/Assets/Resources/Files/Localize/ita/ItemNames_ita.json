@@ -221,5 +221,21 @@
     "text_necromancer_ritual_arise_name": "Sorgi",
     "text_necromancer_ritual_afterlife_name": "Aldilà",
     "text_necromancer_ritual_ade_name": "Ade",
-    "text_shopitem_job_bard_name": "Lavoro: Bardo"
+    "text_shopitem_job_bard_name": "Lavoro: Bardo",
+    "text_enemy_alphawerewolf_name": "Lupo mannaro Alpha",
+    "text_enemy_alphawerewolf_name_plural": "Lupi mannari Alpha",
+    "text_enemy_armoredaxeman_name": "Boia corazzato",
+    "text_enemy_armoredaxeman_name_plural": "Boia corazzati",
+    "text_enemy_corruptedpriest_name": "Prete corrotto",
+    "text_enemy_corruptedpriest_name_plural": "Preti corrotti",
+    "text_enemy_darkwizard_name": "Stregone oscuro",
+    "text_enemy_darkwizard_name_plural": "Stregoni oscuri",
+    "text_enemy_orcking_name": "Re degli orchi",
+    "text_enemy_orcking_name_plural": "Re degli orchi",
+    "text_enemy_rampagingskeleton_name": "Scheletro infuriato",
+    "text_enemy_rampagingskeleton_name_plural": "Scheletri infuriati",
+    "text_enemy_scorchingslime_name": "Slime rovente",
+    "text_enemy_scorchingslime_name_plural": "Slime roventi",
+    "text_enemy_undeadsoldier_name": "Soldato non morto",
+    "text_enemy_undeadsoldier_name_plural": "Soldati non morti"
 }

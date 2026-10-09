@@ -4,9 +4,9 @@ Efficiency,0.01,30
 Luck,0.01,70
 Metallurgy,0.1,30
 ,,
-Base Exp Growth,50,
-Expo Growth,1.55,
-Flat Growth,10,
+Base Exp Growth,55,
+Expo Growth,1.65,
+Flat Growth,40,
 ,,
 Helmet Max Hp Linear Growth,0.15,
 Helmet Max Hp Quadratic Growth,0.03,

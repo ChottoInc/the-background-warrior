@@ -84,14 +84,23 @@ public static class UtilsFarmer
     }
 
 
+    /*
+     * The formula is scale * growth^(level-1) + offset, and the offset is what makes the first two levels hit 10 and 30.
+     * With growth = 1.5, offset must equal -(scale * 0.75) to keep level 1 at 10.
+     * 
+     * If that's too much, lower growth to 1.3 and set scale to about 66 and offset to -50, which gives 10, 30, 56, 90, 134, 190. 
+     * You can also round the result to the nearest 5 for cleaner numbers by changing the return to Mathf.RoundToInt(value / 5f) * 5.
+     * */
     public static int RequiredExpForCompanionLevel(int level)
     {
-        // Level starts at 1
-        if (level <= 1) return 0;
+        // Level starts at 1. Returns the exp needed to go from this level to the next.
+        level = Mathf.Max(1, level);
 
-        // Formula: baseExp * (growthRate^(level-1) - 1)
-        //return (long)(BASE_FARMER_EXP_GROWTH * Mathf.Pow(level, EXPO_FARMER_EXP_GROWTH) + FLAT_FARMER_EXP_GROWTH * level);
-        return 5 + Mathf.FloorToInt(50 * 1.5f);
+        const float scale = 40f;   // how steep the curve is
+        const float growth = 1.5f; // each level needs ~50% more than the previous one
+        const float offset = -30f; // shifts the curve so level 1 costs exactly 10
+
+        return Mathf.RoundToInt(scale * Mathf.Pow(growth, level - 1) + offset);
     }
 
 

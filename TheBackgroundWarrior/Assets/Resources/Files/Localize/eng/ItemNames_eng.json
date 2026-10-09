@@ -221,5 +221,21 @@
     "text_necromancer_ritual_arise_name": "Arise",
     "text_necromancer_ritual_afterlife_name": "Afterlife",
     "text_necromancer_ritual_ade_name": "Ade",
-    "text_shopitem_job_bard_name": "Class: Bard"
+    "text_shopitem_job_bard_name": "Class: Bard",
+    "text_enemy_alphawerewolf_name": "Alpha Werewolf",
+    "text_enemy_alphawerewolf_name_plural": "Alpha Werewolves",
+    "text_enemy_armoredaxeman_name": "Armored Axeman",
+    "text_enemy_armoredaxeman_name_plural": "Armored Axemen",
+    "text_enemy_corruptedpriest_name": "Corrupted Priest",
+    "text_enemy_corruptedpriest_name_plural": "Corrupted Priests",
+    "text_enemy_darkwizard_name": "Dark Wizard",
+    "text_enemy_darkwizard_name_plural": "Dark Wizards",
+    "text_enemy_orcking_name": "Orc King",
+    "text_enemy_orcking_name_plural": "Orc Kings",
+    "text_enemy_rampagingskeleton_name": "Rampaging Skeleton",
+    "text_enemy_rampagingskeleton_name_plural": "Rampaging Skeletons",
+    "text_enemy_scorchingslime_name": "Scorching Slime",
+    "text_enemy_scorchingslime_name_plural": "Scorching Slimes",
+    "text_enemy_undeadsoldier_name": "Undead Soldier",
+    "text_enemy_undeadsoldier_name_plural": "Undead Soldiers"
 }

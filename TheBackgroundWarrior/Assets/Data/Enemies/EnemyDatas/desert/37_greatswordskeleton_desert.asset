@@ -15,6 +15,6 @@ MonoBehaviour:
   id: 37
   enemyType: 3
   baseMaxHp: 200
-  baseAtk: 17
+  baseAtk: 18
   baseDef: 12
   baseCritDmg: 2

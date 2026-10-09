@@ -7,6 +7,6 @@ Crit Rate,0.001,20
 Crit Dmg,0.005,30
 Luck,0.0005,30
 ,,
-Base Exp Growth,60,
-Expo Growth,1.1,
+Base Exp Growth,100,
+Expo Growth,1.25,
 Flat Growth,80,

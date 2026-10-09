@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSO: {fileID: 11400000, guid: 1f2ef696592cbbd4987d8020f2bd8f8b, type: 2}
   possibleEnemies:
-  - value: {fileID: 11400000, guid: 87998223cd62a81428c4eaadd7d5942d, type: 2}
+  - value: {fileID: 11400000, guid: dcb858d2fd06e61478565d5c85c07fb2, type: 2}
     chanches: 20
-  - value: {fileID: 11400000, guid: f339caa6de90e934ead43bda4e53508e, type: 2}
+  - value: {fileID: 11400000, guid: d9567ff7be9528c43b91548a3f46f4b0, type: 2}
     chanches: 15
-  - value: {fileID: 11400000, guid: dc93e5c2fd4bfd34f97844ba3f3d58e3, type: 2}
+  - value: {fileID: 11400000, guid: d2e135586e20bab48b33172f31790f00, type: 2}
     chanches: 15
-  - value: {fileID: 11400000, guid: 3a4ec56780cc7f442848325a12bc0df7, type: 2}
+  - value: {fileID: 11400000, guid: c8ce8afce4894344bba05cfd6fcc47de, type: 2}
     chanches: 15
-  - value: {fileID: 11400000, guid: b740653332358b740ad2fe68579a1703, type: 2}
+  - value: {fileID: 11400000, guid: 245d9bb956c88a648af952680f72639c, type: 2}
     chanches: 15
-  - value: {fileID: 11400000, guid: da3a6b0c7dc4d5540bb2ff2f5ff44990, type: 2}
+  - value: {fileID: 11400000, guid: 85d6d365d3f5c1644a323423cfc9379d, type: 2}
     chanches: 10
-  - value: {fileID: 11400000, guid: 7235824c6f11e7942aa860f3991f7e91, type: 2}
+  - value: {fileID: 11400000, guid: 4a2b8b5ea57444e489520608088f1fdd, type: 2}
     chanches: 10

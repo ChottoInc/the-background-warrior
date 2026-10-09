@@ -6,10 +6,14 @@ public class UIFarmerPanelCompanions : MonoBehaviour
     [SerializeField] UITabJobFarmer tabFarmer;
 
     [Header("Companions")]
+    [SerializeField] GameObject _scrollCompanions;
     [SerializeField] GameObject companionInfoPrefab;
     [SerializeField] Transform containerCompanions;
 
     private List<GameObject> companionObjs;
+
+    [Space(10)]
+    [SerializeField] GameObject _textEmptyCompanions;
 
     [Header("Crops")]
     [SerializeField] GameObject cropInfoPrefab;
@@ -26,6 +30,10 @@ public class UIFarmerPanelCompanions : MonoBehaviour
 
         //Debug.Log("Companions: " + PlayerManager.Instance.PlayerFarmerData.Companions.Count);
         //Debug.Log("Companions objs: " + companionObjs.Count);
+
+        // show a text if there are no companions, hide the scroll view
+        _scrollCompanions.SetActive(companionObjs.Count > 0);
+        _textEmptyCompanions.SetActive(companionObjs.Count <= 0);
 
         cropsObjs = ClearList(cropsObjs);
         FillCrops();

@@ -31,4 +31,4 @@ MonoBehaviour:
   - {fileID: 2044097158, guid: cf03922ec99f3bc40ac4ebb30742f00c, type: 3}
   attractedCompanions:
   - {fileID: 11400000, guid: c1ab5d4718de58845bd50e406c671b8c, type: 2}
-  rewardedExp: 200
+  rewardedExp: 70

@@ -7,7 +7,6 @@ public class CropData
 
 
     private float baseGrowthTime;
-    private float currentGrowth;
 
     private int plantedSlot;
 
@@ -18,11 +17,11 @@ public class CropData
         baseGrowthTime -
         (baseGrowthTime * PlayerManager.Instance.PlayerFarmerData.CurrentGreenthumb);
 
-    public float CurrentGrowth => currentGrowth;
+    public float CurrentGrowth { get; private set; }
     public int PlantedSlot => plantedSlot;
 
 
-    public bool IsFullyGrown => currentGrowth >= GrowthTime;
+    public bool IsFullyGrown => CurrentGrowth >= GrowthTime;
 
 
 
@@ -31,7 +30,7 @@ public class CropData
         this.cropSO = cropSO;
 
         baseGrowthTime = cropSO.BaseGrowthTime;
-        currentGrowth = 0;
+        CurrentGrowth = 0;
 
         this.plantedSlot = plantedSlot;
     }
@@ -41,9 +40,9 @@ public class CropData
         cropSO = UtilsItem.GetItemById(saveData.cropId) as CropSO;
 
         baseGrowthTime = cropSO.BaseGrowthTime;
-        currentGrowth = saveData.currentGrowth;
+        CurrentGrowth = saveData.currentGrowth;
 
-        currentGrowth = saveData.currentGrowth;
+        CurrentGrowth = saveData.currentGrowth;
 
         plantedSlot = saveData.plantedSlot;
     }
@@ -51,7 +50,7 @@ public class CropData
     public Sprite GetCurrentSprite()
     {
         int maxSprites = CropSO.SpriteCrop.Length;
-        float percGrowth = currentGrowth / GrowthTime;
+        float percGrowth = CurrentGrowth / GrowthTime;
 
         // set to max - 1, so when the growth is not 100%, the right sprite will be shown
         int spriteIndex;
@@ -70,10 +69,10 @@ public class CropData
 
     public void AddGrowth(float t)
     {
-        currentGrowth += t;
+        CurrentGrowth += t;
 
         // set max as growth time
-        currentGrowth = Mathf.Min(GrowthTime, currentGrowth);
+        CurrentGrowth = Mathf.Min(GrowthTime, CurrentGrowth);
 
         // reward exp if growth reaches max
         if(IsFullyGrown)
@@ -85,7 +84,7 @@ public class CropData
 
     public void ResetGrowth()
     {
-        currentGrowth = 0;
+        CurrentGrowth = 0;
 
         PlayerManager.Instance.SaveFarmerData();
     }

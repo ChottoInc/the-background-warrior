@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DarkWizardController
+  m_Controller: {fileID: 9100000, guid: 5883c649b5856a44080c694de441d682, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 397bbe5edf04c344b8829c2cddef6821, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 279e4a7bc1708a64580bb08b73c2b4ed, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d889631c79209cb42b1666789635b823, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8d3434fcc2fc9e1429874a537fd0c30c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 782047255cf447849be9c3f31e1cf4fa, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5d8fb8aec34cb3547b96250bf3e24291, type: 2}

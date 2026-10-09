@@ -76,11 +76,11 @@ public static class UtilsBlacksmith
     
 
     // materials scaling
-    private const int BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_COPPER = 360;
-    private const int BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_IRON = 200;
-    private const int BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_BRONZE = 120;
-    private const int BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_SILVER = 70;
-    private const int BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_GOLD = 20;
+    private const int BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_COPPER = 1200;
+    private const int BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_IRON = 650;
+    private const int BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_BRONZE = 350;
+    private const int BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_SILVER = 200;
+    private const int BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_GOLD = 80;
 
     private static readonly float[] BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL =
     {
@@ -334,39 +334,8 @@ public static class UtilsBlacksmith
 
     private static int RequiredBlacksmithItemAmount(BlacksmithGear gear, int level, int itemIndex)
     {
-        /*
-        switch (idGear)
-        {
-            case ID_BLACKSMITH_HELMET:
-                //return Mathf.FloorToInt(BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex] * Mathf.Pow(level, GROWTH_AMOUNT_BLACKSMITH_HELMET_PER_LEVEL_METAL[itemIndex]));
-                return
-                    Mathf.FloorToInt(BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex] *
-                    Mathf.Pow(GROWTH_AMOUNT_BLACKSMITH_HELMET_PER_LEVEL_METAL[itemIndex], level - MAX_MANUAL_WEAPON_REQUIREMENT));
-
-            case ID_BLACKSMITH_ARMOR:
-                //return Mathf.FloorToInt(BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex] * Mathf.Pow(level, GROWTH_AMOUNT_BLACKSMITH_ARMOR_PER_LEVEL_METAL[itemIndex]));
-                return
-                    Mathf.FloorToInt(BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex] *
-                    Mathf.Pow(GROWTH_AMOUNT_BLACKSMITH_ARMOR_PER_LEVEL_METAL[itemIndex], level - MAX_MANUAL_WEAPON_REQUIREMENT));
-
-            case ID_BLACKSMITH_GLOVES:
-                //return Mathf.FloorToInt(BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex] * Mathf.Pow(level, GROWTH_AMOUNT_BLACKSMITH_GLOVES_PER_LEVEL_METAL[itemIndex]));
-                return
-                    Mathf.FloorToInt(BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex] *
-                    Mathf.Pow(GROWTH_AMOUNT_BLACKSMITH_GLOVES_PER_LEVEL_METAL[itemIndex], level - MAX_MANUAL_WEAPON_REQUIREMENT));
-
-            case ID_BLACKSMITH_BOOTS:
-                //return Mathf.FloorToInt(BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex] * Mathf.Pow(level, GROWTH_AMOUNT_BLACKSMITH_BOOTS_PER_LEVEL_METAL[itemIndex]));
-                return
-                    Mathf.FloorToInt(BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex] *
-                    Mathf.Pow(GROWTH_AMOUNT_BLACKSMITH_BOOTS_PER_LEVEL_METAL[itemIndex], level - MAX_MANUAL_WEAPON_REQUIREMENT));
-        }
-        
-        return -1;
-        */
-
         return
-                    Mathf.FloorToInt(BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex] *
-                    Mathf.Pow(GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex], level - MAX_MANUAL_GEAR_REQUIREMENT));
+            Mathf.RoundToInt(BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex] *
+            Mathf.Pow(GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL[itemIndex], level - MAX_MANUAL_GEAR_REQUIREMENT));
     }
 }

@@ -33,5 +33,5 @@ MonoBehaviour:
   spellDesc: Deals descrete damage aoe
   prefab: {fileID: 3516904201339745218, guid: 2ff5e9a7a312c864eaf4f43e0bf498c0, type: 3}
   baseLearningPoints: 200
-  baseCooldownCastWarrior: 25
+  baseCooldownCastWarrior: 30
   maxRank: 5
