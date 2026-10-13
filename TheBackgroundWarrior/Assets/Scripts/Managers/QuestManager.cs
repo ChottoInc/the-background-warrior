@@ -99,6 +99,10 @@ public class QuestManager : MonoBehaviour
 
 
 
+    // flag for saving progress
+    private const float COOLDOWN_CHECK_SAVE = 20f;
+    private bool _needSave;
+    private float _timerCheckSave;
 
 
 
@@ -201,6 +205,19 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            SaveQuestsData();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveQuestsData();
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // if home only
@@ -256,17 +273,38 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _timerCheckSave = COOLDOWN_CHECK_SAVE;
+    }
+
     private void Update()
     {
-        if (isPlayerObserverInit) return;
-
-        if(PlayerManager.Instance != null && isSetup)
+        if (!isPlayerObserverInit)
         {
-            PlayerManager.Instance.OnItemAdd += questEventHandler.OnItemObtain;
-            PlayerManager.Instance.OnCompanionBefriended += questEventHandler.OnBefriend;
-            PlayerManager.Instance.OnSpellRankUp += questEventHandler.OnSpellRankUp;
-            PlayerManager.Instance.OnSummon += questEventHandler.OnSummon;
-            isPlayerObserverInit = true;
+            if (PlayerManager.Instance != null && isSetup)
+            {
+                PlayerManager.Instance.OnItemAdd += questEventHandler.OnItemObtain;
+                PlayerManager.Instance.OnCompanionBefriended += questEventHandler.OnBefriend;
+                PlayerManager.Instance.OnSpellRankUp += questEventHandler.OnSpellRankUp;
+                PlayerManager.Instance.OnSummon += questEventHandler.OnSummon;
+                isPlayerObserverInit = true;
+            }
+        }
+
+        if(_timerCheckSave <= 0)
+        {
+            _timerCheckSave = COOLDOWN_CHECK_SAVE;
+
+            if (_needSave)
+            {
+                SaveQuestsData();
+                _needSave = false;
+            }
+        }
+        else
+        {
+            _timerCheckSave -= Time.deltaTime;
         }
     }
 
@@ -274,6 +312,8 @@ public class QuestManager : MonoBehaviour
     public void Setup(IDataService service)
     {
         saveService = service;
+
+        questEventHandler = new QuestEventHandler();
 
         try
         {
@@ -295,8 +335,6 @@ public class QuestManager : MonoBehaviour
             //Debug.Log("Datas quest: " + DictQuestsStoryProgress.Count);
             //Debug.Log("Datas quest active: " + ActiveStoryQuests.Count);
         }
-
-        questEventHandler = new QuestEventHandler();
 
         isSetup = true;
     }
@@ -503,10 +541,10 @@ public class QuestManager : MonoBehaviour
         // store every id of story saved data
         List<string> alreadySavedDataIds = new List<string>();
 
-        try
+        // for every found save, update dictionary
+        for (int i = 0; i < datas.Count; i++)
         {
-            // for every found save, update dictionary
-            for (int i = 0; i < datas.Count; i++)
+            try
             {
                 exceptionIndex = i;
 
@@ -536,30 +574,31 @@ public class QuestManager : MonoBehaviour
                     }
                 }
             }
-
-            // get non saved quest ids
-            List<string> nonSavedIds = UtilsGeneral.GetNonSharedValues(DictQuestsStoryProgress.Keys.ToList(), alreadySavedDataIds);
-
-            // loop non saved datas and active the ones next to another
-            foreach (var id in nonSavedIds)
+            catch
             {
-                if (IsQuestNextToAnother(id))
-                {
-                    var data = DictQuestsStoryProgress[id];
-                    data.isActive = true;
-                    DictQuestsStoryProgress[id] = data;
-
-                    ActiveStoryQuests.Add(id);
-                }
+                Debug.LogError("Can't load quest data id: " + datas[exceptionIndex].questId);
             }
+        }
 
-            // deactive if previous has not been cleared
-            DeactivePreviouslyUnclearedQuests();
-        }
-        catch
+        // get non saved quest ids
+        List<string> nonSavedIds = UtilsGeneral.GetNonSharedValues(DictQuestsStoryProgress.Keys.ToList(), alreadySavedDataIds);
+
+        // loop non saved datas and active the ones next to another
+        foreach (var id in nonSavedIds)
         {
-            Debug.LogError("Can't load quest data id: " + datas[exceptionIndex].questId);
+            if (IsQuestNextToAnother(id))
+            {
+                var data = DictQuestsStoryProgress[id];
+                data.isActive = true;
+                DictQuestsStoryProgress[id] = data;
+
+                ActiveStoryQuests.Add(id);
+            }
         }
+
+        // deactive if previous has not been cleared
+        DeactivePreviouslyUnclearedQuests();
+        
 
         //Debug.Log("Dictionary quests counter: " + DictQuestsStoryProgress.Count);
     }
@@ -598,9 +637,9 @@ public class QuestManager : MonoBehaviour
         // used for debug infos
         int exceptionIndex = 0;
 
-        try
+        for (int i = 0; i < datas.Count; i++)
         {
-            for (int i = 0; i < datas.Count; i++)
+            try
             {
                 exceptionIndex = i;
 
@@ -625,12 +664,12 @@ public class QuestManager : MonoBehaviour
                     ActiveBountyQuests.Add(datas[i].slotTab, datas[i].questId);
                 }
             }
+            catch
+            {
+                Debug.LogError("Can't load quest data id: " + datas[exceptionIndex].questId);
+            }
         }
-        catch
-        {
-            Debug.LogError("Can't load quest data id: " + datas[exceptionIndex].questId);
-        }
-
+        
         //Debug.Log("Dictionary quests counter: " + DictQuestsBountyProgress.Count);
     }
 
@@ -934,6 +973,12 @@ public class QuestManager : MonoBehaviour
 
     #endregion
 
+
+    public void SetSaveFlag()
+    {
+        if (_needSave) return;
+        _needSave = true;
+    }
 
 
     public void SaveQuestsData()

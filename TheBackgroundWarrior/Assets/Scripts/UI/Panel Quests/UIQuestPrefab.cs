@@ -42,8 +42,6 @@ public class UIQuestPrefab : MonoBehaviour
         SetupQuest(questType, storyQuestId, questData, questDataProgress);
 
         UpdateProgressBarUI(questData, questDataProgress);
-
-        Debug.Log("bar max: " + progressBar.MaxValue + ", curr: " + progressBar.Value);
     }
 
     public void Setup(UITabQuestsBounties questWindow, UtilsQuest.QuestType questType, string bountyQuestId, UtilsQuest.QuestData questData, UtilsQuest.QuestDataProgress questDataProgress)
@@ -106,7 +104,6 @@ public class UIQuestPrefab : MonoBehaviour
                 break;
 
             case UtilsQuest.QuestObjectiveType.LevelUp:
-                Debug.Log("max to level: " + data.amountStat + ", curr prog: " + progress.progressCounter);
                 progressBar.Setup(data.amountStat, progress.progressCounter);
                 break;
 

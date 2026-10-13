@@ -26,7 +26,8 @@ public class QuestEventHandler
 
         if (NeedUpdateKillProgress(eventData.questData, eventData.enemySO))
         {
-            UpdateKillProgress(eventData.questType, eventData.questId);
+            AddQuestProgress(eventData, eventData.questId, 1);
+            //UpdateKillProgress(eventData.questType, eventData.questId);
             result.needSave = true;
 
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
@@ -111,7 +112,8 @@ public class QuestEventHandler
 
         if (NeedUpdateObtainProgress(eventData.questData, eventData.itemId))
         {
-            UpdateObtainProgress(eventData.questType, eventData.questId);
+            AddQuestProgress(eventData, eventData.questId, 1);
+            //UpdateObtainProgress(eventData.questType, eventData.questId);
             result.needSave = true;
 
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
@@ -197,7 +199,8 @@ public class QuestEventHandler
 
         if (NeedUpdateStatUpProgress(eventData.questData, eventData.statId))
         {
-            UpdateStatLevelUpProgress(eventData.questType, eventData.questId, eventData.statAmount);
+            AddQuestProgress(eventData, eventData.questId, eventData.statAmount);
+            //UpdateStatLevelUpProgress(eventData.questType, eventData.questId, eventData.statAmount);
             result.needSave = true;
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
@@ -278,7 +281,8 @@ public class QuestEventHandler
 
         if (NeedUpdateUnlockMapProgress(eventData.questData, eventData.mapId))
         {
-            UpdateUnlockMapProgress(eventData.questType, eventData.questId);
+            AddQuestProgress(eventData, eventData.questId);
+            //UpdateUnlockMapProgress(eventData.questType, eventData.questId);
             result.needSave = true;
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
@@ -430,7 +434,8 @@ public class QuestEventHandler
 
         if (NeedUpdateSpellRankProgress(eventData.questData, eventData.spellId))
         {
-            UpdateSpellRankProgress(eventData.questType, eventData.questId);
+            AddQuestProgress(eventData, eventData.questId, 1);
+            //UpdateSpellRankProgress(eventData.questType, eventData.questId);
             result.needSave = true;
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
@@ -511,7 +516,8 @@ public class QuestEventHandler
 
         if (NeedUpdateSummonProgress(eventData.questData))
         {
-            UpdateSummonProgress(eventData.questType, eventData.questId);
+            AddQuestProgress(eventData, eventData.questId, 1);
+            //UpdateSummonProgress(eventData.questType, eventData.questId);
             result.needSave = true;
 
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
@@ -557,6 +563,32 @@ public class QuestEventHandler
 
     #endregion
 
+    private void AddQuestProgress(CustomEventData data, string questId, int progressAmount = 1)
+    {
+        var dict = GetDict(data.questType);
+        var progress = dict[questId];
+
+        switch (data.questData.questObjectiveType)
+        {
+            default:
+                progress.progressCounter += progressAmount;
+                break;
+
+            case QuestObjectiveType.UnlockMap:
+                progress.progressCompleted = true;
+                break;
+        }
+
+        dict[questId] = progress;
+    }
+
+    private Dictionary<string, QuestDataProgress> GetDict(QuestType t) => t switch
+    {
+        QuestType.Bounties => QuestManager.Instance.DictQuestsBountyProgress,
+        QuestType.Daily => QuestManager.Instance.DictQuestsDailyProgress,
+        _ => QuestManager.Instance.DictQuestsStoryProgress
+    };
+
     /// <summary>
     /// Iterate through list and returns if needs save or notification
     /// </summary>
@@ -576,6 +608,10 @@ public class QuestEventHandler
         // iterate list
         foreach (var quest in questList)
         {
+            // check if quest has been already cleared, don't add progress if so and go to next iteration
+            var progress = GetDict(questType)[quest];
+            if (progress.isCleared) continue;
+
             IQuestScriptable so;
 
             // get so
@@ -586,6 +622,7 @@ public class QuestEventHandler
                 case QuestType.Bounties: so = GetBountyQuestById(quest); break;
                 case QuestType.Daily: so = GetDailyQuestById(quest); break;
             }
+
 
             // populate with missing informations
             eventData.questId = quest;
@@ -636,7 +673,8 @@ public class QuestEventHandler
 
         if (storyResult.needSave || bountyResult.needSave || dailyResult.needSave)
         {
-            QuestManager.Instance.SaveQuestsData();
+            QuestManager.Instance.SetSaveFlag();
+            //QuestManager.Instance.SaveQuestsData();
         }
     }
 }

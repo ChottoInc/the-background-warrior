@@ -95,7 +95,7 @@ public class PlayerNecromancer : Player
 
     public void GiveExp()
     {
-        long baseExp = 500;
+        long baseExp = UtilsNecromancer.BASE_EXP_GAIN_FROM_FIGHTERS;
         long finalExp = Mathf.RoundToInt((float)baseExp * (1f + PlayerData.CurrentLuck));
         PlayerData.AddExp(finalExp);
         SaveNecromancerData();

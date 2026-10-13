@@ -4,6 +4,9 @@ public class UtilsNecromancer : MonoBehaviour
 {
     public enum RitualType { Summon, Arise, Afterlife, Ade }
 
+    public const long BASE_EXP_GAIN_FROM_FIGHTERS = 400;
+
+
 
     public static float PER_LEVEL_NECROMANCER_GAIN_APTITUDE = 0.2f;         // every 5 levels new couple, up to 15
     public static float PER_LEVEL_NECROMANCER_GAIN_SUMMON = 0.02f;          // up to 35

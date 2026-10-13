@@ -6,6 +6,6 @@ Lifespan,0.02,50
 Horde,0.2,20
 Luck,0.005,10
 ,,
-Base Exp Growth,50,
-Expo Growth,1.4,
-Flat Growth,20,
+Base Exp Growth,40,
+Expo Growth,1.45,
+Flat Growth,50,
