@@ -69,7 +69,14 @@ public class SteamManager : MonoBehaviour {
 			Destroy(gameObject);
 			return;
 		}
-		s_instance = this;
+
+        if (!SettingsManager.Instance.IsSteamPlatform)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        s_instance = this;
 
 		if(s_EverInitialized) {
 			// This is almost always an error.

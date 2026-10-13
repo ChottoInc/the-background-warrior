@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using static UtilsQuest;
 
 public class QuestEventHandler
@@ -510,12 +509,20 @@ public class QuestEventHandler
             needNotification = false
         };
 
-        UpdateSummonProgress(eventData.questType, eventData.questId);
-        result.needSave = true;
+        if (NeedUpdateSummonProgress(eventData.questData))
+        {
+            UpdateSummonProgress(eventData.questType, eventData.questId);
+            result.needSave = true;
 
-        result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
-
+            result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
+        }
+        
         return result;
+    }
+
+    private bool NeedUpdateSummonProgress(QuestData data)
+    {
+        return data.questObjectiveType == QuestObjectiveType.Summon;
     }
 
     private void UpdateSummonProgress(QuestType questType, string questId)

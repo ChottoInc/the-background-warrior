@@ -10,12 +10,6 @@ public class CustomSteamManager : SteamManager
 
     protected override void Awake()
     {
-        if (!SettingsManager.Instance.IsSteamPlatform)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         base.Awake();
 
         if (Initialized)

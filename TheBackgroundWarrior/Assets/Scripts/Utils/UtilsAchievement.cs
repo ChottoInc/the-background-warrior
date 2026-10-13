@@ -124,4 +124,26 @@ public static class UtilsAchievement
             Debug.LogWarning("SteamManager is not initialized. Cannot add to stat.");
         }
     }
+
+    public static bool RemoveAchievement(string achievementId)
+    {
+        if (SteamManager.Initialized)
+        {
+            if (Steamworks.SteamUserStats.ClearAchievement(achievementId))
+            {
+                Steamworks.SteamUserStats.StoreStats();
+                return true;
+            }
+            else
+            {
+                Debug.LogWarning("Achievement Id not found: " + achievementId);
+                return false;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("SteamManager is not initialized. Cannot remove achievement.");
+            return false;
+        }
+    }
 }

@@ -67,7 +67,7 @@ public class QuestManager : MonoBehaviour
                 //Debug.Log("difference (m): " + difference.Minutes);
 
                 // check for time
-                if (difference.Minutes >= 20)
+                if (difference.TotalMinutes >= 20)
                 {
                     // update last check, only in the moment when you can actually refresh
                     LastCheckBountiesRefreshDate = currentCheckBounties;
