@@ -16,10 +16,12 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: a44341848f4015a4285c043166f6209e, type: 3}
   itemNameTextId: text_item_card_40_name
+  itemNamePluralTextId: 
   itemName: Screaming Voice
   itemDescTextId: text_item_card_40_desc
   itemDesc: The hero has been cursed, this screaming voice telling him to fight won't
     be silent. The only thing he can do is to keep going forward.
   cardRarity: 2
+  _cardType: 2
   backgroundSprite: {fileID: 21300000, guid: 81301cdeeeb39214abc70d9f24111733, type: 3}
   cardNumber: 40

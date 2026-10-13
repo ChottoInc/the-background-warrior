@@ -23,5 +23,6 @@ MonoBehaviour:
     monsters, and a powerful spell. Only the strongest can handle it, and the more
     people use it, the faster are the effects.
   cardRarity: 2
+  _cardType: 2
   backgroundSprite: {fileID: 21300000, guid: 81301cdeeeb39214abc70d9f24111733, type: 3}
   cardNumber: 31

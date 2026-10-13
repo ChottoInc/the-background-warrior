@@ -3,6 +3,23 @@ using UnityEngine;
 
 public static class UtilsCombatMap
 {
+    public const int MAP_WOODS = 0;
+    public const int MAP_CAVE = 1;
+    public const int MAP_LAKES = 2;
+    public const int MAP_RUINEDVILLAGE = 3;
+    public const int MAP_SWAMPS = 4;
+    public const int MAP_MOUNTAINS = 5;
+    public const int MAP_DESERT = 6;
+    public const int MAP_SEQUOIAFOREST = 7;
+    public const int MAP_SHORE = 8;
+    public const int MAP_RUINEDCITY = 9;
+    public const int MAP_COLLAPSINGBRIDGE = 10;
+    public const int MAP_REMOTEISLAND = 11;
+    public const int MAP_OLDCAPITAL = 12;
+    public const int MAP_LASTOUTPOST = 13;
+
+
+
     private static CombatMapSO[] maps;
     private static MapToEnemiesSO[] mapEnemies;
     private static MapToCardsSO[] mapCards;

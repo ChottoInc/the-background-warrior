@@ -183,21 +183,25 @@ public class PlayerBlacksmithData : BasePlayerData
     public void AddBlacksmithHelmetLevel(int level)
     {
         levelHelmetBlacksmith += level;
+        CheckAllAchievements();
     }
 
     public void AddBlacksmithArmorLevel(int level)
     {
         levelArmorBlacksmith += level;
+        CheckAllAchievements();
     }
 
     public void AddBlacksmithGlovesLevel(int level)
     {
         levelGlovesBlacksmith += level;
+        CheckAllAchievements();
     }
 
     public void AddBlacksmithBootsLevel(int level)
     {
         levelBootsBlacksmith += level;
+        CheckAllAchievements();
     }
 
     public void SetForgingOre(int id)
@@ -213,5 +217,30 @@ public class PlayerBlacksmithData : BasePlayerData
     public void SetCurrentForgingQuantity(int max)
     {
         currentForgingQuantity = max;
+    }
+
+
+    public void CheckAllAchievements()
+    {
+        if (levelHelmetBlacksmith >= 10 &&
+            levelArmorBlacksmith >= 10 &&
+            levelGlovesBlacksmith >= 10 &&
+            levelBootsBlacksmith >= 10)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UPGRADE_GEARS_10))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UPGRADE_GEARS_10);
+            }
+        }
+        else if (levelHelmetBlacksmith >= 5 &&
+            levelArmorBlacksmith >= 5 &&
+            levelGlovesBlacksmith >= 5 &&
+            levelBootsBlacksmith >= 5)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UPGRADE_GEARS_5))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UPGRADE_GEARS_5);
+            }
+        }
     }
 }

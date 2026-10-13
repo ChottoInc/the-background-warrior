@@ -106,6 +106,31 @@ public class Inventory
             }
         }
 
+        // check for steam achievements
+        if (SteamManager.Initialized)
+        {
+            ItemSO item = UtilsItem.GetItemById(id);
+
+            if(id == UtilsItem.ID_GOLD_ORE)
+            {
+                UtilsAchievement.AddStat(UtilsAchievement.STAT_GOLD_OBTAINED, quantity, UtilsAchievement.STAT_GOLD_OBTAINED_MAX);
+            }
+
+            if(item.ItemType == UtilsItem.ItemType.Card)
+            {
+                CardSO card = item as CardSO;
+                if (card.CardRarity == UtilsItem.CardRarity.Rare)
+                {
+                    if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.COLLECT_CARD_FIRST_RARE))
+                    {
+                        UtilsAchievement.UnlockAchievement(UtilsAchievement.COLLECT_CARD_FIRST_RARE);
+                    }
+                }
+
+                CheckCollectedCardAchievements();
+            }
+        }
+
         ItemGroups.Sort();
     }
 
@@ -188,6 +213,71 @@ public class Inventory
                 result.Add(group);
         }
         return result;
+    }
+
+    #endregion
+
+    #region ACHIEVEMENTS
+
+    public void CheckAllAchievements()
+    {
+        // check for steam achievements
+        if (SteamManager.Initialized)
+        {
+            CheckCollectedCardAchievements();
+            CheckFirstRareCollectedAchievement();
+        }
+    }
+
+    private void CheckFirstRareCollectedAchievement()
+    {
+        var cards = UtilsItem.GetAllTypeItem<CardSO>();
+        foreach (var card in cards)
+        {
+            if (card.CardRarity == UtilsItem.CardRarity.Rare)
+            {
+                if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.COLLECT_CARD_FIRST_RARE))
+                {
+                    UtilsAchievement.UnlockAchievement(UtilsAchievement.COLLECT_CARD_FIRST_RARE);
+                }
+                break;
+            }
+        }
+    }
+
+    private void CheckCollectedCardAchievements()
+    {
+        if (UtilsCard.AreAllCardTypeCollected(UtilsCard.CardType.Monsters))
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.COLLECT_CARD_MONSTERS_GROUP))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.COLLECT_CARD_MONSTERS_GROUP);
+            }
+        }
+
+        if (UtilsCard.AreAllCardTypeCollected(UtilsCard.CardType.People))
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.COLLECT_CARD_PEOPLE_GROUP))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.COLLECT_CARD_PEOPLE_GROUP);
+            }
+        }
+
+        if (UtilsCard.AreAllCardTypeCollected(UtilsCard.CardType.Objects))
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.COLLECT_CARD_OBJECTS_GROUP))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.COLLECT_CARD_OBJECTS_GROUP);
+            }
+        }
+
+        if (UtilsCard.AreAllCardCollected())
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.COLLECT_CARD_ALL))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.COLLECT_CARD_ALL);
+            }
+        }
     }
 
     #endregion

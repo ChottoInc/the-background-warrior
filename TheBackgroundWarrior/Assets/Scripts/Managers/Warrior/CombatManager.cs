@@ -312,6 +312,32 @@ public class CombatManager : MonoBehaviour
                         PlayerManager.Instance.UpdateFightData(player.PlayerData);
                         PlayerManager.Instance.SaveFightData();
 
+                        //achievements steam
+                        if (SteamManager.Initialized)
+                        {
+                            string achievementId = string.Empty;
+                            if (mapSO.IdMap == UtilsCombatMap.MAP_WOODS)
+                            {
+                                achievementId = UtilsAchievement.CLEAR_WOODS_MAP;
+                            }
+                            else if (mapSO.IdMap == UtilsCombatMap.MAP_SWAMPS)
+                            {
+                                achievementId = UtilsAchievement.CLEAR_SWAMPS_MAP;
+                            }
+                            else if (mapSO.IdMap == UtilsCombatMap.MAP_RUINEDCITY)
+                            {
+                                achievementId = UtilsAchievement.CLEAR_RUINEDCITY_MAP;
+                            }
+
+                            if (!string.IsNullOrEmpty(achievementId))
+                            {
+                                if (!UtilsAchievement.IsAchievementUnlocked(achievementId))
+                                {
+                                    UtilsAchievement.UnlockAchievement(achievementId);
+                                }
+                            }
+                        }
+
                         SceneLoaderManager.Instance.LoadScene(settings);
                     }
                     else

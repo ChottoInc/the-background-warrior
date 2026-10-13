@@ -205,7 +205,6 @@ public class Companion : MonoBehaviour
 
                     if (PlayerManager.Instance.PlayerFarmerData.HasCompanion(tempSOBefriend))
                     {
-                        //PlayerManager.Instance.Inventory.AddBits(2);
                         // give exp to companion if already befriended
                         PlayerManager.Instance.PlayerFarmerData.AddCompanionExp(tempSOBefriend, 1);
                         PlayerManager.Instance.SaveInventoryData();

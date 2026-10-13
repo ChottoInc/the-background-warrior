@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,10 +45,13 @@ public class UITabJobWarrior : UITabWindow
 
             // set map scroll to point near your last unlocked map
             int mapsCount = PlayerManager.Instance.PlayerFightData.AvailableMaps.Count;
+            /*
             if (mapsCount > 3)
             {
                 scrollMaps.verticalNormalizedPosition = 1- (1f / (float)mapsCount);
-            }
+            }*/
+
+            CenterScrollOnIndex(mapsCount, maps.Length);
         }
         else
         {
@@ -67,6 +71,25 @@ public class UITabJobWarrior : UITabWindow
         {
             RefreshCards();
         }
+    }
+
+    private void CenterScrollOnIndex(int index, int totalCount, float extraItemsScrolled = -1f)
+    {
+
+        Canvas.ForceUpdateCanvases();
+
+        RectTransform viewport = scrollMaps.viewport != null
+            ? scrollMaps.viewport
+            : scrollMaps.GetComponent<RectTransform>();
+
+        float itemHeight = (scrollMaps.content.GetChild(0) as RectTransform).rect.height;
+        float visibleItems = viewport.rect.height / itemHeight;
+
+        float scrollableItems = totalCount - visibleItems;
+        if (scrollableItems <= 0f) return;
+
+        float offset = index + 0.5f - visibleItems / 2f + extraItemsScrolled;
+        scrollMaps.verticalNormalizedPosition = 1f - Mathf.Clamp01(offset / scrollableItems);
     }
 
     public void OnButtonBack()

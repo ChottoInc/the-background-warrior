@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06aaca5f792c20845aca9190e0568559, type: 3}
+  m_Name: MapToCardsData_OldCapital
+  m_EditorClassIdentifier: 
+  mapSO: {fileID: 11400000, guid: 0fff658b9f500924a9e96aa1a3115cb7, type: 2}
+  _possibleCards:
+  - value: {fileID: 11400000, guid: e780a453741fb1e469b287b297bb344d, type: 2}
+    chanches: 25
+  - value: {fileID: 11400000, guid: c43308c0b16433b4b93e0803a94098ac, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 4418626aa03d299419fb0c9a2a0c9d8b, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 393f0d1db16bbeb4dbdff7c60e2b3a79, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 3fa357437001275478e00cee6e8cbf6e, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 24826bec9f409cc4a86ce932ee6e91af, type: 2}
+    chanches: 5

@@ -341,6 +341,14 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: ca7644c141b2e9b4e949d8ab9d515f61, type: 3}
   - sceneName: WoodsScene
     icon: {fileID: 21300000, guid: ca7644c141b2e9b4e949d8ab9d515f61, type: 3}
+  - sceneName: CollapsingBridge
+    icon: {fileID: 21300000, guid: ca7644c141b2e9b4e949d8ab9d515f61, type: 3}
+  - sceneName: RemoteIsland
+    icon: {fileID: 21300000, guid: ca7644c141b2e9b4e949d8ab9d515f61, type: 3}
+  - sceneName: OldCapital
+    icon: {fileID: 21300000, guid: ca7644c141b2e9b4e949d8ab9d515f61, type: 3}
+  - sceneName: LastOutpost
+    icon: {fileID: 21300000, guid: ca7644c141b2e9b4e949d8ab9d515f61, type: 3}
   - sceneName: MinerScene
     icon: {fileID: 21300000, guid: 21fbf184450347843a2f6b3fe1aec864, type: 3}
   - sceneName: BlacksmithScene

@@ -146,5 +146,25 @@ public class PlayerMinerData : BasePlayerData
     public void AddMinerWeaponLevel(int level)
     {
         levelWeaponMiner += level;
+
+        CheckAllAchievements();
+    }
+
+    public void CheckAllAchievements()
+    {
+        if (levelWeaponMiner >= 10)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UPGRADE_SWORD_10))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UPGRADE_SWORD_10);
+            }
+        }
+        else if (levelWeaponMiner >= 5)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UPGRADE_SWORD_5))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UPGRADE_SWORD_5);
+            }
+        }
     }
 }

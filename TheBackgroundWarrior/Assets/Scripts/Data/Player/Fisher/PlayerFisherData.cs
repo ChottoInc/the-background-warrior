@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using static UtilsPlayer;
 
 public class PlayerFisherData : BasePlayerData
@@ -240,5 +241,39 @@ public class PlayerFisherData : BasePlayerData
         ActiveBait = null;
 
         OnBaitChange?.Invoke();
+    }
+
+    private bool AreAllGroupsCompleted()
+    {
+        return 
+            IsLifeSeriesCompleted &&
+            IsPredatorSeriesCompleted &&
+            IsGuardianSeriesCompleted &&
+            IsDartSeriesCompleted &&
+            IsSharpSeriesCompleted &&
+            IsPiercingSeriesCompleted &&
+            IsGoldenSeriesCompleted &&
+            IsElderSeriesCompleted &&
+            IsQuickSeriesCompleted;
+    }
+
+
+    public void CheckAllAchievements()
+    {
+        if (IsGoldenSeriesCompleted)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.OBTAIN_FISH_GOLDEN_GROUP))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.OBTAIN_FISH_GOLDEN_GROUP);
+            }
+        }
+
+        if(AreAllGroupsCompleted())
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.OBTAIN_FISH_ALL_GROUP))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.OBTAIN_FISH_ALL_GROUP);
+            }
+        }
     }
 }

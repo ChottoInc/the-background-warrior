@@ -16,11 +16,13 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: 1f913caf36deb5348806363a9b554ab3, type: 3}
   itemNameTextId: text_item_card_27_name
+  itemNamePluralTextId: 
   itemName: The Hero
   itemDescTextId: text_item_card_27_desc
   itemDesc: "He woke up with no memories, and now he doesn\u2019t know who he is.
     All he can do is fight, because of a voice echoing in his head to do so. He doesn't
     want to fight, but he must, or else the voice won't stop."
   cardRarity: 2
+  _cardType: 1
   backgroundSprite: {fileID: 21300000, guid: 950f6fbfeb77a374d905e377c9847e7b, type: 3}
   cardNumber: 27

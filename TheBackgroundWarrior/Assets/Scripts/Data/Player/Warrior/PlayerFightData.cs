@@ -462,4 +462,43 @@ public class PlayerFightData : BasePlayerData
         availableMaps.Add(id);
         OnAddMap?.Invoke(id);
     }
+
+
+
+    public void CheckAllAchievements()
+    {
+        CheckMapClearAchievements();
+    }
+
+    private void CheckMapClearAchievements()
+    {
+        if (SteamManager.Initialized)
+        {
+            foreach (var map in availableMaps)
+            {
+                // check for aailable maps next to the achievements, so it's certain that the player cleared the map
+                string achievementId = string.Empty;
+                if (map == UtilsCombatMap.MAP_CAVE)
+                {
+                    achievementId = UtilsAchievement.CLEAR_WOODS_MAP;
+                }
+                else if (map == UtilsCombatMap.MAP_MOUNTAINS)
+                {
+                    achievementId = UtilsAchievement.CLEAR_SWAMPS_MAP;
+                }
+                else if (map == UtilsCombatMap.MAP_COLLAPSINGBRIDGE)
+                {
+                    achievementId = UtilsAchievement.CLEAR_RUINEDCITY_MAP;
+                }
+
+                if (!string.IsNullOrEmpty(achievementId))
+                {
+                    if (!UtilsAchievement.IsAchievementUnlocked(achievementId))
+                    {
+                        UtilsAchievement.UnlockAchievement(achievementId);
+                    }
+                }
+            }
+        }
+    }
 }

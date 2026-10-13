@@ -16,11 +16,13 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: bd35f925acc340946a5ca8f40ce12acb, type: 3}
   itemNameTextId: text_item_card_20_name
+  itemNamePluralTextId: 
   itemName: Terry, Captain of the Kingdom Knights
   itemDescTextId: text_item_card_20_desc
   itemDesc: He knew something was about to happen, a gut feeling. He was ready. And
     as soon as the guards sounded the alarm, he rushed outside the city walls, a
     strategy formed in his mind.
   cardRarity: 0
+  _cardType: 1
   backgroundSprite: {fileID: 21300000, guid: 950f6fbfeb77a374d905e377c9847e7b, type: 3}
   cardNumber: 20

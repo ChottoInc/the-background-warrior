@@ -16,11 +16,13 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: 5984a85ac3c7b0f46b42365473970f68, type: 3}
   itemNameTextId: text_item_card_23_name
+  itemNamePluralTextId: 
   itemName: Colt, Knights' Trainer
   itemDescTextId: text_item_card_23_desc
   itemDesc: He was there when the war started, but he would not live enough to see
     its end. In 60 years, he trained so many, and many of them died. Before retirement,
     there was a rumor that some kind of ancient spell was going to save them all.
   cardRarity: 1
+  _cardType: 1
   backgroundSprite: {fileID: 21300000, guid: 950f6fbfeb77a374d905e377c9847e7b, type: 3}
   cardNumber: 23

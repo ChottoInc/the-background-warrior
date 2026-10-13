@@ -114,5 +114,40 @@ public class PlayerJobsData
         OnJobUnlocked?.Invoke(job);
 
         PlayerManager.Instance.SaveJobsData();
+
+        CheckAchievementsForJobUnlock(job);
+    }
+
+    private void CheckAchievementsForJobUnlock(UtilsPlayer.PlayerJob job)
+    {
+        if (SteamManager.Initialized)
+        {
+            string achievementId = string.Empty;
+            switch (job)
+            {
+                case UtilsPlayer.PlayerJob.Blacksmith: achievementId = UtilsAchievement.UNLOCK_BLACKSMITH_JOB; break;
+                case UtilsPlayer.PlayerJob.Farmer: achievementId = UtilsAchievement.UNLOCK_FARMER_JOB; break;
+                case UtilsPlayer.PlayerJob.Mage: achievementId = UtilsAchievement.UNLOCK_MAGE_JOB; break;
+                case UtilsPlayer.PlayerJob.Alchemist: achievementId = UtilsAchievement.UNLOCK_ALCHEMIST_JOB; break;
+                case UtilsPlayer.PlayerJob.Necromancer: achievementId = UtilsAchievement.UNLOCK_NECROMANCER_JOB; break;
+                case UtilsPlayer.PlayerJob.Bard: achievementId = UtilsAchievement.UNLOCK_BARD_JOB; break;
+            }
+
+            if (!string.IsNullOrEmpty(achievementId))
+            {
+                if(!UtilsAchievement.IsAchievementUnlocked(achievementId))
+                {
+                    UtilsAchievement.UnlockAchievement(achievementId);
+                }
+            }
+        }
+    }
+
+    public void CheckAllAchievements()
+    {
+        foreach(var job in availableJobs)
+        {
+            CheckAchievementsForJobUnlock(job);
+        }
     }
 }

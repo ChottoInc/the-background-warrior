@@ -16,11 +16,13 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: 26c44dbe3133f494c83a2a4c0d35bea1, type: 3}
   itemNameTextId: text_item_card_29_name
+  itemNamePluralTextId: 
   itemName: Mormegil, Titan's Sword
   itemDescTextId: text_item_card_29_desc
   itemDesc: The greatest sword ever created and companion of Titan. This sword proves
     the skills that humanity reached at its peak, even the strongest monster couldn't
     defend against it.
   cardRarity: 0
+  _cardType: 2
   backgroundSprite: {fileID: 21300000, guid: 81301cdeeeb39214abc70d9f24111733, type: 3}
   cardNumber: 29

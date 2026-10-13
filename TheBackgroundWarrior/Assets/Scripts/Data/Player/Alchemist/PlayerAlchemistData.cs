@@ -182,6 +182,8 @@ public class PlayerAlchemistData : BasePlayerData
             case UtilsPlayer.ID_ALCHEMIST_STABILITY: LevelStatStability += amount; break;
         }
 
+        CheckUnlockAllRecipesAchievement();
+
         InvokeStatChange(id, amount);
     }
 
@@ -227,5 +229,27 @@ public class PlayerAlchemistData : BasePlayerData
     public void SetCurrentCraftingQuantity(int max)
     {
         CurrentCraftingQuantity = max;
+    }
+
+
+
+    public void CheckAllAchievements()
+    {
+        if (SteamManager.Initialized)
+        {
+            CheckUnlockAllRecipesAchievement();
+        }
+    }
+
+
+    private void CheckUnlockAllRecipesAchievement()
+    {
+        if (CurrentResearch >= UtilsAlchemist.PER_LEVEL_ALCHEMIST_MAX_RESEARCH)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_ALL_CONCOCTIONS_RECIPES))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UNLOCK_ALL_CONCOCTIONS_RECIPES);
+            }
+        }
     }
 }

@@ -16,10 +16,12 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: 5000decf8ce0a7e4196bce68ac7ba8c8, type: 3}
   itemNameTextId: text_item_card_39_name
+  itemNamePluralTextId: 
   itemName: Eris's Cards
   itemDescTextId: text_item_card_39_desc
   itemDesc: I wrote down my memories into a new magical item of my creation. To whomever
     finds them, unveil the mysteries of my world.
   cardRarity: 2
+  _cardType: 2
   backgroundSprite: {fileID: 21300000, guid: 81301cdeeeb39214abc70d9f24111733, type: 3}
   cardNumber: 39

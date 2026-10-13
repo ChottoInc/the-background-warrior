@@ -148,6 +148,64 @@ public class PlayerNecromancerData : BasePlayerData
             case UtilsPlayer.ID_NECROMANCER_LUCK: LevelStatLuck += amount; break;
         }
 
+        CheckAllAchievements();
+
         InvokeStatChange(id, amount);
+    }
+
+
+    public void CheckAllAchievements()
+    {
+        if (SteamManager.Initialized)
+        {
+            CheckUnlockCouplesAchievement();
+            CheckNecromancerAriseAchievement();
+            CheckNecromancerAfterlifeAchievement();
+            CheckNecromancerAdeAchievement();
+        }
+    }
+
+    private void CheckUnlockCouplesAchievement()
+    {
+        if (CurrentAptitude >= UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_APTITUDE)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_NECROMANCER_ALL_COUPLES))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UNLOCK_NECROMANCER_ALL_COUPLES);
+            }
+        }
+    }
+
+    private void CheckNecromancerAriseAchievement()
+    {
+        if (IsAriseRitualUnlocked)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_NECROMANCER_ARISE_RITUAL))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UNLOCK_NECROMANCER_ARISE_RITUAL);
+            }
+        }
+    }
+
+    private void CheckNecromancerAfterlifeAchievement()
+    {
+        if (IsAfterlifeRitualUnlocked)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_NECROMANCER_AFTERLIFE_RITUAL))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UNLOCK_NECROMANCER_AFTERLIFE_RITUAL);
+            }
+        }
+    }
+
+    private void CheckNecromancerAdeAchievement()
+    {
+        if (IsAdeRitualUnlocked)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_NECROMANCER_ADE_RITUAL))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UNLOCK_NECROMANCER_ADE_RITUAL);
+            }
+        }
     }
 }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06aaca5f792c20845aca9190e0568559, type: 3}
+  m_Name: MapToCardsData_RemoteIsland
+  m_EditorClassIdentifier: 
+  mapSO: {fileID: 11400000, guid: 82c3522138d296441a49b252b6c71125, type: 2}
+  _possibleCards:
+  - value: {fileID: 11400000, guid: 257e86cab62ce9d46928b0ec69993d4d, type: 2}
+    chanches: 25
+  - value: {fileID: 11400000, guid: 21e7a6e7579fde34f869aca87d09f7d5, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 792e3f92fad15e5448cc03ab518599e2, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: b833f5e34dc9b4441a3a94dbfe15cdd7, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 0f7e06317c411364884169507c395f8b, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: f26099148c6b3af46ac860e66cdcd0ee, type: 2}
+    chanches: 5

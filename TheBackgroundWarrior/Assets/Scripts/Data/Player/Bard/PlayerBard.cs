@@ -15,6 +15,10 @@ public class PlayerBard : Player
     private float _counterSong;
     private float _currentSongLength;
 
+
+    private HashSet<int> _uniquePlayedSongs;
+
+
     public event Action OnChangeMusic;
 
 
@@ -34,6 +38,11 @@ public class PlayerBard : Player
             Buff inspirationBuff = new Buff(UtilsBuffs.BuffType.Inspiration, _counterSong);
             PlayerManager.Instance.PlayerBuffsData.AddBuff(inspirationBuff);
         }
+    }
+
+    private void Start()
+    {
+        _uniquePlayedSongs = new HashSet<int>();
     }
 
     public void Setup(PlayerBardData playerData)
@@ -86,6 +95,11 @@ public class PlayerBard : Player
 
         AudioManager.Instance.PlayMusic(songName);
         _currentSongLength = AudioManager.Instance.GetMusicLength(songName);
+
+        // add index song to hashset to check for achievement
+        _uniquePlayedSongs.Add(AudioManager.Instance.CurrentPlayingSongIndex);
+        CheckAllAchievements();
+
 
         OnChangeMusic?.Invoke();
 
@@ -190,4 +204,19 @@ public class PlayerBard : Player
     }
 
     #endregion
+
+
+    private void CheckAllAchievements()
+    {
+        if (SteamManager.Initialized)
+        {
+            if (_uniquePlayedSongs.Count >= 5)
+            {
+                if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.LISTEN_BARD_5))
+                {
+                    UtilsAchievement.UnlockAchievement(UtilsAchievement.LISTEN_BARD_5);
+                }
+            }
+        }
+    }
 }

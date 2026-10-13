@@ -159,6 +159,10 @@ public class PlayerMage : Player
         }
         _currentSpell.AddPoints(finalPointsToAdd);
 
+
+        // check achievements after giving points to spell in case ranks up
+        PlayerData.CheckMaxSpellsAchievements();
+
         PlayerData.UpdateSpellData(_currentSpell);
         PlayerData.AddExp(UtilsMage.GetSpellCastExp(_currentSpell.SpellSO.SpellType));
 

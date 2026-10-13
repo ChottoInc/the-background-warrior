@@ -62,4 +62,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BardScene.unity
     guid: 7da01af92941fba42bab68f682b54528
+  - enabled: 1
+    path: Assets/Scenes/CollapsingBridgeScene.unity
+    guid: 39a583a09feac274ba8dcd3a931bc37b
+  - enabled: 1
+    path: Assets/Scenes/RemoteIslandScene.unity
+    guid: 0d85995b27b09194cb4f1e01e37e9cc7
+  - enabled: 1
+    path: Assets/Scenes/OldCapitalScene.unity
+    guid: fd018678d57919448b6dc721cda95152
+  - enabled: 1
+    path: Assets/Scenes/LastOutpostScene.unity
+    guid: 036d5371b3c6a24448bdd8bd72362e0c
   m_configObjects: {}

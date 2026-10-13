@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06aaca5f792c20845aca9190e0568559, type: 3}
+  m_Name: MapToCardsData_CollapsingBridge
+  m_EditorClassIdentifier: 
+  mapSO: {fileID: 11400000, guid: 7f7d7d73dbf363e40aee946cf6d2d52c, type: 2}
+  _possibleCards:
+  - value: {fileID: 11400000, guid: 7739544d7a939b644bd61c6f21e57494, type: 2}
+    chanches: 25
+  - value: {fileID: 11400000, guid: 03d9a01bd65b1c34081a5c3525997150, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 0fd6aee620a82754993d897c534c08a3, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: c33d76e6e2e3c724f84ddae83d4cf1ba, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 82056e0f7d32d1d499f02a0da906d1d4, type: 2}
+    chanches: 10
+  - value: {fileID: 11400000, guid: 04959276365eaba43bbb8c91f0ad15ea, type: 2}
+    chanches: 5
+  - value: {fileID: 11400000, guid: f55d923ac267cef4793e4e9648d0402e, type: 2}
+    chanches: 5

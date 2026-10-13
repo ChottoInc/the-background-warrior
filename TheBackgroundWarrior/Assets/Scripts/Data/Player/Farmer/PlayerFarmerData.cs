@@ -210,6 +210,10 @@ public class PlayerFarmerData : BasePlayerData
     {
         CompanionData data = new CompanionData(companionSO);
         companions.Add(data);
+
+        CheckBefriendCompanionFirst();
+
+        UtilsAchievement.AddStat(UtilsAchievement.STAT_BEFRIEND_COMPANIONS_COUNT, 1, UtilsAchievement.STAT_BEFRIEND_COMPANIONS_COUNT_MAX);
     }
 
     public bool HasCompanion(CompanionSO companionSO)
@@ -292,6 +296,55 @@ public class PlayerFarmerData : BasePlayerData
         if (empty3) return 2;
 
         return -1;
+    }
+
+
+    public void CheckAllAchievements()
+    {
+        if (SteamManager.Initialized)
+        {
+            CheckBefriendCompanionFirst();
+            CheckMaxLevelCompaions();
+        }
+    }
+
+    private void CheckBefriendCompanionFirst()
+    {
+        if (SteamManager.Initialized)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.BEFRIEND_COMPANIONS_FIRST))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.BEFRIEND_COMPANIONS_FIRST);
+            }
+        }
+    }
+
+
+    private void CheckMaxLevelCompaions()
+    {
+        int countMaxLevel = 0;
+        foreach (var companion in companions)
+        {
+            if(companion.CurrentLevel >= UtilsFarmer.MAX_LEVEL_COMPANIONS)
+            {
+                countMaxLevel++;
+            }
+        }
+
+        if(countMaxLevel >= 5)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.MAX_UPGRADE_COMPANIONS_5))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.MAX_UPGRADE_COMPANIONS_5);
+            }
+        }
+        else if(countMaxLevel >= 1)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.MAX_UPGRADE_COMPANIONS_1))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.MAX_UPGRADE_COMPANIONS_1);
+            }
+        }
     }
 }
 

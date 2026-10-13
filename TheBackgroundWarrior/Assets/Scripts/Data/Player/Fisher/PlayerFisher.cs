@@ -176,6 +176,9 @@ public class PlayerFisher : Player
         // Save ivnentory
         PlayerManager.Instance.SaveInventoryData();
 
+        // check achievements
+        playerData.CheckAllAchievements();
+
         // Remove from pool if caught
         FishSpawnManager.Instance.RemoveFishFromPool(hookedFish);
 

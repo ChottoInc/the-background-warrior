@@ -155,6 +155,8 @@ public class PlayerAlchemist : Player
 
                 PlayerManager.Instance.SaveInventoryData();
 
+                UtilsAchievement.AddStat(UtilsAchievement.STAT_CRAFT_CONCOCTIONS_COUNT, amountToAdd, UtilsAchievement.STAT_CRAFT_CONCOCTIONS_COUNT_MAX);
+
                 // Give exp to alchemist job
                 long rewardedExp = CurrentRecipe.RewardedExp;
                 PlayerData.AddExp(rewardedExp);

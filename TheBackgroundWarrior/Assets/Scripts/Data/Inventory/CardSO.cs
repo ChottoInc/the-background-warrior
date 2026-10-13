@@ -7,6 +7,7 @@ public class CardSO : ItemSO
     [SerializeField] UtilsItem.CardRarity cardRarity;
 
     [Space(10)]
+    [SerializeField] UtilsCard.CardType _cardType;
     [SerializeField] Sprite backgroundSprite;
 
     [Space(10)]
@@ -31,6 +32,7 @@ public class CardSO : ItemSO
     }
 
     public Sprite BackgoundSprite => backgroundSprite;
+    public UtilsCard.CardType CardType => _cardType;
 
     public int CardNumber => cardNumber;
 }

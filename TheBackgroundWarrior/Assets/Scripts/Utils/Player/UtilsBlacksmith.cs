@@ -91,11 +91,11 @@ public static class UtilsBlacksmith
         BASE_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_GOLD
     };
 
-    private const float GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_COPPER = 2f;
-    private const float GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_IRON = 1.9f;
-    private const float GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_BRONZE = 1.8f;
-    private const float GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_SILVER = 1.7f;
-    private const float GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_GOLD = 1.6f;
+    private const float GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_COPPER = 1.5f;
+    private const float GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_IRON = 1.4f;
+    private const float GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_BRONZE = 1.3f;
+    private const float GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_SILVER = 1.2f;
+    private const float GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_GOLD = 1.1f;
 
     private static readonly float[] GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_METAL =
     {

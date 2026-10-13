@@ -67,6 +67,14 @@ public class PlayerWarriorRituals : MonoBehaviour
         {
             prefabToSpawn = _bigSummon;
             //Debug.Log("Summon big");
+
+            if (SteamManager.Initialized)
+            {
+                if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.SUMMON_UNDEAD_POWERFUL_FIRST))
+                {
+                    UtilsAchievement.UnlockAchievement(UtilsAchievement.SUMMON_UNDEAD_POWERFUL_FIRST);
+                }
+            }
         }
         else
         {
@@ -100,6 +108,8 @@ public class PlayerWarriorRituals : MonoBehaviour
         CurrentHorde++;
 
         PlayerManager.Instance.OnSummonEvent(1);
+
+        UtilsAchievement.AddStat(UtilsAchievement.STAT_SUMMON_UNDEADS_COUNT, 1, UtilsAchievement.STAT_SUMMON_UNDEADS_COUNT_MAX);
     }
 
     public void DecreaseHorde()

@@ -7,6 +7,13 @@ using static UtilsItem;
 
 public static class UtilsCard
 {
+    public enum CardType
+    {
+        Monsters,
+        People,
+        Objects
+    }
+
     public static CardSO GetRandomCardByRarity(CardRarity rarity)
     {
         var cards = GetAllTypeItem<CardSO>().ToList();
@@ -131,5 +138,28 @@ public static class UtilsCard
         }
 
         return result;
+    }
+
+    public static bool AreAllCardTypeCollected(CardType cardType)
+    {
+        var allCards = GetAllTypeItem<CardSO>().ToList();
+        var allTypeCards = allCards.Where(c => c.CardType == cardType).ToList();
+        foreach (var card in allTypeCards)
+        {
+            if (!PlayerManager.Instance.Inventory.HasItem(card.Id))
+                return false;
+        }
+        return true;
+    }
+
+    public static bool AreAllCardCollected()
+    {
+        var allCards = GetAllTypeItem<CardSO>().ToList();
+        foreach (var card in allCards)
+        {
+            if (!PlayerManager.Instance.Inventory.HasItem(card.Id))
+                return false;
+        }
+        return true;
     }
 }

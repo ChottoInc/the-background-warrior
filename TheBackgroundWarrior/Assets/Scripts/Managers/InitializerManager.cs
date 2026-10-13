@@ -321,6 +321,19 @@ public class InitializerManager : MonoBehaviour
 
             // Check for jobs that you should have unlocked but they aren't for some reason
             PlayerManager.Instance.InitialJobChecks();
+
+
+            // check for all achievements that should be unlocked, maybe from offline gameplay or demo
+            PlayerManager.Instance.Inventory.CheckAllAchievements();
+            PlayerManager.Instance.PlayerJobsData.CheckAllAchievements();
+            PlayerManager.Instance.PlayerFightData.CheckAllAchievements();
+            PlayerManager.Instance.PlayerFisherData.CheckAllAchievements();
+            PlayerManager.Instance.PlayerMinerData.CheckAllAchievements();
+            PlayerManager.Instance.PlayerBlacksmithData.CheckAllAchievements();
+            PlayerManager.Instance.PlayerFarmerData.CheckAllAchievements();
+            PlayerManager.Instance.PlayerMageData.CheckAllAchievements();
+            PlayerManager.Instance.PlayerAlchemistData.CheckAllAchievements();
+            PlayerManager.Instance.PlayerNecromancerData.CheckAllAchievements();
         }
         catch(FatalLoadException e)
         {

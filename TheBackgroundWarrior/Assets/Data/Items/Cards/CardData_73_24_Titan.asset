@@ -16,6 +16,7 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: 936b25c9eb518e048b39f8a5e21c428d, type: 3}
   itemNameTextId: text_item_card_24_name
+  itemNamePluralTextId: 
   itemName: Titan, S Rank Adventurer
   itemDescTextId: text_item_card_24_desc
   itemDesc: Always on the frontline, he stood against all kinds of monsters, turning
@@ -23,5 +24,6 @@ MonoBehaviour:
     adventurer who loved exploring different ruins every day. During one of those
     explorations, he recovered an ancient tome.
   cardRarity: 1
+  _cardType: 1
   backgroundSprite: {fileID: 21300000, guid: 950f6fbfeb77a374d905e377c9847e7b, type: 3}
   cardNumber: 24

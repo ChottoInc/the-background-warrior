@@ -52,6 +52,8 @@ public class ConsumableBaitHandler : AbstractConsumableHandler<BaitSO>
             PlayerManager.Instance.SaveFisherData();
         }
 
+        UtilsAchievement.AddStat(UtilsAchievement.STAT_BAITS_CONSUMED, 1, UtilsAchievement.STAT_BAITS_CONSUMED_MAX);
+
         return true;
     }
 }

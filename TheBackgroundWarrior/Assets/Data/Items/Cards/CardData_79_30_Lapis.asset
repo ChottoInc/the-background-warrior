@@ -16,11 +16,13 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: 4102ac5310f6ee547ae327400f8a1284, type: 3}
   itemNameTextId: text_item_card_30_name
+  itemNamePluralTextId: 
   itemName: Lapis, Otto's Sceptre
   itemDescTextId: text_item_card_30_desc
   itemDesc: The greatest scepter ever created and companion of Otto. This scepter
     shows the skills that humanity reached at its peak. A single spell could annihilate
     hundreds of monsters.
   cardRarity: 0
+  _cardType: 2
   backgroundSprite: {fileID: 21300000, guid: 81301cdeeeb39214abc70d9f24111733, type: 3}
   cardNumber: 30

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06aaca5f792c20845aca9190e0568559, type: 3}
+  m_Name: MapToCardsData_LastOutpost
+  m_EditorClassIdentifier: 
+  mapSO: {fileID: 11400000, guid: 68211301c2ae21a4188d38104380acfa, type: 2}
+  _possibleCards:
+  - value: {fileID: 11400000, guid: ce24c9ffae0b86e48942d1d5b910e61b, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: 4a3ec27b9e64bac4aa868d6cda02d75a, type: 2}
+    chanches: 20
+  - value: {fileID: 11400000, guid: a0e15fd9605e7ad499fb347bbc6ea120, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: e1c181616ac83b443aed6910af408826, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: 96aefa7f8cd126a49b4919d8bc91ab79, type: 2}
+    chanches: 15
+  - value: {fileID: 11400000, guid: a8de906d86aece845a33e00458c12e06, type: 2}
+    chanches: 10
+  - value: {fileID: 11400000, guid: 27f12bb0b241f4345b668debbaed6a43, type: 2}
+    chanches: 5

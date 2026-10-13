@@ -285,6 +285,11 @@ public class EnemyData
 
         // set to 0 if lower
         CurrentHp = Mathf.Max(CurrentHp, 0f);
+
+        if(CurrentHp <= 0)
+        {
+            UtilsAchievement.AddStat(UtilsAchievement.STAT_KILL_MAGE_COUNT, 1, UtilsAchievement.STAT_KILL_MAGE_COUNT_MAX);
+        }
     }
 
     public bool HasStatus(UtilsEnemy.EnemyAffectedStatus status)

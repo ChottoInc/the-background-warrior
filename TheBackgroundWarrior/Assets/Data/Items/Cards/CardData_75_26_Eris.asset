@@ -16,6 +16,7 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: 3ae99baf547fb5647823ec36c3d76be4, type: 3}
   itemNameTextId: text_item_card_26_name
+  itemNamePluralTextId: 
   itemName: Eris, Alchemist
   itemDescTextId: text_item_card_26_desc
   itemDesc: First-class researcher and alchemist, she was recruited to use an ancient
@@ -23,5 +24,6 @@ MonoBehaviour:
     to take part in it. Her memories were blurry. She used to wake up at night, remembering
     different outcomes of that war, and wrote all her notes in a diary.
   cardRarity: 2
+  _cardType: 1
   backgroundSprite: {fileID: 21300000, guid: 950f6fbfeb77a374d905e377c9847e7b, type: 3}
   cardNumber: 26

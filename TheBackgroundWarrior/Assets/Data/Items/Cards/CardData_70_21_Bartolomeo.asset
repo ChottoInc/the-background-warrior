@@ -16,11 +16,13 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: 93fe976a6b2409b41a443052f2ed1439, type: 3}
   itemNameTextId: text_item_card_21_name
+  itemNamePluralTextId: 
   itemName: Bartolomeo, King's Advisor
   itemDescTextId: text_item_card_21_desc
   itemDesc: Because of him, some very wrong decisions were made during the war. Blinded
     by the power he held, he fully supported an all-out war, certain that humans
     would prevail once again.
   cardRarity: 0
+  _cardType: 1
   backgroundSprite: {fileID: 21300000, guid: 950f6fbfeb77a374d905e377c9847e7b, type: 3}
   cardNumber: 21

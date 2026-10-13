@@ -16,9 +16,11 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: 95b8ab886a53f2f4998aae1bb7b8243f, type: 3}
   itemNameTextId: text_item_card_37_name
+  itemNamePluralTextId: 
   itemName: Eris's Diary Page 4
   itemDescTextId: text_item_card_37_desc
   itemDesc: 4 statuses.
   cardRarity: 2
+  _cardType: 2
   backgroundSprite: {fileID: 21300000, guid: 81301cdeeeb39214abc70d9f24111733, type: 3}
   cardNumber: 37

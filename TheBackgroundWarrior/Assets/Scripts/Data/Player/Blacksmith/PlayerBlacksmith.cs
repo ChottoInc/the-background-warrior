@@ -215,6 +215,9 @@ public class PlayerBlacksmith : Player
 
             PlayerManager.Instance.SaveInventoryData();
 
+            // check achievements
+            UtilsAchievement.AddStat(UtilsAchievement.CRAFT_GOLD_100, amountMetalToAdd, UtilsAchievement.STAT_GOLD_FORGED_MAX);
+
             // Give exp to blacksmith job
             long rewardedExp = UtilsItem.GetMetalExp(metal);
             playerData.AddExp(rewardedExp);

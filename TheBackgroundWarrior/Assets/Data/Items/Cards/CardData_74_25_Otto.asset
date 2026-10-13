@@ -16,11 +16,13 @@ MonoBehaviour:
   itemType: 1
   sprite: {fileID: 21300000, guid: fe5afdb5562243949a3f7d08382115fe, type: 3}
   itemNameTextId: text_item_card_25_name
+  itemNamePluralTextId: 
   itemName: Otto, The Strongest Magician
   itemDescTextId: text_item_card_25_desc
   itemDesc: Magic had no secrets for him. He learned every language, even the most
     ancient ones, to expand his knowledge. During the war, he was recruited to decipher
     an old tome that was recovered from some ruins.
   cardRarity: 1
+  _cardType: 1
   backgroundSprite: {fileID: 21300000, guid: 950f6fbfeb77a374d905e377c9847e7b, type: 3}
   cardNumber: 25

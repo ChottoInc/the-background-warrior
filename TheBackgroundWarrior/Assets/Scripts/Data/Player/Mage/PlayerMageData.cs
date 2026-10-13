@@ -180,6 +180,9 @@ public class PlayerMageData : BasePlayerData
             case UtilsPlayer.ID_MAGE_PROFICIENCY: LevelStatProficiency += amount; break;
         }
 
+        CheckUnlockAllSpellsAchievement();
+        CheckUnlockAllSlotsAchievement();
+
         InvokeStatChange(id, amount);
     }
 
@@ -274,6 +277,66 @@ public class PlayerMageData : BasePlayerData
             case 2: return IsSlot2Unlocked;
             case 3: return IsSlot3Unlocked;
             case 4: return IsSlot4Unlocked;
+        }
+    }
+
+
+    public void CheckAllAchievements()
+    {
+        if (SteamManager.Initialized)
+        {
+            CheckMaxSpellsAchievements();
+            CheckUnlockAllSpellsAchievement();
+            CheckUnlockAllSlotsAchievement();
+        }
+    }
+
+    public void CheckMaxSpellsAchievements()
+    {
+        int countMaxLevel = 0;
+        foreach (var spell in Spells)
+        {
+            if(spell.CurrentRank >= spell.SpellSO.MaxRank)
+            {
+                countMaxLevel++;
+            }
+        }
+
+        if (countMaxLevel >= 5)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.MAX_UPGRADE_MAGE_SPELLS_5))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.MAX_UPGRADE_MAGE_SPELLS_5);
+            }
+        }
+        else if (countMaxLevel >= 1)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.MAX_UPGRADE_MAGE_SPELLS_1))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.MAX_UPGRADE_MAGE_SPELLS_1);
+            }
+        }
+    }
+
+    private void CheckUnlockAllSpellsAchievement()
+    {
+        if(CurrentScholar >= UtilsMage.PER_LEVEL_MAGE_MAX_SCHOLAR)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_ALL_MAGE_SPELLS))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UNLOCK_ALL_MAGE_SPELLS);
+            }
+        }
+    }
+
+    private void CheckUnlockAllSlotsAchievement()
+    {
+        if (CurrentProficiency >= UtilsMage.PER_LEVEL_MAGE_MAX_PROFICIENCY)
+        {
+            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_ALL_MAGE_SLOTS))
+            {
+                UtilsAchievement.UnlockAchievement(UtilsAchievement.UNLOCK_ALL_MAGE_SLOTS);
+            }
         }
     }
 }
