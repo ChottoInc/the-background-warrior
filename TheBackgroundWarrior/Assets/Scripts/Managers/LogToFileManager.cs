@@ -9,6 +9,9 @@ using UnityEngine;
 public class LogToFileManager : MonoBehaviour
 {
     [SerializeField] bool isEnabled;
+    [SerializeField] bool _isAchievementDebugEnabled = true;
+
+    public bool IsAchievementDebugEnabled => _isAchievementDebugEnabled;
 
     private static string logFilePath;
     private static StreamWriter logWriter;

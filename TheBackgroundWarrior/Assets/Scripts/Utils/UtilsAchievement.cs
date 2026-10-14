@@ -85,7 +85,8 @@ public static class UtilsAchievement
         }
         else
         {
-            Debug.LogWarning("SteamManager is not initialized. Cannot check achievement status.");
+            if (LogToFileManager.Instance.IsAchievementDebugEnabled)
+                Debug.LogWarning("SteamManager is not initialized. Cannot check achievement status.");
             return false;
         }
     }
@@ -99,7 +100,8 @@ public static class UtilsAchievement
         }
         else
         {
-            Debug.LogWarning("SteamManager is not initialized. Cannot unlock achievement.");
+            if (LogToFileManager.Instance.IsAchievementDebugEnabled)
+                Debug.LogWarning("SteamManager is not initialized. Cannot unlock achievement.");
         }
     }
 
@@ -121,7 +123,8 @@ public static class UtilsAchievement
         }
         else
         {
-            Debug.LogWarning("SteamManager is not initialized. Cannot add to stat.");
+            if(LogToFileManager.Instance.IsAchievementDebugEnabled)
+                Debug.LogWarning("SteamManager is not initialized. Cannot add to stat.");
         }
     }
 
@@ -136,13 +139,15 @@ public static class UtilsAchievement
             }
             else
             {
-                Debug.LogWarning("Achievement Id not found: " + achievementId);
+                if (LogToFileManager.Instance.IsAchievementDebugEnabled)
+                    Debug.LogWarning("Achievement Id not found: " + achievementId);
                 return false;
             }
         }
         else
         {
-            Debug.LogWarning("SteamManager is not initialized. Cannot remove achievement.");
+            if (LogToFileManager.Instance.IsAchievementDebugEnabled)
+                Debug.LogWarning("SteamManager is not initialized. Cannot remove achievement.");
             return false;
         }
     }

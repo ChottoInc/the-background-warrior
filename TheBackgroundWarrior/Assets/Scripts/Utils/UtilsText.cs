@@ -224,6 +224,8 @@ public static class UtilsText
     public const string text_shop_isdaily = "text_shop_isdaily";
     public const string text_shop_isunique = "text_shop_isunique";
 
+    public const string text_shop_alchemistunlocked = "text_shop_alchemistunlocked";
+
     // -------------------- QUESTS --------------------- //
 
     public const string text_quest_desc_kill_specific = "text_quest_desc_kill_specific";
@@ -1272,6 +1274,8 @@ public static class UtilsText
 
             { text_shop_isdaily, "Daily purchase." },
             { text_shop_isunique, "One-time purchase." },
+
+            { text_shop_alchemistunlocked, "Alchemist unlocked" },
             
             // -------------------- QUESTS --------------------- //
 

@@ -16,6 +16,18 @@ public static class UtilsGeneral
     public enum DayMoment { Morning, Afternoon, Evening, Night }
 
 
+    private const int GREED_CONCOCTION_ID = 500;
+    private const int VETERAN_CONCOCTION_ID = 501;
+    private const int STORYTELLER_CONCOCTION_ID = 502;
+    private const int STONED_CONCOCTION_ID = 503;
+    private const int SAILOR_CONCOCTION_ID = 504;
+    private const int DWARF_CONCOCTION_ID = 505;
+    private const int TAMER_CONCOCTION_ID = 506;
+    private const int ARCANIST_CONCOCTION_ID = 507;
+    private const int IRONSKIN_CONCOCTION_ID = 540;
+    public enum TextLinkType { None, Concoction }
+
+
 
 
     public static void Initialize()
@@ -142,7 +154,6 @@ public static class UtilsGeneral
 
     #endregion
 
-
     #region SETTINGS
 
     public enum AutocloseTimerType { MINS5, MINS10, MINS20, MINS30, MINS60, MINS120 }
@@ -179,7 +190,6 @@ public static class UtilsGeneral
     }
 
     #endregion
-
 
     #region FILE READING
 
@@ -264,6 +274,92 @@ public static class UtilsGeneral
         }
 
         return result;
+    }
+
+    #endregion
+
+    #region TEXT
+
+    public static string GetTextByLink(string link)
+    {
+        string res = string.Empty;
+        link = link.ToUpper();
+
+        TextLinkType linkType = TextLinkType.None;
+        ConcoctionSO item = null;
+
+        switch(link)
+        {
+            case "GREED":
+                linkType = TextLinkType.Concoction;
+                item = UtilsItem.GetItemById(GREED_CONCOCTION_ID) as ConcoctionSO;
+                res = UtilsText.AllText[UtilsText.text_name_buff_greed_effect]; 
+                break;
+
+            case "VETERAN":
+                linkType = TextLinkType.Concoction;
+                item = UtilsItem.GetItemById(VETERAN_CONCOCTION_ID) as ConcoctionSO;
+                res = UtilsText.AllText[UtilsText.text_name_buff_veteran_effect];
+                break;
+
+            case "STORYTELLER":
+                linkType = TextLinkType.Concoction;
+                item = UtilsItem.GetItemById(STORYTELLER_CONCOCTION_ID) as ConcoctionSO;
+                res = UtilsText.AllText[UtilsText.text_name_buff_storyteller_effect];
+                break;
+
+            case "STONED":
+                linkType = TextLinkType.Concoction;
+                item = UtilsItem.GetItemById(STONED_CONCOCTION_ID) as ConcoctionSO;
+                res = UtilsText.AllText[UtilsText.text_name_buff_stoned_effect];
+                break;
+
+            case "SAILOR":
+                linkType = TextLinkType.Concoction;
+                item = UtilsItem.GetItemById(SAILOR_CONCOCTION_ID) as ConcoctionSO;
+                res = UtilsText.AllText[UtilsText.text_name_buff_sailor_effect];
+                break;
+
+            case "DWARF":
+                linkType = TextLinkType.Concoction;
+                item = UtilsItem.GetItemById(DWARF_CONCOCTION_ID) as ConcoctionSO;
+                res = UtilsText.AllText[UtilsText.text_name_buff_dwarf_effect];
+                break;
+
+            case "TAMER":
+                linkType = TextLinkType.Concoction;
+                item = UtilsItem.GetItemById(TAMER_CONCOCTION_ID) as ConcoctionSO;
+                res = UtilsText.AllText[UtilsText.text_name_buff_tamer_effect];
+                break;
+
+            case "ARCANIST":
+                linkType = TextLinkType.Concoction;
+                item = UtilsItem.GetItemById(ARCANIST_CONCOCTION_ID) as ConcoctionSO;
+                res = UtilsText.AllText[UtilsText.text_name_buff_arcanist_effect];
+                break;
+
+            case "IRONSKIN":
+                linkType = TextLinkType.Concoction;
+                item = UtilsItem.GetItemById(IRONSKIN_CONCOCTION_ID) as ConcoctionSO;
+                res = UtilsText.AllText[UtilsText.text_name_buff_ironskin_effect];
+                break;
+
+        }
+
+        switch (linkType)
+        {
+            default: return res;
+
+            case TextLinkType.Concoction:
+                if(item != null)
+                {
+                    res = string.Format(res, Mathf.RoundToInt(item.Duration / 60f));
+                }
+                break;
+
+        }
+
+        return res;
     }
 
     #endregion

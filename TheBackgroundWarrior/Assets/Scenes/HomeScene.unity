@@ -2740,6 +2740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnabled: 1
+  _isAchievementDebugEnabled: 0
 --- !u!4 &1171033273
 Transform:
   m_ObjectHideFlags: 0
