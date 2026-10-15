@@ -554,6 +554,7 @@ GameObject:
   - component: {fileID: 5881830666297411781}
   - component: {fileID: 3950160879438933037}
   - component: {fileID: 859760981972365996}
+  - component: {fileID: 4674663508461614185}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -690,6 +691,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_button_equip
+--- !u!114 &4674663508461614185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2358202618917374573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2624015762296915286
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +714,7 @@ GameObject:
   - component: {fileID: 1837567464448488035}
   - component: {fileID: 8564187557128171981}
   - component: {fileID: 6315198130217398464}
+  - component: {fileID: 3551962622198814997}
   m_Layer: 5
   m_Name: Text Ability
   m_TagString: Untagged
@@ -824,6 +838,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3551962622198814997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624015762296915286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2699513265041361215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,6 +1165,7 @@ GameObject:
   - component: {fileID: 3306553050676358131}
   - component: {fileID: 6765666620975046545}
   - component: {fileID: 523165448770840735}
+  - component: {fileID: 5282973585279762754}
   m_Layer: 5
   m_Name: Text Name
   m_TagString: Untagged
@@ -1282,6 +1309,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &5282973585279762754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4551661282767806829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5703916837923924970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1483,7 @@ GameObject:
   - component: {fileID: 5083949303496510229}
   - component: {fileID: 8162193825359604953}
   - component: {fileID: 8797802359920788923}
+  - component: {fileID: 8300683078730654853}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1580,6 +1620,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_button_unequip
+--- !u!114 &8300683078730654853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266071917077017502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6484659116229724594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,6 +1644,7 @@ GameObject:
   - component: {fileID: 462928309216639790}
   - component: {fileID: 8600127765468148591}
   - component: {fileID: 932140538719050788}
+  - component: {fileID: 3561537222877803433}
   m_Layer: 5
   m_Name: Text Level
   m_TagString: Untagged
@@ -1735,6 +1788,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3561537222877803433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6484659116229724594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6915354262657275856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,6 +1951,7 @@ GameObject:
   - component: {fileID: 3717729592720013589}
   - component: {fileID: 7013839829141704471}
   - component: {fileID: 412672445402590543}
+  - component: {fileID: 6263762837303853394}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2022,6 +2088,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_job_farmer_companion_equipped
+--- !u!114 &6263762837303853394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7644655665069413174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7924037017978496587
 GameObject:
   m_ObjectHideFlags: 0

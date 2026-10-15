@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 1800689713472919658}
   - component: {fileID: 2481167224813618740}
   - component: {fileID: 2500676168658155619}
+  - component: {fileID: 6530155173052713961}
   m_Layer: 5
   m_Name: Text Name
   m_TagString: Untagged
@@ -236,6 +237,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_button_shop_filter_cardpacks
+--- !u!114 &6530155173052713961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133952519092818189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2267336598996954823
 GameObject:
   m_ObjectHideFlags: 0

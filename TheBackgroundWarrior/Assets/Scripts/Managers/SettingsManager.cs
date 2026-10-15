@@ -100,6 +100,17 @@ public class SettingsManager : MonoBehaviour
 
 
 
+
+    // --------- ACCESSIBILITY
+
+    public enum AccessibilityFontSize { F100, F125, F150 }
+    public AccessibilityFontSize FontSize { get; private set; }
+
+    public event Action<AccessibilityFontSize> OnFontSizeChange;
+
+
+
+
     // --------- GENERAL
 
     public float MasterVolume { get; private set; }
@@ -210,6 +221,9 @@ public class SettingsManager : MonoBehaviour
         SetIs60FPS(saveData.is60FPS, false);
         SetCurrentMonitorIndex(saveData.currentMonitorIndex, false, false);
 
+        // --- accessibility
+        SetTargeFontSize((AccessibilityFontSize)saveData.fontSize, false);
+
         // --- general
         SetMasterVolume(saveData.masterVolume, false);
         SetLanguage((UtilsGeneral.Language)saveData.currentLanguage, false);
@@ -257,6 +271,9 @@ public class SettingsManager : MonoBehaviour
         SetIsClickThrough(true, false);
         SetIs60FPS(true, false);
         SetCurrentMonitorIndex(0, true, false);
+
+        // --- accessibility
+        SetTargeFontSize(AccessibilityFontSize.F100, false);
 
         // --- general
         SetMasterVolume(1f, false);
@@ -522,6 +539,20 @@ public class SettingsManager : MonoBehaviour
 
         if (save)
             Save();
+    }
+
+    #endregion
+
+    #region ACCESSIBILITY
+
+    public void SetTargeFontSize(AccessibilityFontSize size, bool save = true)
+    {
+        FontSize = size;
+
+        OnFontSizeChange?.Invoke(FontSize);
+        //Debug.Log("size: " + FontSize);
+
+        if (save) Save();
     }
 
     #endregion

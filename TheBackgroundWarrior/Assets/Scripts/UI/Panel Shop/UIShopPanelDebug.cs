@@ -15,8 +15,8 @@ public class UIShopPanelDebug : MonoBehaviour
     {
         AudioManager.Instance.PlayClickUI();
 
-        //if (ShopManager.Instance.HasRedeemedErisCode) return;
-        //if (_isAnimating) return;
+        if (ShopManager.Instance.HasRedeemedErisCode) return;
+        if (_isAnimating) return;
 
         bool redeemSuccess = false;
 
@@ -26,13 +26,13 @@ public class UIShopPanelDebug : MonoBehaviour
 
             case UtilsShop.REDEEM_ERIS_CODE:
 
-                //if (!ShopManager.Instance.HasRedeemedErisCode)
-                //{
+                if (!ShopManager.Instance.HasRedeemedErisCode)
+                {
                     redeemSuccess = true;
                     ShopManager.Instance.SetRedeemCode(UtilsShop.ID_REDEEM_ERIS_CODE);
                     ShopManager.Instance.SaveShopData();
 
-                    //PlayerManager.Instance.PlayerJobsData.AddAvailableJob(UtilsPlayer.PlayerJob.Alchemist);
+                    PlayerManager.Instance.PlayerJobsData.AddAvailableJob(UtilsPlayer.PlayerJob.Alchemist);
 
                     _isAnimating = true;
 
@@ -40,7 +40,7 @@ public class UIShopPanelDebug : MonoBehaviour
                     _panelAnimation.Open();
 
                     Debug.Log("Redeem success: " + UtilsShop.REDEEM_ERIS_CODE);
-                //}
+                }
                 break;
         }
 

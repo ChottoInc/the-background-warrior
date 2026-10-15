@@ -17,7 +17,7 @@ public class UIFarmerSideCompanionInfo : MonoBehaviour
         {
             imageIconCompanion.sprite = spriteEmpty;
 
-            textName.text = "Empty";
+            textName.text = UtilsText.AllText[UtilsText.text_job_farmer_crop_emptycompanion];
             textLevel.gameObject.SetActive(false);
         }
         else
@@ -27,7 +27,7 @@ public class UIFarmerSideCompanionInfo : MonoBehaviour
             imageIconCompanion.sprite = companionData.CompanionSO.IconCompanion;
 
             textName.text = companionData.CompanionSO.CompanionName;
-            textLevel.text = string.Format("Lv: {0}", companionData.CurrentLevel);
+            textLevel.text = string.Format(UtilsText.AllText[UtilsText.text_job_current_level], companionData.CurrentLevel);
             textLevel.gameObject.SetActive(true);
         }
             

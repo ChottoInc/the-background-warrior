@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 2538534999210831056}
   - component: {fileID: 971303786198924651}
   - component: {fileID: 3391837035077083195}
+  - component: {fileID: 7151685778171333989}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -205,6 +206,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_job_warrior_possiblecards
+--- !u!114 &7151685778171333989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790006628651306769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &845404336130095313
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +368,7 @@ GameObject:
   - component: {fileID: 1901685251394132333}
   - component: {fileID: 2036204372072654841}
   - component: {fileID: 3784954239310550303}
+  - component: {fileID: 7587874185517738608}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -482,6 +496,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7587874185517738608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698861676694359219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3016872309863853340
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +668,7 @@ GameObject:
   - component: {fileID: 809566577600264156}
   - component: {fileID: 3384394726057071522}
   - component: {fileID: 1748546037731744536}
+  - component: {fileID: 5245022621536473263}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -771,6 +798,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5245022621536473263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3465870024314000028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3946057981020923143
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,6 +1371,7 @@ GameObject:
   - component: {fileID: 6384448563231367462}
   - component: {fileID: 3292466490715033494}
   - component: {fileID: 4360342013251763612}
+  - component: {fileID: 7124215342973906197}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1468,6 +1508,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_job_warrior_possiblemonsters
+--- !u!114 &7124215342973906197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7724159473278695380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7929272238997181956
 GameObject:
   m_ObjectHideFlags: 0

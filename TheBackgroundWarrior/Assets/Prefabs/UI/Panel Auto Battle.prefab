@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8617523577854804796}
   - component: {fileID: 3351793671019024212}
   - component: {fileID: 4818611544788696768}
+  - component: {fileID: 3632210778151734286}
   m_Layer: 5
   m_Name: Text Auto Battle
   m_TagString: Untagged
@@ -194,6 +195,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_settings_gameplay_autobattle
+--- !u!114 &3632210778151734286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350815765215281940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2985563374812978478
 GameObject:
   m_ObjectHideFlags: 0

@@ -151,7 +151,7 @@
     "text_job_miner_requirements_levelup": "Requirements for level up",
     "text_job_blacksmith_requirements_levelup": "Requirements for level up",
     "text_job_fisher_availablefishes": "Current available fishes",
-    "text_job_fisher_caughtsession": "Fishes caught in this session :",
+    "text_job_fisher_caughtsession": "Fishes caught in this session",
     "text_job_farmer_crop_basegrowthtime": "Growth time: {1}m{2}s<br>",
     "text_job_farmer_crop_attracts": "Attracts:<br>",
     "text_job_farmer_crop_companiondesc": "Equip companions that will help you defeating monsters",
@@ -331,5 +331,14 @@
     "text_name_map11": "Remote island",
     "text_name_map12": "Old capital",
     "text_name_map13": "Last outpost",
-    "text_shop_alchemistunlocked": "Alchemist unlocked"
+    "text_shop_alchemistunlocked": "Alchemist unlocked",
+    "text_settings_accessibility_targetfontsize": "Font size",
+    "text_settings_accessibility_font_toggle100": "100%",
+    "text_settings_accessibility_font_toggle125": "125%",
+    "text_settings_accessibility_font_toggle150": "150%",
+    "text_button_settings_filter_accessibility": "Accessibility",
+    "text_job_fisher_groups": "Groups",
+    "text_job_farmer_crop_addnewcrop": "Select a crop to grow",
+    "text_job_farmer_crop_currentgrowthtime": "Growth: {0:0}%",
+    "text_job_farmer_crop_emptycompanion": "Not equipped"
 }

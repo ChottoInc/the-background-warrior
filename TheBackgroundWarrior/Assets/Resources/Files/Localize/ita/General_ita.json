@@ -151,7 +151,7 @@
     "text_job_miner_requirements_levelup": "Requisiti per l'aumento di livello",
     "text_job_blacksmith_requirements_levelup": "Requisiti per l'aumento di livello",
     "text_job_fisher_availablefishes": "Pesci disponibili",
-    "text_job_fisher_caughtsession": "Pesci catturati in questa sessione:",
+    "text_job_fisher_caughtsession": "Pesci catturati in questa sessione",
     "text_job_farmer_crop_basegrowthtime": "Tempo di crescita: {1}m{2}s<br>",
     "text_job_farmer_crop_attracts": "Attrae:<br>",
     "text_job_farmer_crop_companiondesc": "Equipaggia compagni che ti aiuteranno a sconfiggere i mostri",
@@ -206,7 +206,7 @@
     "text_button_inventory_filter_ores": "Minerali",
     "text_button_inventory_filter_metals": "Metalli",
     "text_button_inventory_filter_fishes": "Pesci",
-    "text_button_inventory_filter_crops": "Colture",
+    "text_button_inventory_filter_crops": "Piante",
     "text_button_inventory_filter_cards": "Carte",
     "text_yesno_yes": "Conferma",
     "text_yesno_no": "Annulla",
@@ -331,5 +331,14 @@
     "text_name_map11": "Isola remota",
     "text_name_map12": "Vecchia capitale",
     "text_name_map13": "Ultimo avamposto",
-    "text_shop_alchemistunlocked": "Alchimista sbloccato"
+    "text_shop_alchemistunlocked": "Alchimista sbloccato",
+    "text_settings_accessibility_targetfontsize": "Grandezza del font",
+    "text_settings_accessibility_font_toggle100": "100%",
+    "text_settings_accessibility_font_toggle125": "125%",
+    "text_settings_accessibility_font_toggle150": "150%",
+    "text_button_settings_filter_accessibility": "Accessibilità",
+    "text_job_fisher_groups": "Gruppi",
+    "text_job_farmer_crop_addnewcrop": "Seleziona una pianta da crescere",
+    "text_job_farmer_crop_currentgrowthtime": "Crescita: {0:0}%",
+    "text_job_farmer_crop_emptycompanion": "Non equipaggiato"
 }

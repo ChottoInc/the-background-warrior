@@ -1578,6 +1578,7 @@ GameObject:
   - component: {fileID: 5597415311235972471}
   - component: {fileID: 6232408805986404108}
   - component: {fileID: 3043360388265903755}
+  - component: {fileID: 841575190511930839}
   m_Layer: 5
   m_Name: Text Name
   m_TagString: Untagged
@@ -1721,6 +1722,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &841575190511930839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686812575881453420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6356681466063706499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,8 +2409,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5592173398282328410}
   m_HandleRect: {fileID: 920553938905595062}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: -0.00000044524404
+  m_Size: 0.63427764
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2580,6 +2593,7 @@ GameObject:
   - component: {fileID: 9016745557167523608}
   - component: {fileID: 7318530697352035679}
   - component: {fileID: 8764914168043607651}
+  - component: {fileID: 521225244963041606}
   m_Layer: 5
   m_Name: Text Stage
   m_TagString: Untagged
@@ -2723,6 +2737,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &521225244963041606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032060478282380845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9205023608352544110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,6 +2761,7 @@ GameObject:
   - component: {fileID: 7333743579225494110}
   - component: {fileID: 5695008285158185007}
   - component: {fileID: 5685104141936585844}
+  - component: {fileID: 2428809486758636744}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2789,7 +2816,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fight
+  m_text: FightFight
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d84c0cc5ab8f8a048904ad938e7cf1aa, type: 2}
   m_sharedMaterial: {fileID: 8627294091315192098, guid: d84c0cc5ab8f8a048904ad938e7cf1aa, type: 2}
@@ -2871,3 +2898,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_button_fight
+--- !u!114 &2428809486758636744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9205023608352544110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -163,6 +163,8 @@ MonoBehaviour:
   _scrollSpeed: 0.2
   _resumeDelay: 2
   _wheelSensitivity: 0.2
+  _text: {fileID: 0}
+  _alignment: 514
 --- !u!1 &2599065548990152967
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,6 +267,7 @@ GameObject:
   - component: {fileID: 7424464133958246013}
   - component: {fileID: 7456111393427598276}
   - component: {fileID: 4801101046758922153}
+  - component: {fileID: 4718344834969070592}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -401,6 +404,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_button_new
+--- !u!114 &4718344834969070592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2988914467585521385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3957093037558529657
 GameObject:
   m_ObjectHideFlags: 0

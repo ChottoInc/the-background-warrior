@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: 4948918378818826077}
   - component: {fileID: 5110648833766760223}
   - component: {fileID: 478064726018428406}
+  - component: {fileID: 1390341179102525798}
   m_Layer: 5
   m_Name: Text Title
   m_TagString: Untagged
@@ -614,6 +615,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_title_quests
+--- !u!114 &1390341179102525798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996973787638243515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1052595791220001617
 GameObject:
   m_ObjectHideFlags: 0
@@ -4140,6 +4153,7 @@ GameObject:
   - component: {fileID: 297496980780505862}
   - component: {fileID: 3797192651265047414}
   - component: {fileID: 8541865863829860350}
+  - component: {fileID: 3985878913788912254}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -4296,6 +4310,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_button_claim
+--- !u!114 &3985878913788912254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6264532156805043543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6337760569882084110
 GameObject:
   m_ObjectHideFlags: 0
@@ -5758,6 +5784,7 @@ GameObject:
   - component: {fileID: 6901421025609387185}
   - component: {fileID: 5828162599211918956}
   - component: {fileID: 5278628136999001694}
+  - component: {fileID: 486699601551507279}
   m_Layer: 5
   m_Name: Text Title
   m_TagString: Untagged
@@ -5894,6 +5921,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_title_quests_bountieslist
+--- !u!114 &486699601551507279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168062557051521937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9193545024793459457
 GameObject:
   m_ObjectHideFlags: 0

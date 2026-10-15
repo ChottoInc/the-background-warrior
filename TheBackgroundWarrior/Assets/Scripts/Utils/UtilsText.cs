@@ -304,6 +304,11 @@ public static class UtilsText
     public const string text_settings_video_option_toggle60 = "text_settings_video_option_toggle60";
     public const string text_settings_video_button_changemonitor = "text_settings_video_button_changemonitor";
 
+    public const string text_settings_accessibility_targetfontsize = "text_settings_accessibility_targetfontsize";
+    public const string text_settings_accessibility_font_toggle100 = "text_settings_accessibility_font_toggle100";
+    public const string text_settings_accessibility_font_toggle125 = "text_settings_accessibility_font_toggle125";
+    public const string text_settings_accessibility_font_toggle150 = "text_settings_accessibility_font_toggle150";
+
     // -------------------- JOBS --------------------- //
 
     public const string text_job_current_level = "text_job_current_level";
@@ -338,12 +343,16 @@ public static class UtilsText
     public const string text_job_blacksmith_requirements_levelup = "text_job_blacksmith_requirements_levelup";
 
     public const string text_job_fisher_availablefishes = "text_job_fisher_availablefishes";
+    public const string text_job_fisher_groups = "text_job_fisher_groups";
     public const string text_job_fisher_caughtsession = "text_job_fisher_caughtsession";
     public const string text_job_fisher_raritytooltip = "text_job_fisher_raritytooltip";
     public const string text_job_fisher_spawntime = "text_job_fisher_spawntime";
     public const string text_job_fisher_waittime = "text_job_fisher_waittime";
 
 
+    public const string text_job_farmer_crop_addnewcrop = "text_job_farmer_crop_addnewcrop";
+    public const string text_job_farmer_crop_emptycompanion = "text_job_farmer_crop_emptycompanion";
+    public const string text_job_farmer_crop_currentgrowthtime = "text_job_farmer_crop_currentgrowthtime";
     public const string text_job_farmer_crop_basegrowthtime = "text_job_farmer_crop_basegrowthtime";
     public const string text_job_farmer_crop_attracts = "text_job_farmer_crop_attracts";
     public const string text_job_farmer_crop_companiondesc = "text_job_farmer_crop_companiondesc";
@@ -417,6 +426,7 @@ public static class UtilsText
     public const string text_button_settings_filter_general = "text_button_settings_filter_general";
     public const string text_button_settings_filter_gameplay = "text_button_settings_filter_gameplay";
     public const string text_button_settings_filter_video = "text_button_settings_filter_video";
+    public const string text_button_settings_filter_accessibility = "text_button_settings_filter_accessibility";
     public const string text_button_settings_filter_credits = "text_button_settings_filter_credits";
     public const string text_button_settings_filter_help = "text_button_settings_filter_help";
 
@@ -1357,6 +1367,11 @@ public static class UtilsText
             { text_settings_video_option_toggle60, "60 FPS" },
             { text_settings_video_button_changemonitor, "Change Monitor" },
 
+            { text_settings_accessibility_targetfontsize, "Font size" },
+            { text_settings_accessibility_font_toggle100, "100%" },
+            { text_settings_accessibility_font_toggle125, "125%" },
+            { text_settings_accessibility_font_toggle150, "150%" },
+
             // -------------------- JOBS --------------------- //
 
             { text_job_current_level, "Lv. : {0}" },
@@ -1391,9 +1406,13 @@ public static class UtilsText
             { text_job_blacksmith_requirements_levelup, "Requirements for level up" },
 
             { text_job_fisher_availablefishes, "Current available fishes" },
+            { text_job_fisher_groups, "Groups" },
             { text_job_fisher_caughtsession, "Fishes caught in this session until now:" },
 
 
+            { text_job_farmer_crop_emptycompanion, "Empty" },
+            { text_job_farmer_crop_addnewcrop, "Add a new crop to grow" },
+            { text_job_farmer_crop_currentgrowthtime, "Growth: {0:0}%" },
             { text_job_farmer_crop_basegrowthtime, "Growth time: {1}m{2}s<br>" },
             { text_job_farmer_crop_attracts, "Attracts:<br>" },
             { text_job_farmer_crop_companiondesc, "Equip companions that will help you defeating monsters" },
@@ -1471,6 +1490,7 @@ public static class UtilsText
             { text_button_settings_filter_general, "General" },
             { text_button_settings_filter_gameplay, "Gameplay" },
             { text_button_settings_filter_video, "Video" },
+            { text_button_settings_filter_accessibility, "Accessibility" },
             { text_button_settings_filter_credits, "Credits" },
             { text_button_settings_filter_help, "Help" },
 

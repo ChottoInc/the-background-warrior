@@ -55,6 +55,10 @@ public class SettingsSaveData
     public bool is60FPS;
     public int currentMonitorIndex;
 
+    // ------------ ACCESSIBILITY
+
+    public int fontSize;
+
 
     // ------------ GENERAL
 
@@ -109,6 +113,8 @@ public class SettingsSaveData
         is60FPS = manager.Is60FPS;
         currentMonitorIndex = manager.CurrentMonitorIndex;
 
+
+        fontSize = (int)manager.FontSize;
 
 
         masterVolume = manager.MasterVolume;

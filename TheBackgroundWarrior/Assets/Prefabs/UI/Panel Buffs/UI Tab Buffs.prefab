@@ -1070,6 +1070,7 @@ GameObject:
   - component: {fileID: 5241164741232767260}
   - component: {fileID: 8256464022539159570}
   - component: {fileID: 4690823466769947333}
+  - component: {fileID: 2512430957762115253}
   m_Layer: 5
   m_Name: Text Title
   m_TagString: Untagged
@@ -1206,6 +1207,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: text_title_buffs
+--- !u!114 &2512430957762115253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4248429348850527075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4772959096463379851
 GameObject:
   m_ObjectHideFlags: 0

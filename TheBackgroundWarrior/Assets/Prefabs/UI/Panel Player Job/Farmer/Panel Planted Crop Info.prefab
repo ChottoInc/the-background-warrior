@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7688118534101612691}
   - component: {fileID: 5877671711660659250}
   - component: {fileID: 5040783599236488615}
+  - component: {fileID: 6212647200066887801}
   m_Layer: 5
   m_Name: Text Name
   m_TagString: Untagged
@@ -218,6 +219,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6212647200066887801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606736050936082701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3911349880502765029
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +370,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 229.97, y: 0}
-  m_SizeDelta: {x: 459.94, y: 48.5}
+  m_SizeDelta: {x: 459.94, y: 61.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3574042233019308919
 MonoBehaviour:
@@ -508,6 +521,7 @@ GameObject:
   - component: {fileID: 1950929602314560784}
   - component: {fileID: 2921533892323379577}
   - component: {fileID: 8492944637095751227}
+  - component: {fileID: 6442547362382978136}
   m_Layer: 5
   m_Name: Text Growing Time
   m_TagString: Untagged
@@ -631,6 +645,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6442547362382978136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6851018117855917167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aee3820230f60468b257abc73c97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7428774652974000821
 GameObject:
   m_ObjectHideFlags: 0

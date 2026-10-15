@@ -29,7 +29,7 @@ public class UIFarmerPlantedCropInfo : MonoBehaviour
         {
             imageCrop.sprite = spriteAdd;
 
-            textName.text = string.Format("Add a new crop to grow");
+            textName.text = UtilsText.AllText[UtilsText.text_job_farmer_crop_addnewcrop];
             textGrowth.gameObject.SetActive(false);
 
             barGrowth.gameObject.SetActive(false);
@@ -45,7 +45,7 @@ public class UIFarmerPlantedCropInfo : MonoBehaviour
 
             float percGrowth = (cropData.CurrentGrowth / cropData.GrowthTime) * 100f;
             percGrowth = Mathf.Min(percGrowth, 100f); // ensure it doesn't exceed 100%
-            textGrowth.text = string.Format("Growth: {0:0}%", percGrowth);
+            textGrowth.text = string.Format(UtilsText.AllText[UtilsText.text_job_farmer_crop_currentgrowthtime], percGrowth);
 
             barGrowth.gameObject.SetActive(true);
             barGrowth.Setup(cropData.GrowthTime, cropData.CurrentGrowth);

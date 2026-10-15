@@ -33,6 +33,7 @@ public class UILocalizeText : MonoBehaviour
         InitListening();
     }
 
+
     private void InitText()
     {
         if (InitializerManager.Instance.HasCheckFiles && !_isInit)
