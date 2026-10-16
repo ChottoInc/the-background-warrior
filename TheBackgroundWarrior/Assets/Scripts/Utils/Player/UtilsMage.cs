@@ -11,6 +11,14 @@ public static class UtilsMage
     private static Dictionary<int, ListableGameDataSO> dictSpells;
 
 
+    // ---------------- START LEVELS --------------- //
+
+    public const int START_LEVEL_INSIGHT = 1;
+    public const int START_LEVEL_CAST_SPEED = 1;
+    public const int START_LEVEL_SCHOLAR = 0;
+    public const int START_LEVEL_PROFICIENCY = 0;
+
+
 
     public static float PER_LEVEL_MAGE_GAIN_INSIGHT = 0.01f;        // up to 25
     public static float PER_LEVEL_MAGE_GAIN_CASTSPEED = 0.01f;      // up to 20
@@ -63,11 +71,12 @@ public static class UtilsMage
 
 
         MAX_LEVEL_MAGE =
-           PER_LEVEL_MAGE_MAX_INSIGHT +
-           PER_LEVEL_MAGE_MAX_CASTSPEED +
-           PER_LEVEL_MAGE_MAX_SCHOLAR +
-           PER_LEVEL_MAGE_MAX_PROFICIENCY +
-           1;
+            1 +
+            PER_LEVEL_MAGE_MAX_INSIGHT +
+            PER_LEVEL_MAGE_MAX_CASTSPEED +
+            PER_LEVEL_MAGE_MAX_SCHOLAR +
+            PER_LEVEL_MAGE_MAX_PROFICIENCY -
+            (START_LEVEL_INSIGHT + START_LEVEL_CAST_SPEED + START_LEVEL_SCHOLAR + START_LEVEL_PROFICIENCY);
 
 
         BASE_MAGE_EXP_GROWTH = jobDataSO.BaseExpGrowth;

@@ -18,11 +18,6 @@ public class PlayerFarmerData : BasePlayerData
     private int levelstatKindness = 1;
     private int levelStatLuck = 1;
 
-    private int startLevelGreenthumb = 1;
-    private int startLevelAgronomy = 0;
-    private int startLevelKindness = 1;
-    private int startLevelLuck = 1;
-
 
     public int LevelStatGreenthumb => levelStatGreenthumb;
     public int LevelStatAgronomy => levelstatAgronomy;
@@ -92,7 +87,6 @@ public class PlayerFarmerData : BasePlayerData
 
         int sumLevels =
             levelStatGreenthumb + levelstatAgronomy + levelstatKindness + levelStatLuck +
-            //startLevelGreenthumb + startLevelAgronomy + startLevelKindness + startLevelLuck +
             AvailableStatPoints +
             1;
 
@@ -102,7 +96,11 @@ public class PlayerFarmerData : BasePlayerData
         if (CurrentLevel >= UtilsFarmer.MAX_LEVEL_FARMER)
         {
             AvailableStatPoints = UtilsFarmer.MAX_LEVEL_FARMER - 1 -
-               levelStatGreenthumb - levelstatAgronomy - levelstatKindness - levelStatLuck;
+               levelStatGreenthumb - levelstatAgronomy - levelstatKindness - levelStatLuck +
+               UtilsFarmer.START_LEVEL_GREENTHUMB +
+               UtilsFarmer.START_LEVEL_AGRONOMY +
+               UtilsFarmer.START_LEVEL_KINDNESS +
+               UtilsFarmer.START_LEVEL_LUCK;
             CurrentExp = 0;
         }
 
@@ -133,10 +131,10 @@ public class PlayerFarmerData : BasePlayerData
         CurrentExp = 0;
 
 
-        levelStatGreenthumb = startLevelGreenthumb;
-        levelstatAgronomy = startLevelAgronomy;
-        levelstatKindness = startLevelKindness;
-        levelStatLuck = startLevelLuck;
+        levelStatGreenthumb = UtilsFarmer.START_LEVEL_GREENTHUMB;
+        levelstatAgronomy = UtilsFarmer.START_LEVEL_AGRONOMY;
+        levelstatKindness = UtilsFarmer.START_LEVEL_KINDNESS;
+        levelStatLuck = UtilsFarmer.START_LEVEL_LUCK;
 
 
         // multiplier

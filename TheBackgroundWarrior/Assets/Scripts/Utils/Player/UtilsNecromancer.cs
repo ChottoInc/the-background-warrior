@@ -1,10 +1,19 @@
 using UnityEngine;
 
-public class UtilsNecromancer : MonoBehaviour
+public static class UtilsNecromancer
 {
     public enum RitualType { Summon, Arise, Afterlife, Ade }
 
     public const long BASE_EXP_GAIN_FROM_FIGHTERS = 400;
+
+    // ---------------- START LEVELS --------------- //
+
+    public const int START_LEVEL_APTITUDE = 0;
+    public const int START_LEVEL_SUMMON = 1;
+    public const int START_LEVEL_MIGHT = 1;
+    public const int START_LEVEL_LIFESPAN = 1;
+    public const int START_LEVEL_HORDE = 0;
+    public const int START_LEVEL_LUCK = 1;
 
 
 
@@ -54,13 +63,14 @@ public class UtilsNecromancer : MonoBehaviour
 
 
         MAX_LEVEL_NECROMANCER =
-           PER_LEVEL_NECROMANCER_MAX_APTITUDE +
-           PER_LEVEL_NECROMANCER_MAX_SUMMON +
-           PER_LEVEL_NECROMANCER_MAX_MIGHT +
-           PER_LEVEL_NECROMANCER_MAX_LIFESPAN +
-           PER_LEVEL_NECROMANCER_MAX_HORDE +
-           PER_LEVEL_NECROMANCER_MAX_LUCK +
-           1;
+            1 +
+            PER_LEVEL_NECROMANCER_MAX_APTITUDE +
+            PER_LEVEL_NECROMANCER_MAX_SUMMON +
+            PER_LEVEL_NECROMANCER_MAX_MIGHT +
+            PER_LEVEL_NECROMANCER_MAX_LIFESPAN +
+            PER_LEVEL_NECROMANCER_MAX_HORDE +
+            PER_LEVEL_NECROMANCER_MAX_LUCK -
+            (START_LEVEL_APTITUDE + START_LEVEL_SUMMON + START_LEVEL_MIGHT + START_LEVEL_LIFESPAN + START_LEVEL_HORDE + START_LEVEL_LUCK);
 
 
         BASE_NECROMANCER_EXP_GROWTH = jobDataSO.BaseExpGrowth;

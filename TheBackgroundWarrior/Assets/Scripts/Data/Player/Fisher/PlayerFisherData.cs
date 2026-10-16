@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using static UtilsPlayer;
 
 public class PlayerFisherData : BasePlayerData
@@ -14,10 +13,7 @@ public class PlayerFisherData : BasePlayerData
 
     // ---- LEVEL STAT POINTS
 
-    private int startLevelCalmness = 1;
-    private int startLevelReflex = 1;
-    private int startLevelKnowledge = 1;
-    private int startLevelLuck = 1;
+    
 
 
     public int LevelStatCalmness { get; private set; }
@@ -97,7 +93,6 @@ public class PlayerFisherData : BasePlayerData
 
         int sumLevels =
             LevelStatCalmness + LevelStatReflex + LevelStatKnowledge + LevelStatLuck +
-            //startLevelCalmness + startLevelReflex + startLevelKnowledge + startLevelLuck +
             AvailableStatPoints +
             1;
 
@@ -107,7 +102,11 @@ public class PlayerFisherData : BasePlayerData
         if (CurrentLevel >= UtilsFisher.MAX_LEVEL_FISHER)
         {
             AvailableStatPoints = UtilsFisher.MAX_LEVEL_FISHER - 1 -
-               LevelStatCalmness - LevelStatReflex - LevelStatKnowledge - LevelStatLuck;
+               LevelStatCalmness - LevelStatReflex - LevelStatKnowledge - LevelStatLuck +
+               UtilsFisher.START_LEVEL_CALMNESS +
+               UtilsFisher.START_LEVEL_REFLEX +
+               UtilsFisher.START_LEVEL_KNOWLEDGE +
+               UtilsFisher.START_LEVEL_LUCK;
             CurrentExp = 0;
         }
 
@@ -121,10 +120,10 @@ public class PlayerFisherData : BasePlayerData
         CurrentLevel = 1;
         CurrentExp = 0;
 
-        LevelStatCalmness = startLevelCalmness;
-        LevelStatReflex = startLevelReflex;
-        LevelStatKnowledge = startLevelKnowledge;
-        LevelStatLuck = startLevelLuck;
+        LevelStatCalmness = UtilsFisher.START_LEVEL_CALMNESS;
+        LevelStatReflex = UtilsFisher.START_LEVEL_REFLEX;
+        LevelStatKnowledge = UtilsFisher.START_LEVEL_KNOWLEDGE;
+        LevelStatLuck = UtilsFisher.START_LEVEL_LUCK;
 
         // multiplier
         baseCalmness = 0f; // reduced max time for spawn fish, up to 0.5f - 50%

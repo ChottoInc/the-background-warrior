@@ -1880,7 +1880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333f4b071b8e9241868c7ced5f7034d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlatformSteam: 1
+  isPlatformSteam: 0
   enableCheats: 1
   fileEncryption: 0
 --- !u!4 &903364526
@@ -2740,7 +2740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnabled: 1
-  _isAchievementDebugEnabled: 1
+  _isAchievementDebugEnabled: 0
 --- !u!4 &1171033273
 Transform:
   m_ObjectHideFlags: 0

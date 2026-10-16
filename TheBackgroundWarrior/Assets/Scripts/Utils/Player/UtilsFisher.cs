@@ -13,6 +13,13 @@ public static class UtilsFisher
     // Fisher
     private static Dictionary<int, ListableGameDataSO> dictFishGroups;
 
+    // ---------------- START LEVELS --------------- //
+
+    public const int START_LEVEL_CALMNESS = 1;
+    public const int START_LEVEL_REFLEX = 1;
+    public const int START_LEVEL_KNOWLEDGE = 1;
+    public const int START_LEVEL_LUCK = 1;
+
 
     public static float PER_LEVEL_FISHER_GAIN_CALMNESS = 0.01f;
     public static float PER_LEVEL_FISHER_GAIN_REFLEX = 0.01f;
@@ -74,11 +81,12 @@ public static class UtilsFisher
 
 
         MAX_LEVEL_FISHER =
+            1 +
            PER_LEVEL_FISHER_MAX_CALMNESS +
            PER_LEVEL_FISHER_MAX_REFLEX +
            PER_LEVEL_FISHER_MAX_KNOWLEDGE + 
-           PER_LEVEL_FISHER_MAX_LUCK +
-           1;
+           PER_LEVEL_FISHER_MAX_LUCK -
+           (START_LEVEL_CALMNESS + START_LEVEL_REFLEX + START_LEVEL_KNOWLEDGE + START_LEVEL_LUCK);
 
 
         BASE_FISHER_EXP_GROWTH = jobDataSO.BaseExpGrowth;

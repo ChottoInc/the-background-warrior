@@ -6,6 +6,13 @@ public static class UtilsFarmer
 {
     private static Dictionary<int, ListableGameDataSO> dictCompanions;
 
+    // ---------------- START LEVELS --------------- //
+
+    public const int START_LEVEL_GREENTHUMB = 1;
+    public const int START_LEVEL_AGRONOMY = 0;
+    public const int START_LEVEL_KINDNESS = 1;
+    public const int START_LEVEL_LUCK = 1;
+
 
     public static float PER_LEVEL_FARMER_GAIN_GREENTHUMB = 0.01f;    // max 25%, base 1, multiplier
 
@@ -56,11 +63,12 @@ public static class UtilsFarmer
 
 
         MAX_LEVEL_FARMER =
-           PER_LEVEL_FARMER_MAX_GREENTHUMB +
-           PER_LEVEL_FARMER_MAX_AGRONOMY +
-           PER_LEVEL_FARMER_MAX_KINDNESS +
-           PER_LEVEL_FARMER_MAX_LUCK +
-           1;
+            1 +
+            PER_LEVEL_FARMER_MAX_GREENTHUMB +
+            PER_LEVEL_FARMER_MAX_AGRONOMY +
+            PER_LEVEL_FARMER_MAX_KINDNESS +
+            PER_LEVEL_FARMER_MAX_LUCK -
+            (START_LEVEL_GREENTHUMB + START_LEVEL_AGRONOMY + START_LEVEL_KINDNESS + START_LEVEL_LUCK);
 
 
         BASE_FARMER_EXP_GROWTH = jobDataSO.BaseExpGrowth;

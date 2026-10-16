@@ -2,6 +2,17 @@ using UnityEngine;
 
 public static class UtilsWarrior
 {
+    // ---------------- START LEVELS --------------- //
+
+    public const int START_LEVEL_MAX_HP = 1;
+    public const int START_LEVEL_ATK = 1;
+    public const int START_LEVEL_DEF = 1;
+    public const int START_LEVEL_ATKSPD = 1;
+    public const int START_LEVEL_CRIT_RATE = 1;
+    public const int START_LEVEL_CRIT_DMG = 1;
+    public const int START_LEVEL_LUCK = 1;
+
+
     public static float PER_LEVEL_WARRIOR_GAIN_MAXHP;
     public static float PER_LEVEL_WARRIOR_GAIN_ATK;
     public static float PER_LEVEL_WARRIOR_GAIN_DEF;
@@ -55,14 +66,16 @@ public static class UtilsWarrior
 
 
         MAX_LEVEL_WARRIOR =
+            1 +
             PER_LEVEL_WARRIOR_MAX_MAXHP +
             PER_LEVEL_WARRIOR_MAX_ATK +
             PER_LEVEL_WARRIOR_MAX_DEF +
             PER_LEVEL_WARRIOR_MAX_ATK_SPEED +
             PER_LEVEL_WARRIOR_MAX_CRIT_RATE +
             PER_LEVEL_WARRIOR_MAX_CRIT_DMG +
-            PER_LEVEL_WARRIOR_MAX_LUCK +
-            1;
+            PER_LEVEL_WARRIOR_MAX_LUCK -
+            (START_LEVEL_MAX_HP + START_LEVEL_ATK + START_LEVEL_DEF + START_LEVEL_ATKSPD + START_LEVEL_CRIT_RATE + START_LEVEL_CRIT_DMG + START_LEVEL_LUCK)
+            ;
 
 
         BASE_FIGHT_EXP_GROWTH = jobDataSO.BaseExpGrowth;

@@ -18,10 +18,7 @@ public class PlayerMinerData : BasePlayerData
     private int levelShockwave = 1;
     private int levelStatLuck = 1;
 
-    private int startLevelPower = 1;
-    private int startLevelSmashSpeed = 1;
-    private int startLevelShockwave = 1;
-    private int startLevelLuck = 1;
+    
 
     // ---- WEAPON MINER
 
@@ -78,7 +75,6 @@ public class PlayerMinerData : BasePlayerData
 
         int sumLevels =
             levelStatPower + levelSmashSpeed + levelShockwave + levelStatLuck +
-            //startLevelPower + startLevelSmashSpeed + startLevelShockwave + startLevelLuck +
             AvailableStatPoints +
             1;
 
@@ -88,7 +84,11 @@ public class PlayerMinerData : BasePlayerData
         if (CurrentLevel >= UtilsMiner.MAX_LEVEL_MINER)
         {
             AvailableStatPoints = UtilsMiner.MAX_LEVEL_MINER - 1 -
-               levelStatPower - levelSmashSpeed - levelShockwave - levelStatLuck;
+               levelStatPower - levelSmashSpeed - levelShockwave - levelStatLuck +
+               UtilsMiner.START_LEVEL_POWER +
+               UtilsMiner.START_LEVEL_SMASH_SPEED +
+               UtilsMiner.START_LEVEL_SHOCKWAVE +
+               UtilsMiner.START_LEVEL_LUCK;
             CurrentExp = 0;
         }
 
@@ -102,10 +102,10 @@ public class PlayerMinerData : BasePlayerData
         CurrentLevel = 1;
         CurrentExp = 0;
 
-        levelStatPower = startLevelPower;
-        levelSmashSpeed = startLevelSmashSpeed;
-        levelShockwave = startLevelShockwave;
-        levelStatLuck = startLevelLuck;
+        levelStatPower = UtilsMiner.START_LEVEL_POWER;
+        levelSmashSpeed = UtilsMiner.START_LEVEL_SMASH_SPEED;
+        levelShockwave = UtilsMiner.START_LEVEL_SHOCKWAVE;
+        levelStatLuck = UtilsMiner.START_LEVEL_LUCK;
 
 
         basePower = 10;

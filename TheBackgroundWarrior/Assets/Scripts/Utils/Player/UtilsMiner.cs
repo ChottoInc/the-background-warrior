@@ -9,6 +9,13 @@ public static class UtilsMiner
 
     private static Dictionary<int, ListableGameDataSO> dictWeaponLevelToSprite;
 
+    // ---------------- START LEVELS --------------- //
+
+    public const int START_LEVEL_POWER = 1;
+    public const int START_LEVEL_SMASH_SPEED = 1;
+    public const int START_LEVEL_SHOCKWAVE = 1;
+    public const int START_LEVEL_LUCK = 1;
+
     // ----------- JOB STATS ------------- //
 
     public static float PER_LEVEL_MINER_GAIN_POWER = 2;
@@ -118,11 +125,12 @@ public static class UtilsMiner
 
 
         MAX_LEVEL_MINER =
+            1 +
             PER_LEVEL_MINER_MAX_POWER +
             PER_LEVEL_MINER_MAX_SMASHSPEED +
             PER_LEVEL_MINER_MAX_SHOCKWAVE +
-            PER_LEVEL_MINER_MAX_LUCK +
-            1;
+            PER_LEVEL_MINER_MAX_LUCK -
+            (START_LEVEL_POWER + START_LEVEL_SMASH_SPEED + START_LEVEL_SHOCKWAVE + START_LEVEL_LUCK);
 
 
         BASE_MINER_EXP_GROWTH = jobDataSO.BaseExpGrowth;

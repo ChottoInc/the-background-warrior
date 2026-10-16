@@ -9,6 +9,13 @@ public static class UtilsAlchemist
     private static Dictionary<int, ListableGameDataSO> _dictRecipes;
     private static Dictionary<int, ListableGameDataSO> _dictResearch;
 
+    // ---------------- START LEVELS --------------- //
+
+    public const int START_LEVEL_ROUTINE = 1;
+    public const int START_LEVEL_YIELD = 1;
+    public const int START_LEVEL_RESEARCH = 0;
+    public const int START_LEVEL_STABILITY = 0;
+
 
 
     public static float PER_LEVEL_ALCHEMIST_GAIN_ROUTINE = 0.01f;       // up to 15
@@ -55,11 +62,12 @@ public static class UtilsAlchemist
 
 
         MAX_LEVEL_ALCHEMIST =
-           PER_LEVEL_ALCHEMIST_MAX_ROUTINE +
-           PER_LEVEL_ALCHEMIST_MAX_YIELD +
-           PER_LEVEL_ALCHEMIST_MAX_RESEARCH +
-           PER_LEVEL_ALCHEMIST_MAX_STABILITY +
-           1;
+            1 +
+            PER_LEVEL_ALCHEMIST_MAX_ROUTINE +
+            PER_LEVEL_ALCHEMIST_MAX_YIELD +
+            PER_LEVEL_ALCHEMIST_MAX_RESEARCH +
+            PER_LEVEL_ALCHEMIST_MAX_STABILITY -
+            (START_LEVEL_ROUTINE + START_LEVEL_YIELD + START_LEVEL_RESEARCH + START_LEVEL_STABILITY);
 
 
         BASE_ALCHEMIST_EXP_GROWTH = jobDataSO.BaseExpGrowth;

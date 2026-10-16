@@ -14,15 +14,6 @@ public class PlayerNecromancerData : BasePlayerData
 
     // ---- LEVEL STAT POINTS
 
-
-    private int startLevelAptitude = 0;
-    private int startLevelSummon = 1;
-    private int startLevelMight = 1;
-    private int startLevelLifespan = 1;
-    private int startLevelHorde = 0;
-    private int startLevelLuck = 1;
-
-
     public int LevelStatAptitude { get; private set; }
     public int LevelStatSummon { get; private set; }
     public int LevelStatMight { get; private set; }
@@ -96,7 +87,13 @@ public class PlayerNecromancerData : BasePlayerData
         if (CurrentLevel >= UtilsNecromancer.MAX_LEVEL_NECROMANCER)
         {
             AvailableStatPoints = UtilsNecromancer.MAX_LEVEL_NECROMANCER - 1 -
-               LevelStatAptitude - LevelStatSummon - LevelStatMight - LevelStatLifespan - LevelStatHorde - LevelStatLuck;
+               LevelStatAptitude - LevelStatSummon - LevelStatMight - LevelStatLifespan - LevelStatHorde - LevelStatLuck +
+               UtilsNecromancer.START_LEVEL_APTITUDE +
+               UtilsNecromancer.START_LEVEL_SUMMON +
+               UtilsNecromancer.START_LEVEL_MIGHT +
+               UtilsNecromancer.START_LEVEL_LIFESPAN +
+               UtilsNecromancer.START_LEVEL_HORDE +
+               UtilsNecromancer.START_LEVEL_LUCK;
             CurrentExp = 0;
         }
     }
@@ -107,12 +104,12 @@ public class PlayerNecromancerData : BasePlayerData
         CurrentExp = 0;
 
 
-        LevelStatAptitude = startLevelAptitude;
-        LevelStatSummon = startLevelSummon;
-        LevelStatMight = startLevelMight;
-        LevelStatLifespan = startLevelLifespan;
-        LevelStatHorde = startLevelHorde;
-        LevelStatLuck = startLevelLuck;
+        LevelStatAptitude = UtilsNecromancer.START_LEVEL_APTITUDE;
+        LevelStatSummon = UtilsNecromancer.START_LEVEL_SUMMON;
+        LevelStatMight = UtilsNecromancer.START_LEVEL_MIGHT;
+        LevelStatLifespan = UtilsNecromancer.START_LEVEL_LIFESPAN;
+        LevelStatHorde = UtilsNecromancer.START_LEVEL_HORDE;
+        LevelStatLuck = UtilsNecromancer.START_LEVEL_LUCK;
 
 
         // multiplier

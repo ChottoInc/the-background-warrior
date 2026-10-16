@@ -8,6 +8,13 @@ public static class UtilsBlacksmith
 
     public enum BlacksmithGear { Helmet, Armor, Gloves, Boots }
 
+    // ---------------- START LEVELS --------------- //
+
+    public const int START_LEVEL_CRAFT_SPEED = 1;
+    public const int START_LEVEL_EFFICIENCY = 1;
+    public const int START_LEVEL_LUCK = 1;
+    public const int START_LEVEL_METALLURGY = 0;
+
 
     // ---------------- STATS SCALING --------------- //
 
@@ -133,11 +140,12 @@ public static class UtilsBlacksmith
 
 
         MAX_LEVEL_BLACKSMITH =
+            1 +
             PER_LEVEL_BLACKSMITH_MAX_CRAFTSPEED +
             PER_LEVEL_BLACKSMITH_MAX_EFFICIENCY +
             PER_LEVEL_BLACKSMITH_MAX_LUCK +
-            PER_LEVEL_BLACKSMITH_MAX_METALLURGY +
-            1;
+            PER_LEVEL_BLACKSMITH_MAX_METALLURGY -
+            (START_LEVEL_CRAFT_SPEED + START_LEVEL_EFFICIENCY + START_LEVEL_LUCK + START_LEVEL_METALLURGY);
 
 
 

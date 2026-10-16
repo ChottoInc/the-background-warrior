@@ -19,11 +19,6 @@ public class PlayerBlacksmithData : BasePlayerData
     private int levelStatLuck;
     private int levelStatMetallurgy;
 
-    private readonly int startLevelCraftSpeed = 1;
-    private readonly int startLevelEfficiency = 1;
-    private readonly int startLevelStatLuck = 1;
-    private readonly int startLevelMetallurgy = 0;
-
     public int LevelStatCraftSpeed => levelStatCraftSpeed;
     public int LevelEfficiency => levelEfficiency;
     public int LevelStatLuck => levelStatLuck;
@@ -100,7 +95,6 @@ public class PlayerBlacksmithData : BasePlayerData
 
         int sumLevels = 
             levelStatCraftSpeed + levelEfficiency + levelStatLuck + levelStatMetallurgy +
-            //startLevelCraftSpeed + startLevelEfficiency + startLevelStatLuck + startLevelMetallurgy +
             AvailableStatPoints +
             1;
 
@@ -110,7 +104,11 @@ public class PlayerBlacksmithData : BasePlayerData
         if(CurrentLevel >= UtilsBlacksmith.MAX_LEVEL_BLACKSMITH)
         {
             AvailableStatPoints = UtilsBlacksmith.MAX_LEVEL_BLACKSMITH - 1 -
-                levelStatCraftSpeed - levelEfficiency - levelStatLuck - levelStatMetallurgy;
+                levelStatCraftSpeed - levelEfficiency - levelStatLuck - levelStatMetallurgy +
+                UtilsBlacksmith.START_LEVEL_CRAFT_SPEED +
+                UtilsBlacksmith.START_LEVEL_EFFICIENCY +
+                UtilsBlacksmith.START_LEVEL_LUCK +
+                UtilsBlacksmith.START_LEVEL_METALLURGY;
             CurrentExp = 0;
         }
 
@@ -132,10 +130,10 @@ public class PlayerBlacksmithData : BasePlayerData
         CurrentLevel = 1;
         CurrentExp = 0;
 
-        levelStatCraftSpeed = startLevelCraftSpeed;
-        levelEfficiency = startLevelEfficiency;
-        levelStatLuck = startLevelStatLuck;
-        levelStatMetallurgy = startLevelMetallurgy;
+        levelStatCraftSpeed = UtilsBlacksmith.START_LEVEL_CRAFT_SPEED;
+        levelEfficiency = UtilsBlacksmith.START_LEVEL_EFFICIENCY;
+        levelStatLuck = UtilsBlacksmith.START_LEVEL_LUCK;
+        levelStatMetallurgy = UtilsBlacksmith.START_LEVEL_METALLURGY;
 
 
         baseCraftSpeed = 1f;

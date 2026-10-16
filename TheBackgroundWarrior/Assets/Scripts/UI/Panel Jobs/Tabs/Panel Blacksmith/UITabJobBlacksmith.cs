@@ -332,8 +332,13 @@ public class UITabJobBlacksmith : UITabWindow
                 }
                 else
                 {
-                    inputRefineQuantity.text = data.CurrentForgingQuantity.ToString();
-                    selectedInputRefineQuantity = data.CurrentForgingQuantity;
+                    // set to maximum output when chaning ore
+                    int maxItem = GetPossibleRefinedMetalQuantity(oreGroup, ore);
+                    data.SetCurrentForgingQuantity(maxItem);
+                    PlayerManager.Instance.UpdateBlacksmithData(data);
+
+                    inputRefineQuantity.text = maxItem.ToString();
+                    selectedInputRefineQuantity = maxItem;
                 }
             }
 
@@ -627,7 +632,7 @@ public class UITabJobBlacksmith : UITabWindow
                 }
             }
 
-            //panelJob.OnButtonClose();
+            panelJob.OnButtonClose(false);
         }
         else
         {

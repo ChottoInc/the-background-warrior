@@ -15,11 +15,6 @@ public class PlayerMageData : BasePlayerData
     // ---- LEVEL STAT POINTS
 
 
-    private int startLevelInsight = 1;
-    private int startLevelCastSpeed = 1;
-    private int startLevelScholar = 0;
-    private int startLevelProficiency = 0;
-
 
     public int LevelStatInsight { get; private set; }
     public int LevelStatCastSpeed { get; private set; }
@@ -94,7 +89,11 @@ public class PlayerMageData : BasePlayerData
         if (CurrentLevel >= UtilsMage.MAX_LEVEL_MAGE)
         {
             AvailableStatPoints = UtilsMage.MAX_LEVEL_MAGE - 1 -
-               LevelStatInsight - LevelStatCastSpeed - LevelStatScholar - LevelStatProficiency;
+               LevelStatInsight - LevelStatCastSpeed - LevelStatScholar - LevelStatProficiency +
+               UtilsMage.START_LEVEL_INSIGHT +
+               UtilsMage.START_LEVEL_CAST_SPEED +
+               UtilsMage.START_LEVEL_SCHOLAR +
+               UtilsMage.START_LEVEL_PROFICIENCY;
             CurrentExp = 0;
         }
 
@@ -115,10 +114,10 @@ public class PlayerMageData : BasePlayerData
         CurrentExp = 0;
 
 
-        LevelStatInsight = startLevelInsight;
-        LevelStatCastSpeed = startLevelCastSpeed;
-        LevelStatScholar = startLevelScholar;
-        LevelStatProficiency = startLevelProficiency;
+        LevelStatInsight = UtilsMage.START_LEVEL_INSIGHT;
+        LevelStatCastSpeed = UtilsMage.START_LEVEL_CAST_SPEED;
+        LevelStatScholar = UtilsMage.START_LEVEL_SCHOLAR;
+        LevelStatProficiency = UtilsMage.START_LEVEL_PROFICIENCY;
 
 
         // multiplier

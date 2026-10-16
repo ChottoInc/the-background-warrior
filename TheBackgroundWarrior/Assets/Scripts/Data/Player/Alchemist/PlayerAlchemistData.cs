@@ -15,12 +15,6 @@ public class PlayerAlchemistData : BasePlayerData
     // ---- LEVEL STAT POINTS
 
 
-    private int startLevelRoutine = 1;
-    private int startLevelYield = 1;
-    private int startLevelResearch = 0;
-    private int startLevelStability = 0;
-
-
     public int LevelStatRoutine { get; private set; }
     public int LevelStatYield { get; private set; }
     public int LevelStatResearch { get; private set; }
@@ -93,7 +87,11 @@ public class PlayerAlchemistData : BasePlayerData
         if (CurrentLevel >= UtilsAlchemist.MAX_LEVEL_ALCHEMIST)
         {
             AvailableStatPoints = UtilsAlchemist.MAX_LEVEL_ALCHEMIST - 1 -
-               LevelStatRoutine - LevelStatYield - LevelStatResearch - LevelStatStability;
+               LevelStatRoutine - LevelStatYield - LevelStatResearch - LevelStatStability +
+               UtilsAlchemist.START_LEVEL_ROUTINE +
+               UtilsAlchemist.START_LEVEL_YIELD +
+               UtilsAlchemist.START_LEVEL_RESEARCH +
+               UtilsAlchemist.START_LEVEL_STABILITY;
             CurrentExp = 0;
         }
 
@@ -121,10 +119,10 @@ public class PlayerAlchemistData : BasePlayerData
         CurrentExp = 0;
 
 
-        LevelStatRoutine = startLevelRoutine;
-        LevelStatYield = startLevelYield;
-        LevelStatResearch = startLevelResearch;
-        LevelStatStability = startLevelStability;
+        LevelStatRoutine = UtilsAlchemist.START_LEVEL_ROUTINE;
+        LevelStatYield = UtilsAlchemist.START_LEVEL_YIELD;
+        LevelStatResearch = UtilsAlchemist.START_LEVEL_RESEARCH;
+        LevelStatStability = UtilsAlchemist.START_LEVEL_STABILITY;
 
 
         // multiplier

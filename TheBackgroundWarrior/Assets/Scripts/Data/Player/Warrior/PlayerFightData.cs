@@ -51,13 +51,7 @@ public class PlayerFightData : BasePlayerData
     private int levelStatLuck = 1;
 
 
-    private int startLevelMaxHp = 1;
-    private int startLevelAtk = 1;
-    private int startLevelDef = 1;
-    private int startLevelAtkSpd = 1;
-    private int startLevelCritRate = 1;
-    private int startLevelCritDmg = 1;
-    private int startLevelLuck = 1;
+    
 
 
     public List<int> AvailableMaps => availableMaps;
@@ -207,7 +201,6 @@ public class PlayerFightData : BasePlayerData
 
         int sumLevels =
             levelStatMaxHp + levelStatAtk + levelStatDef + levelStatAtkSpd + levelStatCritRate + levelStatCritDmg + levelStatLuck +
-            //startLevelMaxHp + startLevelAtk + startLevelDef + startLevelAtkSpd + startLevelCritRate + startLevelCritDmg + startLevelLuck +
             AvailableStatPoints +
             1;
 
@@ -217,7 +210,14 @@ public class PlayerFightData : BasePlayerData
         if (CurrentLevel >= UtilsWarrior.MAX_LEVEL_WARRIOR)
         {
             AvailableStatPoints = UtilsWarrior.MAX_LEVEL_WARRIOR - 1 -
-                levelStatMaxHp - levelStatAtk - levelStatDef - levelStatAtkSpd - levelStatCritRate - levelStatCritDmg - levelStatLuck;
+                levelStatMaxHp - levelStatAtk - levelStatDef - levelStatAtkSpd - levelStatCritRate - levelStatCritDmg - levelStatLuck +
+                UtilsWarrior.START_LEVEL_MAX_HP +
+                UtilsWarrior.START_LEVEL_ATK +
+                UtilsWarrior.START_LEVEL_DEF +
+                UtilsWarrior.START_LEVEL_ATKSPD +
+                UtilsWarrior.START_LEVEL_CRIT_RATE +
+                UtilsWarrior.START_LEVEL_CRIT_DMG +
+                UtilsWarrior.START_LEVEL_LUCK;
             CurrentExp = 0;
         }
 
@@ -239,17 +239,17 @@ public class PlayerFightData : BasePlayerData
         CurrentExp = 0;
 
 
-        levelStatMaxHp = startLevelMaxHp;
+        levelStatMaxHp = UtilsWarrior.START_LEVEL_MAX_HP;
 
-        levelStatAtk = startLevelAtk;
-        levelStatDef = startLevelDef;
+        levelStatAtk = UtilsWarrior.START_LEVEL_ATK;
+        levelStatDef = UtilsWarrior.START_LEVEL_DEF;
 
-        levelStatAtkSpd = startLevelAtkSpd;
+        levelStatAtkSpd = UtilsWarrior.START_LEVEL_ATKSPD;
 
-        levelStatCritRate = startLevelCritRate;
-        levelStatCritDmg = startLevelCritDmg;
+        levelStatCritRate = UtilsWarrior.START_LEVEL_CRIT_RATE;
+        levelStatCritDmg = UtilsWarrior.START_LEVEL_CRIT_DMG;
 
-        levelStatLuck = startLevelLuck;
+        levelStatLuck = UtilsWarrior.START_LEVEL_LUCK;
 
 
         baseMaxHp = BASE_MAXHP + ((float)PlayerManager.Instance.PlayerAlchemistData.StatPermaMaxHpCounter * ALCHEMIST_PERMA_ADD_MAXHP);
