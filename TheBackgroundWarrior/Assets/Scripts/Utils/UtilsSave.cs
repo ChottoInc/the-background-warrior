@@ -1,11 +1,9 @@
-
 using System;
 using System.IO;
 using UnityEngine;
 
 public static class UtilsSave
 {
-
     public const string ROOT_FOLDER = "Data";
 
     public const string SETTINGS_FOLDER = "Settings";

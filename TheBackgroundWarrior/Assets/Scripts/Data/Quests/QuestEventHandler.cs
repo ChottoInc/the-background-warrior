@@ -27,7 +27,6 @@ public class QuestEventHandler
         if (NeedUpdateKillProgress(eventData.questData, eventData.enemySO))
         {
             AddQuestProgress(eventData, eventData.questId, 1);
-            //UpdateKillProgress(eventData.questType, eventData.questId);
             result.needSave = true;
 
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
@@ -57,36 +56,6 @@ public class QuestEventHandler
             }
         }
         return false;
-    }
-
-    private void UpdateKillProgress(QuestType questType, string questId)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = QuestManager.Instance.DictQuestsStoryProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = QuestManager.Instance.DictQuestsBountyProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = QuestManager.Instance.DictQuestsDailyProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsDailyProgress[questId] = progress;
-                break;
-        }
     }
 
     #endregion
@@ -146,35 +115,6 @@ public class QuestEventHandler
         return false;
     }
 
-    private void UpdateObtainProgress(QuestType questType, string questId)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = QuestManager.Instance.DictQuestsStoryProgress[questId];
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = QuestManager.Instance.DictQuestsBountyProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = QuestManager.Instance.DictQuestsDailyProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsDailyProgress[questId] = progress;
-                break;
-        }
-    }
-
     #endregion
 
     #region STAT UP EVENT
@@ -200,7 +140,6 @@ public class QuestEventHandler
         if (NeedUpdateStatUpProgress(eventData.questData, eventData.statId))
         {
             AddQuestProgress(eventData, eventData.questId, eventData.statAmount);
-            //UpdateStatLevelUpProgress(eventData.questType, eventData.questId, eventData.statAmount);
             result.needSave = true;
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
@@ -228,36 +167,6 @@ public class QuestEventHandler
         return false;
     }
 
-    private void UpdateStatLevelUpProgress(QuestType questType, string questId, int amount)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = QuestManager.Instance.DictQuestsStoryProgress[questId];
-
-                progress.progressCounter += amount;
-                QuestManager.Instance.DictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = QuestManager.Instance.DictQuestsBountyProgress[questId];
-
-                progress.progressCounter += amount;
-                QuestManager.Instance.DictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = QuestManager.Instance.DictQuestsDailyProgress[questId];
-
-                progress.progressCounter += amount;
-                QuestManager.Instance.DictQuestsDailyProgress[questId] = progress;
-                break;
-        }
-    }
-
     #endregion
 
     #region ADD MAP EVENT
@@ -282,7 +191,6 @@ public class QuestEventHandler
         if (NeedUpdateUnlockMapProgress(eventData.questData, eventData.mapId))
         {
             AddQuestProgress(eventData, eventData.questId);
-            //UpdateUnlockMapProgress(eventData.questType, eventData.questId);
             result.needSave = true;
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
@@ -298,36 +206,6 @@ public class QuestEventHandler
                 return true;
         }
         return false;
-    }
-
-    private void UpdateUnlockMapProgress(QuestType questType, string questId)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = QuestManager.Instance.DictQuestsStoryProgress[questId];
-
-                progress.progressCompleted = true;
-                QuestManager.Instance.DictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = QuestManager.Instance.DictQuestsBountyProgress[questId];
-
-                progress.progressCompleted = true;
-                QuestManager.Instance.DictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = QuestManager.Instance.DictQuestsDailyProgress[questId];
-
-                progress.progressCompleted = true;
-                QuestManager.Instance.DictQuestsDailyProgress[questId] = progress;
-                break;
-        }
     }
 
     #endregion
@@ -353,7 +231,7 @@ public class QuestEventHandler
 
         if (NeedUpdateBefriendProgress(eventData.questData, eventData.companionId))
         {
-            UpdateBefriendProgress(eventData.questType, eventData.questId);
+            AddQuestProgress(eventData, eventData.questId, 1);
             result.needSave = true;
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
         }
@@ -379,36 +257,6 @@ public class QuestEventHandler
             }
         }
         return false;
-    }
-
-    private void UpdateBefriendProgress(QuestType questType, string questId)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = QuestManager.Instance.DictQuestsStoryProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = QuestManager.Instance.DictQuestsBountyProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = QuestManager.Instance.DictQuestsDailyProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsDailyProgress[questId] = progress;
-                break;
-        }
     }
 
     #endregion
@@ -463,36 +311,6 @@ public class QuestEventHandler
         return false;
     }
 
-    private void UpdateSpellRankProgress(QuestType questType, string questId)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = QuestManager.Instance.DictQuestsStoryProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = QuestManager.Instance.DictQuestsBountyProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = QuestManager.Instance.DictQuestsDailyProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsDailyProgress[questId] = progress;
-                break;
-        }
-    }
-
     #endregion
 
     #region SUMMON EVENT
@@ -517,7 +335,6 @@ public class QuestEventHandler
         if (NeedUpdateSummonProgress(eventData.questData))
         {
             AddQuestProgress(eventData, eventData.questId, 1);
-            //UpdateSummonProgress(eventData.questType, eventData.questId);
             result.needSave = true;
 
             result.needNotification = QuestManager.Instance.CheckNotifications(eventData.questData, eventData.questType, eventData.questId);
@@ -529,36 +346,6 @@ public class QuestEventHandler
     private bool NeedUpdateSummonProgress(QuestData data)
     {
         return data.questObjectiveType == QuestObjectiveType.Summon;
-    }
-
-    private void UpdateSummonProgress(QuestType questType, string questId)
-    {
-        QuestDataProgress progress;
-
-        switch (questType)
-        {
-            default:
-            case QuestType.Story:
-                progress = QuestManager.Instance.DictQuestsStoryProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsStoryProgress[questId] = progress;
-                break;
-
-            case QuestType.Bounties:
-                progress = QuestManager.Instance.DictQuestsBountyProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsBountyProgress[questId] = progress;
-                break;
-
-            case QuestType.Daily:
-                progress = QuestManager.Instance.DictQuestsDailyProgress[questId];
-
-                progress.progressCounter++;
-                QuestManager.Instance.DictQuestsDailyProgress[questId] = progress;
-                break;
-        }
     }
 
     #endregion
