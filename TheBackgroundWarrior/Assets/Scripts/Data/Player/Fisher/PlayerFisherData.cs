@@ -35,9 +35,9 @@ public class PlayerFisherData : BasePlayerData
     public long ExpToNextLevel => UtilsFisher.RequiredExpForFisherLevel(CurrentLevel + 1);
 
     public float CurrentCalmness => baseCalmness + UtilsFisher.PER_LEVEL_FISHER_GAIN_CALMNESS * (LevelStatCalmness);
-    public float CurrentReflex => baseReflex + UtilsFisher.PER_LEVEL_FISHER_GAIN_REFLEX * (LevelStatReflex - 1) + (_inspirationModifier - 1f);
-    public float CurrentKnowledge => baseKnowledge + UtilsFisher.PER_LEVEL_FISHER_GAIN_KNOWLEDGE * (LevelStatKnowledge - 1) + (_inspirationModifier - 1f);
-    public float CurrentLuck => baseLuck + UtilsFisher.PER_LEVEL_FISHER_GAIN_LUCK * (LevelStatLuck - 1) + (_inspirationModifier - 1f);
+    public float CurrentReflex => baseReflex + UtilsFisher.PER_LEVEL_FISHER_GAIN_REFLEX * (LevelStatReflex - 1);
+    public float CurrentKnowledge => baseKnowledge + UtilsFisher.PER_LEVEL_FISHER_GAIN_KNOWLEDGE * (LevelStatKnowledge - 1);
+    public float CurrentLuck => baseLuck + UtilsFisher.PER_LEVEL_FISHER_GAIN_LUCK * (LevelStatLuck - 1);
 
 
     // ---- FISH GROUPS CHECKS COMPLETION
@@ -53,15 +53,6 @@ public class PlayerFisherData : BasePlayerData
     public bool IsQuickSeriesCompleted { get; private set; }
 
 
-    // ---- BAITS VARS
-
-    public BaitSO ActiveBait { get; private set; }
-
-
-
-    
-
-    public event Action OnBaitChange;
 
     public PlayerFisherData()
     {
@@ -111,8 +102,6 @@ public class PlayerFisherData : BasePlayerData
         }
 
         FillFishGroupsSeriesCompletion();
-
-        ActiveBait = UtilsItem.GetItemById(saveData.activeBaitId) as BaitSO;
     }
 
     private void GenerateBaseStats()
@@ -132,8 +121,6 @@ public class PlayerFisherData : BasePlayerData
         baseKnowledge = 0f; // reduce chances of same species, up to 0.3 - 30%
 
         baseLuck = 0f; // controls rarity of fish, up to 0.4 - 40%
-
-        ActiveBait = null;
     }
 
     public void FillFishGroupsSeriesCompletion()
@@ -227,21 +214,6 @@ public class PlayerFisherData : BasePlayerData
         InvokeStatChange(id, amount);
     }
 
-
-    public void SetActiveBait(BaitSO bait)
-    {
-        ActiveBait = bait;
-
-        OnBaitChange?.Invoke();
-    }
-
-    public void DisableBait()
-    {
-        ActiveBait = null;
-
-        OnBaitChange?.Invoke();
-    }
-
     private bool AreAllGroupsCompleted()
     {
         return 
@@ -254,25 +226,5 @@ public class PlayerFisherData : BasePlayerData
             IsGoldenSeriesCompleted &&
             IsElderSeriesCompleted &&
             IsQuickSeriesCompleted;
-    }
-
-
-    public void CheckAllAchievements()
-    {
-        if (IsGoldenSeriesCompleted)
-        {
-            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.OBTAIN_FISH_GOLDEN_GROUP))
-            {
-                UtilsAchievement.UnlockAchievement(UtilsAchievement.OBTAIN_FISH_GOLDEN_GROUP);
-            }
-        }
-
-        if(AreAllGroupsCompleted())
-        {
-            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.OBTAIN_FISH_ALL_GROUP))
-            {
-                UtilsAchievement.UnlockAchievement(UtilsAchievement.OBTAIN_FISH_ALL_GROUP);
-            }
-        }
     }
 }

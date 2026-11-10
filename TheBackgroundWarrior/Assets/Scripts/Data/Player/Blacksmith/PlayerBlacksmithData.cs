@@ -59,9 +59,9 @@ public class PlayerBlacksmithData : BasePlayerData
     public long ExpToNextLevel => UtilsBlacksmith.RequiredExpForBlacksmithLevel(CurrentLevel + 1);
 
 
-    public float CurrentCraftSpeed => baseCraftSpeed + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_CRAFTSPEED * (levelStatCraftSpeed - 1) * _inspirationModifier;
-    public float CurrentEfficiency => baseEfficiency + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_EFFICIENCY * (levelEfficiency - 1) + (_inspirationModifier - 1f);
-    public float CurrentLuck => baseLuck + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_LUCK * (levelStatLuck - 1) + (_inspirationModifier - 1f);
+    public float CurrentCraftSpeed => baseCraftSpeed + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_CRAFTSPEED * (levelStatCraftSpeed - 1);
+    public float CurrentEfficiency => baseEfficiency + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_EFFICIENCY * (levelEfficiency - 1);
+    public float CurrentLuck => baseLuck + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_LUCK * (levelStatLuck - 1);
     public float CurrentMetallurgy => baseMetallurgy + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_METALLURGY * (levelStatMetallurgy);
 
     public float CurrentCraftTime => 60f / CurrentCraftSpeed;
@@ -181,25 +181,21 @@ public class PlayerBlacksmithData : BasePlayerData
     public void AddBlacksmithHelmetLevel(int level)
     {
         levelHelmetBlacksmith += level;
-        CheckAllAchievements();
     }
 
     public void AddBlacksmithArmorLevel(int level)
     {
         levelArmorBlacksmith += level;
-        CheckAllAchievements();
     }
 
     public void AddBlacksmithGlovesLevel(int level)
     {
         levelGlovesBlacksmith += level;
-        CheckAllAchievements();
     }
 
     public void AddBlacksmithBootsLevel(int level)
     {
         levelBootsBlacksmith += level;
-        CheckAllAchievements();
     }
 
     public void SetForgingOre(int id)
@@ -215,30 +211,5 @@ public class PlayerBlacksmithData : BasePlayerData
     public void SetCurrentForgingQuantity(int max)
     {
         currentForgingQuantity = max;
-    }
-
-
-    public void CheckAllAchievements()
-    {
-        if (levelHelmetBlacksmith >= 10 &&
-            levelArmorBlacksmith >= 10 &&
-            levelGlovesBlacksmith >= 10 &&
-            levelBootsBlacksmith >= 10)
-        {
-            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UPGRADE_GEARS_10))
-            {
-                UtilsAchievement.UnlockAchievement(UtilsAchievement.UPGRADE_GEARS_10);
-            }
-        }
-        else if (levelHelmetBlacksmith >= 5 &&
-            levelArmorBlacksmith >= 5 &&
-            levelGlovesBlacksmith >= 5 &&
-            levelBootsBlacksmith >= 5)
-        {
-            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UPGRADE_GEARS_5))
-            {
-                UtilsAchievement.UnlockAchievement(UtilsAchievement.UPGRADE_GEARS_5);
-            }
-        }
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38982af0bd5cbe64cb91eb35b844a5cc, type: 3}
   m_Name: NecromancerData
   m_EditorClassIdentifier: 
-  id: 8
+  id: 7
   dataPath: Files/Player/PlayerDatas - Necromancer
   <PerLevelGainAptitude>k__BackingField: 0.2
   <PerLevelGainSummon>k__BackingField: 0.02

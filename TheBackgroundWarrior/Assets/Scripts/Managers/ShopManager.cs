@@ -244,8 +244,6 @@ public class ShopManager : MonoBehaviour
         switch (id)
         {
             default: Debug.Log("Invalid redeem code id: " + id); break;
-
-            case ID_REDEEM_ERIS_CODE: HasRedeemedErisCode = true; break;
         }
     }
 

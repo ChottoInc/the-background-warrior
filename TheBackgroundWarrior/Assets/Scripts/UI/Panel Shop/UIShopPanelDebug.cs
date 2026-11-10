@@ -23,25 +23,6 @@ public class UIShopPanelDebug : MonoBehaviour
         switch (inputCode.text)
         {
             default: Debug.Log("Redeem denied"); break;
-
-            case UtilsShop.REDEEM_ERIS_CODE:
-
-                if (!ShopManager.Instance.HasRedeemedErisCode)
-                {
-                    redeemSuccess = true;
-                    ShopManager.Instance.SetRedeemCode(UtilsShop.ID_REDEEM_ERIS_CODE);
-                    ShopManager.Instance.SaveShopData();
-
-                    PlayerManager.Instance.PlayerJobsData.AddAvailableJob(UtilsPlayer.PlayerJob.Alchemist);
-
-                    _isAnimating = true;
-
-                    _contentDebug.SetActive(false);
-                    _panelAnimation.Open();
-
-                    Debug.Log("Redeem success: " + UtilsShop.REDEEM_ERIS_CODE);
-                }
-                break;
         }
 
         if(!redeemSuccess)

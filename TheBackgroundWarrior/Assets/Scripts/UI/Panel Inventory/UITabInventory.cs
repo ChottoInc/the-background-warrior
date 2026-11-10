@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UITabInventory : UITabWindow
 {
-    public enum InventoryItemType { All, Ores, Metals, Fishes, Crops, Baits, Concoctions, Cards }
+    public enum InventoryItemType { All, Ores, Metals, Fishes, Crops, Cards }
 
     [Header("Currencies")]
     [SerializeField] TMP_Text textBits;

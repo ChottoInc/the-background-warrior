@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFight : Player, IDamageable, IHealable
@@ -114,15 +113,6 @@ public class PlayerFight : Player, IDamageable, IHealable
         startScale = spriteRenderer.transform.localScale;
 
         StartCoroutine(CoSpawned());
-
-        _buffsToCheckTypes = new List<UtilsBuffs.BuffType>()
-        {
-            UtilsBuffs.BuffType.Greed,
-            UtilsBuffs.BuffType.Veteran,
-            UtilsBuffs.BuffType.Storyteller,
-            UtilsBuffs.BuffType.IronSkin,
-            UtilsBuffs.BuffType.Inspiration,
-        };
     }
 
     private IEnumerator CoSpawned()

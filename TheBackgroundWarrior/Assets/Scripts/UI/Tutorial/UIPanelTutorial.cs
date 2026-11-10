@@ -34,7 +34,6 @@ public class UIPanelTutorial : MonoBehaviour
     [SerializeField] GameObject buttonInventory;
     [SerializeField] GameObject buttonQuests;
     [SerializeField] GameObject buttonShop;
-    [SerializeField] GameObject buttonBuffs;
 
     [Space(10)]
     [SerializeField] GameObject buttonSetting;
@@ -162,7 +161,6 @@ public class UIPanelTutorial : MonoBehaviour
 
             // active remaining ui elements
 
-            buttonBuffs.SetActive(true);
             buttonSetting.SetActive(true);
 
             panelStage.SetActive(true);
@@ -262,7 +260,6 @@ public class UIPanelTutorial : MonoBehaviour
         buttonJob.SetActive(false);
         buttonInventory.SetActive(false);
 
-        buttonBuffs.SetActive(false);
         buttonShop.SetActive(false);
         buttonQuests.SetActive(false);
 
@@ -290,7 +287,6 @@ public class UIPanelTutorial : MonoBehaviour
         buttonJob.SetActive(true);
         buttonInventory.SetActive(true);
 
-        buttonBuffs.SetActive(true);
         buttonShop.SetActive(true);
         buttonQuests.SetActive(true);
 

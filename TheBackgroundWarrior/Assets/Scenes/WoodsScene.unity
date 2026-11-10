@@ -2096,7 +2096,7 @@ MonoBehaviour:
   buttonInventory: {fileID: 1403177481}
   buttonQuests: {fileID: 1437274624}
   buttonShop: {fileID: 925932013}
-  buttonBuffs: {fileID: 2082149618}
+  buttonBuffs: {fileID: 0}
   buttonSetting: {fileID: 1724291092}
   panelStage: {fileID: 625208070}
   panelAutoBattle: {fileID: 1827974397}
@@ -2474,11 +2474,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 588262930}
   m_SourcePrefab: {fileID: 100100000, guid: e893aefd93740714b999573b02916984, type: 3}
---- !u!1 &2082149618 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1702104812114410754, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
-  m_PrefabInstance: {fileID: 3577316717385707922}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2146624747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3724,7 +3719,7 @@ PrefabInstance:
     - target: {fileID: 1231760381949832534, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
       propertyPath: tabWindow
       value: 
-      objectReference: {fileID: 3577316717385707923}
+      objectReference: {fileID: 0}
     - target: {fileID: 1240173809452486951, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -10162,17 +10157,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
---- !u!114 &3577316717385707923 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8626262653477098911, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
-  m_PrefabInstance: {fileID: 3577316717385707922}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7666e2de303501c4ebe1577ea8323f7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3577316717385707924 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6364046298107711576, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}

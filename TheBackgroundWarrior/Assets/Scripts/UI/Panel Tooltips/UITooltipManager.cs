@@ -19,7 +19,6 @@ public class UITooltipManager : MonoBehaviour
     [SerializeField] UITooltipCard tooltipCard;
     [SerializeField] UITooltipYesNo tooltipYesNo;
     [SerializeField] UITooltipCardOpening tooltipCardOpening;
-    [SerializeField] UITooltipBuff tooltipBuff;
     [SerializeField] UITooltipMapInfo tooltipMapInfo;
 
 
@@ -62,7 +61,6 @@ public class UITooltipManager : MonoBehaviour
             case ID_SHOW_TEXT: tooltipName.Show(tooltipData.text, position, fade, fontMaxSize); break;
             case ID_SHOW_CARD: tooltipCard.Show(tooltipData.cardSO, fade); break;
             case ID_SHOW_CARDOPENING: tooltipCardOpening.Show(tooltipData, position, fade); break;
-            case ID_SHOW_BUFFS: tooltipBuff.Show(fade); break;
             case ID_SHOW_MAPINFO: tooltipMapInfo.Appear(tooltipData, fade, position); break;
         }
     }
@@ -80,7 +78,6 @@ public class UITooltipManager : MonoBehaviour
             case ID_SHOW_TEXT: tooltipName.Hide(fade); break;
             case ID_SHOW_CARD: tooltipCard.Hide(fade); break;
             case ID_SHOW_CARDOPENING: tooltipCardOpening.Hide(fade); break;
-            case ID_SHOW_BUFFS: tooltipBuff.Hide(fade); break;
             case ID_SHOW_MAPINFO: tooltipMapInfo.Disappear(fade); break;
         }
     }

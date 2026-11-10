@@ -257,12 +257,6 @@ public class CombatManager : MonoBehaviour
                 baseCardDropRate +
                 player.PlayerData.CurrentLuck;
 
-            // check if player has storyteller buff
-            if (PlayerManager.Instance.PlayerBuffsData.HasBuff(UtilsBuffs.BuffType.Storyteller))
-            {
-                finalTotalCheck += 0.2f;
-            }
-
             if (UnityEngine.Random.value <= finalTotalCheck)
             {
                 // get card drop, card can be null, it means no drop
@@ -311,32 +305,6 @@ public class CombatManager : MonoBehaviour
                         player.PlayerData.AddAvailableMap(mapSO.NextMap.IdMap);
                         PlayerManager.Instance.UpdateFightData(player.PlayerData);
                         PlayerManager.Instance.SaveFightData();
-
-                        //achievements steam
-                        if (SteamManager.Initialized)
-                        {
-                            string achievementId = string.Empty;
-                            if (mapSO.IdMap == UtilsCombatMap.MAP_WOODS)
-                            {
-                                achievementId = UtilsAchievement.CLEAR_WOODS_MAP;
-                            }
-                            else if (mapSO.IdMap == UtilsCombatMap.MAP_SWAMPS)
-                            {
-                                achievementId = UtilsAchievement.CLEAR_SWAMPS_MAP;
-                            }
-                            else if (mapSO.IdMap == UtilsCombatMap.MAP_RUINEDCITY)
-                            {
-                                achievementId = UtilsAchievement.CLEAR_RUINEDCITY_MAP;
-                            }
-
-                            if (!string.IsNullOrEmpty(achievementId))
-                            {
-                                if (!UtilsAchievement.IsAchievementUnlocked(achievementId))
-                                {
-                                    UtilsAchievement.UnlockAchievement(achievementId);
-                                }
-                            }
-                        }
 
                         SceneLoaderManager.Instance.LoadScene(settings);
                     }

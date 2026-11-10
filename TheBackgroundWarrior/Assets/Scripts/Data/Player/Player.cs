@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IPlayerDataProvider
 {
-    // every sub class of player need a list of buffs to check internally
-    protected List<UtilsBuffs.BuffType> _buffsToCheckTypes;
     protected float timer1Second = UtilsGeneral.TIMER_1SECONDS;
 
 
@@ -16,22 +13,17 @@ public class Player : MonoBehaviour, IPlayerDataProvider
 
     protected virtual void Awake()
     {
-        PlayerManager.Instance.PlayerBuffsData.OnAddBuff += OnBuffAdded;
-        PlayerManager.Instance.PlayerBuffsData.OnRemoveBuff += OnBuffRemoved;
+        
     }
 
     protected virtual void OnDestroy()
     {
-        PlayerManager.Instance.PlayerBuffsData.OnAddBuff -= OnBuffAdded;
-        PlayerManager.Instance.PlayerBuffsData.OnRemoveBuff -= OnBuffRemoved;
+        
     }
 
 
     protected virtual void Update()
     {
-        if(_buffsToCheckTypes != null)
-            HandleBuffs();
-
         CheckSpeedMult();
     }
 
@@ -54,32 +46,6 @@ public class Player : MonoBehaviour, IPlayerDataProvider
                 Time.timeScale = 1f;
             }
         }
-    }
-
-    protected virtual void HandleBuffs()
-    {
-        if (timer1Second <= 0)
-        {
-            PlayerManager.Instance.PlayerBuffsData.DecreaseBuffs(_buffsToCheckTypes, 1f);
-
-            timer1Second = UtilsGeneral.TIMER_1SECONDS;
-
-            PlayerManager.Instance.SaveBuffsData();
-        }
-        else
-        {
-            timer1Second -= Time.deltaTime;
-        }
-    }
-
-    protected virtual void OnBuffAdded(UtilsBuffs.BuffType buffType)
-    {
-        //Debug.Log("Need to inherit from player");
-    }
-
-    protected virtual void OnBuffRemoved(UtilsBuffs.BuffType buffType)
-    {
-        //Debug.Log("Need to inherit from player");
     }
 
     

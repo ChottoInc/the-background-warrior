@@ -37,7 +37,6 @@ public class UIShopPanelInfo : MonoBehaviour
         switch (_itemSO.ShopItemType)
         {
             default: resultText = _itemSO.ItemDesc; break;
-            case UtilsShop.ShopItemType.Baits: resultText = HandleBaitDesc(); break;
         }
 
         if (_itemSO.IsDaily)
@@ -50,12 +49,6 @@ public class UIShopPanelInfo : MonoBehaviour
         }
 
         textDesc.text = resultText;
-    }
-
-    private string HandleBaitDesc()
-    {
-        ShopBaitSO shopBaitSO = _itemSO as ShopBaitSO;
-        return string.Format(shopBaitSO.ItemDesc, shopBaitSO.BaitSO.ItemDesc);
     }
 
     public void Show(bool show)
@@ -97,7 +90,6 @@ public class UIShopPanelInfo : MonoBehaviour
             {
                 case UtilsShop.ShopItemType.CardPack: needClose = true; break;
                 case UtilsShop.ShopItemType.Job: needClose = false; break;
-                case UtilsShop.ShopItemType.Baits: needClose = false; break;
             }
 
             if (needClose)
@@ -110,7 +102,6 @@ public class UIShopPanelInfo : MonoBehaviour
             {
                 case UtilsShop.ShopItemType.CardPack: HandleCardPack(_itemSO as ShopCardPackSO); break;
                 case UtilsShop.ShopItemType.Job: HandleShopJob(_itemSO as ShopJobSO); break;
-                case UtilsShop.ShopItemType.Baits: HandleShopBait(_itemSO as ShopBaitSO); break;
             }
         }
     }
@@ -165,14 +156,6 @@ public class UIShopPanelInfo : MonoBehaviour
     private void HandleShopJob(ShopJobSO jobSO)
     {
         PlayerManager.Instance.PlayerJobsData.AddAvailableJob(jobSO.ShoppingJob);
-
-        // save
-        PlayerManager.Instance.SaveInventoryData();
-    }
-
-    private void HandleShopBait(ShopBaitSO shopBaitSO)
-    {
-        PlayerManager.Instance.Inventory.AddItem(shopBaitSO.BaitSO.Id, shopBaitSO.Quantity);
 
         // save
         PlayerManager.Instance.SaveInventoryData();

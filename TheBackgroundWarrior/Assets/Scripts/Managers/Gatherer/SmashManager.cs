@@ -186,12 +186,6 @@ public class SmashManager : MonoBehaviour
 
         //Debug.Log("Threshold: " + thresholdLoot);
 
-        // check if player has stoned buff
-        if (PlayerManager.Instance.PlayerBuffsData.HasBuff(UtilsBuffs.BuffType.Stoned))
-        {
-            thresholdLoot += 0.2f;
-        }
-
         if (randPercLoot <= thresholdLoot)
         {
             //Debug.Log("Looted!");

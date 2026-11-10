@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerNecromancer : Player
@@ -31,16 +30,6 @@ public class PlayerNecromancer : Player
         base.Awake();
 
         //OnStatChange += CheckSpellBar;
-    }
-
-    private void Start()
-    {
-        _buffsToCheckTypes = new List<UtilsBuffs.BuffType>()
-        {
-            UtilsBuffs.BuffType.Greed,
-            UtilsBuffs.BuffType.Veteran,
-            UtilsBuffs.BuffType.Inspiration,
-        };
     }
 
 

@@ -84,7 +84,6 @@ public class FishSpawnManager : MonoBehaviour
         CaughtFishesSession = new List<FishSO>();
 
         // set pool
-        CheckBuffs();
 
         timer20Seconds = UtilsGeneral.TIMER_20SECONDS;
 
@@ -134,60 +133,6 @@ public class FishSpawnManager : MonoBehaviour
         else
         {
             passedTimeHook += Time.deltaTime;
-        }
-    }
-
-    public void CheckBuffs()
-    {
-        // clear the pool
-        currentPool.Clear();
-
-        PlayerBuffsData data = PlayerManager.Instance.PlayerBuffsData;
-
-        Buff anglerBuff = null;
-
-        if (data.HasBuff(UtilsBuffs.BuffType.MorningAngler))
-        {
-            anglerBuff = data.GetBuffByType(UtilsBuffs.BuffType.MorningAngler);
-        }
-        else if(data.HasBuff(UtilsBuffs.BuffType.MorningAngler))
-        {
-            anglerBuff = data.GetBuffByType(UtilsBuffs.BuffType.AfternoonAngler);
-        }
-        else if(data.HasBuff(UtilsBuffs.BuffType.MorningAngler))
-        {
-            anglerBuff = data.GetBuffByType(UtilsBuffs.BuffType.NightAngler);
-        }
-
-        if(anglerBuff != null)
-        {
-            // get bait from data
-            BaitSO bait = player.PlayerData.ActiveBait;
-
-            int loop1Counter = 0, loop2Counter = 0;
-            switch (bait.Effectivness)
-            {
-                case UtilsFisher.BaitEffectivness.Normal:
-                    loop1Counter = Mathf.FloorToInt((float)MAX_FISHES_IN_POOL * 0.25f);
-                    loop2Counter = MAX_FISHES_IN_POOL - loop1Counter;
-                    break;
-
-                case UtilsFisher.BaitEffectivness.Great:
-                    loop1Counter = Mathf.FloorToInt((float)MAX_FISHES_IN_POOL * 0.5f);
-                    loop2Counter = MAX_FISHES_IN_POOL - loop1Counter;
-                    break;
-
-                case UtilsFisher.BaitEffectivness.Max:
-                    loop1Counter = MAX_FISHES_IN_POOL;
-                    loop2Counter = 0;
-                    break;
-            }
-
-            FillPool(loop1Counter, loop2Counter, bait.AttractsMoment);
-        }
-        else
-        {
-            FillPool();
         }
     }
 

@@ -13,9 +13,7 @@ public class PlayerJobsData
     public bool IsBlacksmithUnlocked { get; private set; }
     public bool IsFarmerUnlocked { get; private set; }
     public bool IsMageUnlocked { get; private set; }
-    public bool IsAlchemistUnlocked { get; private set; }
     public bool IsNecromancerUnlocked { get; private set; }
-    public bool IsBardUnlocked { get; private set; }
 
 
     public event Action<UtilsPlayer.PlayerJob> OnJobUnlocked;
@@ -55,19 +53,9 @@ public class PlayerJobsData
             IsMageUnlocked = true;
         }
 
-        if (availableJobs.Contains(UtilsPlayer.PlayerJob.Alchemist))
-        {
-            IsAlchemistUnlocked = true;
-        }
-
         if (availableJobs.Contains(UtilsPlayer.PlayerJob.Necromancer))
         {
             IsNecromancerUnlocked = true;
-        }
-
-        if (availableJobs.Contains(UtilsPlayer.PlayerJob.Bard))
-        {
-            IsBardUnlocked = true;
         }
     }
 
@@ -82,17 +70,13 @@ public class PlayerJobsData
             //UtilsPlayer.PlayerJob.Farmer,
             //UtilsPlayer.PlayerJob.Blacksmith
             //UtilsPlayer.PlayerJob.Mage
-            //UtilsPlayer.PlayerJob.Alchemist,
             //UtilsPlayer.PlayerJob.Necromancer,
-            //UtilsPlayer.PlayerJob.Bard,
         };
 
         IsBlacksmithUnlocked = false;
         IsFarmerUnlocked = false;
         IsMageUnlocked = false;
-        IsAlchemistUnlocked = false;
         IsNecromancerUnlocked = false;
-        IsBardUnlocked = false;
     }
 
 
@@ -106,48 +90,11 @@ public class PlayerJobsData
             case UtilsPlayer.PlayerJob.Blacksmith: IsBlacksmithUnlocked = true; break;
             case UtilsPlayer.PlayerJob.Farmer: IsFarmerUnlocked = true; break;
             case UtilsPlayer.PlayerJob.Mage: IsMageUnlocked = true; break;
-            case UtilsPlayer.PlayerJob.Alchemist: IsAlchemistUnlocked = true; break;
             case UtilsPlayer.PlayerJob.Necromancer: IsNecromancerUnlocked = true; break;
-            case UtilsPlayer.PlayerJob.Bard: IsBardUnlocked = true; break;
         }
 
         OnJobUnlocked?.Invoke(job);
 
         PlayerManager.Instance.SaveJobsData();
-
-        CheckAchievementsForJobUnlock(job);
-    }
-
-    private void CheckAchievementsForJobUnlock(UtilsPlayer.PlayerJob job)
-    {
-        if (SteamManager.Initialized)
-        {
-            string achievementId = string.Empty;
-            switch (job)
-            {
-                case UtilsPlayer.PlayerJob.Blacksmith: achievementId = UtilsAchievement.UNLOCK_BLACKSMITH_JOB; break;
-                case UtilsPlayer.PlayerJob.Farmer: achievementId = UtilsAchievement.UNLOCK_FARMER_JOB; break;
-                case UtilsPlayer.PlayerJob.Mage: achievementId = UtilsAchievement.UNLOCK_MAGE_JOB; break;
-                case UtilsPlayer.PlayerJob.Alchemist: achievementId = UtilsAchievement.UNLOCK_ALCHEMIST_JOB; break;
-                case UtilsPlayer.PlayerJob.Necromancer: achievementId = UtilsAchievement.UNLOCK_NECROMANCER_JOB; break;
-                case UtilsPlayer.PlayerJob.Bard: achievementId = UtilsAchievement.UNLOCK_BARD_JOB; break;
-            }
-
-            if (!string.IsNullOrEmpty(achievementId))
-            {
-                if(!UtilsAchievement.IsAchievementUnlocked(achievementId))
-                {
-                    UtilsAchievement.UnlockAchievement(achievementId);
-                }
-            }
-        }
-    }
-
-    public void CheckAllAchievements()
-    {
-        foreach(var job in availableJobs)
-        {
-            CheckAchievementsForJobUnlock(job);
-        }
     }
 }

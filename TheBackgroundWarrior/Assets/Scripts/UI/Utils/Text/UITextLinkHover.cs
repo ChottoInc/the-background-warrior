@@ -58,20 +58,7 @@ public class UITextLinkHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (linkId == _currentLinkId) return;
         _currentLinkId = linkId;
 
-        if (linkId == null)
-            HideTooltip();
-        else
-            ShowTooltip(linkId);
-    }
-
-    private void ShowTooltip(string linkId)
-    {
-        string linkString = UtilsGeneral.GetTextByLink(linkId);
-
-        TooltipManagerData tooltipData = new TooltipManagerData();
-        tooltipData.idTooltip = UITooltipManager.ID_SHOW_TEXT;
-        tooltipData.text = linkString;
-        UITooltipManager.Instance.Show(tooltipData, _tooltipPosition.position, true);
+        HideTooltip();
     }
 
     private void HideTooltip()

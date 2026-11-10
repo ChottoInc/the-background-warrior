@@ -15,7 +15,6 @@ public class PlayerManager : MonoBehaviour
 
 
     public PlayerJobsData PlayerJobsData { get; private set; }
-    public PlayerBuffsData PlayerBuffsData { get; private set; }
 
     public PlayerFightData PlayerFightData { get; private set; }
 
@@ -29,11 +28,7 @@ public class PlayerManager : MonoBehaviour
 
     public PlayerMageData PlayerMageData { get; private set; }
 
-    public PlayerAlchemistData PlayerAlchemistData { get; private set; }
-
     public PlayerNecromancerData PlayerNecromancerData { get; private set; }
-
-    public PlayerBardData PlayerBardData { get; private set; }
 
 
 
@@ -102,13 +97,6 @@ public class PlayerManager : MonoBehaviour
         {
             Inventory.OnItemAdd -= ItemAdd;
         }
-
-        // ensure at close the inspiration buff is removed, it's added again on startup
-        if(PlayerBuffsData != null)
-        {
-            Buff bardBuff = new Buff(UtilsBuffs.BuffType.Inspiration, 0);
-            PlayerBuffsData.RemoveBuff(bardBuff);
-        }
     }
 
     // Called after Settings Manager setup
@@ -120,7 +108,6 @@ public class PlayerManager : MonoBehaviour
         {
 
             LoadJobsData();
-            LoadBuffsData();
             LoadInventoryData();
 
             LoadMinerData();
@@ -128,9 +115,7 @@ public class PlayerManager : MonoBehaviour
             LoadFisherData();
             LoadFarmerData();
             LoadMageData();
-            LoadAlchemistData();
             LoadNecromancerData();
-            LoadBardData();
 
             LoadFightData();
         }
@@ -197,44 +182,6 @@ public class PlayerManager : MonoBehaviour
                 PlayerJobsData.AddAvailableJob(UtilsPlayer.PlayerJob.Mage);
             }
         }
-    }
-
-    #endregion
-
-    #region BUFFS DATA
-
-    private void LoadBuffsData()
-    {
-        try
-        {
-            PlayerBuffsSaveData buffsSaveData = saveService.LoadData<PlayerBuffsSaveData>(UtilsSave.GetPlayerBuffsFile(), SettingsManager.Instance.FileEncryption);
-            PlayerBuffsData = new PlayerBuffsData(buffsSaveData);
-        }
-        catch (ConversionException e)
-        {
-            Debug.LogError(e.Message);
-            throw new FatalLoadException("Cannot load buffs data");
-        }
-        catch (FileNotFoundException e)
-        {
-            Debug.LogWarning(e.Message);
-
-            PlayerBuffsData = new PlayerBuffsData();
-            SaveBuffsData();
-        }
-
-    }
-
-    
-    public void UpdateBuffsData(PlayerBuffsData data)
-    {
-        PlayerBuffsData = data;
-    }
-
-    public void SaveBuffsData()
-    {
-        PlayerBuffsSaveData data = new PlayerBuffsSaveData(PlayerBuffsData);
-        saveService.SaveData(UtilsSave.GetPlayerBuffsFile(), data, SettingsManager.Instance.FileEncryption);
     }
 
     #endregion
@@ -514,43 +461,6 @@ public class PlayerManager : MonoBehaviour
 
     #endregion
 
-    #region ALCHEMIST DATA
-
-    private void LoadAlchemistData()
-    {
-        try
-        {
-            PlayerAlchemistSaveData alchemistSaveData = saveService.LoadData<PlayerAlchemistSaveData>(UtilsSave.GetPlayerAlchemistFile(), SettingsManager.Instance.FileEncryption);
-            PlayerAlchemistData = new PlayerAlchemistData(alchemistSaveData);
-        }
-        catch (ConversionException e)
-        {
-            Debug.LogError(e.Message);
-            throw new FatalLoadException("Cannot load alchemist data");
-        }
-        catch (FileNotFoundException e)
-        {
-            Debug.LogWarning(e.Message);
-
-            PlayerAlchemistData = new PlayerAlchemistData();
-            SaveAlchemistData();
-        }
-    }
-
-    public void UpdateAlchemistData(PlayerAlchemistData data)
-    {
-        PlayerAlchemistData = data;
-        SaveAlchemistData();
-    }
-
-    public void SaveAlchemistData()
-    {
-        PlayerAlchemistSaveData data = new PlayerAlchemistSaveData(PlayerAlchemistData);
-        saveService.SaveData(UtilsSave.GetPlayerAlchemistFile(), data, SettingsManager.Instance.FileEncryption);
-    }
-
-    #endregion
-
     #region NECROMANCER DATA
 
     private void LoadNecromancerData()
@@ -593,43 +503,6 @@ public class PlayerManager : MonoBehaviour
 
     #endregion
 
-    #region BARD DATA
-
-    private void LoadBardData()
-    {
-        try
-        {
-            PlayerBardSaveData bardSaveData = saveService.LoadData<PlayerBardSaveData>(UtilsSave.GetPlayerBardFile(), SettingsManager.Instance.FileEncryption);
-            PlayerBardData = new PlayerBardData(bardSaveData);
-        }
-        catch (ConversionException e)
-        {
-            Debug.LogError(e.Message);
-            throw new FatalLoadException("Cannot load bard data");
-        }
-        catch (FileNotFoundException e)
-        {
-            Debug.LogWarning(e.Message);
-
-            PlayerBardData = new PlayerBardData();
-            SaveBardData();
-        }
-    }
-
-    public void UpdateBardData(PlayerBardData data)
-    {
-        PlayerBardData = data;
-        SaveBardData();
-    }
-
-    public void SaveBardData()
-    {
-        PlayerBardSaveData data = new PlayerBardSaveData(PlayerBardData);
-        saveService.SaveData(UtilsSave.GetPlayerBardFile(), data, SettingsManager.Instance.FileEncryption);
-    }
-
-    #endregion
-
     public void SaveAll()
     {
         SaveInventoryData();
@@ -640,9 +513,7 @@ public class PlayerManager : MonoBehaviour
         SaveFisherData();
         SaveFarmerData();
         SaveMageData();
-        SaveAlchemistData();
         SaveNecromancerData();
-        SaveBardData();
 
         SaveJobsData();
     }

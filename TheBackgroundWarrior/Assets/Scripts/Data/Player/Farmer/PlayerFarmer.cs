@@ -178,14 +178,6 @@ public class PlayerFarmer : Player
         StartCoroutine(CoSpawned());
 
         timer5Mins = UtilsGeneral.TIMER_5MIN_IN_SECONDS;
-
-        _buffsToCheckTypes = new List<UtilsBuffs.BuffType>()
-        {
-            UtilsBuffs.BuffType.Greed,
-            UtilsBuffs.BuffType.Veteran,
-            UtilsBuffs.BuffType.Tamer,
-            UtilsBuffs.BuffType.Inspiration,
-        };
     }
 
 
@@ -549,16 +541,6 @@ public class PlayerFarmer : Player
         }
         //Debug.Log("Adding: " + slotData.cropData.CropSO.Id);
         PlayerManager.Instance.SaveInventoryData();
-
-        if (SteamManager.Initialized)
-        {
-            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.GROW_CROP_FIRST))
-            {
-                UtilsAchievement.UnlockAchievement(UtilsAchievement.GROW_CROP_FIRST);
-            }
-
-            UtilsAchievement.AddStat(UtilsAchievement.STAT_GROW_CROP_COUNT, 1, UtilsAchievement.STAT_GROW_CROP_COUNT_MAX);
-        }
     }
 
     private void ResetCrop(CropSlotData slotData)

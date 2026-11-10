@@ -119,7 +119,6 @@ public class QuestManager : MonoBehaviour
     private PlayerFisher playerFisher;
     private PlayerFarmer playerFarmer;
     private PlayerMage playerMage;
-    private PlayerAlchemist playerAlchemist;
     private PlayerNecromancer playerNecromancer;
 
 
@@ -183,9 +182,6 @@ public class QuestManager : MonoBehaviour
 
         if (playerMage != null)
             playerMage.OnStatChange -= questEventHandler.OnStatUp;
-
-        if (playerAlchemist != null)
-            playerAlchemist.OnStatChange -= questEventHandler.OnStatUp;
 
         if (playerNecromancer != null)
             playerNecromancer.OnStatChange -= questEventHandler.OnStatUp;
@@ -259,11 +255,6 @@ public class QuestManager : MonoBehaviour
             case SceneLoaderManager.SceneType.Mage:
                 playerMage = FindFirstObjectByType<PlayerMage>();
                 playerMage.OnStatChange += questEventHandler.OnStatUp;
-                break;
-
-            case SceneLoaderManager.SceneType.Alchemist:
-                playerAlchemist = FindFirstObjectByType<PlayerAlchemist>();
-                playerAlchemist.OnStatChange += questEventHandler.OnStatUp;
                 break;
 
             case SceneLoaderManager.SceneType.Necromancer:

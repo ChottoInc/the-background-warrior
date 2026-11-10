@@ -179,12 +179,6 @@ public class Companion : MonoBehaviour
                 // take action befriended or not
                 float finalTotalCheck = PlayerManager.Instance.PlayerFarmerData.CurrentLuck;
 
-                // check if player has tamer buff
-                if (PlayerManager.Instance.PlayerBuffsData.HasBuff(UtilsBuffs.BuffType.Tamer))
-                {
-                    finalTotalCheck += 0.2f;
-                }
-
                 bool success = UtilsGeneral.GetRandomSuccessFromValue(finalTotalCheck);
                 if (success || CropsPlantManager.Instance.AlwaysBefriendCheat)
                 {

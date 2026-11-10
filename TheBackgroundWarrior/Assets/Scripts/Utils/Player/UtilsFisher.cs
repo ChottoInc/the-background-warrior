@@ -8,8 +8,6 @@ public static class UtilsFisher
     // Max hp, Atk, Def, Atk Spd, Crit rate, Crit dmg, Luck, Exp gain, Move spd warrior
     public enum FishGroupType { Life, Predator, Guardian, Dart, Sharp, Piercing, Golden, Elder, Quick }
 
-    public enum BaitEffectivness { Normal, Great, Max }
-
     // Fisher
     private static Dictionary<int, ListableGameDataSO> dictFishGroups;
 

@@ -38,10 +38,10 @@ public class PlayerMinerData : BasePlayerData
     public long ExpToNextLevel => UtilsMiner.RequiredExpForMinerLevel(CurrentLevel + 1);
 
 
-    public float CurrentPower => basePower + UtilsMiner.PER_LEVEL_MINER_GAIN_POWER * (levelStatPower - 1) * _inspirationModifier;
-    public float CurrentSmashSpeed => baseSmashSpeed + UtilsMiner.PER_LEVEL_MINER_GAIN_SMASHSPEED * (levelSmashSpeed - 1) * _inspirationModifier;
-    public float CurrentShockwave => baseShockwave + UtilsMiner.PER_LEVEL_MINER_GAIN_SHOCKWAVE * (levelShockwave - 1) + (_inspirationModifier - 1f);
-    public float CurrentLuck => baseLuck + UtilsMiner.PER_LEVEL_MINER_GAIN_LUCK * (levelStatLuck - 1) + (_inspirationModifier - 1f);
+    public float CurrentPower => basePower + UtilsMiner.PER_LEVEL_MINER_GAIN_POWER * (levelStatPower - 1);
+    public float CurrentSmashSpeed => baseSmashSpeed + UtilsMiner.PER_LEVEL_MINER_GAIN_SMASHSPEED * (levelSmashSpeed - 1);
+    public float CurrentShockwave => baseShockwave + UtilsMiner.PER_LEVEL_MINER_GAIN_SHOCKWAVE * (levelShockwave - 1);
+    public float CurrentLuck => baseLuck + UtilsMiner.PER_LEVEL_MINER_GAIN_LUCK * (levelStatLuck - 1);
 
     public int WeaponLevel => levelWeaponMiner;
 
@@ -146,25 +146,5 @@ public class PlayerMinerData : BasePlayerData
     public void AddMinerWeaponLevel(int level)
     {
         levelWeaponMiner += level;
-
-        CheckAllAchievements();
-    }
-
-    public void CheckAllAchievements()
-    {
-        if (levelWeaponMiner >= 10)
-        {
-            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UPGRADE_SWORD_10))
-            {
-                UtilsAchievement.UnlockAchievement(UtilsAchievement.UPGRADE_SWORD_10);
-            }
-        }
-        else if (levelWeaponMiner >= 5)
-        {
-            if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UPGRADE_SWORD_5))
-            {
-                UtilsAchievement.UnlockAchievement(UtilsAchievement.UPGRADE_SWORD_5);
-            }
-        }
     }
 }

@@ -6,7 +6,7 @@ public static class UtilsPlayer
 {
     public enum AdvanceStatType { None, Flat, Multiplier }
 
-    public enum PlayerJob { None, Warrior, Miner, Blacksmith, Fisher, Farmer, Mage, Alchemist, Necromancer, Bard }
+    public enum PlayerJob { None, Warrior, Miner, Blacksmith, Fisher, Farmer, Mage, Necromancer }
 
     private static PlayerJobSO[] jobs;
 
@@ -48,11 +48,6 @@ public static class UtilsPlayer
     public const int ID_MAGE_SCHOLAR = 62;              // every x levels unlock new spell
     public const int ID_MAGE_PROFICIENCY = 63;          // every x levels unlock spell slot
 
-    public const int ID_ALCHEMIST_ROUTINE = 70;         // increase crafting speed
-    public const int ID_ALCHEMIST_YIELD = 71;           // craft extra materials
-    public const int ID_ALCHEMIST_RESEARCH = 72;        // every x levels unlock new recipe
-    public const int ID_ALCHEMIST_STABILITY = 73;       // reduce failed crafts
-
     public const int ID_NECROMANCER_APTITUDE = 80;      // every x levels increase couple fighting necromancer
     public const int ID_NECROMANCER_SUMMON = 81;        // increase spawn speed
     public const int ID_NECROMANCER_MIGHT = 82;         // increase minions strength
@@ -72,15 +67,12 @@ public static class UtilsPlayer
 
         // Call every static helper for jobs after the load of SOs
 
-        UtilsBuffs.Initialize();
-
         UtilsWarrior.Initialize();
         UtilsMiner.Initialize();
         UtilsBlacksmith.Initialize();
         UtilsFisher.Initialize();
         UtilsFarmer.Initialize();
         UtilsMage.Initialize();
-        UtilsAlchemist.Initialize();
         UtilsNecromancer.Initialize();
 
         
@@ -166,12 +158,6 @@ public static class UtilsPlayer
             case ID_MAGE_SCHOLAR: return UtilsMage.PER_LEVEL_MAGE_MAX_SCHOLAR;
             case ID_MAGE_PROFICIENCY: return UtilsMage.PER_LEVEL_MAGE_MAX_PROFICIENCY;
 
-            // ALCHEMIST DATA
-            case ID_ALCHEMIST_ROUTINE: return UtilsAlchemist.PER_LEVEL_ALCHEMIST_MAX_ROUTINE;
-            case ID_ALCHEMIST_YIELD: return UtilsAlchemist.PER_LEVEL_ALCHEMIST_MAX_YIELD;
-            case ID_ALCHEMIST_RESEARCH: return UtilsAlchemist.PER_LEVEL_ALCHEMIST_MAX_RESEARCH;
-            case ID_ALCHEMIST_STABILITY: return UtilsAlchemist.PER_LEVEL_ALCHEMIST_MAX_STABILITY;
-
             // NECROMANCER DATA
             case ID_NECROMANCER_APTITUDE: return UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_APTITUDE;
             case ID_NECROMANCER_SUMMON: return UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_SUMMON;
@@ -226,12 +212,6 @@ public static class UtilsPlayer
             case ID_MAGE_CASTSPEED: return PlayerManager.Instance.PlayerMageData.LevelStatCastSpeed;
             case ID_MAGE_SCHOLAR: return PlayerManager.Instance.PlayerMageData.LevelStatScholar;
             case ID_MAGE_PROFICIENCY: return PlayerManager.Instance.PlayerMageData.LevelStatProficiency;
-
-            // ALCHEMIST DATA
-            case ID_ALCHEMIST_ROUTINE: return PlayerManager.Instance.PlayerAlchemistData.LevelStatRoutine;
-            case ID_ALCHEMIST_YIELD: return PlayerManager.Instance.PlayerAlchemistData.LevelStatYield;
-            case ID_ALCHEMIST_RESEARCH: return PlayerManager.Instance.PlayerAlchemistData.LevelStatResearch;
-            case ID_ALCHEMIST_STABILITY: return PlayerManager.Instance.PlayerAlchemistData.LevelStatStability;
 
             // NECROMANCER DATA
             case ID_NECROMANCER_APTITUDE: return PlayerManager.Instance.PlayerNecromancerData.LevelStatAptitude;
@@ -288,12 +268,6 @@ public static class UtilsPlayer
             case ID_MAGE_SCHOLAR: return PlayerManager.Instance.PlayerMageData.CurrentScholar;
             case ID_MAGE_PROFICIENCY: return PlayerManager.Instance.PlayerMageData.CurrentProficiency;
 
-            // ALCHEMIST DATA
-            case ID_ALCHEMIST_ROUTINE: return PlayerManager.Instance.PlayerAlchemistData.CurrentRoutine;
-            case ID_ALCHEMIST_YIELD: return PlayerManager.Instance.PlayerAlchemistData.CurrentYield;
-            case ID_ALCHEMIST_RESEARCH: return PlayerManager.Instance.PlayerAlchemistData.CurrentResearch;
-            case ID_ALCHEMIST_STABILITY: return PlayerManager.Instance.PlayerAlchemistData.CurrentStability;
-
             // NECROMANCER DATA
             case ID_NECROMANCER_APTITUDE: return PlayerManager.Instance.PlayerNecromancerData.CurrentAptitude;
             case ID_NECROMANCER_SUMMON: return PlayerManager.Instance.PlayerNecromancerData.CurrentSummon;
@@ -349,12 +323,6 @@ public static class UtilsPlayer
             case ID_MAGE_SCHOLAR: return AllText[text_tooltip_stat_mage_scholar];
             case ID_MAGE_PROFICIENCY: return AllText[text_tooltip_stat_mage_proficiency];
 
-            // ALCHEMIST DATA
-            case ID_ALCHEMIST_ROUTINE: return AllText[text_tooltip_stat_alchemist_routine];
-            case ID_ALCHEMIST_YIELD: return AllText[text_tooltip_stat_alchemist_yield];
-            case ID_ALCHEMIST_RESEARCH: return AllText[text_tooltip_stat_alchemist_research];
-            case ID_ALCHEMIST_STABILITY: return AllText[text_tooltip_stat_alchemist_stability];
-
             // NECROMANCER DATA
             case ID_NECROMANCER_APTITUDE: return AllText[text_tooltip_stat_necromancer_aptitude];
             case ID_NECROMANCER_SUMMON: return AllText[text_tooltip_stat_necromancer_summon];
@@ -373,7 +341,6 @@ public static class UtilsPlayer
             PlayerManager.Instance.PlayerFisherData.CurrentLevel > UtilsFisher.MAX_LEVEL_FISHER &&
             PlayerManager.Instance.PlayerFarmerData.CurrentLevel > UtilsFarmer.MAX_LEVEL_FARMER &&
             PlayerManager.Instance.PlayerMageData.CurrentLevel > UtilsMage.MAX_LEVEL_MAGE &&
-            PlayerManager.Instance.PlayerAlchemistData.CurrentLevel > UtilsAlchemist.MAX_LEVEL_ALCHEMIST &&
             PlayerManager.Instance.PlayerNecromancerData.CurrentLevel > UtilsNecromancer.MAX_LEVEL_NECROMANCER)
         {
             return true;
@@ -419,11 +386,6 @@ public static class UtilsPlayer
             case ID_MAGE_CASTSPEED:
             case ID_MAGE_SCHOLAR:
             case ID_MAGE_PROFICIENCY: return string.Format("{0} ({1})", GetStatNameById(id), AllText[text_name_class_mage]);
-
-            case ID_ALCHEMIST_ROUTINE:
-            case ID_ALCHEMIST_YIELD:
-            case ID_ALCHEMIST_RESEARCH:
-            case ID_ALCHEMIST_STABILITY: return string.Format("{0} ({1})", GetStatNameById(id), AllText[text_name_class_alchemist]);
 
             case ID_NECROMANCER_APTITUDE:
             case ID_NECROMANCER_SUMMON:
@@ -472,11 +434,6 @@ public static class UtilsPlayer
             case ID_MAGE_SCHOLAR: return AllText[text_name_mage_stat_scholar];
             case ID_MAGE_PROFICIENCY: return AllText[text_name_mage_stat_proficiency];
 
-            case ID_ALCHEMIST_ROUTINE: return AllText[text_name_alchemist_stat_routine];
-            case ID_ALCHEMIST_YIELD: return AllText[text_name_alchemist_stat_yield];
-            case ID_ALCHEMIST_RESEARCH: return AllText[text_name_alchemist_stat_research];
-            case ID_ALCHEMIST_STABILITY: return AllText[text_name_alchemist_stat_stability];
-
             case ID_NECROMANCER_APTITUDE: return AllText[text_name_necromancer_stat_aptitude];
             case ID_NECROMANCER_SUMMON: return AllText[text_name_necromancer_stat_summon];
             case ID_NECROMANCER_MIGHT: return AllText[text_name_necromancer_stat_might];
@@ -523,11 +480,6 @@ public static class UtilsPlayer
             case ID_MAGE_CASTSPEED: return AdvanceStatType.Flat;
             case ID_MAGE_SCHOLAR: return AdvanceStatType.Flat;
             case ID_MAGE_PROFICIENCY: return AdvanceStatType.Flat;
-
-            case ID_ALCHEMIST_ROUTINE: return AdvanceStatType.Multiplier;
-            case ID_ALCHEMIST_YIELD: return AdvanceStatType.Multiplier;
-            case ID_ALCHEMIST_RESEARCH: return AdvanceStatType.Flat;
-            case ID_ALCHEMIST_STABILITY: return AdvanceStatType.Multiplier;
 
             case ID_NECROMANCER_APTITUDE: return AdvanceStatType.Flat;
             case ID_NECROMANCER_SUMMON: return AdvanceStatType.Multiplier;

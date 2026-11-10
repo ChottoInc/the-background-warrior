@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,14 +69,6 @@ public class PlayerBlacksmith : Player
 
     private void Start()
     {
-        _buffsToCheckTypes = new List<UtilsBuffs.BuffType>()
-        {
-            UtilsBuffs.BuffType.Greed,
-            UtilsBuffs.BuffType.Veteran,
-            UtilsBuffs.BuffType.Dwarf,
-            UtilsBuffs.BuffType.Inspiration,
-        };
-
         OnTryForge();
     }
 
@@ -198,12 +189,6 @@ public class PlayerBlacksmith : Player
                 amountMetalToAdd *= amountMultiplier; // up to * 5
             }
 
-            // check if player has dwarf buff
-            if (PlayerManager.Instance.PlayerBuffsData.HasBuff(UtilsBuffs.BuffType.Dwarf))
-            {
-                amountMetalToAdd = Mathf.RoundToInt((float)amountMetalToAdd * 1.2f);
-            }
-
             // remove quantity from blacksmith
             playerData.SetCurrentForgingQuantity(playerData.CurrentForgingQuantity - 1);
 
@@ -214,9 +199,6 @@ public class PlayerBlacksmith : Player
             PlayerManager.Instance.Inventory.AddItem(metal.Id, amountMetalToAdd);
 
             PlayerManager.Instance.SaveInventoryData();
-
-            // check achievements
-            UtilsAchievement.AddStat(UtilsAchievement.CRAFT_GOLD_100, amountMetalToAdd, UtilsAchievement.STAT_GOLD_FORGED_MAX);
 
             // Give exp to blacksmith job
             long rewardedExp = UtilsItem.GetMetalExp(metal);

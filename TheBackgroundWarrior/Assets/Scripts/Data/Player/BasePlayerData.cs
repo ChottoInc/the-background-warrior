@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class BasePlayerData : IBasePlayerData
 {
@@ -8,19 +7,6 @@ public class BasePlayerData : IBasePlayerData
 
 
     public int AvailableStatPoints { get; protected set; }
-
-
-    protected float _inspirationModifier
-    {
-        get
-        {
-            float inspirationModifier = 1f;
-            if (PlayerManager.Instance.PlayerBuffsData.IsInspirationBuffActive())
-                inspirationModifier = 1.1f;
-
-            return inspirationModifier;
-        }
-    }
 
 
     public event Action OnAddedExp;
@@ -35,12 +21,6 @@ public class BasePlayerData : IBasePlayerData
             // set current exp to 0
             CurrentExp = 0;
             return;
-        }
-
-        // check for veteran buff and adds 20%
-        if (PlayerManager.Instance.PlayerBuffsData.HasBuff(UtilsBuffs.BuffType.Veteran))
-        {
-            amount = Mathf.RoundToInt((float)amount * 1.2f);
         }
 
         CurrentExp += amount;

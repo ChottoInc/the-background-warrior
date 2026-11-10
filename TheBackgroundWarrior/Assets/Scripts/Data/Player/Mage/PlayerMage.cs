@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,14 +48,6 @@ public class PlayerMage : Player
 
     private void Start()
     {
-        _buffsToCheckTypes = new List<UtilsBuffs.BuffType>()
-        {
-            UtilsBuffs.BuffType.Greed,
-            UtilsBuffs.BuffType.Veteran,
-            UtilsBuffs.BuffType.Arcanist,
-            UtilsBuffs.BuffType.Inspiration,
-        };
-
         OnShowCurrentSpell(SettingsManager.Instance.IsCurrentSpellShowing);
     }
 
@@ -152,16 +143,8 @@ public class PlayerMage : Player
         // add points and update player data
         int finalPointsToAdd = 1;
 
-        // check if player has arcanist buff
-        if (PlayerManager.Instance.PlayerBuffsData.HasBuff(UtilsBuffs.BuffType.Arcanist))
-        {
-            finalPointsToAdd *= 2;
-        }
         _currentSpell.AddPoints(finalPointsToAdd);
 
-
-        // check achievements after giving points to spell in case ranks up
-        PlayerData.CheckMaxSpellsAchievements();
 
         PlayerData.UpdateSpellData(_currentSpell);
         PlayerData.AddExp(UtilsMage.GetSpellCastExp(_currentSpell.SpellSO.SpellType));

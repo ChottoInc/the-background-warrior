@@ -6,18 +6,12 @@ public static class UtilsShop
 {
     public const int ID_SHOP_FILTER_CARDPACKS = 0;
     public const int ID_SHOP_FILTER_JOBS = 1;
-    public const int ID_SHOP_FILTER_BAITS = 2;
 
     public const int ID_SHOP_FILTER_REDEEM = 9;
     public const int ID_SHOP_FILTER_DEBUG = 10;
-    public const int ID_SHOP_FILTER_ACHIEVEMENTS = 11;
 
 
-    public const string REDEEM_ERIS_CODE = "85641";
-    public const int ID_REDEEM_ERIS_CODE = 0;
-
-
-    public enum ShopItemType { CardPack, Job, Baits }
+    public enum ShopItemType { CardPack, Job }
 
     private static Dictionary<string, ShopItemSO> dictShopItems;
 

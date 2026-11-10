@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFisher : Player
@@ -30,8 +29,6 @@ public class PlayerFisher : Player
 
     public event Action<FishSO> OnFishCaught;
 
-    public event Action OnBaitChange;
-
 
     public PlayerFisherData PlayerData => playerData;
 
@@ -51,17 +48,6 @@ public class PlayerFisher : Player
     protected override void Awake()
     {
         base.Awake();
-
-        _buffsToCheckTypes = new List<UtilsBuffs.BuffType>()
-        {
-            UtilsBuffs.BuffType.Greed,
-            UtilsBuffs.BuffType.Veteran,
-            UtilsBuffs.BuffType.Sailor,
-            UtilsBuffs.BuffType.MorningAngler,
-            UtilsBuffs.BuffType.AfternoonAngler,
-            UtilsBuffs.BuffType.NightAngler,
-            UtilsBuffs.BuffType.Inspiration,
-        };
     }
 
     private void Start()
@@ -136,11 +122,6 @@ public class PlayerFisher : Player
             // Check success hook
             float finalTotalCheck = playerData.CurrentReflex;
 
-            // check if player has sailor buff
-            if (PlayerManager.Instance.PlayerBuffsData.HasBuff(UtilsBuffs.BuffType.Sailor))
-            {
-                finalTotalCheck += 0.2f;
-            }
             successReflex = UtilsGeneral.GetRandomSuccessFromValue(finalTotalCheck);
         }
 
@@ -175,9 +156,6 @@ public class PlayerFisher : Player
 
         // Save ivnentory
         PlayerManager.Instance.SaveInventoryData();
-
-        // check achievements
-        playerData.CheckAllAchievements();
 
         // Remove from pool if caught
         FishSpawnManager.Instance.RemoveFishFromPool(hookedFish);
@@ -244,27 +222,6 @@ public class PlayerFisher : Player
     public override long GetExpToNextLevel()
     {
         return PlayerData.ExpToNextLevel;
-    }
-
-    protected override void OnBuffAdded(UtilsBuffs.BuffType buffType)
-    {
-        OnBuffChange(buffType);
-    }
-
-    protected override void OnBuffRemoved(UtilsBuffs.BuffType buffType)
-    {
-        OnBuffChange(buffType);
-    }
-
-    private void OnBuffChange(UtilsBuffs.BuffType buffType)
-    {
-        if (buffType == UtilsBuffs.BuffType.MorningAngler ||
-            buffType == UtilsBuffs.BuffType.AfternoonAngler ||
-            buffType == UtilsBuffs.BuffType.NightAngler)
-        {
-            FishSpawnManager.Instance.CheckBuffs();
-            OnBaitChange?.Invoke();
-        }
     }
 
 

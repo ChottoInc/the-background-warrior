@@ -3,12 +3,6 @@ using UnityEngine;
 
 public class UITabShop : UITabWindow
 {
-    private const int ID_CARD_ERIS_1 = 83;
-    private const int ID_CARD_ERIS_2 = 84;
-    private const int ID_CARD_ERIS_3 = 85;
-    private const int ID_CARD_ERIS_4 = 86;
-    private const int ID_CARD_ERIS_5 = 87;
-
     [Header("Currencies")]
     [SerializeField] TMP_Text textBits;
 
@@ -24,10 +18,6 @@ public class UITabShop : UITabWindow
     [Header("Debug")]
     [SerializeField] GameObject panelDebug;
 
-    [Header("Achievements")]
-    [SerializeField] GameObject _buttonAchievements;
-    [SerializeField] GameObject _panelAchievements;
-
     public override void Open()
     {
         base.Open();
@@ -38,9 +28,6 @@ public class UITabShop : UITabWindow
         panelShopItems.gameObject.SetActive(true);
         panelDebug.SetActive(false);
         panelRedeem.SetActive(false);
-
-        _buttonAchievements.SetActive(SettingsManager.Instance.AreCheatsEnabled);
-        _panelAchievements.SetActive(false);
 
         // disable last filter
 
@@ -59,23 +46,11 @@ public class UITabShop : UITabWindow
 
             panelShopItems.Hide();
             panelRedeem.SetActive(false);
-            _panelAchievements.SetActive(false);
         }
         else if(filter == UtilsShop.ID_SHOP_FILTER_REDEEM)
         {
             panelRedeem.SetActive(true);
 
-            panelDebug.SetActive(false);
-            panelShopItems.Hide();
-
-            _panelAchievements.SetActive(false);
-        }
-        else if (filter == UtilsShop.ID_SHOP_FILTER_ACHIEVEMENTS)
-        {
-            _panelAchievements.SetActive(true);
-
-
-            panelRedeem.SetActive(false);
             panelDebug.SetActive(false);
             panelShopItems.Hide();
         }
@@ -86,7 +61,6 @@ public class UITabShop : UITabWindow
 
             panelRedeem.SetActive(false);
             panelDebug.SetActive(false);
-            _panelAchievements.SetActive(false);
         }
     }
 

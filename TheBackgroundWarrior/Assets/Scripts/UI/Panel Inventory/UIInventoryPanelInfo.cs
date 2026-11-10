@@ -36,16 +36,6 @@ public class UIInventoryPanelInfo : MonoBehaviour
 
         // Set panel buttons to active if the selected item is a card
         _panelCardButtons.SetActive(itemSO.ItemType == UtilsItem.ItemType.Card);
-
-        if( itemSO.ItemType == UtilsItem.ItemType.Bait ||
-            itemSO.ItemType == UtilsItem.ItemType.Concoction)
-        {
-            _panelConsumableButtons.SetActive(true);
-        }
-        else
-        {
-            _panelConsumableButtons.SetActive(false);
-        }
     }
 
     public void Show(bool show)
@@ -65,19 +55,6 @@ public class UIInventoryPanelInfo : MonoBehaviour
         panelDismantle.Setup(group);
         panelDismantle.Show(true);
         Show(false);
-    }
-
-
-
-    public void OnButtonUse()
-    {
-        if (UtilsItem.UseConsumable(itemSO))
-        {
-            PlayerManager.Instance.Inventory.RemoveItem(itemSO.Id, 1);
-            PlayerManager.Instance.SaveInventoryData();
-
-            Setup(group);
-        }
     }
 
 }

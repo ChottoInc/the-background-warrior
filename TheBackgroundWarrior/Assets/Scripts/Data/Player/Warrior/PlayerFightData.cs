@@ -11,10 +11,6 @@ public class PlayerFightData : BasePlayerData
 
     // ---- BASE STAT VALUES
 
-    private const float ALCHEMIST_PERMA_ADD_MAXHP = 100f;
-    private const float ALCHEMIST_PERMA_ADD_ATTACK = 2f;
-    private const float ALCHEMIST_PERMA_ADD_DEFENSE = 1f;
-
 
 
     private const float BASE_MAXHP = 85f;
@@ -89,8 +85,7 @@ public class PlayerFightData : BasePlayerData
         (baseMaxHp + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_MAXHP * (levelStatMaxHp - 1)) *
         PlayerManager.Instance.HelmetMaxHpBlacksmithMultiplier *
         PlayerManager.Instance.FisherLifeSeriesMultiplier *
-        maxHpModifier *
-        _inspirationModifier;
+        maxHpModifier;
         
 
     public float CurrentHp { get; private set; }
@@ -99,8 +94,7 @@ public class PlayerFightData : BasePlayerData
         (baseAtk + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_ATK * (levelStatAtk - 1)) *
         PlayerManager.Instance.WeaponMinerMultiplier *
         PlayerManager.Instance.FisherPredatorSeriesMultiplier *
-        atkModifier *
-        _inspirationModifier;
+        atkModifier;
 
 
 
@@ -109,8 +103,7 @@ public class PlayerFightData : BasePlayerData
         PlayerManager.Instance.ArmorDefBlacksmithMultiplier *
         PlayerManager.Instance.BootsDefBlacksmithMultiplier *
         PlayerManager.Instance.FisherGuardianSeriesMultiplier *
-        defModifier *
-        _inspirationModifier;
+        defModifier;
         
 
     // todo: if more mehods will be available to increase atk spd and crit rate, then check if you want those stats to be past the max threshold
@@ -118,27 +111,23 @@ public class PlayerFightData : BasePlayerData
         (baseAtkSpd + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_ATK_SPEED * (levelStatAtkSpd - 1)) *
         PlayerManager.Instance.GlovesAtkSpdBlacksmithMultiplier *
         PlayerManager.Instance.FisherDartSeriesMultiplier *
-        atkSpdModifier *
-        _inspirationModifier;
+        atkSpdModifier;
 
     public float CurrentCritRate => 
         (baseCritRate + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_CRIT_RATE * (levelStatCritRate - 1)) *
         PlayerManager.Instance.BootsCritRateBlacksmithMultiplier *
-        PlayerManager.Instance.FisherSharpSeriesMultiplier *
-        _inspirationModifier;
+        PlayerManager.Instance.FisherSharpSeriesMultiplier;
 
     public float CurrentCritDmg => 
         (baseCritDmg + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_CRIT_DMG * (levelStatCritDmg - 1)) *
         PlayerManager.Instance.GlovesCritDmgBlacksmithMultiplier *
         PlayerManager.Instance.FisherPiercingSeriesMultiplier *
-        critDmgModifier *
-        _inspirationModifier;
+        critDmgModifier;
 
     // affects card drop rates, and gives a one more chance to crit rate check
-    public float CurrentLuck => 
+    public float CurrentLuck =>
         (baseLuck + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_LUCK * (levelStatLuck - 1)) *
-        PlayerManager.Instance.FisherGoldenSeriesMultiplier +
-        (_inspirationModifier - 1f); // so adds .1
+        PlayerManager.Instance.FisherGoldenSeriesMultiplier;
 
 
     // ----- SHIELD 
@@ -222,9 +211,6 @@ public class PlayerFightData : BasePlayerData
         }
 
         CurrentHp = MaxHp;
-
-        // at start check if has iron skin
-        CheckShieldAtStart();
     }
 
     private void GenerateBaseStats()
@@ -252,11 +238,11 @@ public class PlayerFightData : BasePlayerData
         levelStatLuck = UtilsWarrior.START_LEVEL_LUCK;
 
 
-        baseMaxHp = BASE_MAXHP + ((float)PlayerManager.Instance.PlayerAlchemistData.StatPermaMaxHpCounter * ALCHEMIST_PERMA_ADD_MAXHP);
+        baseMaxHp = BASE_MAXHP;
         CurrentHp = MaxHp;
 
-        baseAtk = BASE_ATK + ((float)PlayerManager.Instance.PlayerAlchemistData.StatPermaAttackCounter * ALCHEMIST_PERMA_ADD_ATTACK);
-        baseDef = BASE_DEF + ((float)PlayerManager.Instance.PlayerAlchemistData.StatPermaDefenseCounter * ALCHEMIST_PERMA_ADD_DEFENSE);
+        baseAtk = BASE_ATK;
+        baseDef = BASE_DEF;
 
         baseAtkSpd = BASE_ATKSPD;   // 1 attack per second
         //baseAtkSpd = 5f;   // 1 attack per second
@@ -317,15 +303,6 @@ public class PlayerFightData : BasePlayerData
         else
         {
             return Mathf.FloorToInt(damage);
-        }
-    }
-
-    private void CheckShieldAtStart()
-    {
-        if (PlayerManager.Instance.PlayerBuffsData.HasBuff(UtilsBuffs.BuffType.IronSkin))
-        {
-            MaxShield = MaxHp * 0.2f;
-            CurrentShield = MaxShield;
         }
     }
 
@@ -421,7 +398,6 @@ public class PlayerFightData : BasePlayerData
     public void ResetAfterStage()
     {
         CurrentHp = MaxHp;
-        CheckShieldAtStart();
 
         //Debug.Log("Max hp after death: " + currentHp);
 
@@ -461,44 +437,5 @@ public class PlayerFightData : BasePlayerData
 
         availableMaps.Add(id);
         OnAddMap?.Invoke(id);
-    }
-
-
-
-    public void CheckAllAchievements()
-    {
-        CheckMapClearAchievements();
-    }
-
-    private void CheckMapClearAchievements()
-    {
-        if (SteamManager.Initialized)
-        {
-            foreach (var map in availableMaps)
-            {
-                // check for aailable maps next to the achievements, so it's certain that the player cleared the map
-                string achievementId = string.Empty;
-                if (map == UtilsCombatMap.MAP_CAVE)
-                {
-                    achievementId = UtilsAchievement.CLEAR_WOODS_MAP;
-                }
-                else if (map == UtilsCombatMap.MAP_MOUNTAINS)
-                {
-                    achievementId = UtilsAchievement.CLEAR_SWAMPS_MAP;
-                }
-                else if (map == UtilsCombatMap.MAP_COLLAPSINGBRIDGE)
-                {
-                    achievementId = UtilsAchievement.CLEAR_RUINEDCITY_MAP;
-                }
-
-                if (!string.IsNullOrEmpty(achievementId))
-                {
-                    if (!UtilsAchievement.IsAchievementUnlocked(achievementId))
-                    {
-                        UtilsAchievement.UnlockAchievement(achievementId);
-                    }
-                }
-            }
-        }
     }
 }
