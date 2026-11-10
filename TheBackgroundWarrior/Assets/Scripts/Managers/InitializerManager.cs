@@ -23,9 +23,6 @@ public class InitializerManager : MonoBehaviour
     [Header("Scene Loader")]
     [SerializeField] SceneLoaderManager sceneLoaderManager;
 
-    [Header("Taskbar Flash")]
-    [SerializeField] TaskbarFlasher _taskbarFlasher;
-
 
 
 
@@ -371,12 +368,6 @@ public class InitializerManager : MonoBehaviour
     public float GetScreenOffsetBound()
     {
         return offsetBound;
-    }
-
-
-    public void FlashNotification()
-    {
-        _taskbarFlasher.FlashTaskbarIconUntilFocused();
     }
 
 
