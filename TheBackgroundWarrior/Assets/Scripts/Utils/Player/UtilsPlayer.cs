@@ -6,7 +6,7 @@ public static class UtilsPlayer
 {
     public enum AdvanceStatType { None, Flat, Multiplier }
 
-    public enum PlayerJob { None, Warrior, Miner, Blacksmith, Fisher, Farmer, Mage, Necromancer }
+    public enum PlayerJob { None, Warrior, Miner, Blacksmith, Fisher, Farmer, Mage }
 
     private static PlayerJobSO[] jobs;
 
@@ -48,13 +48,6 @@ public static class UtilsPlayer
     public const int ID_MAGE_SCHOLAR = 62;              // every x levels unlock new spell
     public const int ID_MAGE_PROFICIENCY = 63;          // every x levels unlock spell slot
 
-    public const int ID_NECROMANCER_APTITUDE = 80;      // every x levels increase couple fighting necromancer
-    public const int ID_NECROMANCER_SUMMON = 81;        // increase spawn speed
-    public const int ID_NECROMANCER_MIGHT = 82;         // increase minions strength
-    public const int ID_NECROMANCER_LIFESPAN = 83;      // increase life duration
-    public const int ID_NECROMANCER_HORDE = 84;         // every x levels increase horde limit by 1
-    public const int ID_NECROMANCER_LUCK = 85;          // increase spawn chance of big minion - increase experience gain necromancer
-
 
     public static void Initialize()
     {
@@ -72,8 +65,6 @@ public static class UtilsPlayer
         UtilsBlacksmith.Initialize();
         UtilsFisher.Initialize();
         UtilsFarmer.Initialize();
-        UtilsMage.Initialize();
-        UtilsNecromancer.Initialize();
 
         
     }
@@ -151,20 +142,6 @@ public static class UtilsPlayer
             case ID_FARMER_AGRONOMY: return UtilsFarmer.PER_LEVEL_FARMER_MAX_AGRONOMY;
             case ID_FARMER_KINDNESS: return UtilsFarmer.PER_LEVEL_FARMER_MAX_KINDNESS;
             case ID_FARMER_LUCK: return UtilsFarmer.PER_LEVEL_FARMER_MAX_LUCK;
-
-            // MAGE DATA
-            case ID_MAGE_INSIGHT: return UtilsMage.PER_LEVEL_MAGE_MAX_INSIGHT;
-            case ID_MAGE_CASTSPEED: return UtilsMage.PER_LEVEL_MAGE_MAX_CASTSPEED;
-            case ID_MAGE_SCHOLAR: return UtilsMage.PER_LEVEL_MAGE_MAX_SCHOLAR;
-            case ID_MAGE_PROFICIENCY: return UtilsMage.PER_LEVEL_MAGE_MAX_PROFICIENCY;
-
-            // NECROMANCER DATA
-            case ID_NECROMANCER_APTITUDE: return UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_APTITUDE;
-            case ID_NECROMANCER_SUMMON: return UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_SUMMON;
-            case ID_NECROMANCER_MIGHT: return UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_MIGHT;
-            case ID_NECROMANCER_LIFESPAN: return UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_LIFESPAN;
-            case ID_NECROMANCER_HORDE: return UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_HORDE;
-            case ID_NECROMANCER_LUCK: return UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_LUCK;
         }
     }
 
@@ -206,20 +183,6 @@ public static class UtilsPlayer
             case ID_FARMER_AGRONOMY: return PlayerManager.Instance.PlayerFarmerData.LevelStatAgronomy;
             case ID_FARMER_KINDNESS: return PlayerManager.Instance.PlayerFarmerData.LevelStatKindness;
             case ID_FARMER_LUCK: return PlayerManager.Instance.PlayerFarmerData.LevelStatLuck;
-
-            // MAGE DATA
-            case ID_MAGE_INSIGHT: return PlayerManager.Instance.PlayerMageData.LevelStatInsight;
-            case ID_MAGE_CASTSPEED: return PlayerManager.Instance.PlayerMageData.LevelStatCastSpeed;
-            case ID_MAGE_SCHOLAR: return PlayerManager.Instance.PlayerMageData.LevelStatScholar;
-            case ID_MAGE_PROFICIENCY: return PlayerManager.Instance.PlayerMageData.LevelStatProficiency;
-
-            // NECROMANCER DATA
-            case ID_NECROMANCER_APTITUDE: return PlayerManager.Instance.PlayerNecromancerData.LevelStatAptitude;
-            case ID_NECROMANCER_SUMMON: return PlayerManager.Instance.PlayerNecromancerData.LevelStatSummon;
-            case ID_NECROMANCER_MIGHT: return PlayerManager.Instance.PlayerNecromancerData.LevelStatMight;
-            case ID_NECROMANCER_LIFESPAN: return PlayerManager.Instance.PlayerNecromancerData.LevelStatLifespan;
-            case ID_NECROMANCER_HORDE: return PlayerManager.Instance.PlayerNecromancerData.LevelStatHorde;
-            case ID_NECROMANCER_LUCK: return PlayerManager.Instance.PlayerNecromancerData.LevelStatLuck;
         }
     }
 
@@ -261,20 +224,6 @@ public static class UtilsPlayer
             case ID_FARMER_AGRONOMY: return PlayerManager.Instance.PlayerFarmerData.CurrentAgronomy;
             case ID_FARMER_KINDNESS: return PlayerManager.Instance.PlayerFarmerData.CurrentKindness;
             case ID_FARMER_LUCK: return PlayerManager.Instance.PlayerFarmerData.CurrentLuck;
-
-            // MAGE DATA
-            case ID_MAGE_INSIGHT: return PlayerManager.Instance.PlayerMageData.CurrentInsight;
-            case ID_MAGE_CASTSPEED: return PlayerManager.Instance.PlayerMageData.CurrentCastSpeed;
-            case ID_MAGE_SCHOLAR: return PlayerManager.Instance.PlayerMageData.CurrentScholar;
-            case ID_MAGE_PROFICIENCY: return PlayerManager.Instance.PlayerMageData.CurrentProficiency;
-
-            // NECROMANCER DATA
-            case ID_NECROMANCER_APTITUDE: return PlayerManager.Instance.PlayerNecromancerData.CurrentAptitude;
-            case ID_NECROMANCER_SUMMON: return PlayerManager.Instance.PlayerNecromancerData.CurrentSummon;
-            case ID_NECROMANCER_MIGHT: return PlayerManager.Instance.PlayerNecromancerData.CurrentMight;
-            case ID_NECROMANCER_LIFESPAN: return PlayerManager.Instance.PlayerNecromancerData.CurrentLifespan;
-            case ID_NECROMANCER_HORDE: return PlayerManager.Instance.PlayerNecromancerData.CurrentHorde;
-            case ID_NECROMANCER_LUCK: return PlayerManager.Instance.PlayerNecromancerData.CurrentLuck;
         }
     }
 
@@ -322,14 +271,6 @@ public static class UtilsPlayer
             case ID_MAGE_CASTSPEED: return AllText[text_tooltip_stat_mage_castspeed];
             case ID_MAGE_SCHOLAR: return AllText[text_tooltip_stat_mage_scholar];
             case ID_MAGE_PROFICIENCY: return AllText[text_tooltip_stat_mage_proficiency];
-
-            // NECROMANCER DATA
-            case ID_NECROMANCER_APTITUDE: return AllText[text_tooltip_stat_necromancer_aptitude];
-            case ID_NECROMANCER_SUMMON: return AllText[text_tooltip_stat_necromancer_summon];
-            case ID_NECROMANCER_MIGHT: return AllText[text_tooltip_stat_necromancer_might];
-            case ID_NECROMANCER_LIFESPAN: return AllText[text_tooltip_stat_necromancer_lifespan];
-            case ID_NECROMANCER_HORDE: return AllText[text_tooltip_stat_necromancer_horde];
-            case ID_NECROMANCER_LUCK: return AllText[text_tooltip_stat_necromancer_luck];
         }
     }
 
@@ -339,9 +280,7 @@ public static class UtilsPlayer
             PlayerManager.Instance.PlayerMinerData.CurrentLevel > UtilsMiner.MAX_LEVEL_MINER &&
             PlayerManager.Instance.PlayerBlacksmithData.CurrentLevel > UtilsBlacksmith.MAX_LEVEL_BLACKSMITH &&
             PlayerManager.Instance.PlayerFisherData.CurrentLevel > UtilsFisher.MAX_LEVEL_FISHER &&
-            PlayerManager.Instance.PlayerFarmerData.CurrentLevel > UtilsFarmer.MAX_LEVEL_FARMER &&
-            PlayerManager.Instance.PlayerMageData.CurrentLevel > UtilsMage.MAX_LEVEL_MAGE &&
-            PlayerManager.Instance.PlayerNecromancerData.CurrentLevel > UtilsNecromancer.MAX_LEVEL_NECROMANCER)
+            PlayerManager.Instance.PlayerFarmerData.CurrentLevel > UtilsFarmer.MAX_LEVEL_FARMER)
         {
             return true;
         }
@@ -386,13 +325,6 @@ public static class UtilsPlayer
             case ID_MAGE_CASTSPEED:
             case ID_MAGE_SCHOLAR:
             case ID_MAGE_PROFICIENCY: return string.Format("{0} ({1})", GetStatNameById(id), AllText[text_name_class_mage]);
-
-            case ID_NECROMANCER_APTITUDE:
-            case ID_NECROMANCER_SUMMON:
-            case ID_NECROMANCER_MIGHT:
-            case ID_NECROMANCER_LIFESPAN:
-            case ID_NECROMANCER_HORDE:
-            case ID_NECROMANCER_LUCK: return string.Format("{0} ({1})", GetStatNameById(id), AllText[text_name_class_necromancer]);
         }
     }
     
@@ -433,13 +365,6 @@ public static class UtilsPlayer
             case ID_MAGE_CASTSPEED: return AllText[text_name_mage_stat_castspeed];
             case ID_MAGE_SCHOLAR: return AllText[text_name_mage_stat_scholar];
             case ID_MAGE_PROFICIENCY: return AllText[text_name_mage_stat_proficiency];
-
-            case ID_NECROMANCER_APTITUDE: return AllText[text_name_necromancer_stat_aptitude];
-            case ID_NECROMANCER_SUMMON: return AllText[text_name_necromancer_stat_summon];
-            case ID_NECROMANCER_MIGHT: return AllText[text_name_necromancer_stat_might];
-            case ID_NECROMANCER_LIFESPAN: return AllText[text_name_necromancer_stat_lifespan];
-            case ID_NECROMANCER_HORDE: return AllText[text_name_necromancer_stat_horde];
-            case ID_NECROMANCER_LUCK: return AllText[text_name_necromancer_stat_luck];
         }
     }
 
@@ -480,13 +405,6 @@ public static class UtilsPlayer
             case ID_MAGE_CASTSPEED: return AdvanceStatType.Flat;
             case ID_MAGE_SCHOLAR: return AdvanceStatType.Flat;
             case ID_MAGE_PROFICIENCY: return AdvanceStatType.Flat;
-
-            case ID_NECROMANCER_APTITUDE: return AdvanceStatType.Flat;
-            case ID_NECROMANCER_SUMMON: return AdvanceStatType.Multiplier;
-            case ID_NECROMANCER_MIGHT: return AdvanceStatType.Multiplier;
-            case ID_NECROMANCER_LIFESPAN: return AdvanceStatType.Multiplier;
-            case ID_NECROMANCER_HORDE: return AdvanceStatType.Flat;
-            case ID_NECROMANCER_LUCK: return AdvanceStatType.Multiplier;
         }
     }
 

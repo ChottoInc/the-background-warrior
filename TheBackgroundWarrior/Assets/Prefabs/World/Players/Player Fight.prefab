@@ -1230,8 +1230,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5127251890871797146}
   - component: {fileID: 5950147349660842820}
-  - component: {fileID: 279335825074649998}
-  - component: {fileID: 2994141653672892387}
   - component: {fileID: 4276897723236361461}
   - component: {fileID: 8443467059283833716}
   m_Layer: 6
@@ -1256,8 +1254,6 @@ Transform:
   m_Children:
   - {fileID: 3020779928748538253}
   - {fileID: 8105650710461182325}
-  - {fileID: 4125763291413042967}
-  - {fileID: 6282360022424781752}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5950147349660842820
@@ -1286,46 +1282,6 @@ MonoBehaviour:
   hpBar: {fileID: 5052471557200108800}
   _shieldBar: {fileID: 3352217282803660184}
   timerResetAfterDeath: 2
---- !u!114 &279335825074649998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3954496986689173045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39dd8586728d716429d74d9dae9d97e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dictTypeToPrefabs:
-  - spellType: 1
-    spellPrefab: {fileID: 6879071303538948278, guid: 7e824d32ff0bcdc428e6afc347375625, type: 3}
-  - spellType: 2
-    spellPrefab: {fileID: 3873890839360994229, guid: 5d97df315bb78df49a45ef86f3994db6, type: 3}
-  - spellType: 3
-    spellPrefab: {fileID: 744563587549577019, guid: c5a8311a39b6d2a4595f742bc441895a, type: 3}
-  - spellType: 4
-    spellPrefab: {fileID: 449462796423382893, guid: 368e2b4e191e9a947a7c7aff4565e999, type: 3}
-  - spellType: 5
-    spellPrefab: {fileID: 1479843785508081955, guid: bd8e525a897035b44b63f6b3af9f093b, type: 3}
-  _castPosition: {fileID: 4125763291413042967}
---- !u!114 &2994141653672892387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3954496986689173045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c2a693d37bb2e4495b431ae2197564, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnPoint: {fileID: 6282360022424781752}
-  _cooldownSummon: 30
-  _normalSummon: {fileID: 7761898860324777678, guid: ecce2158af3cef34b91c2f59f83451c0, type: 3}
-  _bigSummon: {fileID: 3591296753232894371, guid: 0f1f33306a770e342b7cf3e5e61b7d79, type: 3}
 --- !u!61 &4276897723236361461
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2286,37 +2242,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1.3, y: -0.168}
   m_SizeDelta: {x: 0.6079998, y: 0.59300005}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &7961403115922824536
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6282360022424781752}
-  m_Layer: 6
-  m_Name: Summon Spawn Position
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6282360022424781752
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7961403115922824536}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5127251890871797146}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8139408335174506587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2352,37 +2277,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.527, y: -0.71}
   m_SizeDelta: {x: 0.6079998, y: 0.59300005}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &8210265622919063652
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4125763291413042967}
-  m_Layer: 6
-  m_Name: Spell Shooter Position
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4125763291413042967
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8210265622919063652}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.24, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5127251890871797146}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8852047240703655986
 GameObject:
   m_ObjectHideFlags: 0

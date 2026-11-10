@@ -196,27 +196,6 @@ public class EditorQuestDailySO : Editor
                     EditorGUILayout.PropertyField(s_amountBefriend);
 
                     break;
-
-                case QuestObjectiveType.SpellRank:
-                    EditorGUILayout.Space();
-                    EditorGUILayout.PropertyField(s_questSpellSpecific);
-
-                    if (_quest.QuestData.questSpellSpecific)
-                    {
-                        EditorGUILayout.Space();
-                        EditorGUILayout.PropertyField(s_spellSO);
-                    }
-
-                    EditorGUILayout.Space();
-                    EditorGUILayout.PropertyField(s_amountRank);
-
-                    break;
-
-                case QuestObjectiveType.Summon:
-                    EditorGUILayout.Space();
-                    EditorGUILayout.PropertyField(s_amountSummon);
-
-                    break;
             }
         }
 

@@ -118,8 +118,6 @@ public class QuestManager : MonoBehaviour
     private PlayerBlacksmith playerBlacksmith;
     private PlayerFisher playerFisher;
     private PlayerFarmer playerFarmer;
-    private PlayerMage playerMage;
-    private PlayerNecromancer playerNecromancer;
 
 
 
@@ -179,12 +177,6 @@ public class QuestManager : MonoBehaviour
 
         if (playerFarmer != null)
             playerFarmer.OnStatChange -= questEventHandler.OnStatUp;
-
-        if (playerMage != null)
-            playerMage.OnStatChange -= questEventHandler.OnStatUp;
-
-        if (playerNecromancer != null)
-            playerNecromancer.OnStatChange -= questEventHandler.OnStatUp;
     }
 
     private void OnDestroy()
@@ -196,8 +188,6 @@ public class QuestManager : MonoBehaviour
         {
             PlayerManager.Instance.OnItemAdd -= questEventHandler.OnItemObtain;
             PlayerManager.Instance.OnCompanionBefriended -= questEventHandler.OnBefriend;
-            PlayerManager.Instance.OnSpellRankUp -= questEventHandler.OnSpellRankUp;
-            PlayerManager.Instance.OnSummon -= questEventHandler.OnSummon;
         }
     }
 
@@ -251,16 +241,6 @@ public class QuestManager : MonoBehaviour
                 playerFarmer = FindFirstObjectByType<PlayerFarmer>();
                 playerFarmer.OnStatChange += questEventHandler.OnStatUp;
                 break;
-
-            case SceneLoaderManager.SceneType.Mage:
-                playerMage = FindFirstObjectByType<PlayerMage>();
-                playerMage.OnStatChange += questEventHandler.OnStatUp;
-                break;
-
-            case SceneLoaderManager.SceneType.Necromancer:
-                playerNecromancer = FindFirstObjectByType<PlayerNecromancer>();
-                playerNecromancer.OnStatChange += questEventHandler.OnStatUp;
-                break;
         }
     }
 
@@ -277,8 +257,6 @@ public class QuestManager : MonoBehaviour
             {
                 PlayerManager.Instance.OnItemAdd += questEventHandler.OnItemObtain;
                 PlayerManager.Instance.OnCompanionBefriended += questEventHandler.OnBefriend;
-                PlayerManager.Instance.OnSpellRankUp += questEventHandler.OnSpellRankUp;
-                PlayerManager.Instance.OnSummon += questEventHandler.OnSummon;
                 isPlayerObserverInit = true;
             }
         }
@@ -783,11 +761,6 @@ public class QuestManager : MonoBehaviour
                         {
                             unlockMapUpdates.Add(next.UniqueId);
                         }
-
-                        if(IsRankUpSpellQuestCompleted(next.UniqueId, out int amountToTrigger))
-                        {
-                            rankUpQuests.Add(next.UniqueId, amountToTrigger);
-                        }
                     }
                 }
 
@@ -816,12 +789,6 @@ public class QuestManager : MonoBehaviour
             UpdateQuestAlreadyReachedMap(map);
         }
 
-        // update rank up quests
-        foreach (var pairSpellRankUp in rankUpQuests)
-        {
-            UpdateQuestRankUpSpell(pairSpellRankUp.Key, pairSpellRankUp.Value);
-        }
-
         SaveQuestsData();
     }
 
@@ -842,35 +809,6 @@ public class QuestManager : MonoBehaviour
     {
         QuestStorySO so = GetStoryQuestById(questId);
         questEventHandler.OnAddMap(so.QuestData.mapId);
-    }
-
-    private bool IsRankUpSpellQuestCompleted(string questId, out int amountToTrigger)
-    {
-        QuestStorySO nextSO = GetStoryQuestById(questId);
-        if (nextSO.QuestData.questObjectiveType == QuestObjectiveType.SpellRank)
-        {
-            PlayerMageData data = PlayerManager.Instance.PlayerMageData;
-            SpellData spellData = data.GetSpellByType(nextSO.QuestData.spellSO.SpellType);
-            if (spellData.CurrentRank + nextSO.QuestData.amountRank > spellData.SpellSO.MaxRank)
-            {
-                // once it detects rank is greater than max, return how many rank to trigger quest
-                // amount - (max - current) = amount to trigger quest
-                amountToTrigger = nextSO.QuestData.amountRank - (spellData.SpellSO.MaxRank - spellData.CurrentRank);
-                return true;
-            }
-        }
-        amountToTrigger = 0;
-        return false;
-    }
-
-    private void UpdateQuestRankUpSpell(string questId, int amountToTrigger)
-    {
-        QuestStorySO so = GetStoryQuestById(questId);
-
-        for (int i = 0; i < amountToTrigger; i++)
-        {
-            questEventHandler.OnSpellRankUp(so.QuestData.spellSO.Id);
-        }
     }
 
     #endregion

@@ -131,11 +131,6 @@ public class Enemy : MonoBehaviour, IPoolObject, IDamageable
         {
             CheckDeathVFX();
         }
-
-        if(enemyData != null)
-        {
-            CheckStatuses();
-        }
     }
 
     private void FixedUpdate()
@@ -261,49 +256,6 @@ public class Enemy : MonoBehaviour, IPoolObject, IDamageable
         else
         {
             timerDeathVFX -= Time.deltaTime;
-        }
-    }
-
-    private void CheckStatuses()
-    {
-        if(timerChilling > 0)
-        {
-            timerChilling -= Time.deltaTime;
-        }
-        else
-        {
-            enemyData.RemoveStatus(UtilsEnemy.EnemyAffectedStatus.Chilled);
-        }
-
-        if (timerPoisoned > 0)
-        {
-            timerPoisoned -= Time.deltaTime;
-        }
-        else
-        {
-            enemyData.RemoveStatus(UtilsEnemy.EnemyAffectedStatus.Poisoned);
-        }
-    }
-
-    /// <summary>
-    /// Check and adds statuses to enemy
-    /// </summary>
-    public void AddStatus(UtilsEnemy.EnemyAffectedStatus status)
-    {
-        if(!enemyData.HasStatus(status))
-        {
-            enemyData.AddStatus(status);
-
-            switch (status)
-            {
-                case UtilsEnemy.EnemyAffectedStatus.Chilled:
-                    timerChilling = UtilsEnemy.TIMER_CHILLED_STATUS;
-                    break;
-
-                case UtilsEnemy.EnemyAffectedStatus.Poisoned:
-                    timerPoisoned = UtilsEnemy.TIMER_POISONED_STATUS;
-                    break;
-            }
         }
     }
 

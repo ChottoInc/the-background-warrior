@@ -20,7 +20,6 @@ public static class UtilsSave
     public const string PLAYER_FISHER_FILE = "player_fisher.json";
     public const string PLAYER_FARMER_FILE = "player_farmer.json";
     public const string PLAYER_MAGE_FILE = "player_mage.json";
-    public const string PLAYER_NECROMANCER_FILE = "player_necromancer.json";
 
     public const string COMBATMAPS_FOLDER = "CombatMaps";
     public const string COMBATMAPS_EXT = ".json";
@@ -97,11 +96,6 @@ public static class UtilsSave
     public static string GetPlayerMageFile()
     {
         return GetPlayerFolder() + "/" + PLAYER_MAGE_FILE;
-    }
-
-    public static string GetPlayerNecromancerFile()
-    {
-        return GetPlayerFolder() + "/" + PLAYER_NECROMANCER_FILE;
     }
 
     // ----- MAPS

@@ -6,7 +6,7 @@ public static class UtilsQuest
 {
     public enum QuestType { Story, Daily, Bounties }
 
-    public enum QuestObjectiveType { Kill, Obtain, LevelUp, UnlockMap, Befriend, SpellRank, Craft, Summon }
+    public enum QuestObjectiveType { Kill, Obtain, LevelUp, UnlockMap, Befriend, Craft }
 
 
     private static QuestStorySO[] storySOs;
@@ -154,14 +154,6 @@ public static class UtilsQuest
             case QuestObjectiveType.Befriend:
                 result += string.Format("\n{0}/{1}", progress.progressCounter, data.amountBefriend);
                 break;
-
-            case QuestObjectiveType.SpellRank:
-                result += string.Format("\n{0}/{1}", progress.progressCounter, data.amountRank);
-                break;
-
-            case QuestObjectiveType.Summon:
-                result += string.Format("\n{0}/{1}", progress.progressCounter, data.amountSummon);
-                break;
         }
 
         return result;
@@ -185,17 +177,11 @@ public static class UtilsQuest
             case QuestObjectiveType.Befriend:
                 return HandleCounterQuestCheck(data.amountBefriend, progress.progressCounter);
 
-            case QuestObjectiveType.SpellRank:
-                return HandleCounterQuestCheck(data.amountRank, progress.progressCounter);
-
             case QuestObjectiveType.LevelUp:
                 return HandleCounterQuestCheck(data.amountStat, progress.progressCounter);
 
             case QuestObjectiveType.UnlockMap:
                 return HandleCompletedQuestCheck(progress.progressCompleted);
-
-            case QuestObjectiveType.Summon:
-                return HandleCounterQuestCheck(data.amountSummon, progress.progressCounter);
         }
     }
 
@@ -290,18 +276,6 @@ public static class UtilsQuest
         public CompanionSO companionSO;
 
         public int amountBefriend;
-
-        // --------- Quest Learn Spells ---------
-        public bool questSpellSpecific;
-
-        // --- Specific
-        public SpellSO spellSO;
-
-        public int amountRank;
-
-        // --------- Quest Summon ---------
-
-        public int amountSummon;
 
 
         // --------- Reward ---------

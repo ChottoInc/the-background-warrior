@@ -84,6 +84,7 @@ public class FishSpawnManager : MonoBehaviour
         CaughtFishesSession = new List<FishSO>();
 
         // set pool
+        FillPool();
 
         timer20Seconds = UtilsGeneral.TIMER_20SECONDS;
 

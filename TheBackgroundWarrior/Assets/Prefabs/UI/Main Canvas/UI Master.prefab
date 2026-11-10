@@ -219,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3414337755123211944, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
       propertyPath: _buttonJobs.Array.size
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3414337755123211944, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
       propertyPath: _buttonJobs.Array.data[0]
@@ -228,35 +228,23 @@ PrefabInstance:
     - target: {fileID: 3414337755123211944, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
       propertyPath: _buttonJobs.Array.data[1]
       value: 
-      objectReference: {fileID: 2981666495634759749}
+      objectReference: {fileID: 9205754114628927803}
     - target: {fileID: 3414337755123211944, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
       propertyPath: _buttonJobs.Array.data[2]
       value: 
-      objectReference: {fileID: 9205754114628927803}
+      objectReference: {fileID: 364955478443318116}
     - target: {fileID: 3414337755123211944, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
       propertyPath: _buttonJobs.Array.data[3]
       value: 
-      objectReference: {fileID: 364955478443318116}
+      objectReference: {fileID: 8582305010957864898}
     - target: {fileID: 3414337755123211944, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
       propertyPath: _buttonJobs.Array.data[4]
       value: 
-      objectReference: {fileID: 8582305010957864898}
+      objectReference: {fileID: 3867134467389671803}
     - target: {fileID: 3414337755123211944, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
       propertyPath: _buttonJobs.Array.data[5]
       value: 
       objectReference: {fileID: 3867134467389671803}
-    - target: {fileID: 3414337755123211944, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
-      propertyPath: _buttonJobs.Array.data[6]
-      value: 
-      objectReference: {fileID: 6744445849496903041}
-    - target: {fileID: 3414337755123211944, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
-      propertyPath: _buttonJobs.Array.data[7]
-      value: 
-      objectReference: {fileID: 3784116977741224296}
-    - target: {fileID: 3414337755123211944, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
-      propertyPath: _buttonJobs.Array.data[8]
-      value: 
-      objectReference: {fileID: 3784116977741224296}
     - target: {fileID: 3429660195617894584, guid: 85f7fcca0e5ed3e4b863fcebf17ea74a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -13048,28 +13036,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a591b5f66975ac44ab0f4900d55e619f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2981666495634759749 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5272458496350884938, guid: 93335f3fe656432418366433ef55652f, type: 3}
-  m_PrefabInstance: {fileID: 6938508740308136975}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a43314fac9b2e469ceb6dc07fe0644, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3784116977741224296 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6109531637543349607, guid: 93335f3fe656432418366433ef55652f, type: 3}
-  m_PrefabInstance: {fileID: 6938508740308136975}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a43314fac9b2e469ceb6dc07fe0644, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3867134467389671803 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6188045664969833844, guid: 93335f3fe656432418366433ef55652f, type: 3}
@@ -13123,17 +13089,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfd1c889f7bc86b498c903bfc1075a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6744445849496903041 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4455077304055146894, guid: 93335f3fe656432418366433ef55652f, type: 3}
-  m_PrefabInstance: {fileID: 6938508740308136975}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a43314fac9b2e469ceb6dc07fe0644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8582305010957864898 stripped

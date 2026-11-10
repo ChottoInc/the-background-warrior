@@ -181,15 +181,6 @@ public class EnemyData
 
         OnTakeDamage?.Invoke(GetDisplayDamage(total));
 
-        // heal warrior if poisoned
-        if (HasStatus(UtilsEnemy.EnemyAffectedStatus.Poisoned))
-        {
-            var poisonSpell = PlayerManager.Instance.PlayerMageData.GetSpellByType(UtilsMage.MageSpellType.PoisonGas);
-            float healBy = data.MaxHp * poisonSpell.PercentageLifesteal;
-            //Debug.Log("player heals by" + poisonSpell.PercentageLifesteal.ToString() + " for: " + healBy);
-            data.Heal(healBy);
-        }
-
         CurrentHp = Mathf.Max(CurrentHp, 0f);
     }
 
@@ -238,41 +229,11 @@ public class EnemyData
         CurrentHp = Mathf.Max(CurrentHp, 1f);
     }
 
-    public void TakeDamage(SummonData data)
-    {
-        if (CurrentHp <= 0) return;
-        
-        // can't take less than 0 or it will cure
-        float total = MaxHp * data.CurrentAtkPerc;
-
-        total = Mathf.Max(0f, total);
-        //Debug.Log("Total dmg: " + total);
-
-        // subtract total to hp
-        CurrentHp -= total;
-
-        OnTakeDamage?.Invoke(GetDisplayDamage(total));
-
-        // companions can't kill enemies, at most they reach 1 hp
-        //CurrentHp = Mathf.Max(CurrentHp, 1f);
-
-        // set to 0 if lower
-        CurrentHp = Mathf.Max(CurrentHp, 0f);
-    }
-
     public void TakeDamageFromSpell(float damage)
     {
         if (CurrentHp <= 0) return;
 
         float total = damage;
-
-        if (HasStatus(UtilsEnemy.EnemyAffectedStatus.Chilled))
-        {
-            var chillWindSpell = PlayerManager.Instance.PlayerMageData.GetSpellByType(UtilsMage.MageSpellType.ChillWind);
-            total += total * chillWindSpell.PercentageMoreDamageFromSpells;
-            //Debug.Log("enemy affcted by chilled");
-            //Debug.Log("increase by: " + chillWindSpell.PercentageMoreDamageFromSpells);
-        }
 
         total = Mathf.Max(0f, total);
 
@@ -285,21 +246,6 @@ public class EnemyData
 
         // set to 0 if lower
         CurrentHp = Mathf.Max(CurrentHp, 0f);
-    }
-
-    public bool HasStatus(UtilsEnemy.EnemyAffectedStatus status)
-    {
-        return _affectedStatuses.Contains(status);
-    }
-
-    public void AddStatus(UtilsEnemy.EnemyAffectedStatus status)
-    {
-        _affectedStatuses.Add(status);
-    }
-
-    public void RemoveStatus(UtilsEnemy.EnemyAffectedStatus status)
-    {
-        _affectedStatuses.Remove(status);
     }
 
     public void SetDead()

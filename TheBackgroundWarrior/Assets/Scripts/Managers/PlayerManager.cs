@@ -26,18 +26,12 @@ public class PlayerManager : MonoBehaviour
 
     public PlayerFarmerData PlayerFarmerData { get; private set; }
 
-    public PlayerMageData PlayerMageData { get; private set; }
-
-    public PlayerNecromancerData PlayerNecromancerData { get; private set; }
-
 
 
     // TRIGGERS FOR QUESTS
 
     public event Action<int> OnItemAdd;
     public event Action<int> OnCompanionBefriended;
-    public event Action<int> OnSpellRankUp;
-    public event Action<int> OnSummon;
 
 
 
@@ -114,8 +108,6 @@ public class PlayerManager : MonoBehaviour
             LoadBlacksmithData();
             LoadFisherData();
             LoadFarmerData();
-            LoadMageData();
-            LoadNecromancerData();
 
             LoadFightData();
         }
@@ -419,90 +411,6 @@ public class PlayerManager : MonoBehaviour
 
     #endregion
 
-    #region MAGE DATA
-
-    private void LoadMageData()
-    {
-        try
-        {
-            PlayerMageSaveData mageSaveData = saveService.LoadData<PlayerMageSaveData>(UtilsSave.GetPlayerMageFile(), SettingsManager.Instance.FileEncryption);
-            PlayerMageData = new PlayerMageData(mageSaveData);
-        }
-        catch (ConversionException e)
-        {
-            Debug.LogError(e.Message);
-            throw new FatalLoadException("Cannot load mage data");
-        }
-        catch (FileNotFoundException e)
-        {
-            Debug.LogWarning(e.Message);
-
-            PlayerMageData = new PlayerMageData();
-            SaveMageData();
-        }
-    }
-
-    public void UpdateMageData(PlayerMageData data)
-    {
-        PlayerMageData = data;
-        SaveMageData();
-    }
-
-    public void SaveMageData()
-    {
-        PlayerMageSaveData data = new PlayerMageSaveData(PlayerMageData);
-        saveService.SaveData(UtilsSave.GetPlayerMageFile(), data, SettingsManager.Instance.FileEncryption);
-    }
-
-    public void OnSpellRankUpEvent(int spell)
-    {
-        OnSpellRankUp?.Invoke(spell);
-    }
-
-    #endregion
-
-    #region NECROMANCER DATA
-
-    private void LoadNecromancerData()
-    {
-        try
-        {
-            PlayerNecromancerSaveData necromancerSaveData = saveService.LoadData<PlayerNecromancerSaveData>(UtilsSave.GetPlayerNecromancerFile(), SettingsManager.Instance.FileEncryption);
-            PlayerNecromancerData = new PlayerNecromancerData(necromancerSaveData);
-        }
-        catch (ConversionException e)
-        {
-            Debug.LogError(e.Message);
-            throw new FatalLoadException("Cannot load necromancer data");
-        }
-        catch (FileNotFoundException e)
-        {
-            Debug.LogWarning(e.Message);
-
-            PlayerNecromancerData = new PlayerNecromancerData();
-            SaveNecromancerData();
-        }
-    }
-
-    public void UpdateNecromancerData(PlayerNecromancerData data)
-    {
-        PlayerNecromancerData = data;
-        SaveNecromancerData();
-    }
-
-    public void SaveNecromancerData()
-    {
-        PlayerNecromancerSaveData data = new PlayerNecromancerSaveData(PlayerNecromancerData);
-        saveService.SaveData(UtilsSave.GetPlayerNecromancerFile(), data, SettingsManager.Instance.FileEncryption);
-    }
-
-    public void OnSummonEvent(int amount)
-    {
-        OnSummon?.Invoke(amount);
-    }
-
-    #endregion
-
     public void SaveAll()
     {
         SaveInventoryData();
@@ -512,8 +420,6 @@ public class PlayerManager : MonoBehaviour
         SaveBlacksmithData();
         SaveFisherData();
         SaveFarmerData();
-        SaveMageData();
-        SaveNecromancerData();
 
         SaveJobsData();
     }

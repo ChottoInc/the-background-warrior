@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoaderManager : MonoBehaviour
 {
-    public enum SceneType { Home, CombatMap, Miner, Blacksmith, Fisher, Farmer, Mage, Necromancer }
+    public enum SceneType { Home, CombatMap, Miner, Blacksmith, Fisher, Farmer }
 
 
     [SerializeField] Material fadeMaterial;
@@ -82,14 +82,11 @@ public class SceneLoaderManager : MonoBehaviour
                 default: Debug.Log("Current scene type isn't allowed"); break;
                 case SceneType.CombatMap: 
                     CombatManager.Instance.HandleSwitchScene();
-                    FindFirstObjectByType<PlayerWarriorSpells>().IsChangingScene = true;
                     break;
                 case SceneType.Miner: SmashManager.Instance.HandleSwitchScene(); break;
                 case SceneType.Blacksmith: FindFirstObjectByType<PlayerBlacksmith>().HandleSwitchScene(); break;
                 case SceneType.Fisher: break;
                 case SceneType.Farmer: break;
-                case SceneType.Mage: break;     //TODO: ADD handle switch scene
-                case SceneType.Necromancer: break;
             }
         }
 
@@ -131,14 +128,11 @@ public class SceneLoaderManager : MonoBehaviour
                 default: Debug.Log("Current scene type isn't allowed"); break;
                 case SceneType.CombatMap: 
                     CombatManager.Instance.HandleSwitchScene();
-                    FindFirstObjectByType<PlayerWarriorSpells>().IsChangingScene = true;
                     break;
                 case SceneType.Miner: SmashManager.Instance.HandleSwitchScene(); break;
                 case SceneType.Blacksmith: FindFirstObjectByType<PlayerBlacksmith>().HandleSwitchScene(); break;
                 case SceneType.Fisher: break;
                 case SceneType.Farmer: break;
-                case SceneType.Mage: break;     //TODO: ADD handle switch scene
-                case SceneType.Necromancer: break;
             }
         }
 
@@ -219,14 +213,6 @@ public class SceneLoaderManager : MonoBehaviour
 
                 case SceneType.Farmer:
                     FindFirstObjectByType<PlayerFarmer>().Setup(PlayerManager.Instance.PlayerFarmerData);
-                    break;
-
-                case SceneType.Mage:
-                    FindFirstObjectByType<PlayerMage>().Setup(PlayerManager.Instance.PlayerMageData);
-                    break;
-
-                case SceneType.Necromancer:
-                    FindFirstObjectByType<PlayerNecromancer>().Setup(PlayerManager.Instance.PlayerNecromancerData);
                     break;
             }
 
