@@ -113,10 +113,10 @@ public static class UtilsBlacksmith
         GROWTH_AMOUNT_BLACKSMITH_GEAR_PER_LEVEL_GOLD
     };
 
-    public static int BLACKSMITH_HELMET_MAX_LEVEL = 10;
-    public static int BLACKSMITH_ARMOR_MAX_LEVEL = 10;
-    public static int BLACKSMITH_GLOVES_MAX_LEVEL = 10;
-    public static int BLACKSMITH_BOOTS_MAX_LEVEL = 10;
+    public static int BLACKSMITH_HELMET_MAX_LEVEL = 5;
+    public static int BLACKSMITH_ARMOR_MAX_LEVEL = 5;
+    public static int BLACKSMITH_GLOVES_MAX_LEVEL = 5;
+    public static int BLACKSMITH_BOOTS_MAX_LEVEL = 5;
 
 
     private static PlayerJobBlacksmithSO jobDataSO;

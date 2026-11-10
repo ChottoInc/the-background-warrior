@@ -56,7 +56,7 @@ public static class UtilsMiner
 
     public const int ID_MINER_WEAPON = 0;
 
-    public const int MINER_WEAPON_MAX_LEVEL = 10;
+    public const int MINER_WEAPON_MAX_LEVEL = 5;
 
     /*
      * The first requirements for level up the miner weapon are manually set, 
