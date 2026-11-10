@@ -18,7 +18,7 @@ MonoBehaviour:
     questObjectiveType: 0
     questKillSpecific: 1
     monsterId: 2
-    amountKill: 500
+    amountKill: 350
     itemType: 0
     questObtainSpecific: 0
     itemId: 0

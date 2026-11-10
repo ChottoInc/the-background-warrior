@@ -9999,6 +9999,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8994874784109524261, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
+      propertyPath: panelAutoBattleWorld
+      value: 
+      objectReference: {fileID: 3577316717385707924}
     - target: {fileID: 9023538411496176118, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -10141,6 +10145,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7666e2de303501c4ebe1577ea8323f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3577316717385707924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6364046298107711576, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
+  m_PrefabInstance: {fileID: 3577316717385707922}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827974397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: babb8f3bce7f0214aa6722843f9d49ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4092295095973286758

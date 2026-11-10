@@ -40,6 +40,7 @@ public class UITabSettingsGeneral : UITabWindow
 
     public void OnLanguageChange(int index)
     {
+        AudioManager.Instance.PlayClickUI();
         SettingsManager.Instance.SetLanguage((UtilsGeneral.Language)index);
     }
 

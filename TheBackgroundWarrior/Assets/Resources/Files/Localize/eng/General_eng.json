@@ -159,7 +159,7 @@
     "text_job_farmer_companion_equipped": "Equipped",
     "text_job_fisher_raritytooltip": "<color=#{1}>{2}</color><br>",
     "text_job_fisher_spawntime": "Spawn time: {3}",
-    "text_job_fisher_waittime": "Average time: ~{0}m{1}s",
+    "text_job_fisher_waittime": "Avg time: ~{0}m{1}s",
     "text_button_new": "New",
     "text_button_continue": "Continue",
     "text_button_quit": "Quit",

@@ -36,7 +36,7 @@ public class PlayerFarmer : Player
     private bool isWalking;
     private float timerWatering;
 
-    private bool _needResetCrop;
+    //private bool _needResetCrop;
 
     private enum FarmerAction { None, Sowing, Mowing, Watering }
 
@@ -59,11 +59,17 @@ public class PlayerFarmer : Player
 
     private Queue<Transform> farmPlotsToMow;
     private Queue<CropSlotData> farmPlotsToMowData;
+    private Queue<bool> farmPlotsToMowReset;
     private int currentFarmPlotToMow;
 
     private Queue<Transform> farmPlotsToSow;
     private Queue<CropSlotData> farmPlotsToSowData;
     private int currentFarmPlotToSow;
+
+
+    private Coroutine _wateringRoutine;
+
+
 
     public event Action<int, int> OnStatChange;
 
@@ -105,10 +111,7 @@ public class PlayerFarmer : Player
         {
             if(currentAction == FarmerAction.Watering)
             {
-                // stop watering animation
-                StopCoroutine(nameof(CoWaitWateringAnimation));
-                animator.SetTrigger("Idle");
-                _isPerformingAction = false;
+                StopWatering();
             }
 
             currentAction = nextActions.Dequeue();
@@ -117,9 +120,10 @@ public class PlayerFarmer : Player
 
         if(timerWatering <= 0)
         {
-            if(currentAction == FarmerAction.None)
+            if (currentAction == FarmerAction.None && nextActions.Count == 0)
             {
                 currentAction = FarmerAction.Watering;
+                CheckAction();
             }
 
             timerWatering = GetRandomWateringTime();
@@ -142,6 +146,17 @@ public class PlayerFarmer : Player
         {
             timer5Mins -= Time.deltaTime;
         }
+    }
+
+    private void StopWatering()
+    {
+        if (_wateringRoutine != null)
+        {
+            StopCoroutine(_wateringRoutine);
+            _wateringRoutine = null;
+        }
+        animator.SetTrigger("Idle");
+        _isPerformingAction = false;
     }
 
     public void Setup(PlayerFarmerData playerData)
@@ -296,7 +311,7 @@ public class PlayerFarmer : Player
                 animator.SetBool("isWalking", isWalking);
 
                 // wait for mow animation and call next farm plot
-                StartCoroutine(CoWaitWateringAnimation());
+                _wateringRoutine = StartCoroutine(CoWaitWateringAnimation());
             }
         }
     }
@@ -347,10 +362,11 @@ public class PlayerFarmer : Player
 
     public void AddMow(CropSlotData cropSlotData, Transform[] farmPlots, bool needResetCrop)
     {
-        _needResetCrop = needResetCrop;
+        //_needResetCrop = needResetCrop;
 
         farmPlotsToMow ??= new Queue<Transform>();
         farmPlotsToMowData ??= new Queue<CropSlotData>();
+        farmPlotsToMowReset ??= new Queue<bool>();
 
         foreach (var farmPlot in farmPlots)
         {
@@ -358,6 +374,7 @@ public class PlayerFarmer : Player
         }
 
         farmPlotsToMowData.Enqueue(cropSlotData);
+        farmPlotsToMowReset.Enqueue(needResetCrop);
 
         // enqueue the next action
         nextActions.Enqueue(FarmerAction.Mowing);
@@ -451,10 +468,7 @@ public class PlayerFarmer : Player
 
             // reset action
             currentAction = FarmerAction.None;
-        }
 
-        if (farmPlotsToSow.Count == 0)
-        {
             GenerateNewTarget();
         }
         else
@@ -479,20 +493,18 @@ public class PlayerFarmer : Player
         {
             currentFarmPlotToMow = 0;
             CropSlotData slotData = farmPlotsToMowData.Dequeue();
+            bool needReset = farmPlotsToMowReset.Dequeue();
 
             // harvest
-            Harvest(slotData);
+            Harvest(slotData, needReset);
 
             // reset crop
-            if(_needResetCrop)
+            if(needReset)
                 ResetCrop(slotData);
 
             // reset action
             currentAction = FarmerAction.None;
-        }
 
-        if (farmPlotsToMow.Count == 0)
-        {
             GenerateNewTarget();
         }
         else
@@ -518,12 +530,14 @@ public class PlayerFarmer : Player
 
         GenerateNewTarget();
 
+        _wateringRoutine = null;
+
         _isPerformingAction = false;
     }
 
-    private void Harvest(CropSlotData slotData)
+    private void Harvest(CropSlotData slotData, bool needReset)
     {
-        if (_needResetCrop)
+        if (needReset)
         {
             // Add only 4 if has been befriended companion
             PlayerManager.Instance.Inventory.AddItem(slotData.cropData.CropSO.Id, 4);

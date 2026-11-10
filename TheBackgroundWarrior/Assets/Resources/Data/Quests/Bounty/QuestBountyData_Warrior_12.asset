@@ -18,7 +18,7 @@ MonoBehaviour:
     questObjectiveType: 0
     questKillSpecific: 1
     monsterId: 14
-    amountKill: 500
+    amountKill: 350
     itemType: 0
     questObtainSpecific: 0
     itemId: 0
@@ -34,4 +34,4 @@ MonoBehaviour:
     spellSO: {fileID: 0}
     amountRank: 0
     amountSummon: 0
-    rewardAmount: 1122
+    rewardAmount: 12

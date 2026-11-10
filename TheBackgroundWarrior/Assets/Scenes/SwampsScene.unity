@@ -633,6 +633,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5120034971574508151, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5231971103517338649, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -781,11 +785,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8994874784109524261, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
+      propertyPath: panelAutoBattleWorld
+      value: 
+      objectReference: {fileID: 543276740}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
+--- !u!114 &543276740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6364046298107711576, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
+  m_PrefabInstance: {fileID: 543276739}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: babb8f3bce7f0214aa6722843f9d49ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &613705248 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3547689072938405950, guid: 9cd320b08c35d364ba88c4826e13a4e3, type: 3}
@@ -995,21 +1014,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1932133611}
   mapEnemies: {fileID: 11400000, guid: f66ac02eb0232ec48b06bff8c8953dc0, type: 2}
-  possibleCards:
-  - value: {fileID: 11400000, guid: e780a453741fb1e469b287b297bb344d, type: 2}
-    chanches: 25
-  - value: {fileID: 11400000, guid: c43308c0b16433b4b93e0803a94098ac, type: 2}
-    chanches: 25
-  - value: {fileID: 11400000, guid: 548073278469c4749b5398dff65d0dbc, type: 2}
-    chanches: 15
-  - value: {fileID: 11400000, guid: 21e7a6e7579fde34f869aca87d09f7d5, type: 2}
-    chanches: 15
-  - value: {fileID: 11400000, guid: 27f12bb0b241f4345b668debbaed6a43, type: 2}
-    chanches: 10
-  - value: {fileID: 11400000, guid: 3fa357437001275478e00cee6e8cbf6e, type: 2}
-    chanches: 5
-  - value: {fileID: 11400000, guid: 65818a57813af664eb197d1577a6426b, type: 2}
-    chanches: 5
   _mapCards: {fileID: 11400000, guid: fc60dfc12b922a042832c31afa0f4660, type: 2}
   textStage: {fileID: 1766436182630433080}
 --- !u!1 &724187343
