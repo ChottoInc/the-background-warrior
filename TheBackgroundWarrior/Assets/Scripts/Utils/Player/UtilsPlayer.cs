@@ -382,7 +382,7 @@ public static class UtilsPlayer
             case ID_WARRIOR_LUCK: return AdvanceStatType.Multiplier;
 
             case ID_MINER_POWER: return AdvanceStatType.Flat;
-            case ID_MINER_SMASHSPEED: return AdvanceStatType.Flat;
+            case ID_MINER_SMASHSPEED: return AdvanceStatType.Multiplier;
             case ID_MINER_SHOCKWAVE: return AdvanceStatType.Multiplier;
             case ID_MINER_LUCK: return AdvanceStatType.Multiplier;
 

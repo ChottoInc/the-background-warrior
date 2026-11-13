@@ -29,9 +29,5 @@ MonoBehaviour:
     mapId: 0
     questBefriendSpecific: 0
     companionSO: {fileID: 0}
-    amountBefriend: 10
-    questSpellSpecific: 0
-    spellSO: {fileID: 0}
-    amountRank: 0
-    amountSummon: 0
+    amountBefriend: 5
     rewardAmount: 0

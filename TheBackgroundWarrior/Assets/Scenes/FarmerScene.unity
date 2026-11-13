@@ -5146,6 +5146,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3571909012638661717}
     - target: {fileID: 7000263470824527091, guid: 0ee1977df358bb34bbe29cc6b37b4a07, type: 3}
+      propertyPath: maxLureCooldown
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000263470824527091, guid: 0ee1977df358bb34bbe29cc6b37b4a07, type: 3}
+      propertyPath: minLureCooldown
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000263470824527091, guid: 0ee1977df358bb34bbe29cc6b37b4a07, type: 3}
       propertyPath: alwaysBefriendCheat
       value: 0
       objectReference: {fileID: 0}

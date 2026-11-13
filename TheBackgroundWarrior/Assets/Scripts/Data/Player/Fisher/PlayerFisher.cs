@@ -174,6 +174,7 @@ public class PlayerFisher : Player
     {
         long rewardedExp;
 
+
         // Add fish to caught
         PlayerManager.Instance.Inventory.AddItem(hookedFish.Id, 1);
 
