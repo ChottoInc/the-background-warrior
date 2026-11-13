@@ -362,11 +362,14 @@ public static class UtilsText
 
 
     public const string text_job_mage_spell_locked = "text_job_mage_spell_locked";
+    public const string text_job_mage_spell_warriorcooldown = "text_job_mage_spell_warriorcooldown";
+
     public const string text_job_alchemist_recipe_locked = "text_job_alchemist_recipe_locked";
+    public const string text_job_alchemist_ingredients = "text_job_alchemist_ingredients";
+
     public const string text_job_necromancer_ritual_locked = "text_job_necromancer_ritual_locked";
 
 
-    public const string text_job_alchemist_ingredients = "text_job_alchemist_ingredients";
 
 
     // -------------------- BUTTONS --------------------- //
@@ -1422,7 +1425,11 @@ public static class UtilsText
 
 
             { text_job_mage_spell_locked, "Spell locked" },
+            { text_job_mage_spell_warriorcooldown, "Warrior cooldown: {0}" },
+
             { text_job_alchemist_recipe_locked, "Recipe not available" },
+            { text_job_alchemist_ingredients, "Ingredients" },
+
             { text_job_necromancer_ritual_locked, "Ritual locked" },
 
 
@@ -1430,7 +1437,6 @@ public static class UtilsText
             { text_job_fisher_spawntime, "Spawn time: {3}" },
             { text_job_fisher_waittime, "Average time: ~{0}m{1}s" },
 
-            { text_job_alchemist_ingredients, "Ingredients" },
 
             
             // -------------------- BUTTONS --------------------- //

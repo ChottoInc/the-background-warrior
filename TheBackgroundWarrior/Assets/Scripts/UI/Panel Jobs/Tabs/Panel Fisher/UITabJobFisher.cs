@@ -8,7 +8,12 @@ public class UITabJobFisher : UITabWindow
     [SerializeField] UITabPlayerJob panelJob;
 
     [Space(10)]
-    [SerializeField] TMP_Text textAvailableFishes;
+    //[SerializeField] TMP_Text textAvailableFishes;
+
+    [SerializeField] GameObject _availableFishPrefab;
+    [SerializeField] Transform _containerAvailable;
+
+    private List<GameObject> _availableFishes;
 
     [Space(10)]
     [SerializeField] GameObject fishGroupPrefab;
@@ -74,7 +79,9 @@ public class UITabJobFisher : UITabWindow
 
     private void FillAvailables()
     {
-        string result = "";
+        _availableFishes = ClearList(_availableFishes);
+
+        //string result = "";
 
         // Get day moment
         UtilsGeneral.DayMoment currentMoment = UtilsGeneral.GetDayMoment();
@@ -87,18 +94,46 @@ public class UITabJobFisher : UITabWindow
         foreach (var fish in availables)
         {
             string name = fish.ItemName;
+            string coloredName = string.Format(
+                "<color=#{0}>{1}</color>\n",      // name and rarity
 
+                UtilsItem.GetFishRarityColor(fish.FishRarity),
+                name
+            );
+
+            GameObject prefab = Instantiate(_availableFishPrefab, transform.position, Quaternion.identity);
+            prefab.transform.SetParent(_containerAvailable);
+
+            prefab.transform.localScale = new Vector3(1, 1, 1);
+            prefab.SetActive(true);
+
+            if (prefab.TryGetComponent(out UIFisherAvailableFishPrefab obj))
+            {
+                obj.Setup(coloredName, PlayerManager.Instance.Inventory.HasItem(fish.Id));
+            }
+            _availableFishes.Add(prefab);
+
+            /*
             if (PlayerManager.Instance.Inventory.HasItem(fish.Id))
             {
-                result += string.Format("<color=#FFFFFF>{0}</color>\n", name);
+                
+                string singleLine = string.Format(
+                "<color=#{0}>{1}</color>\n",      // name and rarity
+
+                UtilsItem.GetFishRarityColor(fish.FishRarity),
+                name
+                );
+                
+                //result += singleLine;
+                //result += string.Format("<color=#FFFFFF>{0}</color>\n", name);
             }
             else
             {
-                result += string.Format("<color=#878787>{0}</color>\n", name);
-            }
+                //result += string.Format("<color=#878787>{0}</color>\n", name);
+            }*/
         }
 
-        textAvailableFishes.text = result;
+        //textAvailableFishes.text = result;
     }
 
     private void RefreshGroups()
@@ -148,10 +183,12 @@ public class UITabJobFisher : UITabWindow
 
     public void OnButtonFish()
     {
+        if (player != null) return;
+        /*
         if (player != null)
         {
             panelJob.OnButtonClose(false);
-        }
+        }*/
 
         LastSceneSettings settings = new LastSceneSettings();
         settings.lastSceneName = "FisherScene";

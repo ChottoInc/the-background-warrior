@@ -8,7 +8,7 @@ public class UIBaseTooltipName : MonoBehaviour, ITooltipNameable
 
     private void OnDisable()
     {
-        OnPointerExit(null);
+        //OnPointerExit(null);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

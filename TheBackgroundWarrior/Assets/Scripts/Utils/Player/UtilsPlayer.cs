@@ -500,7 +500,7 @@ public static class UtilsPlayer
             case ID_WARRIOR_LUCK: return AdvanceStatType.Multiplier;
 
             case ID_MINER_POWER: return AdvanceStatType.Flat;
-            case ID_MINER_SMASHSPEED: return AdvanceStatType.Flat;
+            case ID_MINER_SMASHSPEED: return AdvanceStatType.Multiplier;
             case ID_MINER_SHOCKWAVE: return AdvanceStatType.Multiplier;
             case ID_MINER_LUCK: return AdvanceStatType.Multiplier;
 
@@ -520,7 +520,7 @@ public static class UtilsPlayer
             case ID_FARMER_LUCK: return AdvanceStatType.Multiplier;
 
             case ID_MAGE_INSIGHT: return AdvanceStatType.Multiplier;
-            case ID_MAGE_CASTSPEED: return AdvanceStatType.Flat;
+            case ID_MAGE_CASTSPEED: return AdvanceStatType.Multiplier;
             case ID_MAGE_SCHOLAR: return AdvanceStatType.Flat;
             case ID_MAGE_PROFICIENCY: return AdvanceStatType.Flat;
 

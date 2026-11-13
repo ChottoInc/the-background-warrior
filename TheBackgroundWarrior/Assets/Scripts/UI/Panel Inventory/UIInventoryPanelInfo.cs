@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class UIInventoryPanelInfo : MonoBehaviour
 {
     [SerializeField] UITabInventory tabInventory;
+    [SerializeField] UIPanelItems _panelItems;
 
     [Space(10)]
     [SerializeField] Image imageItem;
@@ -75,6 +76,8 @@ public class UIInventoryPanelInfo : MonoBehaviour
         {
             PlayerManager.Instance.Inventory.RemoveItem(itemSO.Id, 1);
             PlayerManager.Instance.SaveInventoryData();
+
+            _panelItems.RefreshItemAfterUse();
 
             Setup(group);
         }

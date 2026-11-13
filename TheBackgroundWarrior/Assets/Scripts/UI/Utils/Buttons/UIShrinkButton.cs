@@ -35,7 +35,7 @@ public class UIShrinkButton : Button
 
         tweenScale?.Kill();
 
-        tweenScale = transform.DOScale(startScale * multiplier, timerShrink).SetEase(Ease.InOutSine).SetUpdate(true);
+        tweenScale = transform.DOScale(startScale * multiplier, timerShrink).SetEase(Ease.InOutSine).SetUpdate(true).SetLink(gameObject, LinkBehaviour.KillOnDestroy);
     }
 
     public override void OnPointerClick(PointerEventData eventData)
@@ -52,7 +52,7 @@ public class UIShrinkButton : Button
 
         transform.localScale = startScale;
 
-        tweenScale = transform.DOScale(startScale * multiplier, timerShrink).SetEase(Ease.InOutSine).SetUpdate(true);
+        tweenScale = transform.DOScale(startScale * multiplier, timerShrink).SetEase(Ease.InOutSine).SetUpdate(true).SetLink(gameObject, LinkBehaviour.KillOnDestroy);
 
         tweenScale.OnComplete(() =>
         {
@@ -67,7 +67,7 @@ public class UIShrinkButton : Button
 
         tweenScale?.Kill();
 
-        tweenScale = transform.DOScale(startScale, timerShrink).SetEase(Ease.InOutSine).SetUpdate(true).OnComplete(() =>
+        tweenScale = transform.DOScale(startScale, timerShrink).SetEase(Ease.InOutSine).SetUpdate(true).SetLink(gameObject, LinkBehaviour.KillOnDestroy).OnComplete(() =>
         {
             if (transform.TryGetComponent(out UISelfIncreaseObject incrObj))
             {

@@ -68,7 +68,7 @@ public class UIPanelObtained : MonoBehaviour
             objectToMove.SetActive(true);
 
             // move and hide at the end
-            tweenMovement = objectToMove.transform.DOMove(endContentPos.position, moveTime).SetEase(Ease.InOutSine).OnComplete(() =>
+            tweenMovement = objectToMove.transform.DOMove(endContentPos.position, moveTime).SetEase(Ease.InOutSine).SetLink(gameObject, LinkBehaviour.KillOnDestroy).OnComplete(() =>
             {
                 objectToMove.SetActive(false);
                 isAnimating = false;

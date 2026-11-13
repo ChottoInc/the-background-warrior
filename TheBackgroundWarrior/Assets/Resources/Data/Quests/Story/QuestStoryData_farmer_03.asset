@@ -30,7 +30,7 @@ MonoBehaviour:
     mapId: 1
     questBefriendSpecific: 1
     companionSO: {fileID: 11400000, guid: 752ba2c10e4afdd4fa8bb4344884194f, type: 2}
-    amountBefriend: 10
+    amountBefriend: 27
     questSpellSpecific: 0
     spellSO: {fileID: 0}
     amountRank: 0

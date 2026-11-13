@@ -7822,6 +7822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tabInventory: {fileID: 8171079448344253253}
+  _panelItems: {fileID: 7050028353446223105}
   imageItem: {fileID: 6276652463356253901}
   textAmount: {fileID: 4774141075140313057}
   textName: {fileID: 8352153841173432140}

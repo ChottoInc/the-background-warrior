@@ -14,6 +14,7 @@ public class UIPanelItems : MonoBehaviour
     private List<ItemGroup> itemGroups;
 
     private UITabInventory.InventoryItemType _currentInvFilter;
+    private ItemGroup _currentSelectedGroup;
 
     [Space(10)]
     [SerializeField] UIInventoryPanelInfo panelInfo;
@@ -110,6 +111,7 @@ public class UIPanelItems : MonoBehaviour
         // If already dismantling, update panel dismantle, else open info item
         if (!panelDismantle.IsOpen)
         {
+            _currentSelectedGroup = group;
             panelInfo.Show(true);
             panelInfo.Setup(group);
         }
@@ -130,5 +132,48 @@ public class UIPanelItems : MonoBehaviour
                 panelInfo.Setup(group);
             }
         }
+    }
+
+    public void RefreshItemAfterUse()
+    {
+        if(_currentSelectedGroup == null)
+        {
+            Debug.Log("group is null");
+            return;
+        }
+
+        var itemInList = GetItemObjByGroup(_currentSelectedGroup, out int index);
+
+        // if left, refresh quantity
+        if (_currentSelectedGroup.Quantity > 0)
+        {
+            itemInList.GetComponent<UIInventoryItem>().RefreshQuantity();
+        }
+        else
+        {
+            // delete inventory item or refresh panel
+            Destroy(itemInList);
+            itemObjs.RemoveAt(index);
+        }
+    }
+
+    /// <summary>
+    /// Find item group in listed ui elements
+    /// </summary>
+    private GameObject GetItemObjByGroup(ItemGroup group, out int index)
+    {
+        for (int i = 0; i < itemObjs.Count; i++)
+        {
+            if (itemObjs[i].TryGetComponent(out UIInventoryItem invItem))
+            {
+                if (invItem.ItemSO.Id == group.IdItem)
+                {
+                    index = i;
+                    return itemObjs[i];
+                }
+            }
+        }
+        index = -1;
+        return null;
     }
 }

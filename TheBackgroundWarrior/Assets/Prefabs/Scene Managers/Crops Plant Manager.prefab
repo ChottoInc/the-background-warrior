@@ -50,7 +50,8 @@ MonoBehaviour:
   slot4: {fileID: 0}
   player: {fileID: 0}
   ySpawn: -4
-  minLureCooldown: 120
-  maxLureCooldown: 300
+  minLureCooldown: 45
+  maxLureCooldown: 100
   reducedLureCooldownCheat: 0
   reducedGrowthTimeCheat: 0
+  alwaysBefriendCheat: 0

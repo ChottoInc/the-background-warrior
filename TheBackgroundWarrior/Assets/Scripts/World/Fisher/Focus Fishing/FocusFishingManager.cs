@@ -7,6 +7,7 @@ public class FocusFishingManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] GameObject _panelCountdown;
     [SerializeField] TMP_Text _textCountdown;
+    [SerializeField] TMP_Text _textFish;
 
     private float _timerCountdown;
     private int _countdown = 3;
@@ -108,6 +109,15 @@ public class FocusFishingManager : MonoBehaviour
 
         _currentHookedFish = FishSpawnManager.Instance.GetRandomFishFromPool(false);
 
+        string coloredName = string.Format(
+                "<color=#{0}>{1}</color>",      // name and rarity
+
+                UtilsItem.GetFishRarityColor(_currentHookedFish.FishRarity),
+                _currentHookedFish.ItemName
+                );
+
+        _textFish.text = coloredName;
+        
         CanCount = true;
     }
 

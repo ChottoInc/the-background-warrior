@@ -11,6 +11,8 @@ public class UIInventoryItem : MonoBehaviour
     protected ItemGroup group;
     protected ItemSO itemSO;
 
+    public ItemSO ItemSO => itemSO;
+
     public virtual void Setup(UIPanelItems panelItems, ItemGroup group, ItemSO itemSO)
     {
         BaseSetup(panelItems, group, itemSO);
@@ -30,5 +32,10 @@ public class UIInventoryItem : MonoBehaviour
     public void OnItemClick()
     {
         panelItems.ShowDetails(group);
+    }
+
+    public void RefreshQuantity()
+    {
+        textAmount.text = group.Quantity.ToString();
     }
 }

@@ -15,6 +15,8 @@ public class UIShopPanelDebug : MonoBehaviour
     {
         AudioManager.Instance.PlayClickUI();
 
+        //Debug.Log("redeemed code: " + ShopManager.Instance.HasRedeemedErisCode);
+
         if (ShopManager.Instance.HasRedeemedErisCode) return;
         if (_isAnimating) return;
 

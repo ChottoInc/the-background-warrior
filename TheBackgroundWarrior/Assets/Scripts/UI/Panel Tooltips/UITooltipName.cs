@@ -85,7 +85,7 @@ public class UITooltipName : MonoBehaviour
             }
 
             // scale with unscaled delta time
-            tweenFade = canvasGroup.DOFade(1f, timeToFade).SetEase(Ease.InOutSine).SetUpdate(true);
+            tweenFade = canvasGroup.DOFade(1f, timeToFade).SetEase(Ease.InOutSine).SetUpdate(true).SetLink(gameObject, LinkBehaviour.KillOnDestroy);
         }
 
         Resize();
@@ -116,6 +116,23 @@ public class UITooltipName : MonoBehaviour
 
     public void Hide(bool fade = false)
     {
+        // do not know why, but sometimes canvas group component is destroyed before that script
+        // so set gameobject to false and then return
+        if (canvasGroup == null)
+        {
+            //Debug.Log("canvas null");
+            //
+            //if (gameObject == null)
+            //{
+            //    Debug.Log("go null");
+            //    return;
+            //}
+            //
+            //Debug.Log("go not null");
+            gameObject.SetActive(false);
+            return;
+        }
+
         if (!fade)
         {
             canvasGroup.alpha = 0f;
@@ -135,7 +152,7 @@ public class UITooltipName : MonoBehaviour
             }
 
             // scale with unscaled delta time
-            tweenFade = canvasGroup.DOFade(0f, timeToFade).SetEase(Ease.InOutSine).SetUpdate(true).OnComplete(() =>
+            tweenFade = canvasGroup.DOFade(0f, timeToFade).SetEase(Ease.InOutSine).SetUpdate(true).SetLink(gameObject, LinkBehaviour.KillOnDestroy).OnComplete(() =>
             {
                 gameObject.SetActive(false);
             });

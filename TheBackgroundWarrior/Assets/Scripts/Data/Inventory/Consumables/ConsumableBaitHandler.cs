@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 
 public class ConsumableBaitHandler : AbstractConsumableHandler<BaitSO>
 {
@@ -47,9 +45,13 @@ public class ConsumableBaitHandler : AbstractConsumableHandler<BaitSO>
                 buffData.RemoveBuff(nightAnglerBuff);
             }
 
-            buffData.AddBuff(anglerBuff);
+            // gives bait first to player data, or the add buff will trigger an observer that checks on active bait before setting it
             PlayerManager.Instance.PlayerFisherData.SetActiveBait(bait);
+
+            buffData.AddBuff(anglerBuff);
+
             PlayerManager.Instance.SaveFisherData();
+            PlayerManager.Instance.SaveBuffsData();
         }
 
         UtilsAchievement.AddStat(UtilsAchievement.STAT_BAITS_CONSUMED, 1, UtilsAchievement.STAT_BAITS_CONSUMED_MAX);

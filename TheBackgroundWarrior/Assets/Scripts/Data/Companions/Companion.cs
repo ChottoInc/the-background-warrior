@@ -20,6 +20,7 @@ public class Companion : MonoBehaviour
     [Header("UI")]
     [SerializeField] GameObject imageBefriended;
     [SerializeField] GameObject imageNotBefriended;
+    [SerializeField] GameObject imageFriendly;
 
 
     private CompanionSO tempSOBefriend;
@@ -486,8 +487,10 @@ public class Companion : MonoBehaviour
 
     public void SetupRandomWalk()
     {
-        // set going to crop
+        // set random walking
         isRandomWalking = true;
+
+        imageFriendly.SetActive(true);
 
         GenerateNewTarget();
     }

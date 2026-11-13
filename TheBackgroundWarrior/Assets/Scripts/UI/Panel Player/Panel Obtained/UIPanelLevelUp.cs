@@ -46,7 +46,7 @@ public class UIPanelLevelUp : MonoBehaviour
         panelText.SetActive(true);
 
         if(isMovementEnabled)
-            tweenMove = panelText.transform.DOMove(movePos.position, moveDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            tweenMove = panelText.transform.DOMove(movePos.position, moveDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(gameObject, LinkBehaviour.KillOnDestroy);
 
         StartCoroutine(CoHidePanel());
     }

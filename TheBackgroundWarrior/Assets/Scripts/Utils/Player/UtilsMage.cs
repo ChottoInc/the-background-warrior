@@ -107,10 +107,10 @@ public static class UtilsMage
         switch (data.CurrentRank)
         {
             default: break;
-            case 1: mult = 1.5f; break;
-            case 2: mult = 2.5f; break;
-            case 3: mult = 4f; break;
-            case 4: mult = 6f; break;
+            case 1: mult = 1.2f; break;
+            case 2: mult = 2f; break;
+            case 3: mult = 3.2f; break;
+            case 4: mult = 5f; break;
         }
 
         return Mathf.FloorToInt(data.SpellSO.BaseLearningPoints * mult);

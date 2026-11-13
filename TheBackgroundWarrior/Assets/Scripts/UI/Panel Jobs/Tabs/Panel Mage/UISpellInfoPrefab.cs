@@ -26,6 +26,9 @@ public class UISpellInfoPrefab : MonoBehaviour
     [Header("Description")]
     [SerializeField] TMP_Text textDesc;
 
+    [Header("Cooldowns")]
+    [SerializeField] TMP_Text _textCooldowns;
+
     [Header("Buttons")]
     [SerializeField] Button buttonLearn;
     [SerializeField] Button buttonEquip;
@@ -72,6 +75,11 @@ public class UISpellInfoPrefab : MonoBehaviour
 
         // set desc
         textDesc.text = IsUnlocked ? UtilsMage.GetSpellDescription(_spellData) : UtilsText.AllText[UtilsText.text_job_mage_spell_locked];
+
+        // set warrior cooldown text
+        _textCooldowns.text = IsUnlocked 
+            ? string.Format(UtilsText.AllText[UtilsText.text_job_mage_spell_warriorcooldown], UtilsGeneral.FormatDecimal(_spellData.CooldownCast)) 
+            : UtilsText.AllText[UtilsText.text_job_mage_spell_locked];
 
         // set button interactable
         buttonLearn.interactable = IsUnlocked;
