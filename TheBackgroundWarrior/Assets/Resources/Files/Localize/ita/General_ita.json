@@ -341,5 +341,7 @@
     "text_job_farmer_crop_addnewcrop": "Seleziona una pianta da crescere",
     "text_job_farmer_crop_currentgrowthtime": "Crescita: {0:0}%",
     "text_job_farmer_crop_emptycompanion": "Non equipaggiato",
-    "text_job_mage_spell_warriorcooldown": "Tempo di ricarica del Guerriero: {0}"
+    "text_job_mage_spell_warriorcooldown": "Tempo di ricarica del Guerriero: {0}",
+    "text_job_fisher_caught": "Catturato",
+    "text_job_fisher_fled": "Fuggito"
 }

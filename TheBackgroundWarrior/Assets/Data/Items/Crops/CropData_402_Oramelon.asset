@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 402
   itemType: 4
-  sprite: {fileID: 21300000, guid: a62f759b46a470547901f55b302576ae, type: 3}
+  sprite: {fileID: 21300000, guid: 6706167a46e76114ab2553ce15079d32, type: 3}
   itemNameTextId: text_item_crop_3_name
   itemNamePluralTextId: 
   itemName: Oramelon
   itemDescTextId: text_item_crop_3_desc
   itemDesc: 
-  baseGrowthTime: 720
+  baseGrowthTime: 880
   unlocksWithAgronomyLevel: 2
   spriteSeed: {fileID: 21300000, guid: 26b1c9be0a9e97e4cbaec1c42ea1cd2b, type: 3}
   spriteCrop:
@@ -31,4 +31,4 @@ MonoBehaviour:
   - {fileID: 2128374650, guid: 951120aa3fe06ed428f3a1cd507e014a, type: 3}
   attractedCompanions:
   - {fileID: 11400000, guid: 18afc6ba1a3c849428aa6ff551a20e92, type: 2}
-  rewardedExp: 150
+  rewardedExp: 250

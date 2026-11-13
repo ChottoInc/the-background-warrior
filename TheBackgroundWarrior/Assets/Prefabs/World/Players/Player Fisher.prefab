@@ -1160,6 +1160,7 @@ MonoBehaviour:
   faceRight: 0
   _focusFighingManager: {fileID: 0}
   _buttonFocus: {fileID: 7527795974632235232}
+  _tooltipFocusFishing: {fileID: 7315979099571007550}
 --- !u!61 &452881059384792462
 BoxCollider2D:
   m_ObjectHideFlags: 0

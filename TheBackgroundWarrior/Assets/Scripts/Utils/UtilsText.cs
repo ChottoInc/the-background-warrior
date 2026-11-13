@@ -348,6 +348,8 @@ public static class UtilsText
     public const string text_job_fisher_raritytooltip = "text_job_fisher_raritytooltip";
     public const string text_job_fisher_spawntime = "text_job_fisher_spawntime";
     public const string text_job_fisher_waittime = "text_job_fisher_waittime";
+    public const string text_job_fisher_caught = "text_job_fisher_caught";
+    public const string text_job_fisher_fled = "text_job_fisher_fled";
 
 
     public const string text_job_farmer_crop_addnewcrop = "text_job_farmer_crop_addnewcrop";
@@ -1436,6 +1438,8 @@ public static class UtilsText
             { text_job_fisher_raritytooltip, "<color=#{1}>{2}</color><br>" },
             { text_job_fisher_spawntime, "Spawn time: {3}" },
             { text_job_fisher_waittime, "Average time: ~{0}m{1}s" },
+            { text_job_fisher_caught, "Caught" },
+            { text_job_fisher_fled, "Fled" },
 
 
             

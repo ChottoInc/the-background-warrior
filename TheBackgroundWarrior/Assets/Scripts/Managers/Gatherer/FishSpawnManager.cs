@@ -40,8 +40,8 @@ public class FishSpawnManager : MonoBehaviour
     private List<FishSO> currentPool;
 
 
-
-    public List<FishSO> CaughtFishesSession { get; private set; }
+    private const int MAX_LOG = 30;
+    public List<(FishSO, bool)> HookedFishesSession { get; private set; }
 
 
 
@@ -69,7 +69,7 @@ public class FishSpawnManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        player.OnFishCaught -= AddFishToCaughtList;
+        player.OnHookedFish -= AddFishToCaughtList;
 
         SettingsManager.Instance.OnIsHiddenFishingBarChange -= OnFishBarHiddenChange;
     }
@@ -77,11 +77,11 @@ public class FishSpawnManager : MonoBehaviour
 
     private void Start()
     {
-        player.OnFishCaught += AddFishToCaughtList;
+        player.OnHookedFish += AddFishToCaughtList;
 
 
         currentPool = new List<FishSO>();
-        CaughtFishesSession = new List<FishSO>();
+        HookedFishesSession = new List<(FishSO, bool)>();
 
         // set pool
         CheckBuffs();
@@ -150,11 +150,11 @@ public class FishSpawnManager : MonoBehaviour
         {
             anglerBuff = data.GetBuffByType(UtilsBuffs.BuffType.MorningAngler);
         }
-        else if(data.HasBuff(UtilsBuffs.BuffType.MorningAngler))
+        else if(data.HasBuff(UtilsBuffs.BuffType.AfternoonAngler))
         {
             anglerBuff = data.GetBuffByType(UtilsBuffs.BuffType.AfternoonAngler);
         }
-        else if(data.HasBuff(UtilsBuffs.BuffType.MorningAngler))
+        else if(data.HasBuff(UtilsBuffs.BuffType.NightAngler))
         {
             anglerBuff = data.GetBuffByType(UtilsBuffs.BuffType.NightAngler);
         }
@@ -317,9 +317,13 @@ public class FishSpawnManager : MonoBehaviour
         //return rand;
     }
 
-    private void AddFishToCaughtList(FishSO fishSO)
+    private void AddFishToCaughtList(FishSO fishSO, bool success)
     {
-        CaughtFishesSession.Add(fishSO);
+        if(HookedFishesSession.Count >= MAX_LOG)
+        {
+            HookedFishesSession.RemoveAt(0);
+        }
+        HookedFishesSession.Add((fishSO, success));
     }
 
     private void UpdateFishBarUI()

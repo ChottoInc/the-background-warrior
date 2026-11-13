@@ -168,6 +168,7 @@ public class PlayerMage : Player
 
         // uppdate bar ui
         barSpell.SetCurrentValue(_currentSpell.CurrentLearnPoints);
+        barSpell.SetMaxValue(_currentSpell.RequiredPointsToNextRank);
 
         // save
         SaveMageData();

@@ -200,7 +200,7 @@ public class Companion : MonoBehaviour
                     imageBefriended.SetActive(true);
 
                     // add exp, might tweak
-                    PlayerManager.Instance.PlayerFarmerData.AddExp(500);
+                    PlayerManager.Instance.PlayerFarmerData.AddExp(350);
 
                     PlayerManager.Instance.OnBefriendedCompanionEvent(tempSOBefriend.Id);
 
@@ -229,7 +229,7 @@ public class Companion : MonoBehaviour
                     CropsPlantManager.Instance.AddMowToPlayer(slotCropIndex, true);
 
                     // add exp, might tweak
-                    PlayerManager.Instance.PlayerFarmerData.AddExp(50);
+                    PlayerManager.Instance.PlayerFarmerData.AddExp(35);
                     PlayerManager.Instance.SaveFarmerData();
 
                     // Animation

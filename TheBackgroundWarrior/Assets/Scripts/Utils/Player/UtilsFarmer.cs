@@ -36,7 +36,7 @@ public static class UtilsFarmer
     private static float FLAT_FARMER_EXP_GROWTH = 10f;
 
 
-    public const long PASSIVE_EXP = 650;
+    public const long PASSIVE_EXP = 1000;
 
 
 
@@ -103,12 +103,21 @@ public static class UtilsFarmer
     {
         // Level starts at 1. Returns the exp needed to go from this level to the next.
         level = Mathf.Max(1, level);
-
+        /*
         const float scale = 40f;   // how steep the curve is
         const float growth = 1.5f; // each level needs ~50% more than the previous one
         const float offset = -30f; // shifts the curve so level 1 costs exactly 10
 
-        return Mathf.RoundToInt(scale * Mathf.Pow(growth, level - 1) + offset);
+        return Mathf.RoundToInt(scale * Mathf.Pow(growth, level - 1) + offset);*/
+
+        switch (level)
+        {
+            default: return 100;
+            case 2: return 10;
+            case 3: return 20;
+            case 4: return 35;
+            case 5: return 50;
+        }
     }
 
 

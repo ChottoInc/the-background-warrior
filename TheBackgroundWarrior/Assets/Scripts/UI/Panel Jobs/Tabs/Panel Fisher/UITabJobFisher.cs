@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,23 +6,24 @@ public class UITabJobFisher : UITabWindow
 {
     [SerializeField] UITabPlayerJob panelJob;
 
-    [Space(10)]
-    //[SerializeField] TMP_Text textAvailableFishes;
-
+    [Header("Available Log")]
     [SerializeField] GameObject _availableFishPrefab;
     [SerializeField] Transform _containerAvailable;
 
     private List<GameObject> _availableFishes;
 
-    [Space(10)]
+    [Header("Groups")]
     [SerializeField] GameObject fishGroupPrefab;
     [SerializeField] Transform container;
     [SerializeField] ScrollRect scrollRectFishGroups;
 
     private List<GameObject> groupsObjs;
 
-    [Space(10)]
-    [SerializeField] TMP_Text textLog;
+    [Header("Session Log")]
+    [SerializeField] GameObject _sessionFishPrefab;
+    [SerializeField] Transform _containerSession;
+
+    private List<GameObject> _sessionFishes;
 
 
     private PlayerFisher player;
@@ -112,28 +112,7 @@ public class UITabJobFisher : UITabWindow
                 obj.Setup(coloredName, PlayerManager.Instance.Inventory.HasItem(fish.Id));
             }
             _availableFishes.Add(prefab);
-
-            /*
-            if (PlayerManager.Instance.Inventory.HasItem(fish.Id))
-            {
-                
-                string singleLine = string.Format(
-                "<color=#{0}>{1}</color>\n",      // name and rarity
-
-                UtilsItem.GetFishRarityColor(fish.FishRarity),
-                name
-                );
-                
-                //result += singleLine;
-                //result += string.Format("<color=#FFFFFF>{0}</color>\n", name);
-            }
-            else
-            {
-                //result += string.Format("<color=#878787>{0}</color>\n", name);
-            }*/
         }
-
-        //textAvailableFishes.text = result;
     }
 
     private void RefreshGroups()
@@ -199,32 +178,42 @@ public class UITabJobFisher : UITabWindow
 
     private void FillLog()
     {
+        _sessionFishes = ClearList(_sessionFishes);
+
         if (FishSpawnManager.Instance == null)
         {
-            textLog.text = "";
+            return;
         }
         else
         {
-            string result = "";
-
             // from last caught to first
-            List<FishSO> sessionFishes = new List<FishSO>();
-            sessionFishes.AddRange(FishSpawnManager.Instance.CaughtFishesSession);
+            List<(FishSO, bool)> sessionFishes = new List<(FishSO, bool)>();
+            sessionFishes.AddRange(FishSpawnManager.Instance.HookedFishesSession);
             sessionFishes.Reverse();
 
             // fill log with name and rarity of each fish
             foreach (var fish in sessionFishes)
             {
-                string singleLine = string.Format(
-                "<color=#{0}>{1}</color>",      // name and rarity
+                string name = fish.Item1.ItemName;
+                string coloredName = string.Format(
+                    "<color=#{0}>{1}</color>\n",      // name and rarity
 
-                UtilsItem.GetFishRarityColor(fish.FishRarity),
-                fish.ItemName
+                    UtilsItem.GetFishRarityColor(fish.Item1.FishRarity),
+                    name
                 );
-                result += singleLine + "\n";
-            }
 
-            textLog.text = result;
+                GameObject prefab = Instantiate(_sessionFishPrefab, transform.position, Quaternion.identity);
+                prefab.transform.SetParent(_containerSession);
+
+                prefab.transform.localScale = new Vector3(1, 1, 1);
+                prefab.SetActive(true);
+
+                if (prefab.TryGetComponent(out UIFisherSessionFishPrefab obj))
+                {
+                    obj.Setup(coloredName, fish.Item2);
+                }
+                _sessionFishes.Add(prefab);
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ public class PlayerFisher : Player
 
     [Space(10)]
     [SerializeField] GameObject _buttonFocus;
+    [SerializeField] UIBaseTooltipName _tooltipFocusFishing;
 
     private bool _isButtonFocusShow = true;
 
@@ -28,7 +29,7 @@ public class PlayerFisher : Player
 
     public event Action<int, int> OnStatChange;
 
-    public event Action<FishSO> OnFishCaught;
+    public event Action<FishSO, bool> OnHookedFish;
 
     public event Action OnBaitChange;
 
@@ -149,10 +150,12 @@ public class PlayerFisher : Player
         if (successReflex)
         {
             HandleCaughtSuccess(hookedFish);
+            OnHookedFish?.Invoke(hookedFish, true);
         }
         else
         {
             HandleCaughtUnsuccess(hookedFish);
+            OnHookedFish?.Invoke(hookedFish, false);
         }
 
         // Save fisher data
@@ -188,8 +191,6 @@ public class PlayerFisher : Player
         // Give player full exp
         rewardedExp = UtilsItem.GetFishExp(hookedFish.FishRarity);
         playerData.AddExp(rewardedExp);
-
-        OnFishCaught?.Invoke(hookedFish);
     }
 
     public void HandleCaughtFocusFishing(FishSO hookedFish)
@@ -206,16 +207,14 @@ public class PlayerFisher : Player
         PlayerManager.Instance.SaveInventoryData();
 
         // Remove from pool if caught
-        //FishSpawnManager.Instance.RemoveFishFromPool(hookedFish);
+        FishSpawnManager.Instance.RemoveFishFromPool(hookedFish);
 
         // refill pool
-        //FishSpawnManager.Instance.FillPool();
+        FishSpawnManager.Instance.FillPool();
 
         // Give player full exp - for now halves the amount of exp since you can spam that game
         rewardedExp = UtilsItem.GetFishExp(hookedFish.FishRarity) / 2;
         playerData.AddExp(rewardedExp);
-
-        OnFishCaught?.Invoke(hookedFish);
     }
 
     private void HandleCaughtUnsuccess(FishSO hookedFish)
@@ -270,7 +269,13 @@ public class PlayerFisher : Player
 
     public void OnButtonFocusFishing()
     {
+        _tooltipFocusFishing.OnPointerExit(null);
         _focusFighingManager.Open();
+    }
+
+    public void TriggerHookedFish(FishSO hookedFish, bool success)
+    {
+        OnHookedFish?.Invoke(hookedFish, success);
     }
 
 

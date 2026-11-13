@@ -52,7 +52,7 @@ public class UITooltipBuff : MonoBehaviour
     {
         _buffObjects = ClearList(_buffObjects);
 
-        FillRequirements();
+        FillBuff();
 
         gameObject.SetActive(true);
 
@@ -93,12 +93,20 @@ public class UITooltipBuff : MonoBehaviour
         return list;
     }
 
-    private void FillRequirements()
+    private void FillBuff()
     {
         var buffList = PlayerManager.Instance.PlayerBuffsData.ActiveBuffs;
 
         for (int i = 0; i < buffList.Count; i++)
         {
+            var buff = buffList[i];
+
+            // skip inspiration buff if it's over
+            if(buff.BuffType == UtilsBuffs.BuffType.Inspiration && buff.RemainingTime <= 0)
+            {
+                continue;
+            }
+
             GameObject prefab = Instantiate(_buffPrefab, transform.position, Quaternion.identity);
             prefab.transform.SetParent(_container);
 
@@ -107,7 +115,7 @@ public class UITooltipBuff : MonoBehaviour
 
             if (prefab.TryGetComponent(out UITooltipBuffPrefab obj))
             {
-                obj.Setup(buffList[i]);
+                obj.Setup(buff);
             }
             _buffObjects.Add(prefab);
         }

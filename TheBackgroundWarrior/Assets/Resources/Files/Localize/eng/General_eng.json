@@ -341,5 +341,7 @@
     "text_job_farmer_crop_addnewcrop": "Select a crop to grow",
     "text_job_farmer_crop_currentgrowthtime": "Growth: {0:0}%",
     "text_job_farmer_crop_emptycompanion": "Not equipped",
-    "text_job_mage_spell_warriorcooldown": "Warrior cooldown: {0}"
+    "text_job_mage_spell_warriorcooldown": "Warrior cooldown: {0}",
+    "text_job_fisher_caught": "Caught",
+    "text_job_fisher_fled": "Fled"
 }

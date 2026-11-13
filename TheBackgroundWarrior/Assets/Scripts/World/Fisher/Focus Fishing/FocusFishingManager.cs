@@ -153,6 +153,8 @@ public class FocusFishingManager : MonoBehaviour
 
     private IEnumerator CoLose()
     {
+        _player.TriggerHookedFish(_currentHookedFish, false);
+
         yield return new WaitForSeconds(2f);
 
         _bubbleSpawner.StopAllCoroutines();
@@ -164,6 +166,8 @@ public class FocusFishingManager : MonoBehaviour
 
     private IEnumerator CoWin()
     {
+        _player.TriggerHookedFish(_currentHookedFish, true);
+
         yield return new WaitForSeconds(2f);
 
         _bubbleSpawner.StopAllCoroutines();
