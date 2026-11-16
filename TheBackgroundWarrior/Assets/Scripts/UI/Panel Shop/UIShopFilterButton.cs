@@ -9,6 +9,6 @@ public class UIShopFilterButton : MonoBehaviour
     {
         if (UITooltipManager.Instance.IsCallbackOpen) return;
 
-        tabShop.OpenShopWindow(this, filterId);
+        tabShop.OpenShopWindow(filterId);
     }
 }

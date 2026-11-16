@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using static UtilsPlayer;
 
@@ -41,6 +42,9 @@ public class PlayerFisherData : BasePlayerData
 
 
     // ---- FISH GROUPS CHECKS COMPLETION
+
+    public HashSet<int> CaughtFishesOnce { get; private set; }
+
 
     public bool IsLifeSeriesCompleted { get; private set; }
     public bool IsPredatorSeriesCompleted { get; private set; }
@@ -110,9 +114,16 @@ public class PlayerFisherData : BasePlayerData
             CurrentExp = 0;
         }
 
-        FillFishGroupsSeriesCompletion();
-
         ActiveBait = UtilsItem.GetItemById(saveData.activeBaitId) as BaitSO;
+
+        // just to be sure the list isn't null
+        if(saveData.caughtFishesOnce != null)
+            CaughtFishesOnce = new HashSet<int>(saveData.caughtFishesOnce);
+
+        // from previous saves, add all fishe you have for now
+        FillCaughtOnceFromInventory();
+
+        FillFishGroupsSeriesCompletion();
     }
 
     private void GenerateBaseStats()
@@ -134,6 +145,16 @@ public class PlayerFisherData : BasePlayerData
         baseLuck = 0f; // controls rarity of fish, up to 0.4 - 40%
 
         ActiveBait = null;
+
+        CaughtFishesOnce = new HashSet<int>();
+    }
+
+    private void FillCaughtOnceFromInventory()
+    {
+        foreach (var item in PlayerManager.Instance.Inventory.GetGroupsOfType(UtilsItem.ItemType.Fish))
+        {
+            CaughtFishesOnce.Add(item.IdItem);
+        }
     }
 
     public void FillFishGroupsSeriesCompletion()
@@ -172,19 +193,16 @@ public class PlayerFisherData : BasePlayerData
     {
         if (group == null) return false;
 
-        bool result = true;
-
         foreach (var fish in group.Fishes)
         {
             // check for not caught fish
-            if (!PlayerManager.Instance.Inventory.HasItem(fish.Id))
+            if (!CaughtFishesOnce.Contains(fish.Id))
             {
-                result = false;
-                break;
+                return false;
             }
         }
 
-        return result;
+        return true;
     }
 
     public bool IsGroupCaughtCheckVar(FishGroupSO fishGroupSO)
@@ -238,8 +256,6 @@ public class PlayerFisherData : BasePlayerData
     public void DisableBait()
     {
         ActiveBait = null;
-
-        OnBaitChange?.Invoke();
     }
 
     private bool AreAllGroupsCompleted()
@@ -254,6 +270,11 @@ public class PlayerFisherData : BasePlayerData
             IsGoldenSeriesCompleted &&
             IsElderSeriesCompleted &&
             IsQuickSeriesCompleted;
+    }
+
+    public void AddToCaughtOnce(int fishId)
+    {
+        CaughtFishesOnce.Add(fishId);
     }
 
 

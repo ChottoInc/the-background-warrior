@@ -3,20 +3,25 @@ using UnityEngine;
 
 public class UITabShop : UITabWindow
 {
+    /*
     private const int ID_CARD_ERIS_1 = 83;
     private const int ID_CARD_ERIS_2 = 84;
     private const int ID_CARD_ERIS_3 = 85;
     private const int ID_CARD_ERIS_4 = 86;
     private const int ID_CARD_ERIS_5 = 87;
+    */
+
+    [Header("Hover")]
+    [SerializeField] UIHoverButtonTabManager _hoverButtonManager;
+    [SerializeField] UIHoverButtonTab _firstFilterButton;
+
 
     [Header("Currencies")]
     [SerializeField] TMP_Text textBits;
 
     [Header("Items")]
     [SerializeField] UIPanelShopItems panelShopItems;
-    [SerializeField] UIShopFilterButton firstFilterButton;
-
-    private UIShopFilterButton currentFilterButton;
+    
 
     [Header("Redeem")]
     [SerializeField] GameObject panelRedeem;
@@ -42,17 +47,14 @@ public class UITabShop : UITabWindow
         _buttonAchievements.SetActive(SettingsManager.Instance.AreCheatsEnabled);
         _panelAchievements.SetActive(false);
 
-        // disable last filter
-
         // select first filter by default
-        currentFilterButton = firstFilterButton;
+        _hoverButtonManager.ChangeHovered(_firstFilterButton);
+        _hoverButtonManager.ChangeSelected(_firstFilterButton);
         panelShopItems.Setup(UtilsShop.ID_SHOP_FILTER_CARDPACKS);
     }
 
-    public void OpenShopWindow(UIShopFilterButton filterButton, int filter)
+    public void OpenShopWindow(int filter)
     {
-        currentFilterButton = filterButton;
-
         if (filter == UtilsShop.ID_SHOP_FILTER_DEBUG)
         {
             panelDebug.SetActive(true);

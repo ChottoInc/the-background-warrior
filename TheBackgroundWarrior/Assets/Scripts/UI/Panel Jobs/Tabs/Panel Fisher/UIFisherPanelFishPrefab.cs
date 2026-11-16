@@ -20,7 +20,7 @@ public class UIFisherPanelFishPrefab : MonoBehaviour
 
         imageFish.sprite = fishSO.Sprite;
 
-        if (PlayerManager.Instance.Inventory.HasItem(fishSO.Id))
+        if (PlayerManager.Instance.PlayerFisherData.CaughtFishesOnce.Contains(fishSO.Id))
         {
             imageFish.color = unlockedColor;
         }

@@ -172,6 +172,7 @@ public class PlayerFisher : Player
 
         // Add fish to caught
         PlayerManager.Instance.Inventory.AddItem(hookedFish.Id, 1);
+        playerData.AddToCaughtOnce(hookedFish.Id);
 
         // check for fishgroups
         playerData.FillFishGroupsSeriesCompletion();
@@ -199,6 +200,7 @@ public class PlayerFisher : Player
 
         // Add fish to caught
         PlayerManager.Instance.Inventory.AddItem(hookedFish.Id, 1);
+        playerData.AddToCaughtOnce(hookedFish.Id);
 
         // check for fishgroups
         playerData.FillFishGroupsSeriesCompletion();
@@ -253,6 +255,8 @@ public class PlayerFisher : Player
     protected override void OnBuffRemoved(UtilsBuffs.BuffType buffType)
     {
         OnBuffChange(buffType);
+
+        playerData.DisableBait();
     }
 
     private void OnBuffChange(UtilsBuffs.BuffType buffType)

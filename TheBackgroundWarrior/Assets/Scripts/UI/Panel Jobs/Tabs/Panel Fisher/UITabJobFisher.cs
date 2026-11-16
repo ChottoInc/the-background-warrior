@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -88,6 +89,10 @@ public class UITabJobFisher : UITabWindow
 
         // Get available from day moment
         var availables = UtilsItem.GetFishByDayMoment(currentMoment);
+
+        // order by name
+        availables.Sort((a, b) => string.Compare(a.ItemName, b.ItemName, System.StringComparison.CurrentCultureIgnoreCase));
+
         //Debug.Log("availables: " + availables.Count);
 
         // fill log with name and rarity of each fish

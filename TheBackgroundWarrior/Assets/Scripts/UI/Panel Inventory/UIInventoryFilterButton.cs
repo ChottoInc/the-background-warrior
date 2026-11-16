@@ -27,7 +27,7 @@ public class UIInventoryFilterButton : UIBaseTooltipName
 
     public void OnButtonClick()
     {
-        tabInventory.OpenInventory(this, _filter);
+        tabInventory.OpenInventory(_filter);
     }
 
     public override string GetText()

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class PlayerFisherSaveData
 {
     public int levelStatCalmness;
@@ -11,6 +13,8 @@ public class PlayerFisherSaveData
     public long currentExp;
 
     public int activeBaitId;
+
+    public List<int> caughtFishesOnce;
 
     public PlayerFisherSaveData() { }
 
@@ -28,5 +32,7 @@ public class PlayerFisherSaveData
 
         if(data.ActiveBait != null)
             activeBaitId = data.ActiveBait.Id;
+
+        caughtFishesOnce = new List<int>(data.CaughtFishesOnce);
     }
 }

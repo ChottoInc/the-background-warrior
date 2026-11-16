@@ -9,10 +9,12 @@ public class UITabInventory : UITabWindow
     [SerializeField] TMP_Text textBits;
 
     [Header("Filters")]
-    [SerializeField]
-    UIInventoryFilterButton[] filterButtons;
+    [SerializeField] UIHoverButtonTab _firstFilter;
+    [SerializeField] UIHoverButtonTabManager _hoverManager;
 
-    private UIInventoryFilterButton currentFilterButton;
+    [Space(10)]
+    [SerializeField] UIInventoryFilterButton[] filterButtons;
+
     private InventoryItemType _currentFilter;
 
     [Header("Window Center")]
@@ -32,9 +34,10 @@ public class UITabInventory : UITabWindow
 
         panelItems.ShowPanelInfo(false);
 
-        currentFilterButton = filterButtons[0];
         panelItems.Setup(InventoryItemType.All);
         _currentFilter = InventoryItemType.All;
+        _hoverManager.ChangeHovered(_firstFilter);
+        _hoverManager.ChangeSelected(_firstFilter);
     }
 
     private void UpdateFilters()
@@ -58,13 +61,8 @@ public class UITabInventory : UITabWindow
         panelItems.Setup(_currentFilter);
     }
 
-    public void OpenInventory(UIInventoryFilterButton filterButton, InventoryItemType filter)
+    public void OpenInventory(InventoryItemType filter)
     {
-        if(filterButton != null)
-        {
-            currentFilterButton = filterButton;
-        }
-
         panelItems.Setup(filter);
         _currentFilter = filter;
 

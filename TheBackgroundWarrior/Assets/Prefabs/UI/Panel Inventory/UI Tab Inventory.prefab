@@ -486,6 +486,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textBits: {fileID: 8695850596744875937}
+  _firstFilter: {fileID: 1285505858580517833}
+  _hoverManager: {fileID: 6492370565887468748}
   filterButtons:
   - {fileID: 6333542530779303938}
   - {fileID: 3960346011944081449}
@@ -17445,6 +17447,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 911eaa28d73094a49b7ebc21afc43ea7, type: 3}
+--- !u!114 &1285505858580517833 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5528628194403535070, guid: 911eaa28d73094a49b7ebc21afc43ea7, type: 3}
+  m_PrefabInstance: {fileID: 6732506275374029591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25544ee4475c6d246bc6daff2c490998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3446245042848622279 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8267816524386975184, guid: 911eaa28d73094a49b7ebc21afc43ea7, type: 3}

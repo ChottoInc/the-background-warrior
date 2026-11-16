@@ -7,8 +7,8 @@ public class UIHoverBaitIcon : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UpdateTimerUI();
-        _timer.gameObject.SetActive(true);
+        if(UpdateTimerUI())
+            _timer.gameObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -16,11 +16,11 @@ public class UIHoverBaitIcon : MonoBehaviour, IPointerEnterHandler, IPointerExit
         _timer.gameObject.SetActive(false);
     }
 
-    private void UpdateTimerUI()
+    private bool UpdateTimerUI()
     {
         // get active bait
         var activeBait = PlayerManager.Instance.PlayerFisherData.ActiveBait;
-        if (activeBait == null) return;
+        if (activeBait == null) return false;
 
         // get buff type based on attracting moment
         UtilsBuffs.BuffType buffType;
@@ -40,7 +40,7 @@ public class UIHoverBaitIcon : MonoBehaviour, IPointerEnterHandler, IPointerExit
         // get buff data
         var buff = PlayerManager.Instance.PlayerBuffsData.GetBuffByType(buffType);
 
-        if (buff == null) return;
+        if (buff == null) return false;
 
         float totalSeconds = buff.RemainingTime;
 
@@ -55,5 +55,7 @@ public class UIHoverBaitIcon : MonoBehaviour, IPointerEnterHandler, IPointerExit
             timerText = $"{minutes:00}:{seconds:00}";
 
         _timer.SetTimer(timerText);
+
+        return true;
     }
 }
