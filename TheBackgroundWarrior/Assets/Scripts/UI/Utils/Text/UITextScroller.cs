@@ -169,4 +169,7 @@ public class UITextScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         float pos = _scrollRect.horizontalNormalizedPosition - delta;
         _scrollRect.horizontalNormalizedPosition = Mathf.Clamp01(pos);
     }
+
+
+
 }

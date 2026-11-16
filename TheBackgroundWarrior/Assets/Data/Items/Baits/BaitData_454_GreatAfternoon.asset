@@ -21,5 +21,5 @@ MonoBehaviour:
   itemDescTextId: text_item_bait_5_desc
   itemDesc: For 10 minutes, also attracts a lot of fishes normally found in the afternoon
   attractsMoment: 1
-  duration: 600
+  duration: 900
   effectivness: 1

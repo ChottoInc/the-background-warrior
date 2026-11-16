@@ -23,5 +23,5 @@ MonoBehaviour:
   <MaxLevelResearch>k__BackingField: 40
   <MaxLevelStability>k__BackingField: 30
   <BaseExpGrowth>k__BackingField: 50
-  <ExpoExpGrowth>k__BackingField: 1.4
-  <FlatExpGrowth>k__BackingField: 20
+  <ExpoExpGrowth>k__BackingField: 1.15
+  <FlatExpGrowth>k__BackingField: 10

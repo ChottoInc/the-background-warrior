@@ -24,4 +24,4 @@ MonoBehaviour:
     quantity: 2
   _product: {fileID: 11400000, guid: 671c229c11dd7f74caf2a9f51f9fceb8, type: 2}
   _craftTime: 10
-  _rewardedExp: 80
+  _rewardedExp: 500

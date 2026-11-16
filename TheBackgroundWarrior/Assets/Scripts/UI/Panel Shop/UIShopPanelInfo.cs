@@ -11,6 +11,7 @@ public class UIShopPanelInfo : MonoBehaviour
     [Space(10)]
     [SerializeField] Image imageItem;
     [SerializeField] TMP_Text textName;
+    [SerializeField] TMP_Text textPrice;
     [SerializeField] TMP_Text textDesc;
 
     [Space(10)]
@@ -26,6 +27,7 @@ public class UIShopPanelInfo : MonoBehaviour
         
         imageItem.sprite = itemSO.Sprite;
         textName.text = itemSO.ItemName;
+        textPrice.text = itemSO.Price.ToString();
        
         HandleDesc();
     }

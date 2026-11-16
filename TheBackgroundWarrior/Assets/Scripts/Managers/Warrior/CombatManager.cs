@@ -142,7 +142,7 @@ public class CombatManager : MonoBehaviour
 
         if (playerHighDamageCheat && SettingsManager.Instance.AreCheatsEnabled)
         {
-            currentEnemy.EnemyData.TakeDamageCheat(1000f);
+            currentEnemy.EnemyData.TakeDamageCheat(3000f);
         }
         else
         {

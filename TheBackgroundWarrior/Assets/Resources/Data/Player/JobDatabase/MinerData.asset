@@ -23,7 +23,7 @@ MonoBehaviour:
   <MaxLevelShockwave>k__BackingField: 30
   <MaxLevelLuck>k__BackingField: 40
   <BaseExpGrowth>k__BackingField: 50
-  <ExpoExpGrowth>k__BackingField: 1.1
+  <ExpoExpGrowth>k__BackingField: 1.3
   <FlatExpGrowth>k__BackingField: 20
   <WeaponLinearGrowth>k__BackingField: 0.3
   <WeaponQuadraticGrowth>k__BackingField: 0.04

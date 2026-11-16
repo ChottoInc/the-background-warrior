@@ -23,5 +23,5 @@ MonoBehaviour:
   <MaxLevelScholar>k__BackingField: 20
   <MaxLevelProficiency>k__BackingField: 15
   <BaseExpGrowth>k__BackingField: 50
-  <ExpoExpGrowth>k__BackingField: 1.05
+  <ExpoExpGrowth>k__BackingField: 1.25
   <FlatExpGrowth>k__BackingField: 10
