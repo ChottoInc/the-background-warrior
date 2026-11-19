@@ -121,7 +121,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5296916272187298926}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.65814775
+  m_Size: 0.52422017
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lv. 1Lv. 1Lv. 1Lv. 1Lv. 1
+  m_text: Lv.30  >> Lv. 30Lv.30  >> Lv. 30
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d84c0cc5ab8f8a048904ad938e7cf1aa, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 04828deb82e644f48a3b9aa20dad7254, type: 2}
@@ -1698,6 +1698,7 @@ MonoBehaviour:
   idStat: 0
   textStatLevel: {fileID: 8772101248236763330}
   textStatName: {fileID: 6992850321002461425}
+  _scrollingStatGroup: {fileID: 1427928058475362647}
   buttonDecrease: {fileID: 5690025532052983241}
   buttonIncrease: {fileID: 4322448589162718207}
   showTooltipAfter: 0.35

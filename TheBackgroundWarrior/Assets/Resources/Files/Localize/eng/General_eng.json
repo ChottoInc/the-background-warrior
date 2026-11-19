@@ -140,7 +140,7 @@
     "text_job_current_level": "Lv. : {0}",
     "text_job_available_points": "Available points: {0}",
     "text_job_current_stat_level": "Lv. {0}",
-    "text_job_change_stat_level": "Lv. {0} >> Lv. {1}",
+    "text_job_change_stat_level": "Lv. {0} > {1}",
     "text_job_warrior_unlockconditions": "None",
     "text_job_miner_unlockconditions": "None",
     "text_job_fisher_unlockconditions": "None",
@@ -343,5 +343,6 @@
     "text_job_farmer_crop_emptycompanion": "Not equipped",
     "text_job_mage_spell_warriorcooldown": "Warrior cooldown: {0}",
     "text_job_fisher_caught": "Caught",
-    "text_job_fisher_fled": "Fled"
+    "text_job_fisher_fled": "Fled",
+    "text_settings_general_version": "Ver. {0}"
 }

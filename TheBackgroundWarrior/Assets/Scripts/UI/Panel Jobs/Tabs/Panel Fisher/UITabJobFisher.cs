@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -89,6 +88,15 @@ public class UITabJobFisher : UITabWindow
 
         // Get available from day moment
         var availables = UtilsItem.GetFishByDayMoment(currentMoment);
+
+
+        // add to availables if a bait is active
+        if(PlayerManager.Instance.PlayerFisherData.ActiveBait != null)
+        {
+            var bait = player.PlayerData.ActiveBait;
+            var baitMoment = bait.AttractsMoment;
+            availables.AddRange(UtilsItem.GetFishByDayMoment(baitMoment));
+        }
 
         // order by name
         availables.Sort((a, b) => string.Compare(a.ItemName, b.ItemName, System.StringComparison.CurrentCultureIgnoreCase));

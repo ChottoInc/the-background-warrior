@@ -118,7 +118,12 @@ public class UIQuestPrefab : MonoBehaviour
             case UtilsQuest.QuestObjectiveType.SpellRank:
                 progressBar.Setup(data.amountRank, progress.progressCounter);
                 break;
+
+            case UtilsQuest.QuestObjectiveType.Summon:
+                progressBar.Setup(data.amountSummon, progress.progressCounter);
+                break;
         }
+
         
     }
 

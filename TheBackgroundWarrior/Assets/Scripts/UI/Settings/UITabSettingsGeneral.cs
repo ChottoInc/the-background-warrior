@@ -8,6 +8,9 @@ public class UITabSettingsGeneral : UITabWindow
     [SerializeField] Slider sliderMaster;
     [SerializeField] TMP_Dropdown dropdownLanguage;
 
+    [Header("Version")]
+    [SerializeField] TMP_Text _textVersion;
+
     public override void Open()
     {
         base.Open();
@@ -29,6 +32,8 @@ public class UITabSettingsGeneral : UITabWindow
         dropdownLanguage.AddOptions(listLanguage);
 
         dropdownLanguage.SetValueWithoutNotify((int)SettingsManager.Instance.CurrentLanguage);
+
+        _textVersion.text = string.Format(UtilsText.AllText[UtilsText.text_settings_general_version], Application.version);
     }
 
 

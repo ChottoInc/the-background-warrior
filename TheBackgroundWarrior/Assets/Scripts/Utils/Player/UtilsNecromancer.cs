@@ -4,7 +4,7 @@ public static class UtilsNecromancer
 {
     public enum RitualType { Summon, Arise, Afterlife, Ade }
 
-    public const long BASE_EXP_GAIN_FROM_FIGHTERS = 400;
+    public const long BASE_EXP_GAIN_FROM_FIGHTERS = 40;
 
     // ---------------- START LEVELS --------------- //
 

@@ -256,7 +256,13 @@ public class PlayerFisher : Player
     {
         OnBuffChange(buffType);
 
-        playerData.DisableBait();
+        if (buffType == UtilsBuffs.BuffType.MorningAngler ||
+            buffType == UtilsBuffs.BuffType.AfternoonAngler ||
+            buffType == UtilsBuffs.BuffType.NightAngler)
+        {
+            playerData.DisableBait();
+            OnBaitChange?.Invoke();
+        }
     }
 
     private void OnBuffChange(UtilsBuffs.BuffType buffType)

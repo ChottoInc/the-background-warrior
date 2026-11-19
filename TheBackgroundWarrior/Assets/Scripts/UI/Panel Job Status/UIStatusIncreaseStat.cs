@@ -12,7 +12,10 @@ public class UIStatusIncreaseStat : MonoBehaviour
 
     [Space(10)]
     [SerializeField] TMP_Text textStatLevel;
+
+    [Space(10)]
     [SerializeField] TMP_Text textStatName;
+    [SerializeField] HorizontalLayoutGroup _scrollingStatGroup;
 
     [Space(10)]
     [SerializeField] Button buttonDecrease;
@@ -70,6 +73,11 @@ public class UIStatusIncreaseStat : MonoBehaviour
             string stat = UtilsPlayer.GetAdvancedStatText(UtilsPlayer.GetCurrentStatById(idStat), idStat);
 
             textStatName.text = name + " - " + stat;
+            /*
+            _scrollingStatGroup.childForceExpandWidth = false;
+            var textRect = textStatName.GetComponent<RectTransform>();
+            textRect.sizeDelta = new Vector2(400f, textRect.sizeDelta.y);
+            _scrollingStatGroup.childForceExpandWidth = true;*/
         }
         else
         {

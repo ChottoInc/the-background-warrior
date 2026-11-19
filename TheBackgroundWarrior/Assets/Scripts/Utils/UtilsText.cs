@@ -273,6 +273,7 @@ public static class UtilsText
     public const string text_settings_general_titleexit = "text_settings_general_titleexit";
     public const string text_settings_general_button_titlescreen = "text_settings_general_button_titlescreen";
     public const string text_settings_general_button_quit = "text_settings_general_button_quit";
+    public const string text_settings_general_version = "text_settings_general_version";
 
     public const string text_settings_general_lang_english = "text_settings_general_lang_english";
     public const string text_settings_general_lang_italian = "text_settings_general_lang_italian";
@@ -1339,6 +1340,7 @@ public static class UtilsText
             { text_settings_general_titleexit, "Exit" },
             { text_settings_general_button_titlescreen, "Title Screen" },
             { text_settings_general_button_quit, "Quit" },
+            { text_settings_general_version, "Ver. {0}" },
 
             { text_settings_general_lang_english, "English" },
             { text_settings_general_lang_italian, "Italiano" },

@@ -84,7 +84,7 @@ public static class UtilsItem
     public static List<FishSO> GetFishByDayMoment(UtilsGeneral.DayMoment moment)
     {
         return GetAllTypeItem<FishSO>()
-            .Where(f => f.SpawnDayMoment == moment)
+            .Where(f => f.SpawnDayMoment == moment && UtilsFisher.GetFishGroupByFish(f) != null)
             .ToList();
     }
 
@@ -132,11 +132,11 @@ public static class UtilsItem
             if (result.FishRarity == rarity)
                 found = true;
 
-
+            /* I ADDED THE CHECK BEFORE ON GET FISH DAY MOMENT, SO IT SHOULD BE OK NOW, BUT I LEAVE THIS HERE JUST IN CASE
             // check if the fish can actually get caught, there are some SOs extra, so the fish wouldn't be in any of the groups
             if (UtilsFisher.GetFishGroupByFish(result) == null)
                 found = false;
-
+            */
             tries++;
         }
 
