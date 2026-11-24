@@ -127,7 +127,7 @@ public class PlayerNecromancerData : BasePlayerData
     {
         base.AddExp(
             amount,
-            level => level >= UtilsMage.MAX_LEVEL_MAGE,
+            level => level >= UtilsNecromancer.MAX_LEVEL_NECROMANCER,
             () => ExpToNextLevel
         );
     }

@@ -149,14 +149,14 @@ public class PlayerAlchemistData : BasePlayerData
 
     public void AddExp(long amount)
     {
-        Debug.Log("current level:" + CurrentLevel + ", required exp: " + ExpToNextLevel);
+        //Debug.Log("current level:" + CurrentLevel + ", required exp: " + ExpToNextLevel);
         base.AddExp(
             amount,
             level => level >= UtilsAlchemist.MAX_LEVEL_ALCHEMIST,
             () => ExpToNextLevel
         );
 
-        Debug.Log("added exp: " + amount + ", required after added exp: " + ExpToNextLevel);
+        //Debug.Log("added exp: " + amount + ", required after added exp: " + ExpToNextLevel);
     }
 
     public void IncreaseLevelStat(int id, int amount)

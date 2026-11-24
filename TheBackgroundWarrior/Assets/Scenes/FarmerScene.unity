@@ -5024,6 +5024,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4930380478526880330, guid: c54fd332e30c9804fa09a06850744cd9, type: 3}
+      propertyPath: minSpawnCooldown
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930380478526880330, guid: c54fd332e30c9804fa09a06850744cd9, type: 3}
+      propertyPath: maxDespawnCooldown
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930380478526880330, guid: c54fd332e30c9804fa09a06850744cd9, type: 3}
+      propertyPath: minDespawnCooldown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6559078570619812624, guid: c54fd332e30c9804fa09a06850744cd9, type: 3}
       propertyPath: m_Name
       value: Companion Spawn Manager

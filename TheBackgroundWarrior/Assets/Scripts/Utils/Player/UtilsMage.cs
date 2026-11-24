@@ -109,8 +109,8 @@ public static class UtilsMage
             default: break;
             case 1: mult = 1.2f; break;
             case 2: mult = 2f; break;
-            case 3: mult = 3.2f; break;
-            case 4: mult = 5f; break;
+            case 3: mult = 3f; break;
+            case 4: mult = 4f; break;
         }
 
         return Mathf.FloorToInt(data.SpellSO.BaseLearningPoints * mult);

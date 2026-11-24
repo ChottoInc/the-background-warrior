@@ -4,7 +4,7 @@ public static class UtilsNecromancer
 {
     public enum RitualType { Summon, Arise, Afterlife, Ade }
 
-    public const long BASE_EXP_GAIN_FROM_FIGHTERS = 40;
+    public const long BASE_EXP_GAIN_FROM_FIGHTERS = 150;
 
     // ---------------- START LEVELS --------------- //
 
@@ -71,6 +71,8 @@ public static class UtilsNecromancer
             PER_LEVEL_NECROMANCER_MAX_HORDE +
             PER_LEVEL_NECROMANCER_MAX_LUCK -
             (START_LEVEL_APTITUDE + START_LEVEL_SUMMON + START_LEVEL_MIGHT + START_LEVEL_LIFESPAN + START_LEVEL_HORDE + START_LEVEL_LUCK);
+
+        //Debug.Log($"MAX_LEVEL_NECROMANCER: {MAX_LEVEL_NECROMANCER}");
 
 
         BASE_NECROMANCER_EXP_GROWTH = jobDataSO.BaseExpGrowth;

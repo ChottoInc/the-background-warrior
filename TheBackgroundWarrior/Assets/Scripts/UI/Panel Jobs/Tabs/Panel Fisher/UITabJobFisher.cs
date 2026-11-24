@@ -91,11 +91,12 @@ public class UITabJobFisher : UITabWindow
 
 
         // add to availables if a bait is active
-        if(PlayerManager.Instance.PlayerFisherData.ActiveBait != null)
+        if (PlayerManager.Instance.PlayerFisherData.ActiveBait != null)
         {
             var bait = player.PlayerData.ActiveBait;
             var baitMoment = bait.AttractsMoment;
-            availables.AddRange(UtilsItem.GetFishByDayMoment(baitMoment));
+
+            MergeAvailables(availables, UtilsItem.GetFishByDayMoment(baitMoment));
         }
 
         // order by name
@@ -125,6 +126,20 @@ public class UITabJobFisher : UITabWindow
                 obj.Setup(coloredName, PlayerManager.Instance.Inventory.HasItem(fish.Id));
             }
             _availableFishes.Add(prefab);
+        }
+    }
+
+    /// <summary>
+    /// Using a list and not hashset since I want to keep the names sorted
+    /// </summary>
+    private void MergeAvailables(List<FishSO> availables, List<FishSO> baitAvailables)
+    {
+        foreach (var fish in baitAvailables)
+        {
+            if (!availables.Contains(fish))
+            {
+                availables.Add(fish);
+            }
         }
     }
 

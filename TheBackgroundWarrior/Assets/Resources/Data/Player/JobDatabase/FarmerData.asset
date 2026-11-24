@@ -16,8 +16,8 @@ MonoBehaviour:
   dataPath: Files/Player/PlayerDatas - Farmer
   <PerLevelGainGreenthumb>k__BackingField: 0.01
   <PerLevelGainAgronomy>k__BackingField: 0.2
-  <PerLevelGainKindness>k__BackingField: 0.01
-  <PerLevelGainLuck>k__BackingField: 0.01
+  <PerLevelGainKindness>k__BackingField: 0.02
+  <PerLevelGainLuck>k__BackingField: 0.02
   <MaxLevelGreenthumb>k__BackingField: 25
   <MaxLevelAgronomy>k__BackingField: 20
   <MaxLevelKindness>k__BackingField: 25

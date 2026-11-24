@@ -406,6 +406,8 @@ public class PlayerFightData : BasePlayerData
     /// </summary>
     public void Heal(float value)
     {
+        Debug.Log("Heal: " + value);
+
         float total = Mathf.Max(0f, value);
 
         // subtract total to hp
