@@ -15,11 +15,11 @@ MonoBehaviour:
   id: 3
   _ingredients:
   - item: {fileID: 11400000, guid: ce93a1275fc975a4e92ed12bb191d6ec, type: 2}
-    quantity: 200
+    quantity: 70
   - item: {fileID: 11400000, guid: 3031592e0fe6e974bb28c661969da799, type: 2}
-    quantity: 150
+    quantity: 40
   - item: {fileID: 11400000, guid: 7997bcc22f8b13545b992b64988176a5, type: 2}
-    quantity: 10
+    quantity: 8
   - item: {fileID: 11400000, guid: 2f03a0533d2bda647a5b9e0afe4117ab, type: 2}
     quantity: 1
   _product: {fileID: 11400000, guid: 06a84dfac4f0e5f4ebd67b95e286381c, type: 2}

@@ -882,7 +882,12 @@ public class UITabJobBlacksmith : UITabWindow
 
     public override void Close()
     {
-        isAnimatingLevelUp = false;
+        if (isAnimatingLevelUp)
+        {
+            StopAllCoroutines();
+            isAnimatingLevelUp = false;
+            matImageWeapon.SetFloat(transparencyAmount, 0f);
+        }
 
         base.Close();
     }

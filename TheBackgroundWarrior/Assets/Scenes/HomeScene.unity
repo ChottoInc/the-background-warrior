@@ -1149,6 +1149,18 @@ PrefabInstance:
       propertyPath: m_text
       value: Continue
       objectReference: {fileID: 0}
+    - target: {fileID: 7456111393427598276, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d84c0cc5ab8f8a048904ad938e7cf1aa, type: 2}
+    - target: {fileID: 7456111393427598276, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 04828deb82e644f48a3b9aa20dad7254, type: 2}
+    - target: {fileID: 7456111393427598276, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7678884178663672853, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1880,9 +1892,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333f4b071b8e9241868c7ced5f7034d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlatformSteam: 0
-  enableCheats: 1
-  fileEncryption: 0
+  isPlatformSteam: 1
+  enableCheats: 0
+  fileEncryption: 1
 --- !u!4 &903364526
 Transform:
   m_ObjectHideFlags: 0
@@ -3688,27 +3700,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 79.95
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 102.99999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 39.975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -51.499996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4801101046758922153, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: textId
@@ -4766,27 +4778,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 70.89
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 102.99999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 35.445
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370870391556775981, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -51.499996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5726658500262420846, guid: 21d310d65ae252a43890c2660fd035f4, type: 3}
       propertyPath: m_Name

@@ -341,9 +341,10 @@ public class PlayerFightData : BasePlayerData
         }
 
         total = Mathf.Max(0f, baseDamage - CurrentDef);
+        //Debug.Log("Total: " + total + ", base: " + baseDamage + ", def: " + CurrentDef);
 
         // check for shield
-        if(CurrentShield > 0)
+        if (CurrentShield > 0)
         {
             float restFromShield = 0;
 
@@ -406,8 +407,6 @@ public class PlayerFightData : BasePlayerData
     /// </summary>
     public void Heal(float value)
     {
-        Debug.Log("Heal: " + value);
-
         float total = Mathf.Max(0f, value);
 
         // subtract total to hp

@@ -15,15 +15,15 @@ MonoBehaviour:
   id: 4
   _ingredients:
   - item: {fileID: 11400000, guid: 11cb4398fa0432d4e8a94e61338746a5, type: 2}
-    quantity: 5
+    quantity: 3
   - item: {fileID: 11400000, guid: 34e1263667c74404ab867cc01d4f997f, type: 2}
-    quantity: 5
+    quantity: 3
   - item: {fileID: 11400000, guid: e77c7c1657bbf3743ac5e556178d873b, type: 2}
     quantity: 2
   - item: {fileID: 11400000, guid: 9d6bb8e347974854984fe12969f6418a, type: 2}
     quantity: 10
   - item: {fileID: 11400000, guid: d2ddb613a7c302747ad7aa34376c8d89, type: 2}
-    quantity: 20
+    quantity: 15
   _product: {fileID: 11400000, guid: 6d2026c2f115d394493aa0e1ebcc5250, type: 2}
   _craftTime: 10
   _rewardedExp: 500

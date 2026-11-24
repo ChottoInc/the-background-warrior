@@ -26,14 +26,14 @@ MonoBehaviour:
   <ExpoExpGrowth>k__BackingField: 1.65
   <FlatExpGrowth>k__BackingField: 40
   <HelmetMaxHpLinearGrowth>k__BackingField: 0.15
-  <HelmetMaxHpQuadraticGrowth>k__BackingField: 0.03
-  <ArmorDefLinearGrowth>k__BackingField: 0.04
-  <ArmorDefQuadraticGrowth>k__BackingField: 0.008
+  <HelmetMaxHpQuadraticGrowth>k__BackingField: 0.04
+  <ArmorDefLinearGrowth>k__BackingField: 0.05
+  <ArmorDefQuadraticGrowth>k__BackingField: 0.01
   <GlovesAtkSpdLinearGrowth>k__BackingField: 0.2
   <GlovesAtkSpdQuadraticGrowth>k__BackingField: 0.04
   <GlovesCritDmgLinearGrowth>k__BackingField: 0.03
   <GlovesCritDmgQuadraticGrowth>k__BackingField: 0.02
-  <BootsDefLinearGrowth>k__BackingField: 0.05
-  <BootsDefQuadraticGrowth>k__BackingField: 0.01
+  <BootsDefLinearGrowth>k__BackingField: 0.06
+  <BootsDefQuadraticGrowth>k__BackingField: 0.02
   <BootsCritRateLinearGrowth>k__BackingField: 0.03
   <BootsCritRateQuadraticGrowth>k__BackingField: 0.0075
