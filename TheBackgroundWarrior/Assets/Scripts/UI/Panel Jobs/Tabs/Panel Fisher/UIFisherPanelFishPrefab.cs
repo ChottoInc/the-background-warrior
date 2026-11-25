@@ -32,7 +32,9 @@ public class UIFisherPanelFishPrefab : MonoBehaviour
 
     public void OnPointerEnter()
     {
-        string itemName = "N/A";
+        //string itemName = "N/A";
+        string itemName = UtilsGeneral.GetFishTooltip(fishSO);
+        /*
         if (fishSO != null)
         {
             itemName = string.Format(
@@ -44,7 +46,7 @@ public class UIFisherPanelFishPrefab : MonoBehaviour
                 UtilsItem.GetFishRarityColor(fishSO.FishRarity),
                 UtilsItem.GetFishRarityName(fishSO.FishRarity),
                 UtilsGeneral.GetDayMomentName(fishSO.SpawnDayMoment));
-        }
+        }*/
 
         TooltipManagerData tooltipData = new TooltipManagerData();
         tooltipData.idTooltip = UITooltipManager.ID_SHOW_TEXT;

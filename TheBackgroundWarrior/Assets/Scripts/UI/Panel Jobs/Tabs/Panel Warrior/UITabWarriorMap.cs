@@ -105,7 +105,11 @@ public class UITabWarriorMap : MonoBehaviour
 
         string possibleMonsters = string.Empty;
 
+        //Debug.Log("Retrieving enemies for map: " + mapSO.MapName);
+
         MapToEnemiesSO mapEnemiesSO = UtilsCombatMap.GetEnemiesByMap(mapSO.IdMap);
+
+        //Debug.Log("Found " + mapEnemiesSO.PossibleEnemies.Length );
 
         for (int i = 0; i < mapEnemiesSO.PossibleEnemies.Length; i++)
         {

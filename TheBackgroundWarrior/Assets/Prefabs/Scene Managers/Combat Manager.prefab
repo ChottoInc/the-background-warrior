@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   enemyHighDamageCheat: 0
-  playerHighDamageCheat: 1
+  playerHighDamageCheat: 0
   playerHighExpCheat: 0
   cardHighDroprateCheat: 0

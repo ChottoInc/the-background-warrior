@@ -73,11 +73,6 @@ public class UIStatusIncreaseStat : MonoBehaviour
             string stat = UtilsPlayer.GetAdvancedStatText(UtilsPlayer.GetCurrentStatById(idStat), idStat);
 
             textStatName.text = name + " - " + stat;
-            /*
-            _scrollingStatGroup.childForceExpandWidth = false;
-            var textRect = textStatName.GetComponent<RectTransform>();
-            textRect.sizeDelta = new Vector2(400f, textRect.sizeDelta.y);
-            _scrollingStatGroup.childForceExpandWidth = true;*/
         }
         else
         {
@@ -91,11 +86,11 @@ public class UIStatusIncreaseStat : MonoBehaviour
         if(tempLevel != currentLevel)
         {
             // show old and new level if there have been changes
-            textStatLevel.text = string.Format(UtilsText.AllText[UtilsText.text_job_change_stat_level], currentLevel, tempLevel);
+            textStatLevel.text = string.Format(UtilsText.AllText[UtilsText.text_job_change_stat_level], currentLevel, UtilsPlayer.GetStatMaxLevelById(idStat), tempLevel - currentLevel);
         }
         else
         {
-            textStatLevel.text = string.Format(UtilsText.AllText[UtilsText.text_job_current_stat_level], currentLevel);
+            textStatLevel.text = string.Format(UtilsText.AllText[UtilsText.text_job_current_stat_level], currentLevel, UtilsPlayer.GetStatMaxLevelById(idStat));
         }
     }
 

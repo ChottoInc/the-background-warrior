@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static UtilsFarmer;
+
 public class PlayerFarmerData : BasePlayerData
 {
     // ---- BASE STAT VALUES
@@ -28,13 +30,21 @@ public class PlayerFarmerData : BasePlayerData
 
 
     // ---- FINAL STAT VALUES
-    public long ExpToNextLevel => UtilsFarmer.RequiredExpForFarmerLevel(CurrentLevel + 1);
+    public long ExpToNextLevel => RequiredExpForFarmerLevel(CurrentLevel + 1);
 
 
-    public float CurrentGreenthumb => baseGreenthumb + UtilsFarmer.PER_LEVEL_FARMER_GAIN_GREENTHUMB * (levelStatGreenthumb - 1)+ (_inspirationModifier - 1f);
-    public float CurrentAgronomy => baseAgronomy + UtilsFarmer.PER_LEVEL_FARMER_GAIN_AGRONOMY * (levelstatAgronomy);
-    public float CurrentKindness => baseKindness + UtilsFarmer.PER_LEVEL_FARMER_GAIN_KINDNESS * (levelstatKindness - 1) + (_inspirationModifier - 1f);
-    public float CurrentLuck => baseLuck + UtilsFarmer.PER_LEVEL_FARMER_GAIN_LUCK * (levelStatLuck - 1) + (_inspirationModifier - 1f);
+    public float CurrentGreenthumb => baseGreenthumb + 
+        PER_LEVEL_FARMER_GAIN_GREENTHUMB * (levelStatGreenthumb >= PER_LEVEL_FARMER_MAX_AGRONOMY ? levelStatGreenthumb : levelStatGreenthumb - 1) + 
+        (_inspirationModifier - 1f);
+
+    public float CurrentAgronomy => baseAgronomy + PER_LEVEL_FARMER_GAIN_AGRONOMY * (levelstatAgronomy);
+    public float CurrentKindness => baseKindness +
+        PER_LEVEL_FARMER_GAIN_KINDNESS * (levelstatKindness >= PER_LEVEL_FARMER_MAX_KINDNESS ? levelstatKindness : levelstatKindness - 1) +
+        (_inspirationModifier - 1f);
+
+    public float CurrentLuck => baseLuck +
+        PER_LEVEL_FARMER_GAIN_LUCK * (levelStatLuck >= PER_LEVEL_FARMER_MAX_LUCK ? levelStatLuck : levelStatLuck - 1) + 
+        (_inspirationModifier - 1f);
 
 
     // ---- PLANTED CROPS
@@ -75,10 +85,10 @@ public class PlayerFarmerData : BasePlayerData
         levelstatKindness = saveData.levelKindness;
         levelStatLuck = saveData.levelStatLuck;
 
-        levelStatGreenthumb = Math.Min(levelStatGreenthumb, UtilsFarmer.PER_LEVEL_FARMER_MAX_GREENTHUMB);
-        levelstatAgronomy = Math.Min(levelstatAgronomy, UtilsFarmer.PER_LEVEL_FARMER_MAX_AGRONOMY);
-        levelstatKindness = Math.Min(levelstatKindness, UtilsFarmer.PER_LEVEL_FARMER_MAX_KINDNESS);
-        levelStatLuck = Math.Min(levelStatLuck, UtilsFarmer.PER_LEVEL_FARMER_MAX_LUCK);
+        levelStatGreenthumb = Math.Min(levelStatGreenthumb, PER_LEVEL_FARMER_MAX_GREENTHUMB);
+        levelstatAgronomy = Math.Min(levelstatAgronomy, PER_LEVEL_FARMER_MAX_AGRONOMY);
+        levelstatKindness = Math.Min(levelstatKindness, PER_LEVEL_FARMER_MAX_KINDNESS);
+        levelStatLuck = Math.Min(levelStatLuck, PER_LEVEL_FARMER_MAX_LUCK);
 
         AvailableStatPoints = saveData.availableStatPoints;
 
@@ -93,14 +103,14 @@ public class PlayerFarmerData : BasePlayerData
         CurrentLevel = Math.Min(CurrentLevel, sumLevels);
 
         // reset available points to 0 if previous bugs occured, and set exp to 0
-        if (CurrentLevel >= UtilsFarmer.MAX_LEVEL_FARMER)
+        if (CurrentLevel >= MAX_LEVEL_FARMER)
         {
-            AvailableStatPoints = UtilsFarmer.MAX_LEVEL_FARMER - 1 -
+            AvailableStatPoints = MAX_LEVEL_FARMER - 1 -
                levelStatGreenthumb - levelstatAgronomy - levelstatKindness - levelStatLuck +
-               UtilsFarmer.START_LEVEL_GREENTHUMB +
-               UtilsFarmer.START_LEVEL_AGRONOMY +
-               UtilsFarmer.START_LEVEL_KINDNESS +
-               UtilsFarmer.START_LEVEL_LUCK;
+               START_LEVEL_GREENTHUMB +
+               START_LEVEL_AGRONOMY +
+               START_LEVEL_KINDNESS +
+               START_LEVEL_LUCK;
             CurrentExp = 0;
         }
 
@@ -131,11 +141,10 @@ public class PlayerFarmerData : BasePlayerData
         CurrentExp = 0;
 
 
-        levelStatGreenthumb = UtilsFarmer.START_LEVEL_GREENTHUMB;
-        levelstatAgronomy = UtilsFarmer.START_LEVEL_AGRONOMY;
-        levelstatKindness = UtilsFarmer.START_LEVEL_KINDNESS;
-        levelStatLuck = UtilsFarmer.START_LEVEL_LUCK;
-
+        levelStatGreenthumb = START_LEVEL_GREENTHUMB;
+        levelstatAgronomy = START_LEVEL_AGRONOMY;
+        levelstatKindness = START_LEVEL_KINDNESS;
+        levelStatLuck = START_LEVEL_LUCK;
 
         // multiplier
         baseGreenthumb = 0f; // reduced growth time crops, up to 25%
@@ -152,7 +161,7 @@ public class PlayerFarmerData : BasePlayerData
     {
         base.AddExp(
             amount,
-            level => level >= UtilsFarmer.MAX_LEVEL_FARMER,
+            level => level >= MAX_LEVEL_FARMER,
             () => ExpToNextLevel
         );
     }
@@ -323,7 +332,7 @@ public class PlayerFarmerData : BasePlayerData
         int countMaxLevel = 0;
         foreach (var companion in companions)
         {
-            if(companion.CurrentLevel >= UtilsFarmer.MAX_LEVEL_COMPANIONS)
+            if(companion.CurrentLevel >= MAX_LEVEL_COMPANIONS)
             {
                 countMaxLevel++;
             }

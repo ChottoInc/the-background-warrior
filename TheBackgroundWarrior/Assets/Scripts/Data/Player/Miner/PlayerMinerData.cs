@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+
 using static UtilsPlayer;
+using static UtilsMiner;
 
 public class PlayerMinerData : BasePlayerData
 {
@@ -35,13 +37,22 @@ public class PlayerMinerData : BasePlayerData
 
     // ---- FINAL STAT VALUES
 
-    public long ExpToNextLevel => UtilsMiner.RequiredExpForMinerLevel(CurrentLevel + 1);
+    public long ExpToNextLevel => RequiredExpForMinerLevel(CurrentLevel + 1);
 
 
-    public float CurrentPower => basePower + UtilsMiner.PER_LEVEL_MINER_GAIN_POWER * (levelStatPower - 1) * _inspirationModifier;
-    public float CurrentSmashSpeed => baseSmashSpeed + UtilsMiner.PER_LEVEL_MINER_GAIN_SMASHSPEED * (levelSmashSpeed - 1) * _inspirationModifier;
-    public float CurrentShockwave => baseShockwave + UtilsMiner.PER_LEVEL_MINER_GAIN_SHOCKWAVE * (levelShockwave - 1) + (_inspirationModifier - 1f);
-    public float CurrentLuck => baseLuck + UtilsMiner.PER_LEVEL_MINER_GAIN_LUCK * (levelStatLuck - 1) + (_inspirationModifier - 1f);
+    public float CurrentPower => basePower +
+        PER_LEVEL_MINER_GAIN_POWER * (LevelStatPower >= PER_LEVEL_MINER_MAX_POWER ? LevelStatPower : LevelStatPower - 1) * 
+        _inspirationModifier;
+
+    public float CurrentSmashSpeed => baseSmashSpeed +
+        PER_LEVEL_MINER_GAIN_SMASHSPEED * (LevelStatSmashSpeed >= PER_LEVEL_MINER_MAX_SMASHSPEED ? LevelStatSmashSpeed : LevelStatSmashSpeed - 1) * 
+        _inspirationModifier;
+    public float CurrentShockwave => baseShockwave +
+        PER_LEVEL_MINER_GAIN_SHOCKWAVE * (LevelStatShockwave >= PER_LEVEL_MINER_MAX_SHOCKWAVE ? LevelStatShockwave : LevelStatShockwave - 1) +
+        (_inspirationModifier - 1f);
+    public float CurrentLuck => baseLuck +
+        PER_LEVEL_MINER_GAIN_LUCK * (LevelStatLuck >= PER_LEVEL_MINER_MAX_LUCK ? LevelStatLuck : LevelStatLuck - 1) +
+        (_inspirationModifier - 1f);
 
     public int WeaponLevel => levelWeaponMiner;
 
@@ -62,10 +73,10 @@ public class PlayerMinerData : BasePlayerData
         levelStatLuck = saveData.levelStatLuck;
 
 
-        levelStatPower = Math.Min(levelStatPower, UtilsMiner.PER_LEVEL_MINER_MAX_POWER);
-        levelSmashSpeed = Math.Min(levelSmashSpeed, UtilsMiner.PER_LEVEL_MINER_MAX_SMASHSPEED);
-        levelShockwave = Math.Min(levelShockwave, UtilsMiner.PER_LEVEL_MINER_MAX_SHOCKWAVE);
-        levelStatLuck = Math.Min(levelStatLuck, UtilsMiner.PER_LEVEL_MINER_MAX_LUCK);
+        levelStatPower = Math.Min(levelStatPower, PER_LEVEL_MINER_MAX_POWER);
+        levelSmashSpeed = Math.Min(levelSmashSpeed, PER_LEVEL_MINER_MAX_SMASHSPEED);
+        levelShockwave = Math.Min(levelShockwave, PER_LEVEL_MINER_MAX_SHOCKWAVE);
+        levelStatLuck = Math.Min(levelStatLuck, PER_LEVEL_MINER_MAX_LUCK);
 
 
         AvailableStatPoints = saveData.availableStatPoints;
@@ -81,14 +92,14 @@ public class PlayerMinerData : BasePlayerData
         CurrentLevel = Math.Min(CurrentLevel, sumLevels);
 
         // reset available points to 0 if previous bugs occured, and set exp to 0
-        if (CurrentLevel >= UtilsMiner.MAX_LEVEL_MINER)
+        if (CurrentLevel >= MAX_LEVEL_MINER)
         {
-            AvailableStatPoints = UtilsMiner.MAX_LEVEL_MINER - 1 -
+            AvailableStatPoints = MAX_LEVEL_MINER - 1 -
                levelStatPower - levelSmashSpeed - levelShockwave - levelStatLuck +
-               UtilsMiner.START_LEVEL_POWER +
-               UtilsMiner.START_LEVEL_SMASH_SPEED +
-               UtilsMiner.START_LEVEL_SHOCKWAVE +
-               UtilsMiner.START_LEVEL_LUCK;
+               START_LEVEL_POWER +
+               START_LEVEL_SMASH_SPEED +
+               START_LEVEL_SHOCKWAVE +
+               START_LEVEL_LUCK;
             CurrentExp = 0;
         }
 
@@ -102,10 +113,10 @@ public class PlayerMinerData : BasePlayerData
         CurrentLevel = 1;
         CurrentExp = 0;
 
-        levelStatPower = UtilsMiner.START_LEVEL_POWER;
-        levelSmashSpeed = UtilsMiner.START_LEVEL_SMASH_SPEED;
-        levelShockwave = UtilsMiner.START_LEVEL_SHOCKWAVE;
-        levelStatLuck = UtilsMiner.START_LEVEL_LUCK;
+        levelStatPower = START_LEVEL_POWER;
+        levelSmashSpeed = START_LEVEL_SMASH_SPEED;
+        levelShockwave = START_LEVEL_SHOCKWAVE;
+        levelStatLuck = START_LEVEL_LUCK;
 
 
         basePower = 10;
@@ -124,7 +135,7 @@ public class PlayerMinerData : BasePlayerData
     {
         base.AddExp(
             amount,
-            level => level >= UtilsMiner.MAX_LEVEL_MINER,
+            level => level >= MAX_LEVEL_MINER,
             () => ExpToNextLevel
         );
     }

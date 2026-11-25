@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+
 using static UtilsPlayer;
+using static UtilsBlacksmith;
 
 public class PlayerBlacksmithData : BasePlayerData
 {
@@ -56,13 +58,22 @@ public class PlayerBlacksmithData : BasePlayerData
     public int CurrentForgingQuantity => currentForgingQuantity;
 
 
-    public long ExpToNextLevel => UtilsBlacksmith.RequiredExpForBlacksmithLevel(CurrentLevel + 1);
+    public long ExpToNextLevel => RequiredExpForBlacksmithLevel(CurrentLevel + 1);
 
 
-    public float CurrentCraftSpeed => baseCraftSpeed + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_CRAFTSPEED * (levelStatCraftSpeed - 1) * _inspirationModifier;
-    public float CurrentEfficiency => baseEfficiency + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_EFFICIENCY * (levelEfficiency - 1) + (_inspirationModifier - 1f);
-    public float CurrentLuck => baseLuck + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_LUCK * (levelStatLuck - 1) + (_inspirationModifier - 1f);
-    public float CurrentMetallurgy => baseMetallurgy + UtilsBlacksmith.PER_LEVEL_BLACKSMITH_GAIN_METALLURGY * (levelStatMetallurgy);
+    public float CurrentCraftSpeed => baseCraftSpeed +
+        PER_LEVEL_BLACKSMITH_GAIN_CRAFTSPEED * (LevelStatCraftSpeed >= PER_LEVEL_BLACKSMITH_MAX_CRAFTSPEED ? LevelStatCraftSpeed : LevelStatCraftSpeed - 1) * 
+        _inspirationModifier;
+
+    public float CurrentEfficiency => baseEfficiency +
+        PER_LEVEL_BLACKSMITH_GAIN_EFFICIENCY * (LevelEfficiency >= PER_LEVEL_BLACKSMITH_MAX_EFFICIENCY ? LevelEfficiency : LevelEfficiency - 1) +
+        (_inspirationModifier - 1f);
+
+    public float CurrentLuck => baseLuck +
+        PER_LEVEL_BLACKSMITH_GAIN_LUCK * (LevelStatLuck >= PER_LEVEL_BLACKSMITH_MAX_LUCK ? LevelStatLuck : LevelStatLuck - 1) +
+        (_inspirationModifier - 1f);
+
+    public float CurrentMetallurgy => baseMetallurgy + PER_LEVEL_BLACKSMITH_GAIN_METALLURGY * (levelStatMetallurgy);
 
     public float CurrentCraftTime => 60f / CurrentCraftSpeed;
 
@@ -82,10 +93,10 @@ public class PlayerBlacksmithData : BasePlayerData
         levelStatLuck = saveData.levelStatLuck;
         levelStatMetallurgy = saveData.levelStatMetallurgy;
 
-        levelStatCraftSpeed = Math.Min(levelStatCraftSpeed, UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_CRAFTSPEED);
-        levelEfficiency = Math.Min(levelEfficiency, UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_EFFICIENCY);
-        levelStatLuck = Math.Min(levelStatLuck, UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_LUCK);
-        levelStatMetallurgy = Math.Min(levelStatMetallurgy, UtilsBlacksmith.PER_LEVEL_BLACKSMITH_MAX_METALLURGY);
+        levelStatCraftSpeed = Math.Min(levelStatCraftSpeed, PER_LEVEL_BLACKSMITH_MAX_CRAFTSPEED);
+        levelEfficiency = Math.Min(levelEfficiency, PER_LEVEL_BLACKSMITH_MAX_EFFICIENCY);
+        levelStatLuck = Math.Min(levelStatLuck, PER_LEVEL_BLACKSMITH_MAX_LUCK);
+        levelStatMetallurgy = Math.Min(levelStatMetallurgy, PER_LEVEL_BLACKSMITH_MAX_METALLURGY);
 
 
         AvailableStatPoints = saveData.availableStatPoints;
@@ -101,14 +112,14 @@ public class PlayerBlacksmithData : BasePlayerData
         CurrentLevel = Math.Min(CurrentLevel, sumLevels);
 
         // reset available points to 0 if previous bugs occured, and set exp to 0
-        if(CurrentLevel >= UtilsBlacksmith.MAX_LEVEL_BLACKSMITH)
+        if(CurrentLevel >= MAX_LEVEL_BLACKSMITH)
         {
-            AvailableStatPoints = UtilsBlacksmith.MAX_LEVEL_BLACKSMITH - 1 -
+            AvailableStatPoints = MAX_LEVEL_BLACKSMITH - 1 -
                 levelStatCraftSpeed - levelEfficiency - levelStatLuck - levelStatMetallurgy +
-                UtilsBlacksmith.START_LEVEL_CRAFT_SPEED +
-                UtilsBlacksmith.START_LEVEL_EFFICIENCY +
-                UtilsBlacksmith.START_LEVEL_LUCK +
-                UtilsBlacksmith.START_LEVEL_METALLURGY;
+                START_LEVEL_CRAFT_SPEED +
+                START_LEVEL_EFFICIENCY +
+                START_LEVEL_LUCK +
+                START_LEVEL_METALLURGY;
             CurrentExp = 0;
         }
 
@@ -130,11 +141,10 @@ public class PlayerBlacksmithData : BasePlayerData
         CurrentLevel = 1;
         CurrentExp = 0;
 
-        levelStatCraftSpeed = UtilsBlacksmith.START_LEVEL_CRAFT_SPEED;
-        levelEfficiency = UtilsBlacksmith.START_LEVEL_EFFICIENCY;
-        levelStatLuck = UtilsBlacksmith.START_LEVEL_LUCK;
-        levelStatMetallurgy = UtilsBlacksmith.START_LEVEL_METALLURGY;
-
+        levelStatCraftSpeed = START_LEVEL_CRAFT_SPEED;
+        levelEfficiency = START_LEVEL_EFFICIENCY;
+        levelStatLuck = START_LEVEL_LUCK;
+        levelStatMetallurgy = START_LEVEL_METALLURGY;
 
         baseCraftSpeed = 1f;
         baseEfficiency = 0f;
@@ -159,7 +169,7 @@ public class PlayerBlacksmithData : BasePlayerData
     {
         base.AddExp(
             amount,
-            level => level >= UtilsBlacksmith.MAX_LEVEL_BLACKSMITH,
+            level => level >= MAX_LEVEL_BLACKSMITH,
             () => ExpToNextLevel
         );
     }

@@ -1383,8 +1383,8 @@ public static class UtilsText
 
             { text_job_current_level, "Lv. : {0}" },
             { text_job_available_points, "Available points: {0}" },
-            { text_job_current_stat_level, "Lv. {0}" },
-            { text_job_change_stat_level, "Lv. {0} >> Lv. {1}" },
+            { text_job_current_stat_level, "Lv. {0}/{1}" },
+            { text_job_change_stat_level, "Lv. {0}/{1} (+{2})" },
 
             { text_job_warrior_unlockconditions, "None" },
             { text_job_miner_unlockconditions, "None" },

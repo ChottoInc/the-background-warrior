@@ -364,6 +364,28 @@ public static class UtilsGeneral
 
     #endregion
 
+    #region TOOLTIPS
+
+    public static string GetFishTooltip(FishSO fish)
+    {
+        string res = string.Empty;
+        if (fish != null)
+        {
+            res = string.Format(
+                "{0}\n" +                       //name
+                UtilsText.AllText[UtilsText.text_job_fisher_raritytooltip] +   // rarity color and rarity name
+                UtilsText.AllText[UtilsText.text_job_fisher_spawntime],              // spawn moment in day
+
+                fish.ItemName,
+                UtilsItem.GetFishRarityColor(fish.FishRarity),
+                UtilsItem.GetFishRarityName(fish.FishRarity),
+                GetDayMomentName(fish.SpawnDayMoment));
+        }
+        return res;
+    }
+
+    #endregion
+
 
 
     /// <summary>

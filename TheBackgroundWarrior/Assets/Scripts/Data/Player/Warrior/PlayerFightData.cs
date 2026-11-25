@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static UtilsWarrior;
+
 public class PlayerFightData : BasePlayerData
 {
     // ---- VISITABLE MAPS
@@ -81,12 +83,15 @@ public class PlayerFightData : BasePlayerData
     private float critDmgModifier = 1f;
 
 
-    public long ExpToNextLevel => UtilsWarrior.RequiredExpForWarriorLevel(CurrentLevel + 1);
+    public long ExpToNextLevel => RequiredExpForWarriorLevel(CurrentLevel + 1);
 
 
     
     public float MaxHp => 
-        (baseMaxHp + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_MAXHP * (levelStatMaxHp - 1)) *
+        (   
+            baseMaxHp +
+            PER_LEVEL_WARRIOR_GAIN_MAXHP * (LevelStatMaxHp >= PER_LEVEL_WARRIOR_MAX_MAXHP ? LevelStatMaxHp : LevelStatMaxHp - 1)
+        ) *
         PlayerManager.Instance.HelmetMaxHpBlacksmithMultiplier *
         PlayerManager.Instance.FisherLifeSeriesMultiplier *
         maxHpModifier *
@@ -96,7 +101,10 @@ public class PlayerFightData : BasePlayerData
     public float CurrentHp { get; private set; }
 
     public float CurrentAtk =>
-        (baseAtk + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_ATK * (levelStatAtk - 1)) *
+        (   
+            baseAtk +
+            PER_LEVEL_WARRIOR_GAIN_ATK * (LevelStatAtk >= PER_LEVEL_WARRIOR_MAX_ATK ? LevelStatAtk : LevelStatAtk - 1)
+        ) *
         PlayerManager.Instance.WeaponMinerMultiplier *
         PlayerManager.Instance.FisherPredatorSeriesMultiplier *
         atkModifier *
@@ -105,7 +113,10 @@ public class PlayerFightData : BasePlayerData
 
 
     public float CurrentDef =>
-        (baseDef + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_DEF * (levelStatDef - 1)) *
+        (   
+            baseDef +
+            PER_LEVEL_WARRIOR_GAIN_DEF * (LevelStatDef >= PER_LEVEL_WARRIOR_MAX_DEF ? LevelStatDef : LevelStatDef - 1)
+        ) *
         PlayerManager.Instance.ArmorDefBlacksmithMultiplier *
         PlayerManager.Instance.BootsDefBlacksmithMultiplier *
         PlayerManager.Instance.FisherGuardianSeriesMultiplier *
@@ -115,20 +126,29 @@ public class PlayerFightData : BasePlayerData
 
     // todo: if more mehods will be available to increase atk spd and crit rate, then check if you want those stats to be past the max threshold
     public float CurrentAtkSpd => 
-        (baseAtkSpd + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_ATK_SPEED * (levelStatAtkSpd - 1)) *
+        (
+            baseAtkSpd +
+            PER_LEVEL_WARRIOR_GAIN_ATK_SPEED * (LevelStatAtkSpd >= PER_LEVEL_WARRIOR_MAX_ATK_SPEED ? LevelStatAtkSpd : LevelStatAtkSpd - 1)
+        ) *
         PlayerManager.Instance.GlovesAtkSpdBlacksmithMultiplier *
         PlayerManager.Instance.FisherDartSeriesMultiplier *
         atkSpdModifier *
         _inspirationModifier;
 
     public float CurrentCritRate => 
-        (baseCritRate + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_CRIT_RATE * (levelStatCritRate - 1)) *
+        (
+            baseCritRate +
+            PER_LEVEL_WARRIOR_GAIN_CRIT_RATE * (LevelStatCritRate >= PER_LEVEL_WARRIOR_MAX_CRIT_RATE ? LevelStatCritRate : LevelStatCritRate - 1)
+        ) *
         PlayerManager.Instance.BootsCritRateBlacksmithMultiplier *
         PlayerManager.Instance.FisherSharpSeriesMultiplier *
         _inspirationModifier;
 
     public float CurrentCritDmg => 
-        (baseCritDmg + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_CRIT_DMG * (levelStatCritDmg - 1)) *
+        (
+            baseCritDmg +
+            PER_LEVEL_WARRIOR_GAIN_CRIT_DMG * (LevelStatCritDmg >= PER_LEVEL_WARRIOR_MAX_CRIT_DMG ? LevelStatCritDmg : LevelStatCritDmg - 1)
+        ) *
         PlayerManager.Instance.GlovesCritDmgBlacksmithMultiplier *
         PlayerManager.Instance.FisherPiercingSeriesMultiplier *
         critDmgModifier *
@@ -136,7 +156,10 @@ public class PlayerFightData : BasePlayerData
 
     // affects card drop rates, and gives a one more chance to crit rate check
     public float CurrentLuck => 
-        (baseLuck + UtilsWarrior.PER_LEVEL_WARRIOR_GAIN_LUCK * (levelStatLuck - 1)) *
+        (
+            baseLuck +
+            PER_LEVEL_WARRIOR_GAIN_LUCK * (LevelStatLuck >= PER_LEVEL_WARRIOR_MAX_LUCK ? LevelStatLuck : LevelStatLuck - 1)
+        ) *
         PlayerManager.Instance.FisherGoldenSeriesMultiplier +
         (_inspirationModifier - 1f); // so adds .1
 
@@ -185,13 +208,13 @@ public class PlayerFightData : BasePlayerData
         levelStatLuck = saveData.levelStatLuck;
 
 
-        levelStatMaxHp = Math.Min(levelStatMaxHp, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_MAXHP);
-        levelStatAtk = Math.Min(levelStatAtk, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_ATK);
-        levelStatDef = Math.Min(levelStatDef, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_DEF);
-        levelStatAtkSpd = Math.Min(levelStatAtkSpd, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_ATK_SPEED);
-        levelStatCritRate = Math.Min(levelStatCritRate, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_CRIT_RATE);
-        levelStatCritDmg = Math.Min(levelStatCritDmg, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_CRIT_DMG);
-        levelStatLuck = Math.Min(levelStatLuck, UtilsWarrior.PER_LEVEL_WARRIOR_MAX_LUCK);
+        levelStatMaxHp = Math.Min(levelStatMaxHp, PER_LEVEL_WARRIOR_MAX_MAXHP);
+        levelStatAtk = Math.Min(levelStatAtk, PER_LEVEL_WARRIOR_MAX_ATK);
+        levelStatDef = Math.Min(levelStatDef, PER_LEVEL_WARRIOR_MAX_DEF);
+        levelStatAtkSpd = Math.Min(levelStatAtkSpd, PER_LEVEL_WARRIOR_MAX_ATK_SPEED);
+        levelStatCritRate = Math.Min(levelStatCritRate, PER_LEVEL_WARRIOR_MAX_CRIT_RATE);
+        levelStatCritDmg = Math.Min(levelStatCritDmg, PER_LEVEL_WARRIOR_MAX_CRIT_DMG);
+        levelStatLuck = Math.Min(levelStatLuck, PER_LEVEL_WARRIOR_MAX_LUCK);
 
 
         AvailableStatPoints = saveData.availableStatPoints;
@@ -207,17 +230,17 @@ public class PlayerFightData : BasePlayerData
         CurrentLevel = Math.Min(CurrentLevel, sumLevels);
 
         // reset available points to 0 if previous bugs occured, and set exp to 0
-        if (CurrentLevel >= UtilsWarrior.MAX_LEVEL_WARRIOR)
+        if (CurrentLevel >= MAX_LEVEL_WARRIOR)
         {
-            AvailableStatPoints = UtilsWarrior.MAX_LEVEL_WARRIOR - 1 -
+            AvailableStatPoints = MAX_LEVEL_WARRIOR - 1 -
                 levelStatMaxHp - levelStatAtk - levelStatDef - levelStatAtkSpd - levelStatCritRate - levelStatCritDmg - levelStatLuck +
-                UtilsWarrior.START_LEVEL_MAX_HP +
-                UtilsWarrior.START_LEVEL_ATK +
-                UtilsWarrior.START_LEVEL_DEF +
-                UtilsWarrior.START_LEVEL_ATKSPD +
-                UtilsWarrior.START_LEVEL_CRIT_RATE +
-                UtilsWarrior.START_LEVEL_CRIT_DMG +
-                UtilsWarrior.START_LEVEL_LUCK;
+                START_LEVEL_MAX_HP +
+                START_LEVEL_ATK +
+                START_LEVEL_DEF +
+                START_LEVEL_ATKSPD +
+                START_LEVEL_CRIT_RATE +
+                START_LEVEL_CRIT_DMG +
+                START_LEVEL_LUCK;
             CurrentExp = 0;
         }
 
@@ -239,17 +262,17 @@ public class PlayerFightData : BasePlayerData
         CurrentExp = 0;
 
 
-        levelStatMaxHp = UtilsWarrior.START_LEVEL_MAX_HP;
+        levelStatMaxHp = START_LEVEL_MAX_HP;
 
-        levelStatAtk = UtilsWarrior.START_LEVEL_ATK;
-        levelStatDef = UtilsWarrior.START_LEVEL_DEF;
+        levelStatAtk = START_LEVEL_ATK;
+        levelStatDef = START_LEVEL_DEF;
 
-        levelStatAtkSpd = UtilsWarrior.START_LEVEL_ATKSPD;
+        levelStatAtkSpd = START_LEVEL_ATKSPD;
 
-        levelStatCritRate = UtilsWarrior.START_LEVEL_CRIT_RATE;
-        levelStatCritDmg = UtilsWarrior.START_LEVEL_CRIT_DMG;
+        levelStatCritRate = START_LEVEL_CRIT_RATE;
+        levelStatCritDmg = START_LEVEL_CRIT_DMG;
 
-        levelStatLuck = UtilsWarrior.START_LEVEL_LUCK;
+        levelStatLuck = START_LEVEL_LUCK;
 
 
         baseMaxHp = BASE_MAXHP + ((float)PlayerManager.Instance.PlayerAlchemistData.StatPermaMaxHpCounter * ALCHEMIST_PERMA_ADD_MAXHP);
@@ -273,7 +296,7 @@ public class PlayerFightData : BasePlayerData
     {
         base.AddExp(
             amount,
-            level => level >= UtilsWarrior.MAX_LEVEL_WARRIOR,
+            level => level >= MAX_LEVEL_WARRIOR,
             () => ExpToNextLevel
         );
     }

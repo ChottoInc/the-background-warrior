@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+using static UtilsNecromancer;
+
 public class PlayerNecromancerData : BasePlayerData
 {
     // ---- BASE STAT VALUES
@@ -24,28 +26,36 @@ public class PlayerNecromancerData : BasePlayerData
 
 
     // ---- FINAL STAT VALUES
-    public long ExpToNextLevel => UtilsNecromancer.RequiredExpForNecromancerLevel(CurrentLevel + 1);
+    public long ExpToNextLevel => RequiredExpForNecromancerLevel(CurrentLevel + 1);
 
 
-    public float CurrentAptitude => baseAptitude + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_APTITUDE * LevelStatAptitude;
-    public float CurrentSummon => baseSummon + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_SUMMON * (LevelStatSummon - 1);
-    public float CurrentMight => baseMight + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_MIGHT * (LevelStatMight - 1) + (_inspirationModifier - 1f);
-    public float CurrentLifespan => baseLifespan + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_LIFESPAN * (LevelStatLifespan - 1) + (_inspirationModifier - 1f);
-    public float CurrentHorde => baseHorde + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_HORDE * LevelStatHorde;
-    public float CurrentLuck => baseLuck + UtilsNecromancer.PER_LEVEL_NECROMANCER_GAIN_LUCK * (LevelStatLuck - 1) + (_inspirationModifier - 1f);
+    public float CurrentAptitude => baseAptitude + PER_LEVEL_NECROMANCER_GAIN_APTITUDE * LevelStatAptitude;
+    public float CurrentSummon => baseSummon + PER_LEVEL_NECROMANCER_GAIN_SUMMON * (LevelStatSummon >= PER_LEVEL_NECROMANCER_MAX_SUMMON ? LevelStatSummon : LevelStatSummon - 1);
+    public float CurrentMight => baseMight +
+        PER_LEVEL_NECROMANCER_GAIN_MIGHT * (LevelStatMight >= PER_LEVEL_NECROMANCER_MAX_MIGHT ? LevelStatMight : LevelStatMight - 1) +
+        (_inspirationModifier - 1f);
+
+    public float CurrentLifespan => baseLifespan +
+        PER_LEVEL_NECROMANCER_GAIN_LIFESPAN * (LevelStatLifespan >= PER_LEVEL_NECROMANCER_MAX_LIFESPAN ? LevelStatLifespan : LevelStatLifespan - 1) +
+        (_inspirationModifier - 1f);
+
+    public float CurrentHorde => baseHorde + PER_LEVEL_NECROMANCER_GAIN_HORDE * LevelStatHorde;
+    public float CurrentLuck => baseLuck +
+        PER_LEVEL_NECROMANCER_GAIN_LUCK * (LevelStatLuck >= PER_LEVEL_NECROMANCER_MAX_LUCK ? LevelStatLuck : LevelStatLuck - 1) +
+        (_inspirationModifier - 1f);
 
 
     public bool IsAriseRitualUnlocked =>
-        LevelStatSummon >= UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_SUMMON &&
-        LevelStatHorde >= UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_HORDE;
+        LevelStatSummon >= PER_LEVEL_NECROMANCER_MAX_SUMMON &&
+        LevelStatHorde >= PER_LEVEL_NECROMANCER_MAX_HORDE;
 
     public bool IsAfterlifeRitualUnlocked =>
-        LevelStatAptitude >= UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_APTITUDE &&
-        LevelStatMight >= UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_MIGHT;
+        LevelStatAptitude >= PER_LEVEL_NECROMANCER_MAX_APTITUDE &&
+        LevelStatMight >= PER_LEVEL_NECROMANCER_MAX_MIGHT;
 
     public bool IsAdeRitualUnlocked =>
-        LevelStatLifespan >= UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_LIFESPAN &&
-        LevelStatLuck >= UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_LUCK;
+        LevelStatLifespan >= PER_LEVEL_NECROMANCER_MAX_LIFESPAN &&
+        LevelStatLuck >= PER_LEVEL_NECROMANCER_MAX_LUCK;
 
 
     public PlayerNecromancerData()
@@ -64,12 +74,12 @@ public class PlayerNecromancerData : BasePlayerData
         LevelStatHorde = saveData.levelStatHorde;
         LevelStatLuck = saveData.levelStatLuck;
 
-        LevelStatAptitude = Math.Min(LevelStatAptitude, UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_APTITUDE);
-        LevelStatSummon = Math.Min(LevelStatSummon, UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_SUMMON);
-        LevelStatMight = Math.Min(LevelStatMight, UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_MIGHT);
-        LevelStatLifespan = Math.Min(LevelStatLifespan, UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_LIFESPAN);
-        LevelStatHorde = Math.Min(LevelStatHorde, UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_HORDE);
-        LevelStatLuck = Math.Min(LevelStatLuck, UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_LUCK);
+        LevelStatAptitude = Math.Min(LevelStatAptitude, PER_LEVEL_NECROMANCER_MAX_APTITUDE);
+        LevelStatSummon = Math.Min(LevelStatSummon, PER_LEVEL_NECROMANCER_MAX_SUMMON);
+        LevelStatMight = Math.Min(LevelStatMight, PER_LEVEL_NECROMANCER_MAX_MIGHT);
+        LevelStatLifespan = Math.Min(LevelStatLifespan, PER_LEVEL_NECROMANCER_MAX_LIFESPAN);
+        LevelStatHorde = Math.Min(LevelStatHorde, PER_LEVEL_NECROMANCER_MAX_HORDE);
+        LevelStatLuck = Math.Min(LevelStatLuck, PER_LEVEL_NECROMANCER_MAX_LUCK);
 
         AvailableStatPoints = saveData.availableStatPoints;
 
@@ -84,16 +94,16 @@ public class PlayerNecromancerData : BasePlayerData
         CurrentLevel = Math.Min(CurrentLevel, sumLevels);
 
         // reset available points to 0 if previous bugs occured, and set exp to 0
-        if (CurrentLevel >= UtilsNecromancer.MAX_LEVEL_NECROMANCER)
+        if (CurrentLevel >= MAX_LEVEL_NECROMANCER)
         {
-            AvailableStatPoints = UtilsNecromancer.MAX_LEVEL_NECROMANCER - 1 -
+            AvailableStatPoints = MAX_LEVEL_NECROMANCER - 1 -
                LevelStatAptitude - LevelStatSummon - LevelStatMight - LevelStatLifespan - LevelStatHorde - LevelStatLuck +
-               UtilsNecromancer.START_LEVEL_APTITUDE +
-               UtilsNecromancer.START_LEVEL_SUMMON +
-               UtilsNecromancer.START_LEVEL_MIGHT +
-               UtilsNecromancer.START_LEVEL_LIFESPAN +
-               UtilsNecromancer.START_LEVEL_HORDE +
-               UtilsNecromancer.START_LEVEL_LUCK;
+               START_LEVEL_APTITUDE +
+               START_LEVEL_SUMMON +
+               START_LEVEL_MIGHT +
+               START_LEVEL_LIFESPAN +
+               START_LEVEL_HORDE +
+               START_LEVEL_LUCK;
             CurrentExp = 0;
         }
     }
@@ -104,12 +114,12 @@ public class PlayerNecromancerData : BasePlayerData
         CurrentExp = 0;
 
 
-        LevelStatAptitude = UtilsNecromancer.START_LEVEL_APTITUDE;
-        LevelStatSummon = UtilsNecromancer.START_LEVEL_SUMMON;
-        LevelStatMight = UtilsNecromancer.START_LEVEL_MIGHT;
-        LevelStatLifespan = UtilsNecromancer.START_LEVEL_LIFESPAN;
-        LevelStatHorde = UtilsNecromancer.START_LEVEL_HORDE;
-        LevelStatLuck = UtilsNecromancer.START_LEVEL_LUCK;
+        LevelStatAptitude = START_LEVEL_APTITUDE;
+        LevelStatSummon = START_LEVEL_SUMMON;
+        LevelStatMight = START_LEVEL_MIGHT;
+        LevelStatLifespan = START_LEVEL_LIFESPAN;
+        LevelStatHorde = START_LEVEL_HORDE;
+        LevelStatLuck = START_LEVEL_LUCK;
 
 
         // multiplier
@@ -127,7 +137,7 @@ public class PlayerNecromancerData : BasePlayerData
     {
         base.AddExp(
             amount,
-            level => level >= UtilsNecromancer.MAX_LEVEL_NECROMANCER,
+            level => level >= MAX_LEVEL_NECROMANCER,
             () => ExpToNextLevel
         );
     }
@@ -164,7 +174,7 @@ public class PlayerNecromancerData : BasePlayerData
 
     private void CheckUnlockCouplesAchievement()
     {
-        if (CurrentAptitude >= UtilsNecromancer.PER_LEVEL_NECROMANCER_MAX_APTITUDE)
+        if (CurrentAptitude >= PER_LEVEL_NECROMANCER_MAX_APTITUDE)
         {
             if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_NECROMANCER_ALL_COUPLES))
             {

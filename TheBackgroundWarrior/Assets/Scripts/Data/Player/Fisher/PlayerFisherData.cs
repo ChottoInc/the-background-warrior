@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+
 using static UtilsPlayer;
+using static UtilsFisher;
 
 public class PlayerFisherData : BasePlayerData
 {
@@ -33,12 +35,19 @@ public class PlayerFisherData : BasePlayerData
 
 
     
-    public long ExpToNextLevel => UtilsFisher.RequiredExpForFisherLevel(CurrentLevel + 1);
+    public long ExpToNextLevel => RequiredExpForFisherLevel(CurrentLevel + 1);
 
-    public float CurrentCalmness => baseCalmness + UtilsFisher.PER_LEVEL_FISHER_GAIN_CALMNESS * (LevelStatCalmness);
-    public float CurrentReflex => baseReflex + UtilsFisher.PER_LEVEL_FISHER_GAIN_REFLEX * (LevelStatReflex - 1) + (_inspirationModifier - 1f);
-    public float CurrentKnowledge => baseKnowledge + UtilsFisher.PER_LEVEL_FISHER_GAIN_KNOWLEDGE * (LevelStatKnowledge - 1) + (_inspirationModifier - 1f);
-    public float CurrentLuck => baseLuck + UtilsFisher.PER_LEVEL_FISHER_GAIN_LUCK * (LevelStatLuck - 1) + (_inspirationModifier - 1f);
+    public float CurrentCalmness => baseCalmness + PER_LEVEL_FISHER_GAIN_CALMNESS * (LevelStatCalmness);
+    public float CurrentReflex => baseReflex +
+        PER_LEVEL_FISHER_GAIN_REFLEX * (LevelStatReflex >= PER_LEVEL_FISHER_MAX_REFLEX ? LevelStatReflex : LevelStatReflex - 1) + 
+        (_inspirationModifier - 1f);
+
+    public float CurrentKnowledge => baseKnowledge +
+        PER_LEVEL_FISHER_GAIN_KNOWLEDGE * (LevelStatKnowledge >= PER_LEVEL_FISHER_MAX_KNOWLEDGE ? LevelStatKnowledge : LevelStatKnowledge - 1) +
+        (_inspirationModifier - 1f);
+    public float CurrentLuck => baseLuck +
+        PER_LEVEL_FISHER_GAIN_LUCK * (LevelStatLuck >= PER_LEVEL_FISHER_MAX_LUCK ? LevelStatLuck : LevelStatLuck - 1) +
+        (_inspirationModifier - 1f);
 
 
     // ---- FISH GROUPS CHECKS COMPLETION
@@ -84,10 +93,10 @@ public class PlayerFisherData : BasePlayerData
         LevelStatLuck = saveData.levelStatLuck;
 
 
-        LevelStatCalmness = Math.Min(LevelStatCalmness, UtilsFisher.PER_LEVEL_FISHER_MAX_CALMNESS);
-        LevelStatReflex = Math.Min(LevelStatReflex, UtilsFisher.PER_LEVEL_FISHER_MAX_REFLEX);
-        LevelStatKnowledge = Math.Min(LevelStatKnowledge, UtilsFisher.PER_LEVEL_FISHER_MAX_KNOWLEDGE);
-        LevelStatLuck = Math.Min(LevelStatLuck, UtilsFisher.PER_LEVEL_FISHER_MAX_LUCK);
+        LevelStatCalmness = Math.Min(LevelStatCalmness, PER_LEVEL_FISHER_MAX_CALMNESS);
+        LevelStatReflex = Math.Min(LevelStatReflex, PER_LEVEL_FISHER_MAX_REFLEX);
+        LevelStatKnowledge = Math.Min(LevelStatKnowledge, PER_LEVEL_FISHER_MAX_KNOWLEDGE);
+        LevelStatLuck = Math.Min(LevelStatLuck, PER_LEVEL_FISHER_MAX_LUCK);
 
 
         AvailableStatPoints = saveData.availableStatPoints;
@@ -103,14 +112,14 @@ public class PlayerFisherData : BasePlayerData
         CurrentLevel = Math.Min(CurrentLevel, sumLevels);
 
         // reset available points to 0 if previous bugs occured, and set exp to 0
-        if (CurrentLevel >= UtilsFisher.MAX_LEVEL_FISHER)
+        if (CurrentLevel >= MAX_LEVEL_FISHER)
         {
-            AvailableStatPoints = UtilsFisher.MAX_LEVEL_FISHER - 1 -
+            AvailableStatPoints = MAX_LEVEL_FISHER - 1 -
                LevelStatCalmness - LevelStatReflex - LevelStatKnowledge - LevelStatLuck +
-               UtilsFisher.START_LEVEL_CALMNESS +
-               UtilsFisher.START_LEVEL_REFLEX +
-               UtilsFisher.START_LEVEL_KNOWLEDGE +
-               UtilsFisher.START_LEVEL_LUCK;
+               START_LEVEL_CALMNESS +
+               START_LEVEL_REFLEX +
+               START_LEVEL_KNOWLEDGE +
+               START_LEVEL_LUCK;
             CurrentExp = 0;
         }
 
@@ -131,10 +140,10 @@ public class PlayerFisherData : BasePlayerData
         CurrentLevel = 1;
         CurrentExp = 0;
 
-        LevelStatCalmness = UtilsFisher.START_LEVEL_CALMNESS;
-        LevelStatReflex = UtilsFisher.START_LEVEL_REFLEX;
-        LevelStatKnowledge = UtilsFisher.START_LEVEL_KNOWLEDGE;
-        LevelStatLuck = UtilsFisher.START_LEVEL_LUCK;
+        LevelStatCalmness = START_LEVEL_CALMNESS;
+        LevelStatReflex = START_LEVEL_REFLEX;
+        LevelStatKnowledge = START_LEVEL_KNOWLEDGE;
+        LevelStatLuck = START_LEVEL_LUCK;
 
         // multiplier
         baseCalmness = 0f; // reduced max time for spawn fish, up to 0.5f - 50%
@@ -161,31 +170,31 @@ public class PlayerFisherData : BasePlayerData
     {
         FishGroupSO currentGroup = null;
 
-        currentGroup = UtilsFisher.GetFishGroupByType(UtilsFisher.FishGroupType.Life);
+        currentGroup = GetFishGroupByType(FishGroupType.Life);
         IsLifeSeriesCompleted = IsGroupCaught(currentGroup);
 
-        currentGroup = UtilsFisher.GetFishGroupByType(UtilsFisher.FishGroupType.Predator);
+        currentGroup = GetFishGroupByType(FishGroupType.Predator);
         IsPredatorSeriesCompleted = IsGroupCaught(currentGroup);
 
-        currentGroup = UtilsFisher.GetFishGroupByType(UtilsFisher.FishGroupType.Guardian);
+        currentGroup = GetFishGroupByType(FishGroupType.Guardian);
         IsGuardianSeriesCompleted = IsGroupCaught(currentGroup);
 
-        currentGroup = UtilsFisher.GetFishGroupByType(UtilsFisher.FishGroupType.Dart);
+        currentGroup = GetFishGroupByType(FishGroupType.Dart);
         IsDartSeriesCompleted = IsGroupCaught(currentGroup);
 
-        currentGroup = UtilsFisher.GetFishGroupByType(UtilsFisher.FishGroupType.Sharp);
+        currentGroup = GetFishGroupByType(FishGroupType.Sharp);
         IsSharpSeriesCompleted = IsGroupCaught(currentGroup);
 
-        currentGroup = UtilsFisher.GetFishGroupByType(UtilsFisher.FishGroupType.Piercing);
+        currentGroup = GetFishGroupByType(FishGroupType.Piercing);
         IsPiercingSeriesCompleted = IsGroupCaught(currentGroup);
 
-        currentGroup = UtilsFisher.GetFishGroupByType(UtilsFisher.FishGroupType.Golden);
+        currentGroup = GetFishGroupByType(FishGroupType.Golden);
         IsGoldenSeriesCompleted = IsGroupCaught(currentGroup);
 
-        currentGroup = UtilsFisher.GetFishGroupByType(UtilsFisher.FishGroupType.Elder);
+        currentGroup = GetFishGroupByType(FishGroupType.Elder);
         IsElderSeriesCompleted = IsGroupCaught(currentGroup);
 
-        currentGroup = UtilsFisher.GetFishGroupByType(UtilsFisher.FishGroupType.Quick);
+        currentGroup = GetFishGroupByType(FishGroupType.Quick);
         IsQuickSeriesCompleted = IsGroupCaught(currentGroup);
     }
 
@@ -210,15 +219,15 @@ public class PlayerFisherData : BasePlayerData
         switch (fishGroupSO.GroupType)
         {
             default: return false;
-            case UtilsFisher.FishGroupType.Life: return IsLifeSeriesCompleted;
-            case UtilsFisher.FishGroupType.Predator: return IsPredatorSeriesCompleted;
-            case UtilsFisher.FishGroupType.Guardian: return IsGuardianSeriesCompleted;
-            case UtilsFisher.FishGroupType.Dart: return IsDartSeriesCompleted;
-            case UtilsFisher.FishGroupType.Sharp: return IsSharpSeriesCompleted;
-            case UtilsFisher.FishGroupType.Piercing: return IsPiercingSeriesCompleted;
-            case UtilsFisher.FishGroupType.Golden: return IsGoldenSeriesCompleted;
-            case UtilsFisher.FishGroupType.Elder: return IsElderSeriesCompleted;
-            case UtilsFisher.FishGroupType.Quick: return IsQuickSeriesCompleted;
+            case FishGroupType.Life: return IsLifeSeriesCompleted;
+            case FishGroupType.Predator: return IsPredatorSeriesCompleted;
+            case FishGroupType.Guardian: return IsGuardianSeriesCompleted;
+            case FishGroupType.Dart: return IsDartSeriesCompleted;
+            case FishGroupType.Sharp: return IsSharpSeriesCompleted;
+            case FishGroupType.Piercing: return IsPiercingSeriesCompleted;
+            case FishGroupType.Golden: return IsGoldenSeriesCompleted;
+            case FishGroupType.Elder: return IsElderSeriesCompleted;
+            case FishGroupType.Quick: return IsQuickSeriesCompleted;
         }
     }
 
@@ -226,7 +235,7 @@ public class PlayerFisherData : BasePlayerData
     {
         base.AddExp(
             amount,
-            level => level >= UtilsFisher.MAX_LEVEL_FISHER,
+            level => level >= MAX_LEVEL_FISHER,
             () => ExpToNextLevel
         );
     }

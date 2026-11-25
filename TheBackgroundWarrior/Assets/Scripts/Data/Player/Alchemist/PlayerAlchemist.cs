@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public class PlayerAlchemist : Player
     [Space(10)]
     [SerializeField] GenericBar _barCrafting;
     [SerializeField] Image _imageOutOfOrder;
+
+    [Space(10)]
+    [SerializeField] ParticleSystem _failedVFX;
 
 
     private float CooldownCraft
@@ -138,8 +142,6 @@ public class PlayerAlchemist : Player
             // add materials in case of success
             if (success)
             {
-                // make little animation for success?
-
                 int amountToAdd = UtilsGeneral.GetRandomSuccessFromValue(PlayerData.CurrentYield) ? 2 : 1;
 
                 // remove quantity from alchemist
@@ -163,15 +165,29 @@ public class PlayerAlchemist : Player
 
                 PlayerManager.Instance.UpdateAlchemistData(PlayerData);
                 SaveAlchemistData();
+
+                // Recheck for next batch, or idle
+                OnTryCraft();
             }
             else
             {
-                // make little animation for failed?
-            }
+                // start faile vfx and stop craft, resume after routine
+                StartCoroutine(CoWaitAfterFail());
 
-            // Recheck for next batch, or idle
-            OnTryCraft();
+                // Give exp to alchemist job for failed recipe, at about 30% of the original exp
+                long rewardedExp = CurrentRecipe.RewardedExp * 30 / 100;
+                PlayerData.AddExp(rewardedExp);
+            }
         }
+    }
+
+    private IEnumerator CoWaitAfterFail()
+    {
+        _failedVFX.Play();
+        yield return new WaitForSeconds(_failedVFX.main.duration);
+        _failedVFX.Stop();
+
+        OnTryCraft();
     }
 
     public void OnTryCraft()

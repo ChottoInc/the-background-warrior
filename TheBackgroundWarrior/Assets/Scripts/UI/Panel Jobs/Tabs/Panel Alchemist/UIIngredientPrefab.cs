@@ -44,7 +44,14 @@ public class UIIngredientPrefab : MonoBehaviour
         string itemName = "N/A";
         if (_requirement.item != null)
         {
-            itemName = _requirement.item.ItemName;
+            switch(_requirement.item.ItemType)
+            {
+                case UtilsItem.ItemType.Fish: itemName = UtilsGeneral.GetFishTooltip(_requirement.item as FishSO); break;
+
+                default:
+                    itemName = _requirement.item.ItemName;
+                    break;
+            }
         }
 
         TooltipManagerData tooltipData = new TooltipManagerData();

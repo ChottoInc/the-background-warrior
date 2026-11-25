@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+using static UtilsMage;
+
 public class PlayerMageData : BasePlayerData
 {
     // ---- BASE STAT VALUES
@@ -24,30 +26,36 @@ public class PlayerMageData : BasePlayerData
 
 
     // ---- FINAL STAT VALUES
-    public long ExpToNextLevel => UtilsMage.RequiredExpForMageLevel(CurrentLevel + 1);
+    public long ExpToNextLevel => RequiredExpForMageLevel(CurrentLevel + 1);
 
 
-    public float CurrentInsight => baseInsight + UtilsMage.PER_LEVEL_MAGE_GAIN_INSIGHT * (LevelStatInsight - 1) + (_inspirationModifier - 1f);
-    public float CurrentCastSpeed => baseCastSpeed + UtilsMage.PER_LEVEL_MAGE_GAIN_CASTSPEED * (LevelStatCastSpeed - 1) + (_inspirationModifier - 1f);
-    public float CurrentScholar => baseScholar + UtilsMage.PER_LEVEL_MAGE_GAIN_SCHOLAR * LevelStatScholar;
-    public float CurrentProficiency => baseProficiency + UtilsMage.PER_LEVEL_MAGE_GAIN_PROFICIENCY * LevelStatProficiency;
+    public float CurrentInsight => baseInsight +
+        PER_LEVEL_MAGE_GAIN_INSIGHT * (LevelStatInsight >= PER_LEVEL_MAGE_MAX_INSIGHT ? LevelStatInsight : LevelStatInsight - 1) +
+        (_inspirationModifier - 1f);
+
+    public float CurrentCastSpeed => baseCastSpeed +
+        PER_LEVEL_MAGE_GAIN_CASTSPEED * (LevelStatCastSpeed >= PER_LEVEL_MAGE_MAX_CASTSPEED ? LevelStatCastSpeed : LevelStatCastSpeed - 1) +
+        (_inspirationModifier - 1f);
+
+    public float CurrentScholar => baseScholar + PER_LEVEL_MAGE_GAIN_SCHOLAR * LevelStatScholar;
+    public float CurrentProficiency => baseProficiency + PER_LEVEL_MAGE_GAIN_PROFICIENCY * LevelStatProficiency;
 
 
     // ---- SPELLS
 
     public List<SpellData> Spells { get; private set; }
 
-    public UtilsMage.MageSpellType CurrentLearningSpell { get; private set; }
+    public MageSpellType CurrentLearningSpell { get; private set; }
 
     public bool IsSlot1Unlocked => 0 <= PlayerManager.Instance.PlayerMageData.CurrentProficiency;
     public bool IsSlot2Unlocked => 1 <= PlayerManager.Instance.PlayerMageData.CurrentProficiency;
     public bool IsSlot3Unlocked => 2 <= PlayerManager.Instance.PlayerMageData.CurrentProficiency;
     public bool IsSlot4Unlocked => 3 <= PlayerManager.Instance.PlayerMageData.CurrentProficiency;
 
-    public UtilsMage.MageSpellType EquippedSlot1Spell { get; private set; }
-    public UtilsMage.MageSpellType EquippedSlot2Spell { get; private set; }
-    public UtilsMage.MageSpellType EquippedSlot3Spell { get; private set; }
-    public UtilsMage.MageSpellType EquippedSlot4Spell { get; private set; }
+    public MageSpellType EquippedSlot1Spell { get; private set; }
+    public MageSpellType EquippedSlot2Spell { get; private set; }
+    public MageSpellType EquippedSlot3Spell { get; private set; }
+    public MageSpellType EquippedSlot4Spell { get; private set; }
 
 
 
@@ -68,10 +76,10 @@ public class PlayerMageData : BasePlayerData
         LevelStatScholar = saveData.levelStatScholar;
         LevelStatProficiency = saveData.levelStatProficiency;
 
-        LevelStatInsight = Math.Min(LevelStatInsight, UtilsMage.PER_LEVEL_MAGE_MAX_INSIGHT);
-        LevelStatCastSpeed = Math.Min(LevelStatCastSpeed, UtilsMage.PER_LEVEL_MAGE_MAX_CASTSPEED);
-        LevelStatScholar = Math.Min(LevelStatScholar, UtilsMage.PER_LEVEL_MAGE_MAX_SCHOLAR);
-        LevelStatProficiency = Math.Min(LevelStatProficiency, UtilsMage.PER_LEVEL_MAGE_MAX_PROFICIENCY);
+        LevelStatInsight = Math.Min(LevelStatInsight, PER_LEVEL_MAGE_MAX_INSIGHT);
+        LevelStatCastSpeed = Math.Min(LevelStatCastSpeed, PER_LEVEL_MAGE_MAX_CASTSPEED);
+        LevelStatScholar = Math.Min(LevelStatScholar, PER_LEVEL_MAGE_MAX_SCHOLAR);
+        LevelStatProficiency = Math.Min(LevelStatProficiency, PER_LEVEL_MAGE_MAX_PROFICIENCY);
 
         AvailableStatPoints = saveData.availableStatPoints;
 
@@ -86,26 +94,26 @@ public class PlayerMageData : BasePlayerData
         CurrentLevel = Math.Min(CurrentLevel, sumLevels);
 
         // reset available points to 0 if previous bugs occured, and set exp to 0
-        if (CurrentLevel >= UtilsMage.MAX_LEVEL_MAGE)
+        if (CurrentLevel >= MAX_LEVEL_MAGE)
         {
-            AvailableStatPoints = UtilsMage.MAX_LEVEL_MAGE - 1 -
+            AvailableStatPoints = MAX_LEVEL_MAGE - 1 -
                LevelStatInsight - LevelStatCastSpeed - LevelStatScholar - LevelStatProficiency +
-               UtilsMage.START_LEVEL_INSIGHT +
-               UtilsMage.START_LEVEL_CAST_SPEED +
-               UtilsMage.START_LEVEL_SCHOLAR +
-               UtilsMage.START_LEVEL_PROFICIENCY;
+               START_LEVEL_INSIGHT +
+               START_LEVEL_CAST_SPEED +
+               START_LEVEL_SCHOLAR +
+               START_LEVEL_PROFICIENCY;
             CurrentExp = 0;
         }
 
         // load spells
         Spells = saveData.spells.Select(spell => new SpellData(spell)).ToList();
 
-        CurrentLearningSpell = (UtilsMage.MageSpellType)saveData.currentLearningSpell;
+        CurrentLearningSpell = (MageSpellType)saveData.currentLearningSpell;
 
-        EquippedSlot1Spell = (UtilsMage.MageSpellType)saveData.equippedSlot1Spell;
-        EquippedSlot2Spell = (UtilsMage.MageSpellType)saveData.equippedSlot2Spell;
-        EquippedSlot3Spell = (UtilsMage.MageSpellType)saveData.equippedSlot3Spell;
-        EquippedSlot4Spell = (UtilsMage.MageSpellType)saveData.equippedSlot4Spell;
+        EquippedSlot1Spell = (MageSpellType)saveData.equippedSlot1Spell;
+        EquippedSlot2Spell = (MageSpellType)saveData.equippedSlot2Spell;
+        EquippedSlot3Spell = (MageSpellType)saveData.equippedSlot3Spell;
+        EquippedSlot4Spell = (MageSpellType)saveData.equippedSlot4Spell;
     }
 
     private void GenerateBaseStats()
@@ -114,10 +122,10 @@ public class PlayerMageData : BasePlayerData
         CurrentExp = 0;
 
 
-        LevelStatInsight = UtilsMage.START_LEVEL_INSIGHT;
-        LevelStatCastSpeed = UtilsMage.START_LEVEL_CAST_SPEED;
-        LevelStatScholar = UtilsMage.START_LEVEL_SCHOLAR;
-        LevelStatProficiency = UtilsMage.START_LEVEL_PROFICIENCY;
+        LevelStatInsight = START_LEVEL_INSIGHT;
+        LevelStatCastSpeed = START_LEVEL_CAST_SPEED;
+        LevelStatScholar = START_LEVEL_SCHOLAR;
+        LevelStatProficiency = START_LEVEL_PROFICIENCY;
 
 
         // multiplier
@@ -129,23 +137,23 @@ public class PlayerMageData : BasePlayerData
         baseProficiency = 0f; // unlocks new slots, check on whole values
 
         // creat default spells
-        Spells = UtilsMage.GetAllSpells().Select(spell => new SpellData(spell)).ToList();
+        Spells = GetAllSpells().Select(spell => new SpellData(spell)).ToList();
 
         // unlock fireball as default
         if (Spells.Count > 0)
         {
             Spells[0].SetUnlocked();
-            CurrentLearningSpell = UtilsMage.MageSpellType.None;
+            CurrentLearningSpell = MageSpellType.None;
         }
 
-        EquippedSlot1Spell = EquippedSlot2Spell = EquippedSlot3Spell = EquippedSlot4Spell = UtilsMage.MageSpellType.None;
+        EquippedSlot1Spell = EquippedSlot2Spell = EquippedSlot3Spell = EquippedSlot4Spell = MageSpellType.None;
     }
 
     public void AddExp(long amount)
     {
         base.AddExp(
             amount,
-            level => level >= UtilsMage.MAX_LEVEL_MAGE,
+            level => level >= MAX_LEVEL_MAGE,
             () => ExpToNextLevel
         );
     }
@@ -170,7 +178,7 @@ public class PlayerMageData : BasePlayerData
                 }
 
                 // check for necromancer job once the scholar stat is maxed out
-                if(LevelStatScholar >= UtilsMage.PER_LEVEL_MAGE_MAX_SCHOLAR)
+                if(LevelStatScholar >= PER_LEVEL_MAGE_MAX_SCHOLAR)
                 {
                     PlayerManager.Instance.PlayerJobsData.AddAvailableJob(UtilsPlayer.PlayerJob.Necromancer);
                 }
@@ -186,12 +194,12 @@ public class PlayerMageData : BasePlayerData
     }
 
 
-    public void SetLearningSpell(UtilsMage.MageSpellType spellType)
+    public void SetLearningSpell(MageSpellType spellType)
     {
         CurrentLearningSpell = spellType;
     }
 
-    public SpellData GetSpellByType(UtilsMage.MageSpellType spellType)
+    public SpellData GetSpellByType(MageSpellType spellType)
     {
         return Spells.Where(spell => spell.SpellSO.SpellType == spellType).FirstOrDefault();
     }
@@ -225,10 +233,10 @@ public class PlayerMageData : BasePlayerData
         switch (idSlot)
         {
             default: Debug.Log("Wrong slot id, probably wrong in the inspector"); break;
-            case 1: EquippedSlot1Spell = UtilsMage.MageSpellType.None; break;
-            case 2: EquippedSlot2Spell = UtilsMage.MageSpellType.None; break;
-            case 3: EquippedSlot3Spell = UtilsMage.MageSpellType.None; break;
-            case 4: EquippedSlot4Spell = UtilsMage.MageSpellType.None; break;
+            case 1: EquippedSlot1Spell = MageSpellType.None; break;
+            case 2: EquippedSlot2Spell = MageSpellType.None; break;
+            case 3: EquippedSlot3Spell = MageSpellType.None; break;
+            case 4: EquippedSlot4Spell = MageSpellType.None; break;
         }
 
         OnEquippedSpellUpdate?.Invoke();
@@ -259,10 +267,10 @@ public class PlayerMageData : BasePlayerData
 
     public int GetFirstEmptySlot()
     {
-        if (EquippedSlot1Spell == UtilsMage.MageSpellType.None && IsSlot1Unlocked) return 1;
-        else if (EquippedSlot2Spell == UtilsMage.MageSpellType.None && IsSlot2Unlocked) return 2;
-        else if (EquippedSlot3Spell == UtilsMage.MageSpellType.None && IsSlot3Unlocked) return 3;
-        else if (EquippedSlot4Spell == UtilsMage.MageSpellType.None && IsSlot4Unlocked) return 4;
+        if (EquippedSlot1Spell == MageSpellType.None && IsSlot1Unlocked) return 1;
+        else if (EquippedSlot2Spell == MageSpellType.None && IsSlot2Unlocked) return 2;
+        else if (EquippedSlot3Spell == MageSpellType.None && IsSlot3Unlocked) return 3;
+        else if (EquippedSlot4Spell == MageSpellType.None && IsSlot4Unlocked) return 4;
 
         return -1;
     }
@@ -319,7 +327,7 @@ public class PlayerMageData : BasePlayerData
 
     private void CheckUnlockAllSpellsAchievement()
     {
-        if(CurrentScholar >= UtilsMage.PER_LEVEL_MAGE_MAX_SCHOLAR)
+        if(CurrentScholar >= PER_LEVEL_MAGE_MAX_SCHOLAR)
         {
             if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_ALL_MAGE_SPELLS))
             {
@@ -330,7 +338,7 @@ public class PlayerMageData : BasePlayerData
 
     private void CheckUnlockAllSlotsAchievement()
     {
-        if (CurrentProficiency >= UtilsMage.PER_LEVEL_MAGE_MAX_PROFICIENCY)
+        if (CurrentProficiency >= PER_LEVEL_MAGE_MAX_PROFICIENCY)
         {
             if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_ALL_MAGE_SLOTS))
             {

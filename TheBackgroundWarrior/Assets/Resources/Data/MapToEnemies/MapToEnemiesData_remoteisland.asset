@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c5a45d4151484b4d80f7e9aa8d4413d, type: 3}
   m_Name: MapToEnemiesData_remoteisland
   m_EditorClassIdentifier: 
-  mapSO: {fileID: 11400000, guid: 8f60ad0b7dd5a86409db8acf98b10ff2, type: 2}
+  mapSO: {fileID: 11400000, guid: 82c3522138d296441a49b252b6c71125, type: 2}
   possibleEnemies:
   - value: {fileID: 11400000, guid: 77c830d14426a3d428d0db51182f4988, type: 2}
     chanches: 20

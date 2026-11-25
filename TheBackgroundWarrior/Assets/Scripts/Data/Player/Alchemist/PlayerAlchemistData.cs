@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+using static UtilsAlchemist;
+
 public class PlayerAlchemistData : BasePlayerData
 {
     // ---- BASE STAT VALUES
@@ -25,13 +27,20 @@ public class PlayerAlchemistData : BasePlayerData
 
 
     // ---- FINAL STAT VALUES
-    public long ExpToNextLevel => UtilsAlchemist.RequiredExpForAlchemistLevel(CurrentLevel + 1);
+    public long ExpToNextLevel => RequiredExpForAlchemistLevel(CurrentLevel + 1);
 
 
-    public float CurrentRoutine => baseRoutine + UtilsAlchemist.PER_LEVEL_ALCHEMIST_GAIN_ROUTINE * (LevelStatRoutine - 1) + (_inspirationModifier - 1f);
-    public float CurrentYield => baseYield + UtilsAlchemist.PER_LEVEL_ALCHEMIST_GAIN_YIELD * (LevelStatYield - 1);
-    public float CurrentResearch => baseResearch + UtilsAlchemist.PER_LEVEL_ALCHEMIST_GAIN_RESEARCH * LevelStatResearch;
-    public float CurrentStability => baseStability + UtilsAlchemist.PER_LEVEL_ALCHEMIST_GAIN_STABILITY * (LevelStatStability - 1) + (_inspirationModifier - 1f);
+    public float CurrentRoutine => baseRoutine +
+        PER_LEVEL_ALCHEMIST_GAIN_ROUTINE * (LevelStatRoutine >= PER_LEVEL_ALCHEMIST_MAX_ROUTINE ? LevelStatRoutine : LevelStatRoutine - 1) +
+        (_inspirationModifier - 1f);
+
+    public float CurrentYield => baseYield +
+        PER_LEVEL_ALCHEMIST_GAIN_YIELD * (LevelStatYield >= PER_LEVEL_ALCHEMIST_MAX_YIELD ? LevelStatYield : LevelStatYield - 1);
+
+    public float CurrentResearch => baseResearch + PER_LEVEL_ALCHEMIST_GAIN_RESEARCH * LevelStatResearch;
+    public float CurrentStability => baseStability +
+        PER_LEVEL_ALCHEMIST_GAIN_STABILITY * (LevelStatStability >= PER_LEVEL_ALCHEMIST_MAX_STABILITY ? LevelStatStability : LevelStatStability - 1) +
+        (_inspirationModifier - 1f);
 
 
 
@@ -66,10 +75,10 @@ public class PlayerAlchemistData : BasePlayerData
         LevelStatResearch = saveData.levelStatResearch;
         LevelStatStability = saveData.levelStatStability;
 
-        LevelStatRoutine = Math.Min(LevelStatRoutine, UtilsAlchemist.PER_LEVEL_ALCHEMIST_MAX_ROUTINE);
-        LevelStatYield = Math.Min(LevelStatYield, UtilsAlchemist.PER_LEVEL_ALCHEMIST_MAX_YIELD);
-        LevelStatResearch = Math.Min(LevelStatResearch, UtilsAlchemist.PER_LEVEL_ALCHEMIST_MAX_RESEARCH);
-        LevelStatStability = Math.Min(LevelStatStability, UtilsAlchemist.PER_LEVEL_ALCHEMIST_MAX_STABILITY);
+        LevelStatRoutine = Math.Min(LevelStatRoutine, PER_LEVEL_ALCHEMIST_MAX_ROUTINE);
+        LevelStatYield = Math.Min(LevelStatYield, PER_LEVEL_ALCHEMIST_MAX_YIELD);
+        LevelStatResearch = Math.Min(LevelStatResearch, PER_LEVEL_ALCHEMIST_MAX_RESEARCH);
+        LevelStatStability = Math.Min(LevelStatStability, PER_LEVEL_ALCHEMIST_MAX_STABILITY);
 
         AvailableStatPoints = saveData.availableStatPoints;
 
@@ -84,20 +93,20 @@ public class PlayerAlchemistData : BasePlayerData
         CurrentLevel = Math.Min(CurrentLevel, sumLevels);
 
         // reset available points to 0 if previous bugs occured, and set exp to 0
-        if (CurrentLevel >= UtilsAlchemist.MAX_LEVEL_ALCHEMIST)
+        if (CurrentLevel >= MAX_LEVEL_ALCHEMIST)
         {
-            AvailableStatPoints = UtilsAlchemist.MAX_LEVEL_ALCHEMIST - 1 -
+            AvailableStatPoints = MAX_LEVEL_ALCHEMIST - 1 -
                LevelStatRoutine - LevelStatYield - LevelStatResearch - LevelStatStability +
-               UtilsAlchemist.START_LEVEL_ROUTINE +
-               UtilsAlchemist.START_LEVEL_YIELD +
-               UtilsAlchemist.START_LEVEL_RESEARCH +
-               UtilsAlchemist.START_LEVEL_STABILITY;
+               START_LEVEL_ROUTINE +
+               START_LEVEL_YIELD +
+               START_LEVEL_RESEARCH +
+               START_LEVEL_STABILITY;
             CurrentExp = 0;
         }
 
         // get active recipe
         if (saveData.currentCraftingRecipe >= 0)
-            CurrentCraftingRecipe = UtilsAlchemist.GetRecipeById(saveData.currentCraftingRecipe);
+            CurrentCraftingRecipe = GetRecipeById(saveData.currentCraftingRecipe);
         else
             CurrentCraftingRecipe = null;
 
@@ -105,7 +114,7 @@ public class PlayerAlchemistData : BasePlayerData
         CurrentCraftingQuantity = saveData.currentCraftingQuantity;
 
         // load recipes
-        AvailableRecipes = saveData.recipes.Select(recipe => UtilsAlchemist.GetRecipeById(recipe)).ToList();
+        AvailableRecipes = saveData.recipes.Select(recipe => GetRecipeById(recipe)).ToList();
 
 
         StatPermaMaxHpCounter = saveData.statPermaMaxHpCounter;
@@ -119,10 +128,10 @@ public class PlayerAlchemistData : BasePlayerData
         CurrentExp = 0;
 
 
-        LevelStatRoutine = UtilsAlchemist.START_LEVEL_ROUTINE;
-        LevelStatYield = UtilsAlchemist.START_LEVEL_YIELD;
-        LevelStatResearch = UtilsAlchemist.START_LEVEL_RESEARCH;
-        LevelStatStability = UtilsAlchemist.START_LEVEL_STABILITY;
+        LevelStatRoutine = START_LEVEL_ROUTINE;
+        LevelStatYield = START_LEVEL_YIELD;
+        LevelStatResearch = START_LEVEL_RESEARCH;
+        LevelStatStability = START_LEVEL_STABILITY;
 
 
         // multiplier
@@ -138,7 +147,7 @@ public class PlayerAlchemistData : BasePlayerData
         // by default has first recipe when unlocked
         AvailableRecipes = new List<RecipeSO>
         {
-            UtilsAlchemist.GetRecipeById(0)
+            GetRecipeById(0)
         };
 
 
@@ -152,7 +161,7 @@ public class PlayerAlchemistData : BasePlayerData
         //Debug.Log("current level:" + CurrentLevel + ", required exp: " + ExpToNextLevel);
         base.AddExp(
             amount,
-            level => level >= UtilsAlchemist.MAX_LEVEL_ALCHEMIST,
+            level => level >= MAX_LEVEL_ALCHEMIST,
             () => ExpToNextLevel
         );
 
@@ -172,7 +181,7 @@ public class PlayerAlchemistData : BasePlayerData
                 for (int i = 0; i < maxIndex; i++)
                 {
                     // check list of research and add recipe if not available yet
-                    var recipe = UtilsAlchemist.GetRecipeFromResearch(i);
+                    var recipe = GetRecipeFromResearch(i);
                     if (!IsRecipeAvailable(recipe))
                         AddAvailableRecipe(recipe);
                 }
@@ -187,7 +196,7 @@ public class PlayerAlchemistData : BasePlayerData
 
     public void AddAvailableRecipe(int id)
     {
-        AvailableRecipes.Add(UtilsAlchemist.GetRecipeById(id));
+        AvailableRecipes.Add(GetRecipeById(id));
     }
 
     public void AddAvailableRecipe(RecipeSO recipe)
@@ -200,15 +209,15 @@ public class PlayerAlchemistData : BasePlayerData
         return AvailableRecipes.Where(r => r.Id == recipe.Id).Any();
     }
 
-    public void AddPermaStatCounter(UtilsAlchemist.PermaStat stat)
+    public void AddPermaStatCounter(PermaStat stat)
     {
         // TODO: add some kind of event to trigger increase stats while in warrior scene, and also for quests maybe
         switch (stat)
         {
             default: Debug.Log("Wrong type of perma stat tried to add"); break;
-            case UtilsAlchemist.PermaStat.MaxHp: StatPermaMaxHpCounter++; break;
-            case UtilsAlchemist.PermaStat.Attack: StatPermaMaxHpCounter++; break;
-            case UtilsAlchemist.PermaStat.Defense: StatPermaMaxHpCounter++; break;
+            case PermaStat.MaxHp: StatPermaMaxHpCounter++; break;
+            case PermaStat.Attack: StatPermaMaxHpCounter++; break;
+            case PermaStat.Defense: StatPermaMaxHpCounter++; break;
         }
     }
 
@@ -242,7 +251,7 @@ public class PlayerAlchemistData : BasePlayerData
 
     private void CheckUnlockAllRecipesAchievement()
     {
-        if (CurrentResearch >= UtilsAlchemist.PER_LEVEL_ALCHEMIST_MAX_RESEARCH)
+        if (CurrentResearch >= PER_LEVEL_ALCHEMIST_MAX_RESEARCH)
         {
             if (!UtilsAchievement.IsAchievementUnlocked(UtilsAchievement.UNLOCK_ALL_CONCOCTIONS_RECIPES))
             {
